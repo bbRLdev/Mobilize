@@ -4,7 +4,6 @@
 //
 //  Created by Michael Labarca on 10/15/20.
 //
-
 import UIKit
 import MapKit
 import SideMenu
@@ -27,16 +26,13 @@ class HomeViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
-    @IBAction func sideMenuButtonPressed(_ sender: Any) {
+    @IBAction func sideNavButtonPressed(_ sender: Any) {
         present(sideMenu!, animated: true)
-    }
-    
-    @IBAction func searchButtonPressed(_ sender: Any) {
+
     }
     
     /*
     // MARK: - Navigation
-
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
