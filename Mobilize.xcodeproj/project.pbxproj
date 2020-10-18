@@ -88,10 +88,18 @@
 		1AF4962A253903DA00CABA30 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				1AF49632253CD8B800CABA30 /* CreatePostControllers */,
 				1AF4962B253903F700CABA30 /* LoginViewController.swift */,
 				1AF4962F2539040C00CABA30 /* HomeViewController.swift */,
 			);
 			path = Controllers;
+			sourceTree = "<group>";
+		};
+		1AF49632253CD8B800CABA30 /* CreatePostControllers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = CreatePostControllers;
 			sourceTree = "<group>";
 		};
 		736F0C6B59539A783FD7388A /* Frameworks */ = {
