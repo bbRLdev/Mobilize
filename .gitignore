@@ -1,2 +1,6 @@
 GoogleService-Info.plist
 Pods
+.DS_Store
+*.xcuserstate
+project.xcworkspace/
+xcuserdata/

@@ -18,9 +18,47 @@
                         <viewLayoutGuide key="safeArea" id="hgH-26-ews"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <connections>
-                        <segue destination="q1X-aM-eMz" kind="presentation" identifier="segueIdentifier" animates="NO" modalPresentationStyle="fullScreen" id="xAW-aJ-DSp"/>
-                    </connections>
+                    <navigationItem key="navigationItem" id="Uyw-Qy-lmx"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="586.95652173913049" y="155.35714285714286"/>
+        </scene>
+        <!--Home View Controller-->
+        <scene sceneID="Fbg-xe-3kO">
+            <objects>
+                <viewController id="DcC-jA-gKe" customClass="HomeViewController" customModule="Mobilize" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="0hl-5C-Uz0">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Gjb-KE-SyA">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                            </mapView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O3D-8t-614">
+                                <rect key="frame" x="20" y="44" width="103" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="SideNavButton"/>
+                                <connections>
+                                    <action selector="sideNavButtonPressed:" destination="DcC-jA-gKe" eventType="touchUpInside" id="WkX-Sq-ysd"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qxk-WA-yGa">
+                                <rect key="frame" x="348" y="832" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Create"/>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="AUD-Sq-IuA"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Gjb-KE-SyA" firstAttribute="trailing" secondItem="AUD-Sq-IuA" secondAttribute="trailing" id="Lxp-Nf-ZDd"/>
+                            <constraint firstItem="Gjb-KE-SyA" firstAttribute="top" secondItem="0hl-5C-Uz0" secondAttribute="top" id="nP8-zL-JCK"/>
+                            <constraint firstAttribute="bottom" secondItem="Gjb-KE-SyA" secondAttribute="bottom" id="sFR-29-PWc"/>
+                            <constraint firstItem="Gjb-KE-SyA" firstAttribute="leading" secondItem="AUD-Sq-IuA" secondAttribute="leading" id="wEa-Sc-Brj"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="lDM-zA-hs2"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nTq-iE-xEh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

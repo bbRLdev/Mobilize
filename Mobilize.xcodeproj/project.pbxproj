@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1A481B3E253E43E600F9A961 /* CreateEventStory.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A481B3D253E43E600F9A961 /* CreateEventStory.storyboard */; };
 		1AF47ACC253666DA0092CE1B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF47ACB253666DA0092CE1B /* AppDelegate.swift */; };
 		1AF47ACE253666DA0092CE1B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF47ACD253666DA0092CE1B /* SceneDelegate.swift */; };
 		1AF47AD0253666DA0092CE1B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF47ACF253666DA0092CE1B /* ViewController.swift */; };
@@ -26,6 +27,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1A481B3D253E43E600F9A961 /* CreateEventStory.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CreateEventStory.storyboard; sourceTree = "<group>"; };
 		1AF47AC8253666DA0092CE1B /* Mobilize.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Mobilize.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1AF47ACB253666DA0092CE1B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1AF47ACD253666DA0092CE1B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -91,6 +93,7 @@
 				1AF47ACF253666DA0092CE1B /* ViewController.swift */,
 				DBB83140253ED6C600F2B48E /* Transition.swift */,
 				1AF47AD1253666DA0092CE1B /* Main.storyboard */,
+				1A481B3D253E43E600F9A961 /* CreateEventStory.storyboard */,
 				DBB83133253ECE9F00F2B48E /* HomeStory.storyboard */,
 				DBB83144253ED7B200F2B48E /* LoginStory.storyboard */,
 				1AF47AD7253666DA0092CE1B /* Assets.xcassets */,
@@ -104,10 +107,19 @@
 		1AF4962A253903DA00CABA30 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				1AF49632253CD8B800CABA30 /* CreatePostControllers */,
+				1AF4962B253903F700CABA30 /* LoginViewController.swift */,
 				DBB830A8253E93FE00F2B48E /* Login */,
 				1AF4962F2539040C00CABA30 /* HomeViewController.swift */,
 			);
 			path = Controllers;
+			sourceTree = "<group>";
+		};
+		1AF49632253CD8B800CABA30 /* CreatePostControllers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = CreatePostControllers;
 			sourceTree = "<group>";
 		};
 		736F0C6B59539A783FD7388A /* Frameworks */ = {
@@ -198,6 +210,7 @@
 				1AF47ADB253666DA0092CE1B /* LaunchScreen.storyboard in Resources */,
 				DBB83135253ECE9F00F2B48E /* HomeStory.storyboard in Resources */,
 				1AF496182539001F00CABA30 /* GoogleService-Info.plist in Resources */,
+				1A481B3E253E43E600F9A961 /* CreateEventStory.storyboard in Resources */,
 				1AF47AD8253666DA0092CE1B /* Assets.xcassets in Resources */,
 				DBB8312C253EC9DE00F2B48E /* Base.lproj in Resources */,
 				1AF47AD3253666DA0092CE1B /* Main.storyboard in Resources */,
