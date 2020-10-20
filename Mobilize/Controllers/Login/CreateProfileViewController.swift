@@ -21,23 +21,14 @@ class CreateProfileViewController: UIViewController {
 
     @IBOutlet weak var nameField: UITextField!
     
-    @IBOutlet weak var emailLabel: UILabel!
-    
     @IBOutlet weak var statusLabel: UILabel!
+    
+    @IBOutlet weak var bioTextView: UITextView!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let user = Firebase.Auth.auth().currentUser
-        //user = Firebase.Auth.auth().currentUser
-        if (user != nil) {
-          //name = user.displayName;
-            emailLabel.text = user?.email ?? "none"
-          //photoUrl = user.photoURL;
-          //emailVerified = user.emailVerified;
-          //uid = user.uid;  // The user's ID, unique to the Firebase project. Do NOT use
-                           // this value to authenticate with your backend server, if
-                           // you have one. Use User.getToken() instead.
-        }
+
         // Do any additional setup after loading the view.
     }
     
@@ -48,13 +39,29 @@ class CreateProfileViewController: UIViewController {
         }
         else{
             let user = Firebase.Auth.auth().currentUser
-            let changeRequest = user?.createProfileChangeRequest()
-            changeRequest?.displayName = nameField.text!
-            //print(nameField.text!)
-            changeRequest?.commitChanges { (error) in
-                if(error == nil){
-                    //print(Auth.auth().currentUser?.displayName ?? "none")
-                    self.performSegue(withIdentifier: self.segueID, sender: nil)
+//            db.collection("cities").document("BJ").setData([ "capital": true ], merge: true)
+            if let userID:String = user?.uid{
+                // Add a new document with a generated ID
+                //var ref: DocumentReference? = nil
+                db.collection("users").document(userID).setData([
+                    "name" : nameField.text!,
+                    "bio" : bioTextView.text ?? ""
+                ], merge: true) { err in
+                    if let err = err {
+                        print("Error adding document: \(err)")
+                    } else {
+                        print("Document added with ID: \(userID)")
+                    }
+                }
+                
+                let changeRequest = user?.createProfileChangeRequest()
+                changeRequest?.displayName = nameField.text!
+                //print(nameField.text!)
+                changeRequest?.commitChanges { (error) in
+                    if(error == nil){
+                        //print(Auth.auth().currentUser?.displayName ?? "none")
+                        self.performSegue(withIdentifier: self.segueID, sender: nil)
+                    }
                 }
             }
 

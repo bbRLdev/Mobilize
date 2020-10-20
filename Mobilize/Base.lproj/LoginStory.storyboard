@@ -166,13 +166,6 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8MQ-AU-ihb">
-                                <rect key="frame" x="20" y="44" width="374" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hRw-0L-Dhv">
                                 <rect key="frame" x="207" y="670" width="0.0" height="0.0"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -203,7 +196,7 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="emailLabel" destination="8MQ-AU-ihb" id="cZj-vX-w1P"/>
+                        <outlet property="bioTextView" destination="mSY-Dp-Mr9" id="wSM-gv-h0G"/>
                         <outlet property="nameField" destination="8zj-Uz-CYR" id="TM3-p3-CnN"/>
                         <outlet property="statusLabel" destination="hRw-0L-Dhv" id="BJH-zC-wR3"/>
                         <segue destination="k9Z-SR-3TR" kind="presentation" identifier="createProfileSegue" modalPresentationStyle="fullScreen" id="MRS-Q2-vhd"/>
