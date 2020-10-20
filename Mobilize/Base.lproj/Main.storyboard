@@ -11,6 +11,7 @@
         <!--Transition-->
         <scene sceneID="WWm-Kh-VIA">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
                 <viewController id="eos-Df-nGV" customClass="Transition" customModule="Mobilize" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="d0B-Aq-uXm">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
@@ -19,14 +20,17 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <navigationItem key="navigationItem" id="Uyw-Qy-lmx"/>
+                    <connections>
+                        <segue destination="q1X-aM-eMz" kind="presentation" identifier="segueIdentifier" animates="NO" modalPresentationStyle="fullScreen" id="Q07-h1-x1z"/>
+                    </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="586.95652173913049" y="155.35714285714286"/>
+            <point key="canvasLocation" x="304" y="415"/>
         </scene>
         <!--Home View Controller-->
         <scene sceneID="Fbg-xe-3kO">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nTq-iE-xEh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <viewController id="DcC-jA-gKe" customClass="HomeViewController" customModule="Mobilize" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="0hl-5C-Uz0">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
@@ -60,9 +64,8 @@
                     </view>
                     <navigationItem key="navigationItem" id="lDM-zA-hs2"/>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="nTq-iE-xEh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="988" y="188"/>
+            <point key="canvasLocation" x="2393" y="415"/>
         </scene>
         <!--LoginStory-->
         <scene sceneID="5qE-uf-47c">
@@ -72,7 +75,24 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jQJ-JS-4wa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1712" y="188"/>
+            <point key="canvasLocation" x="929" y="415"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="h42-l5-dDX">
+            <objects>
+                <navigationController storyboardIdentifier="MainNavigationController" automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="lUV-GX-Jwr" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="RUM-4A-oqe">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="DcC-jA-gKe" kind="relationship" relationship="rootViewController" id="SVI-5n-dFD"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8YE-xt-hCf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1506" y="415"/>
         </scene>
     </scenes>
     <resources>

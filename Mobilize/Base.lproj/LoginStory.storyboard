@@ -111,8 +111,8 @@
                         <outlet property="segCtrl" destination="Rj8-UT-ZGu" id="fMa-nm-zAa"/>
                         <outlet property="statusLabel" destination="FmE-oV-9lQ" id="433-S5-FTN"/>
                         <outlet property="usernameTextField" destination="tWO-GG-Bvp" id="XNa-6R-7SZ"/>
-                        <segue destination="bxx-9L-rba" kind="presentation" identifier="loginSegue" modalPresentationStyle="fullScreen" id="rrT-PI-dlu"/>
                         <segue destination="FUS-MW-fz6" kind="presentation" identifier="signupSegue" modalPresentationStyle="fullScreen" id="Tqn-gI-9Xh"/>
+                        <segue destination="ePX-iN-0oK" kind="presentation" animates="NO" modalPresentationStyle="fullScreen" id="4YN-mf-c4N"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -225,7 +225,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="32"/>
                                 <state key="normal" title="Continue"/>
                                 <connections>
-                                    <segue destination="bxx-9L-rba" kind="presentation" modalPresentationStyle="fullScreen" id="NYY-Ad-axY"/>
+                                    <segue destination="ePX-iN-0oK" kind="presentation" animates="NO" modalPresentationStyle="fullScreen" id="whQ-dJ-bqs"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EHN-Z6-oon">
@@ -257,17 +257,17 @@
             </objects>
             <point key="canvasLocation" x="1414.4927536231885" y="-476.11607142857139"/>
         </scene>
-        <!--UINavigationController-cza-YI-kKf-->
-        <scene sceneID="EXq-wD-UfQ">
+        <!--MainNavigationController-->
+        <scene sceneID="0AK-4A-aPY">
             <objects>
-                <viewControllerPlaceholder storyboardName="HomeStory" referencedIdentifier="UINavigationController-cza-YI-kKf" id="bxx-9L-rba" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ZLx-0t-wKX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <viewControllerPlaceholder storyboardName="Main" referencedIdentifier="MainNavigationController" id="ePX-iN-0oK" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0QR-Au-cyG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1601" y="236"/>
+            <point key="canvasLocation" x="1656" y="98"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="rrT-PI-dlu"/>
+        <segue reference="4YN-mf-c4N"/>
     </inferredMetricsTieBreakers>
     <resources>
         <systemColor name="labelColor">
