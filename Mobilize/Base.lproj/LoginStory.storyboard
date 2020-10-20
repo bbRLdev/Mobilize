@@ -112,7 +112,7 @@
                         <outlet property="statusLabel" destination="FmE-oV-9lQ" id="433-S5-FTN"/>
                         <outlet property="usernameTextField" destination="tWO-GG-Bvp" id="XNa-6R-7SZ"/>
                         <segue destination="FUS-MW-fz6" kind="presentation" identifier="signupSegue" modalPresentationStyle="fullScreen" id="Tqn-gI-9Xh"/>
-                        <segue destination="ePX-iN-0oK" kind="presentation" animates="NO" modalPresentationStyle="fullScreen" id="4YN-mf-c4N"/>
+                        <segue destination="ePX-iN-0oK" kind="presentation" identifier="loginSegue" animates="NO" modalPresentationStyle="fullScreen" id="4YN-mf-c4N"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
