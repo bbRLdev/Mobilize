@@ -11,6 +11,11 @@ import Firebase
 class LoginViewController: UIViewController {
 
     
+    let segueID0 = "loginSegue"
+    
+    let segueID1 = "signupSegue"
+    
+
     @IBOutlet weak var segCtrl: UISegmentedControl!
     
     @IBOutlet weak var usernameTextField: UITextField!
@@ -18,13 +23,12 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var passwordTextField: UITextField!
     
     @IBOutlet weak var cPasswordTextField: UITextField!
-    
+
     @IBOutlet weak var cPasswordLabel: UILabel!
     
     @IBOutlet weak var statusLabel: UILabel!
     
     @IBOutlet weak var loginButton: UIButton!
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,7 +40,6 @@ class LoginViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
 
     }
-    
     
     @IBAction func segmentChanged(_ sender: Any) {
         switch segCtrl.selectedSegmentIndex{
@@ -54,9 +57,10 @@ class LoginViewController: UIViewController {
         }
     }
     
+    
     @IBAction func loginButtonPressed(_ sender: Any) {
         statusLabel.text = nil
-        
+
         guard let uid = usernameTextField.text,
               let password = passwordTextField.text,
               uid.count > 0,
@@ -65,9 +69,21 @@ class LoginViewController: UIViewController {
             statusLabel.text = "Please try again"
           return
         }
-        
-        
-        if(!cPasswordLabel.isHidden){
+
+
+        if(cPasswordLabel.isHidden){
+            Auth.auth().signIn(withEmail: uid, password: password) {
+              user, error in
+                if let _ = error, user == nil {
+                self.statusLabel.text = "Sign in failed"
+              }
+              else{
+                self.performSegue(withIdentifier: self.segueID0, sender: nil)
+              }
+            }
+
+        }
+        else{
             // 1
             guard let cPassword = cPasswordTextField.text,
                   password == cPassword
@@ -75,34 +91,27 @@ class LoginViewController: UIViewController {
                 statusLabel.text = "Sign up failed, please review your entries"
                 return
             }
-            
+
             // 2
             Auth.auth().createUser(withEmail: uid, password: password) { user, error in
                 if error == nil {
                     Auth.auth().signIn(withEmail: uid, password: password)
-                        self.performSegue(withIdentifier: "segueIdentifier", sender: nil)
-                      
+                    self.performSegue(withIdentifier: self.segueID1, sender: nil)
+
                 }
                 else{
                     self.statusLabel.text = "Sign up failed, please review your entries"
                 }
             }
-            
 
         }
-        else{
-            //creating an account takes too much time
-            
-            Auth.auth().signIn(withEmail: uid, password: password) {
-              user, error in
-              if let error = error, user == nil {
-                self.statusLabel.text = "Sign in failed"
-              }
-              else{
-                self.performSegue(withIdentifier: "segueIdentifier", sender: nil)
-              }
-            }
-        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        //let vc = segue.destination as! CreateProfileViewController
+        //vc.verificationId = "Your Data"
+        
     }
     
     // code to enable tapping on the background to remove software keyboard
