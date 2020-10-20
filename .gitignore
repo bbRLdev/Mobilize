@@ -4,3 +4,4 @@ Pods
 *.xcuserstate
 project.xcworkspace/
 xcuserdata/
+.pbxproj
