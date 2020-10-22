@@ -118,6 +118,7 @@
 				1AF47AD9253666DA0092CE1B /* LaunchScreen.storyboard */,
 				1AF47AD7253666DA0092CE1B /* Assets.xcassets */,
 				1AF47ADC253666DA0092CE1B /* Info.plist */,
+				93A358AE254214EA0008489D /* GoogleService-Info.plist */,
 				1AF47AD4253666DA0092CE1B /* Mobilize.xcdatamodeld */,
 			);
 			path = Mobilize;
@@ -236,6 +237,7 @@
 
 
 				1A481B3E253E43E600F9A961 /* CreateEventStory.storyboard in Resources */,
+				93A358AF254214EA0008489D /* GoogleService-Info.plist in Resources */,
 				1AF47AD8253666DA0092CE1B /* Assets.xcassets in Resources */,
 				DBB8312C253EC9DE00F2B48E /* Base.lproj in Resources */,
 				B9609FEC2540D3F100BC5559 /* GoogleService-Info.plist in Resources */,
