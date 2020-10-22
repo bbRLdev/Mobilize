@@ -41,11 +41,16 @@
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zF9-9j-w7N">
                                 <rect key="frame" x="351" y="797" width="43" height="36"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" backgroundImage="slider.horizontal.3" catalog="system"/>
+                                <connections>
+                                    <segue destination="D7u-GK-Mxv" kind="presentation" id="kr3-ne-apQ"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qxk-WA-yGa">
                                 <rect key="frame" x="20" y="793.33333333333348" width="43" height="36"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" backgroundImage="square.and.pencil" catalog="system"/>
                             </button>
                         </subviews>
@@ -63,6 +68,7 @@
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="O3D-8t-614">
                                 <rect key="frame" x="20" y="8" width="43" height="28"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" backgroundImage="line.horizontal.3" catalog="system"/>
                                 <connections>
                                     <action selector="sideNavButtonPressed:" destination="DcC-jA-gKe" eventType="touchUpInside" id="WkX-Sq-ysd"/>
@@ -73,6 +79,7 @@
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="92O-IE-uXo">
                                 <rect key="frame" x="351" y="4" width="43" height="36"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" backgroundImage="magnifyingglass" catalog="system"/>
                                 <connections>
                                     <segue destination="Hyn-Nu-7Mj" kind="presentation" id="V1m-jN-Pzj"/>
@@ -122,6 +129,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DTi-bA-Ylo" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3244.9275362318845" y="414.50892857142856"/>
+        </scene>
+        <!--FilterStory-->
+        <scene sceneID="DAV-HL-LT6">
+            <objects>
+                <viewControllerPlaceholder storyboardName="FilterStory" id="D7u-GK-Mxv" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aMX-Sv-0IK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2958" y="899"/>
         </scene>
         <!--LoginStory-->
         <scene sceneID="5qE-uf-47c">
