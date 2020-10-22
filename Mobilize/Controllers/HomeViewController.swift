@@ -60,6 +60,15 @@ class SideMenuListController: UITableViewController {
         return cell
     }
     
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        if(indexPath.row == 0) {
+            let storyboard: UIStoryboard = UIStoryboard(name: "SettingsScreen", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "Profile") as! SettingsProfileViewController
+            self.show(vc, sender: self)
+        }
+    }
+    
     enum NavLinks: String, CaseIterable {
         case profile = "Profile", settings = "Settings", events = "Your Events"
         
