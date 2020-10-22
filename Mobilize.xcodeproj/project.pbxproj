@@ -16,6 +16,7 @@
 		1AF47AD8253666DA0092CE1B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1AF47AD7253666DA0092CE1B /* Assets.xcassets */; };
 		1AF496302539040C00CABA30 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF4962F2539040C00CABA30 /* HomeViewController.swift */; };
 		934E6AFC253F8EA000DA9392 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 934E6AFB253F8EA000DA9392 /* LoginViewController.swift */; };
+		93A358AF254214EA0008489D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 93A358AE254214EA0008489D /* GoogleService-Info.plist */; };
 		B9609FEC2540D3F100BC5559 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1AF496162539001F00CABA30 /* GoogleService-Info.plist */; };
 		B9609FF02540E97000BC5559 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9609FEF2540E97000BC5559 /* ProfileViewController.swift */; };
 		B9609FF32540E99700BC5559 /* ProfileStory.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B9609FF22540E99700BC5559 /* ProfileStory.storyboard */; };
@@ -42,6 +43,7 @@
 		2CC66262A03F9E3F9A513159 /* Pods-Mobilize.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mobilize.debug.xcconfig"; path = "Target Support Files/Pods-Mobilize/Pods-Mobilize.debug.xcconfig"; sourceTree = "<group>"; };
 		2F96F08B931D41834245C92F /* Pods-Mobilize.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mobilize.release.xcconfig"; path = "Target Support Files/Pods-Mobilize/Pods-Mobilize.release.xcconfig"; sourceTree = "<group>"; };
 		934E6AFB253F8EA000DA9392 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		93A358AE254214EA0008489D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B9609FEF2540E97000BC5559 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		B9609FF22540E99700BC5559 /* ProfileStory.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ProfileStory.storyboard; sourceTree = "<group>"; };
 		D16664B2B4F5523DAF4E7C5A /* Pods_Mobilize.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Mobilize.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -100,6 +102,7 @@
 				1AF47AD9253666DA0092CE1B /* LaunchScreen.storyboard */,
 				1AF47AD7253666DA0092CE1B /* Assets.xcassets */,
 				1AF47ADC253666DA0092CE1B /* Info.plist */,
+				93A358AE254214EA0008489D /* GoogleService-Info.plist */,
 				1AF47AD4253666DA0092CE1B /* Mobilize.xcdatamodeld */,
 			);
 			path = Mobilize;
@@ -201,6 +204,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1A481B3E253E43E600F9A961 /* CreateEventStory.storyboard in Resources */,
+				93A358AF254214EA0008489D /* GoogleService-Info.plist in Resources */,
 				1AF47AD8253666DA0092CE1B /* Assets.xcassets in Resources */,
 				DBB8312C253EC9DE00F2B48E /* Base.lproj in Resources */,
 				B9609FEC2540D3F100BC5559 /* GoogleService-Info.plist in Resources */,
