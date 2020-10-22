@@ -2,9 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:/Users/brandtswanson/Documents/CurrentMobilize/Mobilize/Mobilize/SettingsScreen.storyboard">
-   </FileRef>
-   <FileRef
       location = "group:Mobilize.xcodeproj">
    </FileRef>
    <FileRef
