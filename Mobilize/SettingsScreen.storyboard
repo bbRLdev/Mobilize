@@ -58,7 +58,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="wtz-Ow-hOs">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="joby" translatesAutoresizingMaskIntoConstraints="NO" id="wtz-Ow-hOs">
                                 <rect key="frame" x="79" y="114" width="256" height="256"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="256" id="AJq-pb-iRa"/>
@@ -196,7 +196,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4Wh-eY-0bd">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="joby" translatesAutoresizingMaskIntoConstraints="NO" id="4Wh-eY-0bd">
                                 <rect key="frame" x="86" y="120" width="256" height="256"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
@@ -235,18 +235,11 @@
         <!--Profile Events View Controller-->
         <scene sceneID="Y01-Jt-phm">
             <objects>
-                <viewController id="BOA-wF-ddr" customClass="ProfileEventsViewController" customModule="Mobilize" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ProfileEvents" id="BOA-wF-ddr" customClass="ProfileEventsViewController" customModule="Mobilize" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="PmJ-gc-RJq">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Your Events" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YcK-fA-Vdp">
-                                <rect key="frame" x="186" y="58" width="90" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="2kQ-77-lZJ">
                                 <rect key="frame" x="20" y="112" width="374" height="32"/>
                                 <segments>
@@ -254,15 +247,15 @@
                                     <segment title="RSVP'd Events"/>
                                 </segments>
                             </segmentedControl>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="e9F-6c-vPW">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="e9F-6c-vPW">
                                 <rect key="frame" x="20" y="161" width="374" height="701"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="Kcn-Xc-eXF">
-                                        <rect key="frame" x="0.0" y="28" width="374" height="44"/>
+                                        <rect key="frame" x="0.0" y="28" width="374" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Kcn-Xc-eXF" id="beQ-TS-sak">
-                                            <rect key="frame" x="0.0" y="0.0" width="374" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="374" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -272,6 +265,7 @@
                         <viewLayoutGuide key="safeArea" id="k8F-de-aux"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="e9F-6c-vPW" firstAttribute="top" secondItem="2kQ-77-lZJ" secondAttribute="bottom" constant="18" id="2S7-ht-cTZ"/>
                             <constraint firstItem="e9F-6c-vPW" firstAttribute="leading" secondItem="k8F-de-aux" secondAttribute="leading" constant="20" id="Lbx-9O-eYx"/>
                             <constraint firstItem="e9F-6c-vPW" firstAttribute="bottom" secondItem="k8F-de-aux" secondAttribute="bottom" id="WYh-5I-4v4"/>
                             <constraint firstItem="2kQ-77-lZJ" firstAttribute="leading" secondItem="k8F-de-aux" secondAttribute="leading" constant="20" id="b8T-HK-kOK"/>
@@ -291,6 +285,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="joby" width="400" height="400"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

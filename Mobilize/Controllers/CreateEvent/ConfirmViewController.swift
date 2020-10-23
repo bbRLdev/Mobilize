@@ -9,7 +9,7 @@ import UIKit
 import MapKit
 import SideMenu
 
-class CreateEventStory: UIViewController {
+class ConfirmViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -17,7 +17,9 @@ class CreateEventStory: UIViewController {
     }
     
     @IBAction func backToMain(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
+        let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "Home") as! HomeViewController
+        self.show(vc, sender: self)
     }
     
 }

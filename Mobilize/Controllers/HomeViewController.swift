@@ -40,6 +40,13 @@ class HomeViewController: UIViewController {
     }
     */
     
+    @IBAction func createEvent(_ sender: Any) {
+        let storyboard: UIStoryboard = UIStoryboard(name: "CreateEventStory", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "Confirm") as! ConfirmViewController
+        self.show(vc, sender: self)
+    }
+    
+    
 
 }
 class SideMenuListController: UITableViewController {
@@ -66,10 +73,13 @@ class SideMenuListController: UITableViewController {
             let storyboard: UIStoryboard = UIStoryboard(name: "SettingsScreen", bundle: nil)
             let vc = storyboard.instantiateViewController(withIdentifier: "Profile") as! SettingsProfileViewController
             self.show(vc, sender: self)
-        }
-        if(indexPath.row == 1) {
+        } else if (indexPath.row == 1) {
             let storyboard: UIStoryboard = UIStoryboard(name: "SettingsScreen", bundle: nil)
             let vc = storyboard.instantiateViewController(withIdentifier: "SettingsView") as! SettingsViewController
+            self.show(vc, sender: self)
+        } else if (indexPath.row == 2) {
+            let storyboard: UIStoryboard = UIStoryboard(name: "SettingsScreen", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "ProfileEvents") as! ProfileEventsViewController
             self.show(vc, sender: self)
         }
     }

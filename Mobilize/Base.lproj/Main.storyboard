@@ -30,7 +30,7 @@
         <!--Home View Controller-->
         <scene sceneID="Fbg-xe-3kO">
             <objects>
-                <viewController id="DcC-jA-gKe" customClass="HomeViewController" customModule="Mobilize" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Home" id="DcC-jA-gKe" customClass="HomeViewController" customModule="Mobilize" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="0hl-5C-Uz0">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -53,7 +53,8 @@
                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" backgroundImage="square.and.pencil" catalog="system"/>
                                 <connections>
-                                    <segue destination="ghb-Bz-2ad" kind="presentation" id="eBA-8c-52a"/>
+                                    <action selector="createEvent:" destination="DcC-jA-gKe" eventType="touchUpInside" id="XhJ-fN-nBo"/>
+                                    <action selector="createEvent:" destination="gQ3-T5-1Qu" eventType="touchUpInside" id="YMd-i0-mRc"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -92,6 +93,7 @@
                     </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nTq-iE-xEh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="gQ3-T5-1Qu" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="2392.753623188406" y="414.50892857142856"/>
         </scene>
@@ -132,16 +134,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DTi-bA-Ylo" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3244.9275362318845" y="414.50892857142856"/>
-        </scene>
-        <!--CreateEventStory-->
-        <scene sceneID="vvK-jK-N87">
-            <objects>
-                <viewControllerPlaceholder storyboardName="CreateEventStory" id="ghb-Bz-2ad" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="fny-y7-bBm"/>
-                </viewControllerPlaceholder>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="xxR-dZ-u07" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1877" y="899"/>
         </scene>
         <!--FilterStory-->
         <scene sceneID="DAV-HL-LT6">
