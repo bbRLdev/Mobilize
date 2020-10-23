@@ -52,6 +52,9 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" backgroundImage="square.and.pencil" catalog="system"/>
+                                <connections>
+                                    <segue destination="ghb-Bz-2ad" kind="presentation" id="eBA-8c-52a"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="AUD-Sq-IuA"/>
@@ -129,6 +132,16 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DTi-bA-Ylo" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3244.9275362318845" y="414.50892857142856"/>
+        </scene>
+        <!--CreateEventStory-->
+        <scene sceneID="vvK-jK-N87">
+            <objects>
+                <viewControllerPlaceholder storyboardName="CreateEventStory" id="ghb-Bz-2ad" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="fny-y7-bBm"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xxR-dZ-u07" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1877" y="899"/>
         </scene>
         <!--FilterStory-->
         <scene sceneID="DAV-HL-LT6">

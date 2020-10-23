@@ -92,10 +92,10 @@
             </objects>
             <point key="canvasLocation" x="-484.05797101449281" y="-160.04464285714286"/>
         </scene>
-        <!--Settings View Controller-->
+        <!--SettingsView-->
         <scene sceneID="gFr-aR-RgU">
             <objects>
-                <viewController id="eju-mY-WGX" customClass="SettingsViewController" customModule="Mobilize" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SettingsView" title="SettingsView" id="eju-mY-WGX" customClass="SettingsViewController" customModule="Mobilize" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="vNF-GS-LOC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -144,10 +144,10 @@
             </objects>
             <point key="canvasLocation" x="718.84057971014499" y="482.8125"/>
         </scene>
-        <!--View Controller-->
+        <!--Notifications-->
         <scene sceneID="Px7-ZS-0Ie">
             <objects>
-                <viewController id="IJD-Cx-2mw" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Notifications" title="Notifications" id="IJD-Cx-2mw" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="WaI-h8-CET">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -188,10 +188,10 @@
             </objects>
             <point key="canvasLocation" x="1586.9565217391305" y="702.45535714285711"/>
         </scene>
-        <!--View Controller-->
+        <!--Edit Profile-->
         <scene sceneID="56J-kD-wdo">
             <objects>
-                <viewController id="9ft-VM-haI" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="EditProfile" title="Edit Profile" id="9ft-VM-haI" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="eEP-9f-nrr">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

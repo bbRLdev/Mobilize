@@ -67,6 +67,11 @@ class SideMenuListController: UITableViewController {
             let vc = storyboard.instantiateViewController(withIdentifier: "Profile") as! SettingsProfileViewController
             self.show(vc, sender: self)
         }
+        if(indexPath.row == 1) {
+            let storyboard: UIStoryboard = UIStoryboard(name: "SettingsScreen", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "SettingsView") as! SettingsViewController
+            self.show(vc, sender: self)
+        }
     }
     
     enum NavLinks: String, CaseIterable {
