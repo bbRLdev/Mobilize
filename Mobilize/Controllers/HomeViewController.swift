@@ -39,8 +39,6 @@ class HomeViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
-    
-
 }
 class SideMenuListController: UITableViewController {
     var items = [NavLinks.profile.rawValue, NavLinks.settings.rawValue, NavLinks.events.rawValue]
