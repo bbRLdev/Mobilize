@@ -7,23 +7,22 @@
 import UIKit
 import MapKit
 import SideMenu
+import CoreLocation
 
 class HomeViewController: UIViewController {
-
     
+    @IBOutlet weak var mapView: MKMapView!
     
     var sideMenu: SideMenuNavigationController?
     
-    override func viewWillAppear(_ animated: Bool) {
-        
-    }
+    let locationManager = CLLocationManager()
+    let regionInMeters:Double = 10000
 
     override func viewDidLoad() {
         super.viewDidLoad()
         sideMenu = SideMenuNavigationController(rootViewController: SideMenuListController())
         sideMenu?.leftSide = true
-        
-        // Do any additional setup after loading the view.
+        checkLocationServices()
     }
     
     @IBAction func sideNavButtonPressed(_ sender: Any) {
@@ -31,24 +30,80 @@ class HomeViewController: UIViewController {
 
     }
     
-    /*
-    // MARK: - Navigation
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-    
     @IBAction func createEvent(_ sender: Any) {
         let storyboard: UIStoryboard = UIStoryboard(name: "CreateEventStory", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "Confirm") as! ConfirmViewController
         self.show(vc, sender: self)
     }
     
+    func setUpLocationManager() {
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+    }
     
-
+    func centerViewOnUserLocation() {
+        if let location = locationManager.location?.coordinate {
+            let region = MKCoordinateRegion.init(center: location, latitudinalMeters: regionInMeters, longitudinalMeters: regionInMeters)
+            mapView.setRegion(region, animated: true)
+        }
+    }
+    
+    func checkLocationServices() {
+        print("got to check location services")
+        if CLLocationManager.locationServicesEnabled() {
+            // set up location manager
+            setUpLocationManager()
+            checkLocationAuthorization()
+        } else {
+            // show alert letting user knowing they need to turn location services on
+        }
+        
+    }
+    
+    func checkLocationAuthorization() {
+        switch locationManager.authorizationStatus {
+        case .authorizedWhenInUse:
+            // Do map stuff
+            mapView.showsUserLocation = true
+            centerViewOnUserLocation()
+            locationManager.startUpdatingLocation()
+            break
+        case .denied:
+            // Show alert instructing how to turn on permissions
+            break
+        case .notDetermined:
+            locationManager.requestWhenInUseAuthorization()
+            break
+        case .restricted:
+            // show an alert saying location is restricted (parent controls, etc.)
+            break
+        case .authorizedAlways:
+            break
+        @unknown default:
+            print("Error in checking location authorization")
+        }
+    }
+    
 }
+
+extension HomeViewController: CLLocationManagerDelegate {
+    
+    // update the location on map when user moves around
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        guard let location = locations.last else {
+            return
+        }
+        let region = MKCoordinateRegion.init(center: location.coordinate, latitudinalMeters: regionInMeters, longitudinalMeters: regionInMeters)
+        mapView.setRegion(region, animated: true)
+    }
+    
+    // called when user changes their location authorization
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        checkLocationAuthorization()
+    }
+    
+}
+
 class SideMenuListController: UITableViewController {
     var items = [NavLinks.profile.rawValue, NavLinks.settings.rawValue, NavLinks.events.rawValue]
     

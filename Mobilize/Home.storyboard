@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="eos-Df-nGV">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
@@ -8,49 +8,39 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Transition-->
-        <scene sceneID="WWm-Kh-VIA">
-            <objects>
-                <viewController id="eos-Df-nGV" customClass="Transition" customModule="Mobilize" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="d0B-Aq-uXm">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="hgH-26-ews"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="Uyw-Qy-lmx"/>
-                    <connections>
-                        <segue destination="q1X-aM-eMz" kind="presentation" identifier="segueIdentifier" animates="NO" modalPresentationStyle="fullScreen" id="Q07-h1-x1z"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="174" y="415"/>
-        </scene>
         <!--Home View Controller-->
         <scene sceneID="Fbg-xe-3kO">
             <objects>
-                <viewController storyboardIdentifier="Home" id="DcC-jA-gKe" customClass="HomeViewController" customModule="Mobilize" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="DcC-jA-gKe" customClass="HomeViewController" customModule="Mobilize" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="0hl-5C-Uz0">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Gjb-KE-SyA">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <connections>
+                                    <outlet property="delegate" destination="DcC-jA-gKe" id="TPM-3o-amt"/>
+                                </connections>
                             </mapView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zF9-9j-w7N">
-                                <rect key="frame" x="351" y="797" width="43" height="36"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zF9-9j-w7N">
+                                <rect key="frame" x="351" y="794" width="43" height="36"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="kqF-qf-zg7"/>
+                                    <constraint firstAttribute="width" constant="43" id="x3r-GB-nKx"/>
+                                </constraints>
+                                <color key="tintColor" systemColor="labelColor"/>
                                 <state key="normal" backgroundImage="slider.horizontal.3" catalog="system"/>
                                 <connections>
                                     <segue destination="D7u-GK-Mxv" kind="presentation" id="kr3-ne-apQ"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qxk-WA-yGa">
-                                <rect key="frame" x="20" y="793.33333333333348" width="43" height="36"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qxk-WA-yGa">
+                                <rect key="frame" x="20" y="793" width="43" height="36.333333333333371"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="43" id="M7T-kt-tFD"/>
+                                    <constraint firstAttribute="height" constant="38" id="PZ8-cJ-tj1"/>
+                                </constraints>
+                                <color key="tintColor" systemColor="labelColor"/>
                                 <state key="normal" backgroundImage="square.and.pencil" catalog="system"/>
                                 <connections>
                                     <action selector="createEvent:" destination="DcC-jA-gKe" eventType="touchUpInside" id="XhJ-fN-nBo"/>
@@ -61,9 +51,15 @@
                         <viewLayoutGuide key="safeArea" id="AUD-Sq-IuA"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="qxk-WA-yGa" firstAttribute="leading" secondItem="AUD-Sq-IuA" secondAttribute="leading" constant="20" id="4Qt-af-Udi"/>
+                            <constraint firstItem="AUD-Sq-IuA" firstAttribute="trailing" secondItem="zF9-9j-w7N" secondAttribute="trailing" constant="20" id="LlA-wg-emx"/>
                             <constraint firstItem="Gjb-KE-SyA" firstAttribute="trailing" secondItem="AUD-Sq-IuA" secondAttribute="trailing" id="Lxp-Nf-ZDd"/>
+                            <constraint firstItem="AUD-Sq-IuA" firstAttribute="bottom" secondItem="zF9-9j-w7N" secondAttribute="bottom" constant="30" id="YXy-d3-eJ5"/>
+                            <constraint firstItem="qxk-WA-yGa" firstAttribute="leading" secondItem="AUD-Sq-IuA" secondAttribute="leading" constant="20" id="dxY-Z4-HpS"/>
                             <constraint firstItem="Gjb-KE-SyA" firstAttribute="top" secondItem="0hl-5C-Uz0" secondAttribute="top" id="nP8-zL-JCK"/>
                             <constraint firstAttribute="bottom" secondItem="Gjb-KE-SyA" secondAttribute="bottom" id="sFR-29-PWc"/>
+                            <constraint firstItem="AUD-Sq-IuA" firstAttribute="bottom" secondItem="qxk-WA-yGa" secondAttribute="bottom" constant="30" id="uG7-VI-oeL"/>
+                            <constraint firstItem="AUD-Sq-IuA" firstAttribute="bottom" secondItem="qxk-WA-yGa" secondAttribute="bottom" constant="31.329999999999998" id="vpZ-Kd-0ni"/>
                             <constraint firstItem="Gjb-KE-SyA" firstAttribute="leading" secondItem="AUD-Sq-IuA" secondAttribute="leading" id="wEa-Sc-Brj"/>
                         </constraints>
                     </view>
@@ -72,7 +68,7 @@
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="O3D-8t-614">
                                 <rect key="frame" x="20" y="8" width="43" height="28"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="tintColor" systemColor="labelColor"/>
                                 <state key="normal" backgroundImage="line.horizontal.3" catalog="system"/>
                                 <connections>
                                     <action selector="sideNavButtonPressed:" destination="DcC-jA-gKe" eventType="touchUpInside" id="WkX-Sq-ysd"/>
@@ -83,7 +79,7 @@
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="92O-IE-uXo">
                                 <rect key="frame" x="351" y="4" width="43" height="36"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="tintColor" systemColor="labelColor"/>
                                 <state key="normal" backgroundImage="magnifyingglass" catalog="system"/>
                                 <connections>
                                     <segue destination="Hyn-Nu-7Mj" kind="presentation" id="V1m-jN-Pzj"/>
@@ -91,6 +87,9 @@
                             </button>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="mapView" destination="Gjb-KE-SyA" id="bTj-zp-jWD"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nTq-iE-xEh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <exit id="gQ3-T5-1Qu" userLabel="Exit" sceneMemberID="exit"/>
@@ -143,16 +142,6 @@
             </objects>
             <point key="canvasLocation" x="2958" y="899"/>
         </scene>
-        <!--LoginStory-->
-        <scene sceneID="5qE-uf-47c">
-            <objects>
-                <viewControllerPlaceholder storyboardIdentifier="UINavigationController-cza-YI-kKf" storyboardName="LoginStory" id="q1X-aM-eMz" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="5v2-MK-DsV"/>
-                </viewControllerPlaceholder>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="jQJ-JS-4wa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="929" y="415"/>
-        </scene>
         <!--Navigation Controller-->
         <scene sceneID="h42-l5-dDX">
             <objects>
@@ -177,6 +166,9 @@
         <image name="magnifyingglass" catalog="system" width="128" height="115"/>
         <image name="slider.horizontal.3" catalog="system" width="128" height="100"/>
         <image name="square.and.pencil" catalog="system" width="128" height="115"/>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
