@@ -1,6 +1,7 @@
 GoogleService-Info.plist
 Pods
 *.xcuserstate
+README.pdf
 
 # OS X Finder
 .DS_Store
