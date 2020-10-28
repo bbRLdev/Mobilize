@@ -96,38 +96,45 @@
             </objects>
             <point key="canvasLocation" x="2392.753623188406" y="414.50892857142856"/>
         </scene>
-        <!--View Controller-->
+        <!--Search View Controller-->
         <scene sceneID="BM4-M2-Ux5">
             <objects>
-                <viewController id="Hyn-Nu-7Mj" sceneMemberID="viewController">
+                <viewController id="Hyn-Nu-7Mj" customClass="SearchViewController" customModule="Mobilize" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Fh8-XF-2xj">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <searchBar contentMode="redraw" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FTH-Sg-lSA">
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="FTH-Sg-lSA">
                                 <rect key="frame" x="20" y="88" width="374" height="56"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <scopeButtonTitles>
                                     <string>Title</string>
                                     <string>Title</string>
                                 </scopeButtonTitles>
                             </searchBar>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Search for an event:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hVZ-Ej-x9l">
-                                <rect key="frame" x="20" y="52" width="374" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Search for an event:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hVZ-Ej-x9l">
+                                <rect key="frame" x="131" y="52" width="152.33333333333337" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q1y-42-dHt">
-                                <rect key="frame" x="189" y="193" width="37" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q1y-42-dHt">
+                                <rect key="frame" x="188.66666666666666" y="193" width="37" height="30"/>
                                 <state key="normal" title="Enter"/>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="xmY-Y2-ga9"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="FTH-Sg-lSA" firstAttribute="leading" secondItem="xmY-Y2-ga9" secondAttribute="leading" constant="20" id="8FU-dx-Boh"/>
+                            <constraint firstItem="q1y-42-dHt" firstAttribute="top" secondItem="FTH-Sg-lSA" secondAttribute="bottom" constant="49" id="Hfh-NC-frN"/>
+                            <constraint firstItem="q1y-42-dHt" firstAttribute="centerX" secondItem="Fh8-XF-2xj" secondAttribute="centerX" id="LQc-dV-Veq"/>
+                            <constraint firstItem="FTH-Sg-lSA" firstAttribute="top" secondItem="hVZ-Ej-x9l" secondAttribute="bottom" constant="15" id="PaA-Vb-kfD"/>
+                            <constraint firstItem="hVZ-Ej-x9l" firstAttribute="centerX" secondItem="Fh8-XF-2xj" secondAttribute="centerX" id="bwD-ZS-FTJ"/>
+                            <constraint firstItem="FTH-Sg-lSA" firstAttribute="top" secondItem="xmY-Y2-ga9" secondAttribute="top" constant="88" id="cbW-NF-b82"/>
+                            <constraint firstItem="FTH-Sg-lSA" firstAttribute="centerX" secondItem="Fh8-XF-2xj" secondAttribute="centerX" id="eLo-oS-ygF"/>
+                            <constraint firstItem="hVZ-Ej-x9l" firstAttribute="top" secondItem="xmY-Y2-ga9" secondAttribute="top" constant="52" id="nMO-WS-uDj"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DTi-bA-Ylo" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

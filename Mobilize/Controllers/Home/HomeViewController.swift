@@ -20,20 +20,25 @@ class HomeViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        sideMenu = SideMenuNavigationController(rootViewController: SideMenuListController())
-        sideMenu?.leftSide = true
+        setUpSideMenu()
         checkLocationServices()
     }
     
     @IBAction func sideNavButtonPressed(_ sender: Any) {
         present(sideMenu!, animated: true)
-
     }
     
     @IBAction func createEvent(_ sender: Any) {
         let storyboard: UIStoryboard = UIStoryboard(name: "CreateEventStory", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "Confirm") as! ConfirmViewController
         self.show(vc, sender: self)
+    }
+    
+    func setUpSideMenu() {
+        sideMenu = SideMenuNavigationController(rootViewController: SideMenuListController())
+        sideMenu?.leftSide = true
+        SideMenuManager.default.leftMenuNavigationController = sideMenu
+        SideMenuManager.default.addScreenEdgePanGesturesToPresent(toView: mapView)
     }
     
     func setUpLocationManager() {
@@ -89,12 +94,13 @@ class HomeViewController: UIViewController {
 extension HomeViewController: CLLocationManagerDelegate {
     
     // update the location on map when user moves around
+    // (leave out? annoying b/c stops user from moving map around)
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        guard let location = locations.last else {
-            return
-        }
-        let region = MKCoordinateRegion.init(center: location.coordinate, latitudinalMeters: regionInMeters, longitudinalMeters: regionInMeters)
-        mapView.setRegion(region, animated: true)
+//        guard let location = locations.last else {
+//            return
+//        }
+//        let region = MKCoordinateRegion.init(center: location.coordinate, latitudinalMeters: regionInMeters, longitudinalMeters: regionInMeters)
+//        mapView.setRegion(region, animated: true)
     }
     
     // called when user changes their location authorization
