@@ -5,6 +5,7 @@
 //  Created by Brandt Swanson on 10/15/20.
 //
 import UIKit
+import CoreData
 
 class SettingsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
@@ -38,5 +39,44 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         if(indexPath.row == 1) {
             performSegue(withIdentifier: "notifications", sender: self)
         }
+    }
+    
+    @IBAction func logoutPressed(_ sender: Any) {
+        let controller = UIAlertController(title: "Logout", message: "Are you sure you want to log out?", preferredStyle: .alert)
+        controller.addAction(UIAlertAction(title:"Yes", style: .destructive, handler: {_ in self.handleLogout()}))
+        controller.addAction(UIAlertAction(title:"Cancel", style: .cancel, handler: nil))
+        present(controller, animated: true, completion: nil)
+    }
+    
+    // helper method that will delete log in data
+    private func handleLogout() {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let context = appDelegate.persistentContainer.viewContext
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "ProfileEntity")
+        var fetchedResults: [NSManagedObject]
+        do {
+            print("GOT HERE")
+            try fetchedResults = (context.fetch(request) as? [NSManagedObject])!
+            if(fetchedResults.count > 0) {
+                // clear all saved user data
+                for result:AnyObject in fetchedResults {
+                    context.delete(result as! NSManagedObject)
+                    print("\(result.value(forKey: "uid")!) has been deleted")
+                }
+            }
+            // commit the changes
+            try context.save()
+        } catch {
+            // if an error occurs
+            let nserror = error as NSError
+            NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
+            abort()
+        }
+        // show login screen
+        let storyboard = UIStoryboard(name: "LoginStory", bundle: nil)
+        let loginViewController = storyboard.instantiateViewController(withIdentifier: "Login")
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
+        show(loginViewController, sender: self)
+
     }
 }
