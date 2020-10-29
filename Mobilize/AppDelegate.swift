@@ -21,6 +21,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         FirebaseApp.configure()
         configureInitialViewController()
+        // request notifications
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert], completionHandler: { (success, error) in
+        })
         return true
     }
     

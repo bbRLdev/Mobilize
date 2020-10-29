@@ -16,6 +16,8 @@
 		1AF47AD8253666DA0092CE1B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1AF47AD7253666DA0092CE1B /* Assets.xcassets */; };
 		1AF496302539040C00CABA30 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF4962F2539040C00CABA30 /* HomeViewController.swift */; };
 		934E6AFC253F8EA000DA9392 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 934E6AFB253F8EA000DA9392 /* LoginViewController.swift */; };
+		93CC665A254B36EE0075A9EE /* NotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93CC6659254B36ED0075A9EE /* NotificationsViewController.swift */; };
+		93CC665D254B38A60075A9EE /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 93CC665C254B38A60075A9EE /* Settings.bundle */; };
 		93E47C4A254912B7006D76BF /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 93E47C48254912B2006D76BF /* Home.storyboard */; };
 		93E47C4C254912BC006D76BF /* LoginStory.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 93E47C49254912B4006D76BF /* LoginStory.storyboard */; };
 		93E47C4F254912E1006D76BF /* FilterStory.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 93E47C4E254912DE006D76BF /* FilterStory.storyboard */; };
@@ -46,6 +48,8 @@
 		2CC66262A03F9E3F9A513159 /* Pods-Mobilize.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mobilize.debug.xcconfig"; path = "Target Support Files/Pods-Mobilize/Pods-Mobilize.debug.xcconfig"; sourceTree = "<group>"; };
 		2F96F08B931D41834245C92F /* Pods-Mobilize.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mobilize.release.xcconfig"; path = "Target Support Files/Pods-Mobilize/Pods-Mobilize.release.xcconfig"; sourceTree = "<group>"; };
 		934E6AFB253F8EA000DA9392 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		93CC6659254B36ED0075A9EE /* NotificationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsViewController.swift; sourceTree = "<group>"; };
+		93CC665C254B38A60075A9EE /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		93E47C48254912B2006D76BF /* Home.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
 		93E47C49254912B4006D76BF /* LoginStory.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LoginStory.storyboard; sourceTree = "<group>"; };
 		93E47C4E254912DE006D76BF /* FilterStory.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = FilterStory.storyboard; sourceTree = "<group>"; };
@@ -95,6 +99,7 @@
 		1AF47ABF253666DA0092CE1B = {
 			isa = PBXGroup;
 			children = (
+				93CC665C254B38A60075A9EE /* Settings.bundle */,
 				1AF47ACA253666DA0092CE1B /* Mobilize */,
 				1AF47AC9253666DA0092CE1B /* Products */,
 				EF9DB5F19464E68D396D8FBE /* Pods */,
@@ -166,6 +171,7 @@
 			children = (
 				B960A00C25411EFE00BC5559 /* SettingsProfileViewController.swift */,
 				B960A01B2542093600BC5559 /* SettingsViewController.swift */,
+				93CC6659254B36ED0075A9EE /* NotificationsViewController.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -258,6 +264,7 @@
 			files = (
 				93E47C4C254912BC006D76BF /* LoginStory.storyboard in Resources */,
 				93E47C6E25491871006D76BF /* SettingsScreen.storyboard in Resources */,
+				93CC665D254B38A60075A9EE /* Settings.bundle in Resources */,
 				1AF47AD8253666DA0092CE1B /* Assets.xcassets in Resources */,
 				93E47C4F254912E1006D76BF /* FilterStory.storyboard in Resources */,
 				93E47C7125491879006D76BF /* ProfileStory.storyboard in Resources */,
@@ -322,6 +329,7 @@
 				1AF47ACC253666DA0092CE1B /* AppDelegate.swift in Sources */,
 				1A6036E4254234A900E874D5 /* ControlContainableScrollview.swift in Sources */,
 				1A603726254286D600E874D5 /* ConfirmViewController.swift in Sources */,
+				93CC665A254B36EE0075A9EE /* NotificationsViewController.swift in Sources */,
 				934E6AFC253F8EA000DA9392 /* LoginViewController.swift in Sources */,
 				1AF496302539040C00CABA30 /* HomeViewController.swift in Sources */,
 				1A60372925428D5100E874D5 /* QAandConfirmVC.swift in Sources */,

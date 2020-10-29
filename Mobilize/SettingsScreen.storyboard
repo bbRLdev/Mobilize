@@ -157,7 +157,7 @@
         <!--Notifications-->
         <scene sceneID="Px7-ZS-0Ie">
             <objects>
-                <viewController storyboardIdentifier="Notifications" title="Notifications" id="IJD-Cx-2mw" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Notifications" title="Notifications" id="IJD-Cx-2mw" customClass="NotificationsViewController" customModule="Mobilize" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="WaI-h8-CET">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -173,6 +173,9 @@
                                 <rect key="frame" x="145" y="468" width="125" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Open iOS settings"/>
+                                <connections>
+                                    <action selector="openSettingsPushed:" destination="IJD-Cx-2mw" eventType="touchUpInside" id="3JX-yz-LfM"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="1. Tap Notifications" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a09-Xq-X3Y">
                                 <rect key="frame" x="126" y="250" width="144" height="21"/>
