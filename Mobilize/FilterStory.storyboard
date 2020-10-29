@@ -117,25 +117,25 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tiU-YN-dgy">
                                         <rect key="frame" x="0.0" y="0.0" width="93.666666666666671" height="30"/>
                                         <state key="normal" title="March">
-                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <color key="titleColor" systemColor="labelColor"/>
                                         </state>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bc7-xt-B85">
                                         <rect key="frame" x="93.666666666666686" y="0.0" width="93.333333333333314" height="30"/>
                                         <state key="normal" title="Townhall">
-                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <color key="titleColor" systemColor="labelColor"/>
                                         </state>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sqM-Ga-r2b">
                                         <rect key="frame" x="187" y="0.0" width="93.666666666666686" height="30"/>
                                         <state key="normal" title="Voting">
-                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <color key="titleColor" systemColor="labelColor"/>
                                         </state>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v8g-xa-bQZ">
                                         <rect key="frame" x="280.66666666666669" y="0.0" width="93.333333333333314" height="30"/>
                                         <state key="normal" title="Protest">
-                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <color key="titleColor" systemColor="labelColor"/>
                                         </state>
                                     </button>
                                 </subviews>
@@ -164,6 +164,7 @@
                             <constraint firstItem="1Sn-1K-lLt" firstAttribute="centerX" secondItem="fur-mK-Hih" secondAttribute="centerX" id="P0m-jm-5r7"/>
                             <constraint firstItem="ota-s5-EN3" firstAttribute="top" secondItem="Ojs-FR-Gcr" secondAttribute="bottom" constant="7.6666666666666856" id="Vu0-AU-0rv"/>
                             <constraint firstItem="fur-mK-Hih" firstAttribute="bottom" secondItem="ota-s5-EN3" secondAttribute="bottom" constant="522" id="W0R-1z-voz"/>
+                            <constraint firstItem="vFt-4p-628" firstAttribute="leading" secondItem="fur-mK-Hih" secondAttribute="leading" constant="20" id="WKd-I8-Yyd"/>
                             <constraint firstItem="vFt-4p-628" firstAttribute="leading" secondItem="QbY-He-Sw9" secondAttribute="leadingMargin" id="Yoe-mW-9fm"/>
                             <constraint firstItem="ota-s5-EN3" firstAttribute="leading" secondItem="vf4-28-x67" secondAttribute="leading" id="f7b-Be-uh6"/>
                             <constraint firstItem="fur-mK-Hih" firstAttribute="trailing" secondItem="149-6l-VEj" secondAttribute="trailing" constant="20" id="igq-8V-JaK"/>

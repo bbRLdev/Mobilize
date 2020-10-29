@@ -282,7 +282,7 @@
         <!--MainNavigationController-->
         <scene sceneID="0AK-4A-aPY">
             <objects>
-                <viewControllerPlaceholder storyboardName="Main" referencedIdentifier="MainNavigationController" id="ePX-iN-0oK" sceneMemberID="viewController"/>
+                <viewControllerPlaceholder storyboardName="Home" referencedIdentifier="MainNavigationController" id="ePX-iN-0oK" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0QR-Au-cyG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1656" y="98"/>
