@@ -42,8 +42,8 @@ class FilterViewController: UIViewController {
             button.setTitleColor(UIColor.black, for: .normal)
             button.setImage(UIImage(systemName: "circle.fill"), for: .normal)
             button.setImage(UIImage(systemName: "circle"), for: .selected)
-            button.titleEdgeInsets.left = 12
-            button.titleEdgeInsets.right = -12
+            button.titleEdgeInsets.left = 6
+            button.titleEdgeInsets.right = -6
             button.tintColor = colorSet[caseNum]
             button.addTarget(self, action: #selector(selectActivismFilter(_:)), for: .touchUpInside)
             activismButtonSet.append(button)
