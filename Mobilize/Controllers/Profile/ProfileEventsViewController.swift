@@ -35,6 +35,19 @@ class ProfileEventsViewController: UIViewController, UITableViewDelegate, UITabl
         }
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        if(indexPath.row == 0) {
+            let storyboard: UIStoryboard = UIStoryboard(name: "EventStory", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "EventView") as! EventDetailsViewController
+            self.show(vc, sender: self)
+        } else if (indexPath.row == 1) {
+            let storyboard: UIStoryboard = UIStoryboard(name: "EventStory", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "EventView") as! EventDetailsViewController
+            self.show(vc, sender: self)
+        }
+    }
  
     @IBAction func RSVP(_ sender: Any) {
         RSVPView = true

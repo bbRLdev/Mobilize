@@ -28,10 +28,12 @@
 		B960A0162542079900BC5559 /* ProfileEventsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B960A0152542079900BC5559 /* ProfileEventsViewController.swift */; };
 		B960A01C2542093700BC5559 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B960A01B2542093600BC5559 /* SettingsViewController.swift */; };
 		BF47B03D5A51FD2ADD1E0002 /* Pods_Mobilize.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D16664B2B4F5523DAF4E7C5A /* Pods_Mobilize.framework */; };
+		DB94FDAA254295D8005BFDE1 /* EventStory.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DB94FDA8254295D8005BFDE1 /* EventStory.storyboard */; };
 		DBB830AC253E958400F2B48E /* CreateProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB830AB253E958400F2B48E /* CreateProfileViewController.swift */; };
 		DBB8312C253EC9DE00F2B48E /* Base.lproj in Resources */ = {isa = PBXBuildFile; fileRef = DBB8312B253EC9DE00F2B48E /* Base.lproj */; };
 		DBB83141253ED6C600F2B48E /* Transition.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB83140253ED6C600F2B48E /* Transition.swift */; };
 		DBB83146253ED7B200F2B48E /* LoginStory.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DBB83144253ED7B200F2B48E /* LoginStory.storyboard */; };
+		DBEB0DFC2542955C0043ADB1 /* EventDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBEB0DFB2542955C0043ADB1 /* EventDetailsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -61,11 +63,13 @@
 		B960A0152542079900BC5559 /* ProfileEventsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEventsViewController.swift; sourceTree = "<group>"; };
 		B960A01B2542093600BC5559 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		D16664B2B4F5523DAF4E7C5A /* Pods_Mobilize.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Mobilize.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DB94FDA9254295D8005BFDE1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/EventStory.storyboard; sourceTree = "<group>"; };
 		DBB830A3253E7A6B00F2B48E /* Mobilize.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Mobilize.entitlements; sourceTree = "<group>"; };
 		DBB830AB253E958400F2B48E /* CreateProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateProfileViewController.swift; sourceTree = "<group>"; };
 		DBB8312B253EC9DE00F2B48E /* Base.lproj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = folder; path = Base.lproj; sourceTree = "<group>"; };
 		DBB83140253ED6C600F2B48E /* Transition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transition.swift; sourceTree = "<group>"; };
 		DBB83145253ED7B200F2B48E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LoginStory.storyboard; sourceTree = "<group>"; };
+		DBEB0DFB2542955C0043ADB1 /* EventDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,6 +141,7 @@
 				1AF47AD7253666DA0092CE1B /* Assets.xcassets */,
 				1AF47ADC253666DA0092CE1B /* Info.plist */,
 				1AF47AD4253666DA0092CE1B /* Mobilize.xcdatamodeld */,
+				DB94FDA8254295D8005BFDE1 /* EventStory.storyboard */,
 			);
 			path = Mobilize;
 			sourceTree = "<group>";
@@ -149,6 +154,7 @@
 				DBB830A8253E93FE00F2B48E /* Login */,
 				1AF4962F2539040C00CABA30 /* HomeViewController.swift */,
 				B9609FEF2540E97000BC5559 /* ProfileViewController.swift */,
+				DBEB0DFB2542955C0043ADB1 /* EventDetailsViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -257,6 +263,7 @@
 				1A6037172542804A00E874D5 /* GoogleService-Info.plist in Resources */,
 				B9609FF32540E99700BC5559 /* ProfileStory.storyboard in Resources */,
 				1A6036E02542345300E874D5 /* FilterStory.storyboard in Resources */,
+				DB94FDAA254295D8005BFDE1 /* EventStory.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -313,6 +320,7 @@
 				1AF47AD0253666DA0092CE1B /* ViewController.swift in Sources */,
 				B960A01C2542093700BC5559 /* SettingsViewController.swift in Sources */,
 				1AF47ACC253666DA0092CE1B /* AppDelegate.swift in Sources */,
+				DBEB0DFC2542955C0043ADB1 /* EventDetailsViewController.swift in Sources */,
 				1A6036E4254234A900E874D5 /* ControlContainableScrollview.swift in Sources */,
 				1A603726254286D600E874D5 /* ConfirmViewController.swift in Sources */,
 				1AF47ACE253666DA0092CE1B /* SceneDelegate.swift in Sources */,
@@ -344,6 +352,14 @@
 				1AF47ADA253666DA0092CE1B /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		DB94FDA8254295D8005BFDE1 /* EventStory.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DB94FDA9254295D8005BFDE1 /* Base */,
+			);
+			name = EventStory.storyboard;
 			sourceTree = "<group>";
 		};
 		DBB83144253ED7B200F2B48E /* LoginStory.storyboard */ = {
