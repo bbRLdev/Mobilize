@@ -1,22 +1,18 @@
 //
-//  Transition.swift
+//  EventDetailsViewController.swift
 //  Mobilize
 //
-//  Created by Roger Zhong on 10/20/20.
+//  Created by Roger Zhong on 10/22/20.
 //
 
 import UIKit
 
-class Transition: UIViewController {
+class EventDetailsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        self.performSegue(withIdentifier: "segueIdentifier", sender: nil)
     }
     
 
