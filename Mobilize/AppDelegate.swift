@@ -79,6 +79,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     print("signed in successfully")
                 }
             }
+        }else {
+            print("no log in info")
+            return false
         }
         return userDefault.bool(forKey: "usersignedin")
     }
