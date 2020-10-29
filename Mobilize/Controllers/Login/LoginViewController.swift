@@ -7,6 +7,7 @@
 
 import UIKit
 import Firebase
+import CoreData
 
 class LoginViewController: UIViewController {
 
@@ -37,12 +38,8 @@ class LoginViewController: UIViewController {
 
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-
-    }
-    
     @IBAction func segmentChanged(_ sender: Any) {
-        switch segCtrl.selectedSegmentIndex{
+        switch segCtrl.selectedSegmentIndex {
         case 0:
             cPasswordLabel.isHidden = true
             cPasswordTextField.isHidden = true
@@ -71,19 +68,18 @@ class LoginViewController: UIViewController {
         }
 
 
-        if(cPasswordLabel.isHidden){
+        if(cPasswordLabel.isHidden) {
             Auth.auth().signIn(withEmail: uid, password: password) {
               user, error in
                 if let _ = error, user == nil {
                 self.statusLabel.text = "Sign in failed"
-              }
-              else{
+              }else {
+                // store login info
+                self.storeProfile(uid: uid, password: password)
                 self.performSegue(withIdentifier: self.segueID0, sender: nil)
               }
             }
-
-        }
-        else{
+        }else {
             // 1
             guard let cPassword = cPasswordTextField.text,
                   password == cPassword
@@ -96,10 +92,11 @@ class LoginViewController: UIViewController {
             Auth.auth().createUser(withEmail: uid, password: password) { user, error in
                 if error == nil {
                     Auth.auth().signIn(withEmail: uid, password: password)
+                    // store login info
+                    self.storeProfile(uid: uid, password: password)
                     self.performSegue(withIdentifier: self.segueID1, sender: nil)
 
-                }
-                else{
+                }else {
                     self.statusLabel.text = "Sign up failed, please review your entries"
                 }
             }
@@ -107,15 +104,26 @@ class LoginViewController: UIViewController {
         }
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-        //let vc = segue.destination as! CreateProfileViewController
-        //vc.verificationId = "Your Data"
-        
+    // helper method that saves login information into core data
+    private func storeProfile(uid:String, password:String) {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let context = appDelegate.persistentContainer.viewContext
+        let profileToStore = NSEntityDescription.insertNewObject(forEntityName: "ProfileEntity", into:context)
+        // set the attribute variables
+        profileToStore.setValue(uid, forKey: "uid")
+        profileToStore.setValue(password, forKey: "password")
+        // commit the changes
+        do {
+            try context.save()
+        } catch {
+            // if an error occurs
+            let nserror = error as NSError
+            NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
+            abort()
+        }
     }
     
     // code to enable tapping on the background to remove software keyboard
-        
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
     }

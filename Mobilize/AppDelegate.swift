@@ -8,9 +8,13 @@
 import UIKit
 import CoreData
 import Firebase
+import FirebaseAuth
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
+    
+    let userDefault = UserDefaults.standard
+    let launchedBefore = UserDefaults.standard.bool(forKey: "usersingedin")
     
     var window: UIWindow?
 
@@ -21,20 +25,62 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     private func configureInitialViewController() {
+        let loggedIn = checkIfLoggedIn()
         window = UIWindow()
-        
         let initialViewController: UIViewController
-        let storyboard = UIStoryboard(name: "Home", bundle: nil)
-        
-        if(true) {
+        if(loggedIn) {
+            let storyboard = UIStoryboard(name: "Home", bundle: nil)
             let mainViewController = storyboard.instantiateViewController(withIdentifier: "MainNavigationController")
             initialViewController = mainViewController
         }else {
+            let storyboard = UIStoryboard(name: "LoginStory", bundle: nil)
             let loginViewController = storyboard.instantiateViewController(withIdentifier: "Login")
             initialViewController = loginViewController
         }
         window?.rootViewController = initialViewController
         self.window?.makeKeyAndVisible()
+    }
+    
+    // checks if there is already user info saved in core data
+    private func checkIfLoggedIn() -> Bool {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let context = appDelegate.persistentContainer.viewContext
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "ProfileEntity")
+        var fetchedResults: [NSManagedObject]? = nil
+        do {
+            try fetchedResults = context.fetch(request) as? [NSManagedObject]
+        } catch {
+            let nserror = error as NSError
+            NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
+            return false
+        }
+        
+        // read in fetched results
+        if(!fetchedResults!.isEmpty) {
+            let profileEntity = fetchedResults![0]
+            guard let uid = profileEntity.value(forKey:"uid") as? String,
+                  let password = profileEntity.value(forKey:"password") as? String
+                else {
+                    print("could not find any user data")
+                    return false
+                }
+            // try logging in
+            Auth.auth().signIn(withEmail: uid, password: password) {
+              user, error in
+                if let _ = error, user == nil {
+                    // couldn't sign in
+                    self.userDefault.set(false, forKey: "usersignedin")
+                    self.userDefault.synchronize()
+                    print("error signing in")
+                }else {
+                    // signed in successfully
+                    self.userDefault.set(true, forKey: "usersignedin")
+                    self.userDefault.synchronize()
+                    print("signed in successfully")
+                }
+            }
+        }
+        return userDefault.bool(forKey: "usersignedin")
     }
 
     // MARK: - Core Data stack
