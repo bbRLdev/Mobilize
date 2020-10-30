@@ -36,6 +36,10 @@ class HomeViewController: UIViewController, GetFilters {
         if segue.identifier == "FilterSegueId",
            let nextVC = segue.destination as? FilterViewController {
             nextVC.delegate = self
+            nextVC.radius = searchRadius
+            nextVC.initActivismButtons = activismFilters
+            print("Preparing for segue ", activismFilters)
+            nextVC.initEventButtons = eventFilters
         }
     }
     
@@ -54,6 +58,8 @@ class HomeViewController: UIViewController, GetFilters {
         activismFilters = actFilters
         eventFilters = evtFilters
         searchRadius = radius
+        print("Got filters ", activismFilters)
+
     }
     
     func setUpSideMenu() {
