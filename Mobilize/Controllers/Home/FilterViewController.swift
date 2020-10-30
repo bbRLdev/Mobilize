@@ -12,6 +12,9 @@ import UIKit
 class FilterViewController: UIViewController {
     
     @IBOutlet weak var filterStack: UIStackView!
+    @IBOutlet weak var eventStack: UIStackView!
+    @IBOutlet weak var radiusSlider: UISlider!
+    var delegate: UIViewController!
     
     enum ActivismFilterTypes: String, CaseIterable {
         case racialJustice = "Racial Justice",
@@ -22,14 +25,25 @@ class FilterViewController: UIViewController {
              womensRights = "Women's Rights"
     }
     
+    enum EventFilterTypes: String, CaseIterable {
+        case march = "March",
+             protest = "Protest",
+             political = "Political",
+             voting = "Voting"
+    }
+    
     let colorSet: [UIColor] = [UIColor.purple,
                                UIColor.red,
                                UIColor.cyan,
                                UIColor.orange,
                                UIColor.green,
                                UIColor.systemPink]
-    
+    var initActivismButtons: [String] = []
+    var initEventButtons: [String] = []
+    var radius: Float = 0
+
     var activismButtonSet: [UIButton] = []
+    var eventButtonSet: [UIButton] = []
     
     
     override func viewDidLoad() {
@@ -40,19 +54,41 @@ class FilterViewController: UIViewController {
             let button = UIButton()
             button.setTitle(activism.rawValue, for: .normal)
             button.setTitleColor(UIColor.black, for: .normal)
-            button.setImage(UIImage(systemName: "circle.fill"), for: .normal)
-            button.setImage(UIImage(systemName: "circle"), for: .selected)
-            button.titleEdgeInsets.left = 12
-            button.titleEdgeInsets.right = -12
+            button.setImage(UIImage(systemName: "circle"), for: .normal)
+            button.setImage(UIImage(systemName: "circle.fill"), for: .selected)
+            button.titleEdgeInsets.left = 6
+            button.titleEdgeInsets.right = -6
             button.tintColor = colorSet[caseNum]
-            button.addTarget(self, action: #selector(selectActivismFilter(_:)), for: .touchUpInside)
+            button.addTarget(self, action: #selector(selectFilter(_:)), for: .touchUpInside)
             activismButtonSet.append(button)
             caseNum += 1
             filterStack.addArrangedSubview(button)
+            if(initActivismButtons.contains(activism.rawValue)) {
+                button.isSelected = true
+            }
         }
+        
+        for event in EventFilterTypes.allCases {
+            let button = UIButton()
+            button.setTitle(event.rawValue, for: .normal)
+            button.setTitleColor(UIColor.black, for: .normal)
+            button.setImage(UIImage(systemName: "circle"), for: .normal)
+            button.setImage(UIImage(systemName: "circle.fill"), for: .selected)
+            button.titleEdgeInsets.left = 6
+            button.titleEdgeInsets.right = -6
+            button.tintColor = UIColor.lightGray
+            button.addTarget(self, action: #selector(selectFilter(_:)), for: .touchUpInside)
+            eventButtonSet.append(button)
+            eventStack.addArrangedSubview(button)
+            if(initEventButtons.contains(event.rawValue)) {
+                button.isSelected = true
+            }
+        }
+        
+        radiusSlider.setValue(radius, animated: true)
     }
 
-    @objc func selectActivismFilter(_ sender: UIButton!) {
+    @IBAction func selectFilter(_ sender: UIButton!) {
         if sender.isSelected {
             sender.isSelected = false
         } else {
@@ -61,7 +97,7 @@ class FilterViewController: UIViewController {
         
     }
     
-    func collectSelectedActivismFilter() -> [String] {
+    func collectSelectedActivismFilters() -> [String] {
         var ret: [String] = []
         for button in activismButtonSet {
             if button.isSelected, let title = button.currentTitle {
@@ -69,6 +105,27 @@ class FilterViewController: UIViewController {
             }
         }
         return ret
+    }
+    
+    func collectSelectedEventFilters() -> [String] {
+        var ret: [String] = []
+        for button in eventButtonSet {
+            if button.isSelected, let title = button.currentTitle {
+                ret.append(title)
+            }
+        }
+        return ret
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        let eventFilters = collectSelectedEventFilters()
+        let activismFilters = collectSelectedActivismFilters()
+        let radius = radiusSlider.value
+        let homeVC = delegate as! GetFilters
+        homeVC.getFilters(actFilters: activismFilters,
+                          evtFilters: eventFilters,
+                          radius: radius)
+        // pass to main vc
     }
 
     /*
