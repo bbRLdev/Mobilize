@@ -26,16 +26,16 @@
                                 <rect key="frame" x="20" y="100" width="374" height="293"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="ZRh-t5-vPA">
-                                        <rect key="frame" x="0.0" y="0.0" width="374" height="110.33333333333333"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="374" height="108.33333333333333"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Activism Type" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vf4-28-x67">
-                                                <rect key="frame" x="0.0" y="0.0" width="106.33333333333333" height="20.333333333333332"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="106.33333333333333" height="18.333333333333332"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" delaysContentTouches="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vFt-4p-628" customClass="ControlContainableScrollView" customModule="Mobilize" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="28.333333333333343" width="374" height="82"/>
+                                                <rect key="frame" x="0.0" y="26.333333333333329" width="374" height="82"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="3J1-UF-iFU">
                                                         <rect key="frame" x="0.0" y="0.0" width="374" height="82"/>
@@ -58,7 +58,7 @@
                                         </constraints>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="hRC-ys-XMB">
-                                        <rect key="frame" x="0.0" y="144.33333333333334" width="374" height="57.333333333333343"/>
+                                        <rect key="frame" x="0.0" y="142.33333333333334" width="374" height="59.333333333333343"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Event Type" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nRu-JL-J43">
                                                 <rect key="frame" x="0.0" y="0.0" width="84.333333333333329" height="20.333333333333332"/>
@@ -66,34 +66,11 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="44" translatesAutoresizingMaskIntoConstraints="NO" id="149-6l-VEj">
-                                                <rect key="frame" x="0.0" y="27.333333333333343" width="372" height="30"/>
-                                                <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tiU-YN-dgy">
-                                                        <rect key="frame" x="0.0" y="0.0" width="60" height="30"/>
-                                                        <state key="normal" title="March">
-                                                            <color key="titleColor" systemColor="labelColor"/>
-                                                        </state>
-                                                    </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bc7-xt-B85">
-                                                        <rect key="frame" x="104" y="0.0" width="60" height="30"/>
-                                                        <state key="normal" title="Townhall">
-                                                            <color key="titleColor" systemColor="labelColor"/>
-                                                        </state>
-                                                    </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sqM-Ga-r2b">
-                                                        <rect key="frame" x="208" y="0.0" width="60" height="30"/>
-                                                        <state key="normal" title="Voting">
-                                                            <color key="titleColor" systemColor="labelColor"/>
-                                                        </state>
-                                                    </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v8g-xa-bQZ">
-                                                        <rect key="frame" x="312" y="0.0" width="60" height="30"/>
-                                                        <state key="normal" title="Protest">
-                                                            <color key="titleColor" systemColor="labelColor"/>
-                                                        </state>
-                                                    </button>
-                                                </subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="149-6l-VEj">
+                                                <rect key="frame" x="0.0" y="27.333333333333343" width="374" height="32"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="32" id="In5-VO-IUI"/>
+                                                </constraints>
                                             </stackView>
                                         </subviews>
                                     </stackView>
@@ -133,7 +110,9 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="eventStack" destination="149-6l-VEj" id="2oR-iB-1zd"/>
                         <outlet property="filterStack" destination="3J1-UF-iFU" id="6fj-g0-IRk"/>
+                        <outlet property="radiusSlider" destination="ota-s5-EN3" id="FYs-0P-1Te"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kIk-Gc-UGG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -142,9 +121,6 @@
         </scene>
     </scenes>
     <resources>
-        <systemColor name="labelColor">
-            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

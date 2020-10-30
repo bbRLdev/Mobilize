@@ -31,7 +31,7 @@
                                 <color key="tintColor" systemColor="labelColor"/>
                                 <state key="normal" backgroundImage="slider.horizontal.3" catalog="system"/>
                                 <connections>
-                                    <segue destination="D7u-GK-Mxv" kind="presentation" id="kr3-ne-apQ"/>
+                                    <segue destination="D7u-GK-Mxv" kind="presentation" identifier="FilterSegueId" id="kr3-ne-apQ"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qxk-WA-yGa">

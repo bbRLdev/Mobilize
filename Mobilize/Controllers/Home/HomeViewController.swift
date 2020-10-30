@@ -9,7 +9,11 @@ import MapKit
 import SideMenu
 import CoreLocation
 
-class HomeViewController: UIViewController {
+protocol GetFilters {
+    func getFilters(actFilters: [String], evtFilters: [String], radius: Float)
+}
+
+class HomeViewController: UIViewController, GetFilters {
     
     @IBOutlet weak var mapView: MKMapView!
     
@@ -17,11 +21,22 @@ class HomeViewController: UIViewController {
     
     let locationManager = CLLocationManager()
     let regionInMeters:Double = 10000
+    
+    var eventFilters: [String] = []
+    var activismFilters: [String] = []
+    var searchRadius: Float = 50.0
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpSideMenu()
         checkLocationServices()
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "FilterSegueId",
+           let nextVC = segue.destination as? FilterViewController {
+            nextVC.delegate = self
+        }
     }
     
     @IBAction func sideNavButtonPressed(_ sender: Any) {
@@ -32,6 +47,13 @@ class HomeViewController: UIViewController {
         let storyboard: UIStoryboard = UIStoryboard(name: "CreateEventStory", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "Confirm") as! ConfirmViewController
         self.show(vc, sender: self)
+    }
+    
+    // Protocol method
+    func getFilters(actFilters: [String], evtFilters: [String], radius: Float) {
+        activismFilters = actFilters
+        eventFilters = evtFilters
+        searchRadius = radius
     }
     
     func setUpSideMenu() {
