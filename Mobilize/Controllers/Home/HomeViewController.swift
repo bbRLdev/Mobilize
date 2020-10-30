@@ -38,7 +38,6 @@ class HomeViewController: UIViewController, GetFilters {
             nextVC.delegate = self
             nextVC.radius = searchRadius
             nextVC.initActivismButtons = activismFilters
-            print("Preparing for segue ", activismFilters)
             nextVC.initEventButtons = eventFilters
         }
     }
@@ -58,7 +57,6 @@ class HomeViewController: UIViewController, GetFilters {
         activismFilters = actFilters
         eventFilters = evtFilters
         searchRadius = radius
-        print("Got filters ", activismFilters)
 
     }
     

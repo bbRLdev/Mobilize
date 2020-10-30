@@ -63,7 +63,6 @@ class FilterViewController: UIViewController {
             activismButtonSet.append(button)
             caseNum += 1
             filterStack.addArrangedSubview(button)
-            print(initActivismButtons)
             if(initActivismButtons.contains(activism.rawValue)) {
                 button.isSelected = true
             }
@@ -81,7 +80,6 @@ class FilterViewController: UIViewController {
             button.addTarget(self, action: #selector(selectFilter(_:)), for: .touchUpInside)
             eventButtonSet.append(button)
             eventStack.addArrangedSubview(button)
-            print(initEventButtons)
             if(initEventButtons.contains(event.rawValue)) {
                 button.isSelected = true
             }
@@ -124,7 +122,6 @@ class FilterViewController: UIViewController {
         let activismFilters = collectSelectedActivismFilters()
         let radius = radiusSlider.value
         let homeVC = delegate as! GetFilters
-        print("Selected filters ", activismFilters )
         homeVC.getFilters(actFilters: activismFilters,
                           evtFilters: eventFilters,
                           radius: radius)
