@@ -12,6 +12,7 @@
 		1A603726254286D600E874D5 /* ConfirmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A603725254286D600E874D5 /* ConfirmViewController.swift */; };
 		1A60372925428D5100E874D5 /* QAandConfirmVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A60372825428D5100E874D5 /* QAandConfirmVC.swift */; };
 		1A91533B254A51A500370962 /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A91533A254A51A500370962 /* FilterViewController.swift */; };
+		1A915341254E068D00370962 /* EventInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A915340254E068D00370962 /* EventInfoViewController.swift */; };
 		1AF47ACC253666DA0092CE1B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF47ACB253666DA0092CE1B /* AppDelegate.swift */; };
 		1AF47AD6253666DA0092CE1B /* Mobilize.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1AF47AD4253666DA0092CE1B /* Mobilize.xcdatamodeld */; };
 		1AF47AD8253666DA0092CE1B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1AF47AD7253666DA0092CE1B /* Assets.xcassets */; };
@@ -41,6 +42,7 @@
 		1A603725254286D600E874D5 /* ConfirmViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmViewController.swift; sourceTree = "<group>"; };
 		1A60372825428D5100E874D5 /* QAandConfirmVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QAandConfirmVC.swift; sourceTree = "<group>"; };
 		1A91533A254A51A500370962 /* FilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
+		1A915340254E068D00370962 /* EventInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventInfoViewController.swift; sourceTree = "<group>"; };
 		1AF47AC8253666DA0092CE1B /* Mobilize.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Mobilize.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1AF47ACB253666DA0092CE1B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1AF47AD5253666DA0092CE1B /* Mobilize.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Mobilize.xcdatamodel; sourceTree = "<group>"; };
@@ -94,6 +96,7 @@
 			children = (
 				1A60372825428D5100E874D5 /* QAandConfirmVC.swift */,
 				1A603725254286D600E874D5 /* ConfirmViewController.swift */,
+				1A915340254E068D00370962 /* EventInfoViewController.swift */,
 			);
 			path = CreateEvent;
 			sourceTree = "<group>";
@@ -332,6 +335,7 @@
 				B960A01C2542093700BC5559 /* SettingsViewController.swift in Sources */,
 				1AF47ACC253666DA0092CE1B /* AppDelegate.swift in Sources */,
 				1A6036E4254234A900E874D5 /* ControlContainableScrollview.swift in Sources */,
+				1A915341254E068D00370962 /* EventInfoViewController.swift in Sources */,
 				1A603726254286D600E874D5 /* ConfirmViewController.swift in Sources */,
 				93CC665A254B36EE0075A9EE /* NotificationsViewController.swift in Sources */,
 				934E6AFC253F8EA000DA9392 /* LoginViewController.swift in Sources */,
