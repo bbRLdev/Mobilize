@@ -19,6 +19,8 @@
 		934E6AFC253F8EA000DA9392 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 934E6AFB253F8EA000DA9392 /* LoginViewController.swift */; };
 		93CC665A254B36EE0075A9EE /* NotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93CC6659254B36ED0075A9EE /* NotificationsViewController.swift */; };
 		93CC665D254B38A60075A9EE /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 93CC665C254B38A60075A9EE /* Settings.bundle */; };
+		93CC6663254F9BC70075A9EE /* EventModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93CC6662254F9BC70075A9EE /* EventModel.swift */; };
+		93CC6667254F9BDF0075A9EE /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93CC6666254F9BDF0075A9EE /* UserModel.swift */; };
 		93E47C4A254912B7006D76BF /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 93E47C48254912B2006D76BF /* Home.storyboard */; };
 		93E47C4C254912BC006D76BF /* LoginStory.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 93E47C49254912B4006D76BF /* LoginStory.storyboard */; };
 		93E47C4F254912E1006D76BF /* FilterStory.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 93E47C4E254912DE006D76BF /* FilterStory.storyboard */; };
@@ -52,6 +54,8 @@
 		934E6AFB253F8EA000DA9392 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		93CC6659254B36ED0075A9EE /* NotificationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsViewController.swift; sourceTree = "<group>"; };
 		93CC665C254B38A60075A9EE /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
+		93CC6662254F9BC70075A9EE /* EventModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventModel.swift; sourceTree = "<group>"; };
+		93CC6666254F9BDF0075A9EE /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		93E47C48254912B2006D76BF /* Home.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
 		93E47C49254912B4006D76BF /* LoginStory.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LoginStory.storyboard; sourceTree = "<group>"; };
 		93E47C4E254912DE006D76BF /* FilterStory.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = FilterStory.storyboard; sourceTree = "<group>"; };
@@ -120,6 +124,7 @@
 		1AF47ACA253666DA0092CE1B /* Mobilize */ = {
 			isa = PBXGroup;
 			children = (
+				93CC6661254F9BAD0075A9EE /* Models */,
 				1A6037162542804A00E874D5 /* GoogleService-Info.plist */,
 				1A6036E22542347800E874D5 /* UIClasses */,
 				DBB830A3253E7A6B00F2B48E /* Mobilize.entitlements */,
@@ -157,6 +162,15 @@
 				D16664B2B4F5523DAF4E7C5A /* Pods_Mobilize.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		93CC6661254F9BAD0075A9EE /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				93CC6662254F9BC70075A9EE /* EventModel.swift */,
+				93CC6666254F9BDF0075A9EE /* UserModel.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		93E47C79254A0B0A006D76BF /* Home */ = {
@@ -335,12 +349,14 @@
 				1A603726254286D600E874D5 /* ConfirmViewController.swift in Sources */,
 				93CC665A254B36EE0075A9EE /* NotificationsViewController.swift in Sources */,
 				934E6AFC253F8EA000DA9392 /* LoginViewController.swift in Sources */,
+				93CC6667254F9BDF0075A9EE /* UserModel.swift in Sources */,
 				1AF496302539040C00CABA30 /* HomeViewController.swift in Sources */,
 				1A60372925428D5100E874D5 /* QAandConfirmVC.swift in Sources */,
 				93E47C7D254A0BE1006D76BF /* SearchViewController.swift in Sources */,
 				B960A0162542079900BC5559 /* ProfileEventsViewController.swift in Sources */,
 				B9609FF02540E97000BC5559 /* ProfileViewController.swift in Sources */,
 				DBB830AC253E958400F2B48E /* CreateProfileViewController.swift in Sources */,
+				93CC6663254F9BC70075A9EE /* EventModel.swift in Sources */,
 				B960A00D25411EFE00BC5559 /* SettingsProfileViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
