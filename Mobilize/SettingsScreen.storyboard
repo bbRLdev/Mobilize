@@ -204,7 +204,7 @@
         <!--Edit Profile-->
         <scene sceneID="56J-kD-wdo">
             <objects>
-                <viewController storyboardIdentifier="EditProfile" title="Edit Profile" id="9ft-VM-haI" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="EditProfile" title="Edit Profile" id="9ft-VM-haI" customClass="EditProfileViewController" customModule="Mobilize" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="eEP-9f-nrr">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -218,6 +218,9 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="d:" destination="C1n-qC-b6n" eventType="editingDidEnd" id="avh-wv-S1r"/>
+                                </connections>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Organization" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="R4y-A5-GCN">
                                 <rect key="frame" x="159" y="528" width="111" height="34"/>
@@ -229,19 +232,32 @@
                                 <rect key="frame" x="158" y="610" width="98" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Save Changes"/>
+                                <connections>
+                                    <action selector="save:" destination="9ft-VM-haI" eventType="touchUpInside" id="Tp5-l1-gKs"/>
+                                    <action selector="save:" destination="C1n-qC-b6n" eventType="touchUpInside" id="YBb-9D-b7m"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZWG-4P-i7h">
                                 <rect key="frame" x="172" y="410" width="71" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Edit photo"/>
+                                <connections>
+                                    <action selector="editPhoto:" destination="9ft-VM-haI" eventType="touchUpInside" id="A46-H1-QG5"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Djk-CY-OvE"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <navigationItem key="navigationItem" id="iIR-Uf-V3p"/>
+                    <connections>
+                        <outlet property="nameField" destination="cCU-lc-rQh" id="H4I-1D-TEE"/>
+                        <outlet property="organizationField" destination="R4y-A5-GCN" id="UQ7-Yh-7cr"/>
+                        <outlet property="profilePicture" destination="4Wh-eY-0bd" id="Qdc-0l-eTQ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bXV-dc-8U3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="C1n-qC-b6n" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1555.072463768116" y="-25.446428571428569"/>
         </scene>
