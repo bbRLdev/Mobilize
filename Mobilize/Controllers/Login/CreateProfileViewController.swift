@@ -19,21 +19,22 @@ class CreateProfileViewController: UIViewController {
 
     //var name, email, photoUrl, uid, emailVerified
 
-    @IBOutlet weak var nameField: UITextField!
+    @IBOutlet weak var firstNameField: UITextField!
+    
+    @IBOutlet weak var lastNameField: UITextField!
     
     @IBOutlet weak var statusLabel: UILabel!
     
     @IBOutlet weak var bioTextView: UITextView!
     
+    @IBOutlet weak var organization: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
     }
     
     @IBAction func createButtonPressed(_ sender: Any) {
-        if(nameField.text == ""){
+        if(firstNameField.text == ""){
             statusLabel.text = "Please enter a name."
             return
         }
@@ -44,7 +45,9 @@ class CreateProfileViewController: UIViewController {
                 // Add a new document with a generated ID
                 //var ref: DocumentReference? = nil
                 db.collection("users").document(userID).setData([
-                    "name" : nameField.text!,
+                    "firstName" : firstNameField.text!,
+                    "lastName" : lastNameField.text!,
+                    "organization" : organization.text!,
                     "bio" : bioTextView.text ?? ""
                 ], merge: true) { err in
                     if let err = err {
@@ -55,7 +58,7 @@ class CreateProfileViewController: UIViewController {
                 }
                 
                 let changeRequest = user?.createProfileChangeRequest()
-                changeRequest?.displayName = nameField.text!
+                changeRequest?.displayName = firstNameField.text!
                 //print(nameField.text!)
                 changeRequest?.commitChanges { (error) in
                     if(error == nil){
