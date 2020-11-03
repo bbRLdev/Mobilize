@@ -13,7 +13,7 @@ class CreateProfileViewController: UIViewController {
     
     let db = Firestore.firestore()
     
-    let segueID = "createProfileSegue"
+    let segueID = "uploadPictureSegue"
     
     var email = ""
 
@@ -37,8 +37,7 @@ class CreateProfileViewController: UIViewController {
         if(firstNameField.text == ""){
             statusLabel.text = "Please enter a name."
             return
-        }
-        else{
+        }else {
             let user = Firebase.Auth.auth().currentUser
 //            db.collection("cities").document("BJ").setData([ "capital": true ], merge: true)
             if let userID:String = user?.uid{
@@ -68,6 +67,39 @@ class CreateProfileViewController: UIViewController {
                 }
             }
         }
+    }
+    
+}
+
+class UploadPictureViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    let segueID = "createProfileSegue"
+    
+    var imagePicker = UIImagePickerController()
+    
+    @IBOutlet weak var profilePicture: UIImageView!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        imagePicker.delegate = self
+    }
+    
+    @IBAction func choosePicturePressed(_ sender: Any) {
+        imagePicker.sourceType = .photoLibrary
+        imagePicker.allowsEditing = true
+        present(imagePicker, animated: true, completion: nil)
+    }
+    
+    @IBAction func createProfilePressed(_ sender: Any) {
+        self.performSegue(withIdentifier: self.segueID, sender: nil)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]){
+        if let image = info[.editedImage] as? UIImage {
+            profilePicture.image = image
+        }
+        dismiss(animated: true, completion: nil)
+        reloadInputViews()
     }
     
 }

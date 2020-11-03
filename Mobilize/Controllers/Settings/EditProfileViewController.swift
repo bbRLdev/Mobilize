@@ -27,7 +27,7 @@ class EditProfileViewController: UIViewController {
             profilePicture.contentMode = .scaleAspectFit
             profilePicture.image = image
         }
-        organizationField.text = profile!.organization
+        //organizationField.text = profile!.organization
         nameField.text = profile?.name
         // Do any additional setup after loading the view.
     }

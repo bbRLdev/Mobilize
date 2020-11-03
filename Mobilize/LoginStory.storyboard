@@ -150,11 +150,12 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VOM-NL-cTj">
-                                <rect key="frame" x="125.5" y="616" width="163" height="46"/>
+                                <rect key="frame" x="178.5" y="616" width="57" height="46"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="28"/>
-                                <state key="normal" title="Create Profile"/>
+                                <state key="normal" title="Next"/>
                                 <connections>
                                     <action selector="createButtonPressed:" destination="FUS-MW-fz6" eventType="touchUpInside" id="qG2-pL-nxI"/>
+                                    <segue destination="8dw-mw-Tnc" kind="presentation" identifier="uploadPictureSegue" modalPresentationStyle="fullScreen" id="S8e-tl-dMs"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Last Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mza-X6-avI">
@@ -223,12 +224,11 @@
                         <outlet property="firstNameField" destination="8zj-Uz-CYR" id="TM3-p3-CnN"/>
                         <outlet property="lastNameField" destination="ysx-Mu-Uzi" id="MuI-Ot-Yvc"/>
                         <outlet property="organization" destination="7th-bb-h8J" id="6LR-NS-Ljv"/>
-                        <segue destination="k9Z-SR-3TR" kind="presentation" identifier="createProfileSegue" modalPresentationStyle="fullScreen" id="MRS-Q2-vhd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="08E-Pu-6w3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="630.43478260869574" y="-476.11607142857139"/>
+            <point key="canvasLocation" x="488" y="-476"/>
         </scene>
         <!--Welcome View Controller-->
         <scene sceneID="Aww-JU-eSL">
@@ -279,7 +279,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zRT-R6-Tca" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1617" y="-476"/>
+            <point key="canvasLocation" x="2235" y="-476"/>
         </scene>
         <!--MainNavigationController-->
         <scene sceneID="0AK-4A-aPY">
@@ -289,9 +289,58 @@
             </objects>
             <point key="canvasLocation" x="1656" y="98"/>
         </scene>
+        <!--Upload Picture View Controller-->
+        <scene sceneID="SQ5-KB-9uj">
+            <objects>
+                <viewController id="8dw-mw-Tnc" customClass="UploadPictureViewController" customModule="Mobilize" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="4JP-XW-mZt">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7x6-wY-IEK">
+                                <rect key="frame" x="79" y="155" width="256" height="256"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Upload a profile picture" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LWh-dr-FUi">
+                                <rect key="frame" x="48" y="44" width="318" height="39"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="32"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QEU-yY-laO">
+                                <rect key="frame" x="126" y="626" width="163" height="46"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="28"/>
+                                <state key="normal" title="Create Profile"/>
+                                <connections>
+                                    <action selector="createProfilePressed:" destination="8dw-mw-Tnc" eventType="touchUpInside" id="pop-t0-MV3"/>
+                                    <segue destination="k9Z-SR-3TR" kind="presentation" identifier="createProfileSegue" modalPresentationStyle="fullScreen" id="ttC-R4-Hxo"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="765-4K-HvF">
+                                <rect key="frame" x="153" y="467" width="109" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Choose a photo"/>
+                                <connections>
+                                    <action selector="choosePicturePressed:" destination="8dw-mw-Tnc" eventType="touchUpInside" id="u0p-Kf-m8C"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="UiM-hm-uBj"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <connections>
+                        <outlet property="profilePicture" destination="7x6-wY-IEK" id="Xg3-hl-YpU"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="L0X-TT-zae" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1371.0144927536232" y="-476.11607142857139"/>
+        </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="4YN-mf-c4N"/>
+        <segue reference="whQ-dJ-bqs"/>
     </inferredMetricsTieBreakers>
     <resources>
         <systemColor name="labelColor">
