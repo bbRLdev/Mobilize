@@ -8,10 +8,9 @@
 import UIKit
 import Firebase
 import FirebaseFirestore
+import FirebaseStorage
 
 class CreateProfileViewController: UIViewController {
-    
-    let db = Firestore.firestore()
     
     let segueID = "uploadPictureSegue"
     
@@ -33,49 +32,46 @@ class CreateProfileViewController: UIViewController {
         super.viewDidLoad()
     }
     
-    @IBAction func createButtonPressed(_ sender: Any) {
+    @IBAction func nextButtonPressed(_ sender: Any) {
         if(firstNameField.text == ""){
             statusLabel.text = "Please enter a name."
             return
         }else {
-            let user = Firebase.Auth.auth().currentUser
-//            db.collection("cities").document("BJ").setData([ "capital": true ], merge: true)
-            if let userID:String = user?.uid{
-                // Add a new document with a generated ID
-                //var ref: DocumentReference? = nil
-                db.collection("users").document(userID).setData([
-                    "firstName" : firstNameField.text!,
-                    "lastName" : lastNameField.text!,
-                    "organization" : organization.text!,
-                    "bio" : bioTextView.text ?? ""
-                ], merge: true) { err in
-                    if let err = err {
-                        print("Error adding document: \(err)")
-                    } else {
-                        print("Document added with ID: \(userID)")
-                    }
-                }
-                
-                let changeRequest = user?.createProfileChangeRequest()
-                changeRequest?.displayName = firstNameField.text!
-                //print(nameField.text!)
-                changeRequest?.commitChanges { (error) in
-                    if(error == nil){
-                        //print(Auth.auth().currentUser?.displayName ?? "none")
-                        self.performSegue(withIdentifier: self.segueID, sender: nil)
-                    }
-                }
-            }
+            self.performSegue(withIdentifier: self.segueID, sender: nil)
         }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        //segue calculator
+        if segue.identifier == segueID,
+           let pictureVC = segue.destination as? UploadPictureViewController {
+            pictureVC.delegate = self
+            pictureVC.firstName = firstNameField.text!
+            pictureVC.lastName = lastNameField.text!
+            pictureVC.organization = organization.text!
+            pictureVC.bio = bioTextView.text!
+            }
+            
     }
     
 }
 
 class UploadPictureViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
+    let db = Firestore.firestore()
+    
+    var delegate: UIViewController!
+    
     let segueID = "createProfileSegue"
     
     var imagePicker = UIImagePickerController()
+    
+    var image: UIImage? = nil
+    var firstName: String? = nil
+    var lastName: String? = nil
+    var organization: String? = nil
+    var bio: String? = nil
+    
     
     @IBOutlet weak var profilePicture: UIImageView!
     
@@ -91,7 +87,40 @@ class UploadPictureViewController: UIViewController, UIImagePickerControllerDele
     }
     
     @IBAction func createProfilePressed(_ sender: Any) {
-        self.performSegue(withIdentifier: self.segueID, sender: nil)
+        
+        let user = Firebase.Auth.auth().currentUser
+        if let userID:String = user?.uid {
+            // Add a new document with a generated ID
+            db.collection("users").document(userID).setData([
+                "firstName" : firstName!,
+                "lastName" : lastName!,
+                "organization" : organization!,
+                "bio" : bio!
+            ], merge: true) { err in
+                if let err = err {
+                    print("Error adding document: \(err)")
+                } else {
+                    print("Document added with ID: \(userID)")
+                }
+            }
+            let changeRequest = user?.createProfileChangeRequest()
+            changeRequest?.displayName = firstName!
+            changeRequest?.commitChanges { (error) in
+                if(error == nil){
+                    print("current display name: " + (Auth.auth().currentUser?.displayName)!)
+                    self.performSegue(withIdentifier: self.segueID, sender: nil)
+                }
+            }
+        }
+       
+//        guard let imageSelected = self.image else {
+//            print("profile picture is nil")
+//            return
+//        }
+//
+//        guard let imageData = imageSelected.jpegData(compressionQuality: 0.4) else {
+//            return
+//        }
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]){
@@ -110,7 +139,6 @@ class WelcomeViewController: UIViewController {
     
     var handle: AuthStateDidChangeListenerHandle?
 
-
     override func viewDidLoad() {
         super.viewDidLoad()
         Auth.auth().currentUser?.reload()
@@ -120,8 +148,8 @@ class WelcomeViewController: UIViewController {
         handle = Auth.auth().addStateDidChangeListener { (auth, usr) in
             let user = Auth.auth().currentUser
             if let user = user {
+                print("label in welcome VC: " + user.displayName!)
                 self.nameLabel.text = user.displayName
-
             }
         }
     }

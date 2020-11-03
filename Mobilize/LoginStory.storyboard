@@ -154,7 +154,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="28"/>
                                 <state key="normal" title="Next"/>
                                 <connections>
-                                    <action selector="createButtonPressed:" destination="FUS-MW-fz6" eventType="touchUpInside" id="qG2-pL-nxI"/>
+                                    <action selector="nextButtonPressed:" destination="FUS-MW-fz6" eventType="touchUpInside" id="qG2-pL-nxI"/>
                                     <segue destination="8dw-mw-Tnc" kind="presentation" identifier="uploadPictureSegue" modalPresentationStyle="fullScreen" id="S8e-tl-dMs"/>
                                 </connections>
                             </button>
