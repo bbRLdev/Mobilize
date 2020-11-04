@@ -7,6 +7,7 @@ target 'Mobilize' do
 
   # Pods for Mobilize
   pod 'SideMenu'
+  pod 'Alamofire', '~> 5.2'
 
   # add pods for desired Firebase products
   # https://firebase.google.com/docs/ios/setup#available-pods

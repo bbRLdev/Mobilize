@@ -129,6 +129,16 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f7x-Mh-cjh">
+                                <rect key="frame" x="183" y="735" width="48" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Logout">
+                                    <color key="titleColor" systemColor="systemRedColor"/>
+                                </state>
+                                <connections>
+                                    <action selector="logoutPressed:" destination="eju-mY-WGX" eventType="touchUpInside" id="6ew-7X-xQD"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Esj-Vt-Qp4"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -147,7 +157,7 @@
         <!--Notifications-->
         <scene sceneID="Px7-ZS-0Ie">
             <objects>
-                <viewController storyboardIdentifier="Notifications" title="Notifications" id="IJD-Cx-2mw" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Notifications" title="Notifications" id="IJD-Cx-2mw" customClass="NotificationsViewController" customModule="Mobilize" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="WaI-h8-CET">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -163,6 +173,9 @@
                                 <rect key="frame" x="145" y="468" width="125" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Open iOS settings"/>
+                                <connections>
+                                    <action selector="openSettingsPushed:" destination="IJD-Cx-2mw" eventType="touchUpInside" id="3JX-yz-LfM"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="1. Tap Notifications" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a09-Xq-X3Y">
                                 <rect key="frame" x="126" y="250" width="144" height="21"/>
@@ -288,6 +301,9 @@
         <image name="joby" width="400" height="400"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemRedColor">
+            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

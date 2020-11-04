@@ -31,11 +31,11 @@
                                 <color key="tintColor" systemColor="labelColor"/>
                                 <state key="normal" backgroundImage="slider.horizontal.3" catalog="system"/>
                                 <connections>
-                                    <segue destination="D7u-GK-Mxv" kind="presentation" id="kr3-ne-apQ"/>
+                                    <segue destination="D7u-GK-Mxv" kind="presentation" identifier="FilterSegueId" id="kr3-ne-apQ"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qxk-WA-yGa">
-                                <rect key="frame" x="20" y="793" width="43" height="36.333333333333371"/>
+                                <rect key="frame" x="20" y="794.33333333333337" width="43" height="36.333333333333371"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="43" id="M7T-kt-tFD"/>
                                     <constraint firstAttribute="height" constant="38" id="PZ8-cJ-tj1"/>
@@ -59,7 +59,6 @@
                             <constraint firstItem="Gjb-KE-SyA" firstAttribute="top" secondItem="0hl-5C-Uz0" secondAttribute="top" id="nP8-zL-JCK"/>
                             <constraint firstAttribute="bottom" secondItem="Gjb-KE-SyA" secondAttribute="bottom" id="sFR-29-PWc"/>
                             <constraint firstItem="AUD-Sq-IuA" firstAttribute="bottom" secondItem="qxk-WA-yGa" secondAttribute="bottom" constant="30" id="uG7-VI-oeL"/>
-                            <constraint firstItem="AUD-Sq-IuA" firstAttribute="bottom" secondItem="qxk-WA-yGa" secondAttribute="bottom" constant="31.329999999999998" id="vpZ-Kd-0ni"/>
                             <constraint firstItem="Gjb-KE-SyA" firstAttribute="leading" secondItem="AUD-Sq-IuA" secondAttribute="leading" id="wEa-Sc-Brj"/>
                         </constraints>
                     </view>

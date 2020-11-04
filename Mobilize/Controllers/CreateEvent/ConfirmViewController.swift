@@ -14,9 +14,7 @@ class ConfirmViewController: UIViewController {
     }
     
     @IBAction func backToMain(_ sender: Any) {
-        let storyboard: UIStoryboard = UIStoryboard(name: "Home", bundle: nil)
-        let vc = storyboard.instantiateViewController(withIdentifier: "Home") as! HomeViewController
-        self.show(vc, sender: self)
+        self.navigationController?.popToRootViewController(animated: true)
     }
     
 }
