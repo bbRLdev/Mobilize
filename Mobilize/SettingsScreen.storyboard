@@ -58,7 +58,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="joby" translatesAutoresizingMaskIntoConstraints="NO" id="wtz-Ow-hOs">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="wtz-Ow-hOs">
                                 <rect key="frame" x="79" y="114" width="256" height="256"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="256" id="AJq-pb-iRa"/>
@@ -84,6 +84,9 @@
                     <navigationItem key="navigationItem" id="DGY-AV-VKQ"/>
                     <connections>
                         <outlet property="Options" destination="I44-jC-zrA" id="mLi-T5-1Sx"/>
+                        <outlet property="name" destination="Js7-hw-Fla" id="wuf-eo-CiV"/>
+                        <outlet property="organization" destination="myJ-dw-nWi" id="NtZ-ld-NRk"/>
+                        <outlet property="profilePic" destination="wtz-Ow-hOs" id="xe0-Xu-gQk"/>
                         <segue destination="BOA-wF-ddr" kind="show" identifier="events" id="CJe-ow-gPQ"/>
                         <segue destination="eju-mY-WGX" kind="show" identifier="settings" id="Cr3-rn-G4u"/>
                     </connections>
@@ -209,7 +212,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="joby" translatesAutoresizingMaskIntoConstraints="NO" id="4Wh-eY-0bd">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4Wh-eY-0bd">
                                 <rect key="frame" x="86" y="120" width="256" height="256"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
@@ -233,8 +236,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Save Changes"/>
                                 <connections>
-                                    <action selector="save:" destination="9ft-VM-haI" eventType="touchUpInside" id="Tp5-l1-gKs"/>
-                                    <action selector="save:" destination="C1n-qC-b6n" eventType="touchUpInside" id="YBb-9D-b7m"/>
+                                    <action selector="saveChanges:" destination="9ft-VM-haI" eventType="touchUpInside" id="FXD-Mb-LZe"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZWG-4P-i7h">
@@ -253,7 +255,7 @@
                     <connections>
                         <outlet property="nameField" destination="cCU-lc-rQh" id="H4I-1D-TEE"/>
                         <outlet property="organizationField" destination="R4y-A5-GCN" id="UQ7-Yh-7cr"/>
-                        <outlet property="profilePicture" destination="4Wh-eY-0bd" id="Qdc-0l-eTQ"/>
+                        <outlet property="profilePicture" destination="4Wh-eY-0bd" id="UOR-Em-7OT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bXV-dc-8U3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -314,7 +316,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="joby" width="400" height="400"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

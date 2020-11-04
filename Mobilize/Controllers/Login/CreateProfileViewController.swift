@@ -36,8 +36,6 @@ class CreateProfileViewController: UIViewController {
         if(firstNameField.text == ""){
             statusLabel.text = "Please enter a name."
             return
-        }else {
-            self.performSegue(withIdentifier: self.segueID, sender: nil)
         }
     }
     
@@ -88,14 +86,25 @@ class UploadPictureViewController: UIViewController, UIImagePickerControllerDele
     
     @IBAction func createProfilePressed(_ sender: Any) {
         
+        guard let imageSelected = self.image else {
+            print("pic is nil")
+            return
+        }
+        
+        guard let imageData = imageSelected.jpegData(compressionQuality: 0.4) else {
+            return
+        }
+        
+        
         let user = Firebase.Auth.auth().currentUser
         if let userID:String = user?.uid {
             // Add a new document with a generated ID
             db.collection("users").document(userID).setData([
                 "firstName" : firstName!,
                 "lastName" : lastName!,
-                "organization" : organization!,
-                "bio" : bio!
+                "organization": organization!,
+                "bio" : bio!,
+                "profileImageURL" : ""
             ], merge: true) { err in
                 if let err = err {
                     print("Error adding document: \(err)")
@@ -103,29 +112,39 @@ class UploadPictureViewController: UIViewController, UIImagePickerControllerDele
                     print("Document added with ID: \(userID)")
                 }
             }
-            let changeRequest = user?.createProfileChangeRequest()
-            changeRequest?.displayName = firstName!
-            changeRequest?.commitChanges { (error) in
-                if(error == nil){
-                    print("current display name: " + (Auth.auth().currentUser?.displayName)!)
-                    self.performSegue(withIdentifier: self.segueID, sender: nil)
+            
+            let storageRef = Storage.storage().reference(forURL: "gs://mobilize-77a05.appspot.com")
+            let storageProfileRef = storageRef.child("users").child(userID)
+            
+            let metadata = StorageMetadata()
+            metadata.contentType = "image/jpg"
+            storageProfileRef.putData(imageData, metadata: metadata, completion: {
+                (storageMetadata, error) in
+                if error != nil {
+                    print("error uploading profile image")
+                    return
                 }
-            }
+                
+                storageProfileRef.downloadURL(completion: { (url, error) in
+                    if let metaImageURL = url?.absoluteString {
+                        let userRef = self.db.collection("users").document(userID)
+                        userRef.updateData([
+                            "profileImageURL": metaImageURL
+                        ]) { err in
+                            if let err = err {
+                                print("Error updating profile image: \(err)")
+                            }
+                        }
+                    }
+                })
+            })
         }
-       
-//        guard let imageSelected = self.image else {
-//            print("profile picture is nil")
-//            return
-//        }
-//
-//        guard let imageData = imageSelected.jpegData(compressionQuality: 0.4) else {
-//            return
-//        }
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]){
         if let image = info[.editedImage] as? UIImage {
             profilePicture.image = image
+            self.image = image
         }
         dismiss(animated: true, completion: nil)
         reloadInputViews()
@@ -138,6 +157,8 @@ class WelcomeViewController: UIViewController {
     @IBOutlet weak var nameLabel: UILabel!
     
     var handle: AuthStateDidChangeListenerHandle?
+    
+    let db = Firestore.firestore()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -146,13 +167,20 @@ class WelcomeViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         handle = Auth.auth().addStateDidChangeListener { (auth, usr) in
-            let user = Auth.auth().currentUser
-            if let user = user {
-                print("label in welcome VC: " + user.displayName!)
-                self.nameLabel.text = user.displayName
+            let userID = Auth.auth().currentUser?.uid
+            let docRef = self.db.collection("users").document(userID!)
+            docRef.getDocument { (document, error) in
+                if let document = document, document.exists {
+                    let dataDescription = document.data()
+                    let firstName:String = dataDescription!["firstName"] as! String
+                    self.nameLabel.text = firstName
+                } else {
+                    print("Document does not exist")
+                }
             }
         }
     }
+    
     override func viewWillDisappear(_ animated: Bool) {
         Auth.auth().removeStateDidChangeListener(handle!)
     }

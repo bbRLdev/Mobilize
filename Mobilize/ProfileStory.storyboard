@@ -54,7 +54,7 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="joby" translatesAutoresizingMaskIntoConstraints="NO" id="OBT-bX-wBC">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OBT-bX-wBC">
                                 <rect key="frame" x="78" y="62" width="240" height="240"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
@@ -64,6 +64,7 @@
                     </view>
                     <connections>
                         <outlet property="eventTable" destination="591-J4-weY" id="Efk-CL-llJ"/>
+                        <outlet property="profilePic" destination="OBT-bX-wBC" id="DdQ-lr-BFn"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VPE-Qp-qGY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -72,7 +73,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="joby" width="400" height="400"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
