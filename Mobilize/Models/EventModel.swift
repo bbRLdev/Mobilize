@@ -19,6 +19,7 @@ class EventModel {
     var likeNum = 0
     var rsvpNum = 0
     var questions: [Question] = []
+    var photoURLCollection: [String] = []
     
     init(name: String, desc: String, loc: String, org: String) {
         eventName = name
