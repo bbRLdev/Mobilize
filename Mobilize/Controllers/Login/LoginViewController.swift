@@ -38,6 +38,10 @@ class LoginViewController: UIViewController {
 
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.isNavigationBarHidden = true
+    }
+    
     @IBAction func segmentChanged(_ sender: Any) {
         switch segCtrl.selectedSegmentIndex {
         case 0:

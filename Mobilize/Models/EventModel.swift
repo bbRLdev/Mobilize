@@ -7,6 +7,7 @@
 
 import Foundation
 
+
 typealias Question = (question: String, answer: String)
 
 class EventModel {

@@ -137,7 +137,7 @@ extension HomeViewController: CLLocationManagerDelegate {
 }
 
 class SideMenuListController: UITableViewController {
-    var items = [NavLinks.profile.rawValue, NavLinks.settings.rawValue, NavLinks.events.rawValue]
+    var items = [NavLinks.profile.rawValue, NavLinks.settings.rawValue, NavLinks.events.rawValue, NavLinks.logout.rawValue]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -151,6 +151,10 @@ class SideMenuListController: UITableViewController {
     override func tableView( _ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         cell.textLabel?.text = items[indexPath.row]
+        
+        if(cell.textLabel?.text == "Log Out"){
+            cell.textLabel?.textColor = UIColor.red
+        }
         return cell
     }
     
@@ -169,10 +173,17 @@ class SideMenuListController: UITableViewController {
             let vc = storyboard.instantiateViewController(withIdentifier: "ProfileEvents") as! ProfileEventsViewController
             self.show(vc, sender: self)
         }
+        else if (indexPath.row == 3) {
+            
+            let storyboard: UIStoryboard = UIStoryboard(name: "LoginStory", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "Login") as! LoginViewController
+            
+            self.show(vc, sender: self)
+        }
     }
     
     enum NavLinks: String, CaseIterable {
-        case profile = "Profile", settings = "Settings", events = "Your Events"
+        case profile = "Profile", settings = "Settings", events = "Your Events", logout = "Log Out"
         
     }
 }
