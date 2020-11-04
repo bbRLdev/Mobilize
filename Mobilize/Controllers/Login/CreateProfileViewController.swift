@@ -82,6 +82,11 @@ class WelcomeViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+//        let user = Auth.auth().currentUser
+//        if let user = user {
+//            self.nameLabel.text = user.displayName
+//
+//        }
         handle = Auth.auth().addStateDidChangeListener { (auth, usr) in
             let user = Auth.auth().currentUser
             if let user = user {
