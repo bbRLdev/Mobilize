@@ -114,7 +114,7 @@ class UploadPictureViewController: UIViewController, UIImagePickerControllerDele
             }
             
             let storageRef = Storage.storage().reference(forURL: "gs://mobilize-77a05.appspot.com")
-            let storageProfileRef = storageRef.child("users").child(userID)
+            let storageProfileRef = storageRef.child("users").child(userID).child("profile_picture")
             
             let metadata = StorageMetadata()
             metadata.contentType = "image/jpg"
