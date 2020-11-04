@@ -16,12 +16,17 @@ class SettingsProfileViewController: UIViewController, UITableViewDelegate, UITa
     @IBOutlet var profilePic: UIImageView!
     @IBOutlet var Options: UITableView!
     @IBOutlet var organization: UILabel!
+    @IBOutlet weak var bioTextView: UITextView!
     let db = Firestore.firestore()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         Options.delegate = self
         Options.dataSource = self
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(false)
         loadProfileInfo()
     }
     
@@ -56,8 +61,10 @@ class SettingsProfileViewController: UIViewController, UITableViewDelegate, UITa
                 let firstName = dataDescription!["firstName"] as! String
                 let lastName = dataDescription!["lastName"] as! String
                 let org = dataDescription!["organization"] as! String
+                let bio = dataDescription!["bio"] as! String
                 self.name.text = firstName + " " + lastName
                 self.organization.text = org
+                self.bioTextView.text = bio
                 let urlDatabase = dataDescription!["profileImageURL"] as! String
                 let url = URL(string: urlDatabase)
                 URLSession.shared.dataTask(with: url!, completionHandler: { (data, response, error) in

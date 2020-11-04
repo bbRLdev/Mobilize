@@ -15,7 +15,9 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
 
     @IBOutlet weak var profilePicture: UIImageView!
     @IBOutlet weak var organizationField: UITextField!
-    @IBOutlet weak var nameField: UITextField!
+    @IBOutlet weak var firstNameField: UITextField!
+    @IBOutlet weak var lastNameField: UITextField!
+    @IBOutlet weak var bioField: UITextView!
     
     var name = ""
     var organization = ""
@@ -26,6 +28,7 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        imagePicker.delegate = self
         loadProfileInfo()
     }
     
@@ -39,6 +42,7 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
     @IBAction func saveChanges(_ sender: Any) {
         guard let imageSelected = self.image else {
             print("pic is nil")
+            saveTextFields()
             return
         }
         guard let imageData = imageSelected.jpegData(compressionQuality: 0.4) else {
@@ -48,7 +52,7 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
         if let userID:String = user?.uid {
             
             let storageRef = Storage.storage().reference(forURL: "gs://mobilize-77a05.appspot.com")
-            let storageProfileRef = storageRef.child("users").child(userID)
+            let storageProfileRef = storageRef.child("users").child(userID).child("profile_picture")
             
             let metadata = StorageMetadata()
             metadata.contentType = "image/jpg"
@@ -63,15 +67,36 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
                     if let metaImageURL = url?.absoluteString {
                         let userRef = self.db.collection("users").document(userID)
                         userRef.updateData([
-                            "profileImageURL": metaImageURL
+                            "profileImageURL": metaImageURL,
+                            "firstName": self.firstNameField.text!,
+                            "lastName": self.lastNameField.text!,
+                            "organization": self.organizationField.text!,
+                            "bio": self.bioField.text!
                         ]) { err in
                             if let err = err {
-                                print("Error updating profile image: \(err)")
+                                print("Error updating profile: \(err)")
                             }
                         }
                     }
                 })
             })
+        }
+    }
+    
+    func saveTextFields() {
+        let user = Firebase.Auth.auth().currentUser
+        if let userID:String = user?.uid {
+            let userRef = self.db.collection("users").document(userID)
+            userRef.updateData([
+                "firstName": self.firstNameField.text!,
+                "lastName": self.lastNameField.text!,
+                "organization": self.organizationField.text!,
+                "bio": self.bioField.text!
+            ]) { err in
+                if let err = err {
+                    print("Error updating profile: \(err)")
+                }
+            }
         }
     }
     
@@ -84,8 +109,11 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
                 let firstName = dataDescription!["firstName"] as! String
                 let lastName = dataDescription!["lastName"] as! String
                 let org = dataDescription!["organization"] as! String
-                self.nameField.text = firstName + " " + lastName
+                let bio = dataDescription!["bio"] as! String
+                self.firstNameField.text = firstName
+                self.lastNameField.text = lastName
                 self.organizationField.text = org
+                self.bioField.text = bio
                 let urlDatabase = dataDescription!["profileImageURL"] as! String
                 let url = URL(string: urlDatabase)
                 URLSession.shared.dataTask(with: url!, completionHandler: { (data, response, error) in
