@@ -8,6 +8,8 @@ import UIKit
 import MapKit
 import SideMenu
 import CoreLocation
+import Firebase
+import CoreData
 
 protocol GetFilters {
     func getFilters(actFilters: [String], evtFilters: [String], radius: Float)
@@ -137,7 +139,7 @@ extension HomeViewController: CLLocationManagerDelegate {
 }
 
 class SideMenuListController: UITableViewController {
-    var items = [NavLinks.profile.rawValue, NavLinks.settings.rawValue, NavLinks.events.rawValue, NavLinks.logout.rawValue]
+    var items = [NavLinks.profile.rawValue, NavLinks.events.rawValue, NavLinks.settings.rawValue, NavLinks.logout.rawValue]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -166,24 +168,41 @@ class SideMenuListController: UITableViewController {
             self.show(vc, sender: self)
         } else if (indexPath.row == 1) {
             let storyboard: UIStoryboard = UIStoryboard(name: "SettingsScreen", bundle: nil)
-            let vc = storyboard.instantiateViewController(withIdentifier: "SettingsView") as! SettingsViewController
+            let vc = storyboard.instantiateViewController(withIdentifier: "ProfileEvents") as! ProfileEventsViewController
             self.show(vc, sender: self)
         } else if (indexPath.row == 2) {
             let storyboard: UIStoryboard = UIStoryboard(name: "SettingsScreen", bundle: nil)
-            let vc = storyboard.instantiateViewController(withIdentifier: "ProfileEvents") as! ProfileEventsViewController
+            let vc = storyboard.instantiateViewController(withIdentifier: "SettingsView") as! SettingsViewController
             self.show(vc, sender: self)
         }
         else if (indexPath.row == 3) {
-            
-            let storyboard: UIStoryboard = UIStoryboard(name: "LoginStory", bundle: nil)
-            let vc = storyboard.instantiateViewController(withIdentifier: "Login") as! LoginViewController
-            
-            self.show(vc, sender: self)
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            let context = appDelegate.persistentContainer.viewContext
+            let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "ProfileEntity")
+            let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+
+            do {
+                try
+                    context.execute(deleteRequest)
+            } catch let error as NSError {
+                print(error)
+            }
+
+            do {
+                try Auth.auth().signOut()
+                let storyboard: UIStoryboard = UIStoryboard(name: "LoginStory", bundle: nil)
+                let vc = storyboard.instantiateViewController(withIdentifier: "Login") as! LoginViewController
+                
+                self.show(vc, sender: self)
+            } catch let error {
+                print("Error: ", error.localizedDescription)
+            }
+
         }
     }
     
     enum NavLinks: String, CaseIterable {
-        case profile = "Profile", settings = "Settings", events = "Your Events", logout = "Log Out"
+        case profile = "Profile", events = "Your Events", settings = "Settings", logout = "Log Out"
         
     }
 }

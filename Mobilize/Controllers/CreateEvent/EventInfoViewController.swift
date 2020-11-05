@@ -48,8 +48,6 @@ class EventInfoViewController: UIViewController, UITableViewDelegate, UITableVie
     
     @IBAction func onNextButtonPressed(_ sender: Any) {
         
-
-        
         if(eventNameField.text == "" || organizationNameField.text == "" || coordinates == nil){
             
             var msg = "please enter event information"

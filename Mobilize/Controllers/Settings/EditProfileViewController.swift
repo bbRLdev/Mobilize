@@ -29,6 +29,10 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
     override func viewDidLoad() {
         super.viewDidLoad()
         imagePicker.delegate = self
+        //loadProfileInfo()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
         loadProfileInfo()
     }
     

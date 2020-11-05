@@ -25,8 +25,13 @@ class SettingsProfileViewController: UIViewController, UITableViewDelegate, UITa
         Options.dataSource = self
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(false)
+//    override func viewDidAppear(_ animated: Bool) {
+//        super.viewDidAppear(false)
+//        loadProfileInfo()
+//    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        //super.viewWillAppear(false)
         loadProfileInfo()
     }
     
