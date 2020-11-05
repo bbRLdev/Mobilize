@@ -438,6 +438,9 @@ Q29uZmlybWF0aW9uIBBvZiBDb29wZXJhdGlvbg
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="XZG-IH-pSh"/>
+                    <connections>
+                        <outlet property="createButton" destination="fX9-RZ-06p" id="vJE-Qi-cck"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GRg-6I-4NN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <exit id="NJB-9K-Pa2" userLabel="Exit" sceneMemberID="exit"/>

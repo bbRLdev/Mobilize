@@ -18,6 +18,11 @@ class QAandConfirmVC: UIViewController {
     var event: EventModel!
     var imgURLs: [String] = []
     
+    
+    @IBOutlet weak var createButton: UIButton!
+    
+    
+    
     var imgLoadingFlag = false {
         willSet {
             if newValue == false {
@@ -34,8 +39,11 @@ class QAandConfirmVC: UIViewController {
     var collectionLoadingFlag = false {
         willSet {
             if newValue == false {
-                print("hi")
                 self.navigationController?.popToRootViewController(animated: true)
+            }
+            else{
+                //createButton.isUserInteractionEnabled = true
+                //createButton.setTitle("Create Event", for: .normal)
             }
         }
     }
@@ -44,9 +52,16 @@ class QAandConfirmVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         print("Did load \(images)")
+        
     }
     
+    
+    
+    
     @IBAction func createEvent(_ sender: Any) {
+        createButton.setTitle("Uploading...", for: .normal)
+        createButton.isUserInteractionEnabled = false
+        
         if let uid = getUID() {
             event.organizerUID = uid
             event.questions.append(q)
@@ -60,7 +75,13 @@ class QAandConfirmVC: UIViewController {
             let eid = docRef.documentID
             event.eventID = eid
             imgLoadingFlag = true
-            uploadImages(eventId: event.eventID)
+            //if(images.count > 0){
+                uploadImages(eventId: event.eventID)
+            //}
+//            else{
+//                imgLoadingFlag = false
+//            }
+            
             
         }
     }
@@ -75,38 +96,49 @@ class QAandConfirmVC: UIViewController {
     
     func uploadImages(eventId: String) {
 //        var noError: Bool
+        
+//        if (images.count == 0){
+//            imgLoadingFlag = false
+//            return
+//        }
+        
         let storageRef = Storage.storage().reference(forURL: "gs://mobilize-77a05.appspot.com")
         let metadata = StorageMetadata()
         metadata.contentType = "image/jpg"
         var count: Int = 0 {
             willSet {
-                if newValue >= images.count {
+                if newValue > images.count {
                     imgLoadingFlag = false
                 }
             }
         }
+        
+        count += 1
         for image in images {
+            let imageId = UUID().uuidString
+            
             if let imageData = image.jpegData(compressionQuality: 4.0) {
-                let eventRef = storageRef.child("events").child(eventId).child("\(count)")
+                let eventRef = storageRef.child("events").child(eventId).child("\(imageId)")
                 eventRef.putData(imageData, metadata: metadata, completion: {
                     (storageMetadata, error) in
                     if error != nil {
-                        print("error uploading image \(count)")
+                        print("error uploading image \(imageId)")
                         return
                     }
-                    print("no errors")
+                    //print("no errors")
                     eventRef.downloadURL(completion: { (url, error) in
                         if let err = error {
                             print(err.localizedDescription)
                         }
-                        print("no errors 2")
+                        //print("no errors 2")
 
                         guard let url = url else { return }
                         self.imgURLs.append(url.absoluteString)
+                        
+                        //increment does not allow printing of updated value
                         count += 1
                     })
                 })
-                
             }
         }
     }
@@ -122,6 +154,8 @@ class QAandConfirmVC: UIViewController {
         }
         docRef.setData(
             [
+                "coordinates": ["latitude": event.coordinates.latitude,
+                                "longitude": event.coordinates.longitude],
                 "name" : event.eventName,
                 "description" : event.description,
                 "address" : event.location,

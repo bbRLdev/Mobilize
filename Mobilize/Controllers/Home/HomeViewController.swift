@@ -17,6 +17,8 @@ protocol GetFilters {
 
 class HomeViewController: UIViewController, GetFilters {
     
+    let db = Firestore.firestore()
+    
     @IBOutlet weak var mapView: MKMapView!
     
     var sideMenu: SideMenuNavigationController?
@@ -32,6 +34,7 @@ class HomeViewController: UIViewController, GetFilters {
         super.viewDidLoad()
         setUpSideMenu()
         checkLocationServices()
+        loadPins()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -67,6 +70,34 @@ class HomeViewController: UIViewController, GetFilters {
         sideMenu?.leftSide = true
         SideMenuManager.default.leftMenuNavigationController = sideMenu
         SideMenuManager.default.addScreenEdgePanGesturesToPresent(toView: mapView)
+    }
+    
+    func loadPins(){
+        db.collection("events")
+            .addSnapshotListener { querySnapshot, error in
+                guard let documents = querySnapshot?.documents else {
+                    print("Error fetching documents: \(error!)")
+                    return
+                }
+                
+                for document in documents{
+                    let dataDescription = document.data()
+                    let coordDict = dataDescription["coordinates"] as? NSDictionary
+                    
+                    if(coordDict != nil){
+                        let latitude:Double = coordDict?.value(forKey: "latitude") as! Double
+                        let longitude:Double = coordDict?.value(forKey: "longitude") as! Double
+                        let coordinates = CLLocationCoordinate2DMake(latitude, longitude)
+                        
+                        let annotation = MKPointAnnotation()
+                        annotation.coordinate = coordinates
+                        
+                        self.mapView.addAnnotation(annotation)
+                    }
+
+                    //print("\(document.documentID) => \(latitude) \(longitude)")
+                }
+            }
     }
     
     func setUpLocationManager() {
@@ -123,6 +154,7 @@ extension HomeViewController: CLLocationManagerDelegate {
     
     // update the location on map when user moves around
     // (leave out? annoying b/c stops user from moving map around)
+
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
 //        guard let location = locations.last else {
 //            return

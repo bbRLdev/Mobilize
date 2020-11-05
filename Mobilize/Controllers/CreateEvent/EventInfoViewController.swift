@@ -69,11 +69,12 @@ class EventInfoViewController: UIViewController, UITableViewDelegate, UITableVie
         guard let eventName = eventNameField.text,
                let orgName = organizationNameField.text,
                let eventAddress = eventAddressField.text,
-               let eventDescription = eventAddressField.text
+               let eventDescription = eventAddressField.text,
+               let eventCoordinates = coordinates
         else {
             return
         }
-        event = EventModel(name: eventName, desc: eventDescription, loc: eventAddress, org: orgName)
+        event = EventModel(name: eventName, desc: eventDescription, loc: eventAddress, org: orgName, coord: eventCoordinates)
         performSegue(withIdentifier: segueId, sender: self)
     }
     

@@ -6,11 +6,12 @@
 //
 
 import Foundation
-
+import MapKit
 
 typealias Question = (question: String, answer: String)
 
 class EventModel {
+    var coordinates: CLLocationCoordinate2D
     var organization: String
     var description: String
     var location: String
@@ -22,11 +23,12 @@ class EventModel {
     var questions: [Question] = []
     var photoURLCollection: [String] = []
     
-    init(name: String, desc: String, loc: String, org: String) {
+    init(name: String, desc: String, loc: String, org: String, coord: CLLocationCoordinate2D) {
         eventName = name
         description = desc
         location = loc
         organization = org
+        coordinates = coord
     }
     
 }
