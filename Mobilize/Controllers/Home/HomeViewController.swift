@@ -35,6 +35,7 @@ class HomeViewController: UIViewController, GetFilters {
         setUpSideMenu()
         checkLocationServices()
         loadPins()
+        setMapDelegate()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -45,6 +46,7 @@ class HomeViewController: UIViewController, GetFilters {
             nextVC.initActivismButtons = activismFilters
             nextVC.initEventButtons = eventFilters
         }
+        
     }
     
     @IBAction func sideNavButtonPressed(_ sender: Any) {
@@ -72,31 +74,76 @@ class HomeViewController: UIViewController, GetFilters {
         SideMenuManager.default.addScreenEdgePanGesturesToPresent(toView: mapView)
     }
     
+    private func addPin(diff :DocumentChange){
+        let dataDescription = diff.document.data()
+        let coordDict = dataDescription["coordinates"] as? NSDictionary
+        
+        if(coordDict != nil){
+            let latitude:Double = coordDict?.value(forKey: "latitude") as! Double
+            let longitude:Double = coordDict?.value(forKey: "longitude") as! Double
+            let coordinates = CLLocationCoordinate2DMake(latitude, longitude)
+            
+            let annotation = AnnotationModel(eid: diff.document.documentID)
+            annotation.coordinate = coordinates
+            
+            self.mapView.addAnnotation(annotation)
+        }
+    }
+    private func removePin(diff :DocumentChange){
+        let eventID = diff.document.documentID
+        for annotation in self.mapView.annotations {
+            if let model = annotation as? AnnotationModel,
+               model.eventID == eventID{
+                self.mapView.removeAnnotation(model)
+            }
+        }
+    }
     func loadPins(){
         db.collection("events")
             .addSnapshotListener { querySnapshot, error in
-                guard let documents = querySnapshot?.documents else {
-                    print("Error fetching documents: \(error!)")
+                
+                guard let snapshot = querySnapshot else {
+                    print("Error fetching snapshots: \(error!)")
                     return
                 }
-                
-                for document in documents{
-                    let dataDescription = document.data()
-                    let coordDict = dataDescription["coordinates"] as? NSDictionary
-                    
-                    if(coordDict != nil){
-                        let latitude:Double = coordDict?.value(forKey: "latitude") as! Double
-                        let longitude:Double = coordDict?.value(forKey: "longitude") as! Double
-                        let coordinates = CLLocationCoordinate2DMake(latitude, longitude)
-                        
-                        let annotation = MKPointAnnotation()
-                        annotation.coordinate = coordinates
-                        
-                        self.mapView.addAnnotation(annotation)
+                snapshot.documentChanges.forEach { diff in
+                    if (diff.type == .added) {
+                        //print("New event: \(diff.document.data())")
+                        self.addPin(diff: diff)
                     }
-
-                    //print("\(document.documentID) => \(latitude) \(longitude)")
+                    else if (diff.type == .modified) {
+                        //print("Modified event: \(diff.document.data())")
+                        self.removePin(diff: diff)
+                        self.addPin(diff: diff)
+                    }
+                    else if (diff.type == .removed) {
+                        //print("Removed event: \(diff.document.data())")
+                        self.removePin(diff: diff)
+                    }
                 }
+                
+//                guard let documents = querySnapshot?.documents else {
+//                    print("Error fetching documents: \(error!)")
+//                    return
+//                }
+//
+//                for document in documents{
+//                    let dataDescription = document.data()
+//                    let coordDict = dataDescription["coordinates"] as? NSDictionary
+//
+//                    if(coordDict != nil){
+//                        let latitude:Double = coordDict?.value(forKey: "latitude") as! Double
+//                        let longitude:Double = coordDict?.value(forKey: "longitude") as! Double
+//                        let coordinates = CLLocationCoordinate2DMake(latitude, longitude)
+//
+//                        let annotation = AnnotationModel(eid: document.documentID)
+//                        annotation.coordinate = coordinates
+//
+//                        self.mapView.addAnnotation(annotation)
+//                    }
+//
+//                    //print("\(document.documentID) => \(latitude) \(longitude)")
+//                }
             }
     }
     
@@ -150,8 +197,25 @@ class HomeViewController: UIViewController, GetFilters {
     
 }
 
-extension HomeViewController: CLLocationManagerDelegate {
+extension HomeViewController: CLLocationManagerDelegate, MKMapViewDelegate {
     
+    
+    func setMapDelegate(){
+        mapView.delegate = self
+    }
+    
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        if let annotation = view.annotation as? AnnotationModel {
+            print(annotation.eventID)
+            
+            let storyboard: UIStoryboard = UIStoryboard(name: "EventStory", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "EventView") as! EventDetailsViewController
+            
+            vc.eventID = annotation.eventID
+            self.show(vc, sender: self)
+            
+        }
+    }
     // update the location on map when user moves around
     // (leave out? annoying b/c stops user from moving map around)
 

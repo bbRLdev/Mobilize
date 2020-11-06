@@ -6,15 +6,35 @@
 //
 
 import UIKit
+import Firebase
 
 class EventDetailsViewController: UIViewController {
-
+    let db = Firestore.firestore()
+    
+    var eventID: String?
+    
+    @IBOutlet weak var organizerLabel: UILabel!
+    
+    @IBOutlet weak var addressLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        loadEventInfo()
         // Do any additional setup after loading the view.
     }
     
+    func loadEventInfo() {
+        let eid = eventID
+        let docRef = self.db.collection("events").document(eid!)
+        docRef.getDocument { (document, error) in
+            if let document = document, document.exists {
+                let dataDescription = document.data()
+                let addr = dataDescription!["address"] as! String
+                self.addressLabel.text = addr
+        }
+    }
+}
 
     /*
     // MARK: - Navigation

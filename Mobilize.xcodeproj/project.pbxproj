@@ -30,7 +30,6 @@
 		93E47C7125491879006D76BF /* ProfileStory.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 93E47C6C2549185D006D76BF /* ProfileStory.storyboard */; };
 		93E47C7D254A0BE1006D76BF /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93E47C7C254A0BE1006D76BF /* SearchViewController.swift */; };
 		B9050AC025507C2F00272F63 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9050ABF25507C2F00272F63 /* EditProfileViewController.swift */; };
-		B9609FF02540E97000BC5559 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9609FEF2540E97000BC5559 /* ProfileViewController.swift */; };
 		B960A00D25411EFE00BC5559 /* SettingsProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B960A00C25411EFE00BC5559 /* SettingsProfileViewController.swift */; };
 		B960A0162542079900BC5559 /* ProfileEventsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B960A0152542079900BC5559 /* ProfileEventsViewController.swift */; };
 		B960A01C2542093700BC5559 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B960A01B2542093600BC5559 /* SettingsViewController.swift */; };
@@ -39,6 +38,7 @@
 		DB51BE0E25527AF3007C65F6 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB51BE0C25527AF3007C65F6 /* UserModel.swift */; };
 		DB51BE1125527B22007C65F6 /* AddMediaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB51BE1025527B22007C65F6 /* AddMediaViewController.swift */; };
 		DB51BE1525527B7D007C65F6 /* EventDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB51BE1425527B7D007C65F6 /* EventDetailsViewController.swift */; };
+		DB51BE322554B862007C65F6 /* AnnotationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB51BE312554B862007C65F6 /* AnnotationModel.swift */; };
 		DBB17774254A52B800E2AFAA /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB17773254A52B800E2AFAA /* ProfileViewController.swift */; };
 		DBB17776254A52C700E2AFAA /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB17775254A52C700E2AFAA /* HomeViewController.swift */; };
 		DBB17778254A52D900E2AFAA /* EventStory.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DBB17777254A52D900E2AFAA /* EventStory.storyboard */; };
@@ -73,7 +73,6 @@
 		93E47C6D2549185F006D76BF /* CreateEventStory.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CreateEventStory.storyboard; sourceTree = "<group>"; };
 		93E47C7C254A0BE1006D76BF /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		B9050ABF25507C2F00272F63 /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
-		B9609FEF2540E97000BC5559 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		B960A00C25411EFE00BC5559 /* SettingsProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsProfileViewController.swift; sourceTree = "<group>"; };
 		B960A0152542079900BC5559 /* ProfileEventsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEventsViewController.swift; sourceTree = "<group>"; };
 		B960A01B2542093600BC5559 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
@@ -82,6 +81,7 @@
 		DB51BE0C25527AF3007C65F6 /* UserModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		DB51BE1025527B22007C65F6 /* AddMediaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddMediaViewController.swift; sourceTree = "<group>"; };
 		DB51BE1425527B7D007C65F6 /* EventDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetailsViewController.swift; sourceTree = "<group>"; };
+		DB51BE312554B862007C65F6 /* AnnotationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnotationModel.swift; sourceTree = "<group>"; };
 		DBB17773254A52B800E2AFAA /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		DBB17775254A52C700E2AFAA /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		DBB17777254A52D900E2AFAA /* EventStory.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = EventStory.storyboard; sourceTree = "<group>"; };
@@ -142,7 +142,6 @@
 		1AF47ACA253666DA0092CE1B /* Mobilize */ = {
 			isa = PBXGroup;
 			children = (
-				DBB17777254A52D900E2AFAA /* EventStory.storyboard */,
 				93CC6661254F9BAD0075A9EE /* Models */,
 				1A6037162542804A00E874D5 /* GoogleService-Info.plist */,
 				1A6036E22542347800E874D5 /* UIClasses */,
@@ -150,6 +149,7 @@
 				DB51BE0A25527AF3007C65F6 /* Models */,
 				1AF4962A253903DA00CABA30 /* Controllers */,
 				1AF47ACB253666DA0092CE1B /* AppDelegate.swift */,
+				DBB17777254A52D900E2AFAA /* EventStory.storyboard */,
 				93E47C6D2549185F006D76BF /* CreateEventStory.storyboard */,
 				93E47C6B25491859006D76BF /* SettingsScreen.storyboard */,
 				93E47C6725491704006D76BF /* LaunchScreen.storyboard */,
@@ -190,6 +190,7 @@
 			children = (
 				93CC6662254F9BC70075A9EE /* EventModel.swift */,
 				93CC6666254F9BDF0075A9EE /* UserModel.swift */,
+				DB51BE312554B862007C65F6 /* AnnotationModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -385,6 +386,7 @@
 				1AF47AD6253666DA0092CE1B /* Mobilize.xcdatamodeld in Sources */,
 				B960A01C2542093700BC5559 /* SettingsViewController.swift in Sources */,
 				1AF47ACC253666DA0092CE1B /* AppDelegate.swift in Sources */,
+				DB51BE322554B862007C65F6 /* AnnotationModel.swift in Sources */,
 				1A6036E4254234A900E874D5 /* ControlContainableScrollview.swift in Sources */,
 				DB51BE0D25527AF3007C65F6 /* EventModel.swift in Sources */,
 				DBB17776254A52C700E2AFAA /* HomeViewController.swift in Sources */,
@@ -394,7 +396,6 @@
 				934E6AFC253F8EA000DA9392 /* LoginViewController.swift in Sources */,
 				B9050AC025507C2F00272F63 /* EditProfileViewController.swift in Sources */,
 				93CC6667254F9BDF0075A9EE /* UserModel.swift in Sources */,
-				1AF496302539040C00CABA30 /* HomeViewController.swift in Sources */,
 				1A60372925428D5100E874D5 /* QAandConfirmVC.swift in Sources */,
 				93E47C7D254A0BE1006D76BF /* SearchViewController.swift in Sources */,
 				B960A0162542079900BC5559 /* ProfileEventsViewController.swift in Sources */,
