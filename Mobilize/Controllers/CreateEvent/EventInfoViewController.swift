@@ -71,7 +71,7 @@ class EventInfoViewController: UIViewController, UITableViewDelegate, UITableVie
         guard let eventName = eventNameField.text,
                let orgName = organizationNameField.text,
                let eventAddress = eventAddressField.text,
-               let eventDescription = eventAddressField.text,
+               let eventDescription = eventDescriptionField.text,
                let eventCoordinates = coordinates,
                let uid = auth.currentUser?.uid
         else {
