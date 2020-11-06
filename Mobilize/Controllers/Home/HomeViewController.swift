@@ -8,12 +8,16 @@ import UIKit
 import MapKit
 import SideMenu
 import CoreLocation
+import Firebase
+import CoreData
 
 protocol GetFilters {
     func getFilters(actFilters: [String], evtFilters: [String], radius: Float)
 }
 
 class HomeViewController: UIViewController, GetFilters {
+    
+    let db = Firestore.firestore()
     
     @IBOutlet weak var mapView: MKMapView!
     
@@ -30,6 +34,8 @@ class HomeViewController: UIViewController, GetFilters {
         super.viewDidLoad()
         setUpSideMenu()
         checkLocationServices()
+        loadPins()
+        setMapDelegate()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -40,6 +46,7 @@ class HomeViewController: UIViewController, GetFilters {
             nextVC.initActivismButtons = activismFilters
             nextVC.initEventButtons = eventFilters
         }
+        
     }
     
     @IBAction func sideNavButtonPressed(_ sender: Any) {
@@ -65,6 +72,79 @@ class HomeViewController: UIViewController, GetFilters {
         sideMenu?.leftSide = true
         SideMenuManager.default.leftMenuNavigationController = sideMenu
         SideMenuManager.default.addScreenEdgePanGesturesToPresent(toView: mapView)
+    }
+    
+    private func addPin(diff :DocumentChange){
+        let dataDescription = diff.document.data()
+        let coordDict = dataDescription["coordinates"] as? NSDictionary
+        
+        if(coordDict != nil){
+            let latitude:Double = coordDict?.value(forKey: "latitude") as! Double
+            let longitude:Double = coordDict?.value(forKey: "longitude") as! Double
+            let coordinates = CLLocationCoordinate2DMake(latitude, longitude)
+            
+            let annotation = AnnotationModel(eid: diff.document.documentID)
+            annotation.coordinate = coordinates
+            
+            self.mapView.addAnnotation(annotation)
+        }
+    }
+    private func removePin(diff :DocumentChange){
+        let eventID = diff.document.documentID
+        for annotation in self.mapView.annotations {
+            if let model = annotation as? AnnotationModel,
+               model.eventID == eventID{
+                self.mapView.removeAnnotation(model)
+            }
+        }
+    }
+    func loadPins(){
+        db.collection("events")
+            .addSnapshotListener { querySnapshot, error in
+                
+                guard let snapshot = querySnapshot else {
+                    print("Error fetching snapshots: \(error!)")
+                    return
+                }
+                snapshot.documentChanges.forEach { diff in
+                    if (diff.type == .added) {
+                        //print("New event: \(diff.document.data())")
+                        self.addPin(diff: diff)
+                    }
+                    else if (diff.type == .modified) {
+                        //print("Modified event: \(diff.document.data())")
+                        self.removePin(diff: diff)
+                        self.addPin(diff: diff)
+                    }
+                    else if (diff.type == .removed) {
+                        //print("Removed event: \(diff.document.data())")
+                        self.removePin(diff: diff)
+                    }
+                }
+                
+//                guard let documents = querySnapshot?.documents else {
+//                    print("Error fetching documents: \(error!)")
+//                    return
+//                }
+//
+//                for document in documents{
+//                    let dataDescription = document.data()
+//                    let coordDict = dataDescription["coordinates"] as? NSDictionary
+//
+//                    if(coordDict != nil){
+//                        let latitude:Double = coordDict?.value(forKey: "latitude") as! Double
+//                        let longitude:Double = coordDict?.value(forKey: "longitude") as! Double
+//                        let coordinates = CLLocationCoordinate2DMake(latitude, longitude)
+//
+//                        let annotation = AnnotationModel(eid: document.documentID)
+//                        annotation.coordinate = coordinates
+//
+//                        self.mapView.addAnnotation(annotation)
+//                    }
+//
+//                    //print("\(document.documentID) => \(latitude) \(longitude)")
+//                }
+            }
     }
     
     func setUpLocationManager() {
@@ -117,10 +197,28 @@ class HomeViewController: UIViewController, GetFilters {
     
 }
 
-extension HomeViewController: CLLocationManagerDelegate {
+extension HomeViewController: CLLocationManagerDelegate, MKMapViewDelegate {
     
+    
+    func setMapDelegate(){
+        mapView.delegate = self
+    }
+    
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        if let annotation = view.annotation as? AnnotationModel {
+            print(annotation.eventID)
+            
+            let storyboard: UIStoryboard = UIStoryboard(name: "EventStory", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "EventView") as! EventDetailsViewController
+            
+            vc.eventID = annotation.eventID
+            self.show(vc, sender: self)
+            
+        }
+    }
     // update the location on map when user moves around
     // (leave out? annoying b/c stops user from moving map around)
+
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
 //        guard let location = locations.last else {
 //            return
@@ -137,7 +235,7 @@ extension HomeViewController: CLLocationManagerDelegate {
 }
 
 class SideMenuListController: UITableViewController {
-    var items = [NavLinks.profile.rawValue, NavLinks.settings.rawValue, NavLinks.events.rawValue]
+    var items = [NavLinks.profile.rawValue, NavLinks.events.rawValue, NavLinks.settings.rawValue, NavLinks.logout.rawValue]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -151,6 +249,10 @@ class SideMenuListController: UITableViewController {
     override func tableView( _ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         cell.textLabel?.text = items[indexPath.row]
+        
+        if(cell.textLabel?.text == "Log Out"){
+            cell.textLabel?.textColor = UIColor.red
+        }
         return cell
     }
     
@@ -162,17 +264,41 @@ class SideMenuListController: UITableViewController {
             self.show(vc, sender: self)
         } else if (indexPath.row == 1) {
             let storyboard: UIStoryboard = UIStoryboard(name: "SettingsScreen", bundle: nil)
-            let vc = storyboard.instantiateViewController(withIdentifier: "SettingsView") as! SettingsViewController
+            let vc = storyboard.instantiateViewController(withIdentifier: "ProfileEvents") as! ProfileEventsViewController
             self.show(vc, sender: self)
         } else if (indexPath.row == 2) {
             let storyboard: UIStoryboard = UIStoryboard(name: "SettingsScreen", bundle: nil)
-            let vc = storyboard.instantiateViewController(withIdentifier: "ProfileEvents") as! ProfileEventsViewController
+            let vc = storyboard.instantiateViewController(withIdentifier: "SettingsView") as! SettingsViewController
             self.show(vc, sender: self)
+        }
+        else if (indexPath.row == 3) {
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            let context = appDelegate.persistentContainer.viewContext
+            let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "ProfileEntity")
+            let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+
+            do {
+                try
+                    context.execute(deleteRequest)
+            } catch let error as NSError {
+                print(error)
+            }
+
+            do {
+                try Auth.auth().signOut()
+                let storyboard: UIStoryboard = UIStoryboard(name: "LoginStory", bundle: nil)
+                let vc = storyboard.instantiateViewController(withIdentifier: "Login") as! LoginViewController
+                
+                self.show(vc, sender: self)
+            } catch let error {
+                print("Error: ", error.localizedDescription)
+            }
+
         }
     }
     
     enum NavLinks: String, CaseIterable {
-        case profile = "Profile", settings = "Settings", events = "Your Events"
+        case profile = "Profile", events = "Your Events", settings = "Settings", logout = "Log Out"
         
     }
 }

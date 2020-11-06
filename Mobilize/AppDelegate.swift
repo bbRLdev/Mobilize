@@ -9,13 +9,14 @@ import UIKit
 import CoreData
 import Firebase
 import FirebaseAuth
+import CoreLocation
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     let userDefault = UserDefaults.standard
     let launchedBefore = UserDefaults.standard.bool(forKey: "usersingedin")
-    
+    let locationManager = CLLocationManager()
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
@@ -24,6 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // request notifications
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert], completionHandler: { (success, error) in
         })
+        locationManager.requestWhenInUseAuthorization()
         return true
     }
     

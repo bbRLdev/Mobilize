@@ -17,5 +17,6 @@ target 'Mobilize' do
   pod 'Firebase/Storage'
   # Optionally, include the Swift extensions if you're using Swift.
   pod 'FirebaseFirestoreSwift'
+  pod 'Firebase/Storage'
 
 end

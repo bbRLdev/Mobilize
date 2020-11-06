@@ -10,7 +10,8 @@ import Foundation
 class UserModel {
     
     var name:String?
-    var uid:String?
+    var username:String?
+    var password:String?
     var bio:String?
     var organization:String?
     var profilePicture:String?
@@ -18,9 +19,10 @@ class UserModel {
     var eventsCreated:[String]?
     var eventsLiked:[String]?
     
-    init(name:String, uid:String, password:String, bio:String, organization:String, profilePicture:String, eventsRSVPd:[String], eventsCreated:[String], eventsLiked:[String]) {
+    init(name:String, username:String, password:String, bio:String, organization:String, profilePicture:String, eventsRSVPd:[String], eventsCreated:[String], eventsLiked:[String]) {
         self.name = name
-        self.uid = uid
+        self.username = username
+        self.password = password
         self.bio = bio
         self.organization = organization
         self.profilePicture = profilePicture

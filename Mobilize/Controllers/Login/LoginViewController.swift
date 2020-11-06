@@ -38,6 +38,10 @@ class LoginViewController: UIViewController {
 
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.isNavigationBarHidden = true
+    }
+    
     @IBAction func segmentChanged(_ sender: Any) {
         switch segCtrl.selectedSegmentIndex {
         case 0:
@@ -58,9 +62,9 @@ class LoginViewController: UIViewController {
     @IBAction func loginButtonPressed(_ sender: Any) {
         statusLabel.text = nil
 
-        guard let uid = usernameTextField.text,
+        guard let email = usernameTextField.text,
               let password = passwordTextField.text,
-              uid.count > 0,
+              email.count > 0,
               password.count > 0
         else {
             statusLabel.text = "Please try again"
@@ -69,13 +73,13 @@ class LoginViewController: UIViewController {
 
 
         if(cPasswordLabel.isHidden) {
-            Auth.auth().signIn(withEmail: uid, password: password) {
+            Auth.auth().signIn(withEmail: email, password: password) {
               user, error in
                 if let _ = error, user == nil {
                 self.statusLabel.text = "Sign in failed"
               }else {
                 // store login info
-                self.storeProfile(uid: uid, password: password)
+                self.storeProfile(uid: email, password: password)
                 self.performSegue(withIdentifier: self.segueID0, sender: nil)
               }
             }
@@ -87,19 +91,21 @@ class LoginViewController: UIViewController {
                 statusLabel.text = "Sign up failed, please review your entries"
                 return
             }
-
+            
+            
+            self.performSegue(withIdentifier: segueID1, sender: nil)
             // 2
-            Auth.auth().createUser(withEmail: uid, password: password) { user, error in
-                if error == nil {
-                    Auth.auth().signIn(withEmail: uid, password: password)
-                    // store login info
-                    self.storeProfile(uid: uid, password: password)
-                    self.performSegue(withIdentifier: self.segueID1, sender: nil)
-
-                }else {
-                    self.statusLabel.text = "Sign up failed, please review your entries"
-                }
-            }
+//            Auth.auth().createUser(withEmail: uid, password: password) { user, error in
+//                if error == nil {
+//                    Auth.auth().signIn(withEmail: uid, password: password)
+//                    // store login info
+//                    self.storeProfile(uid: uid, password: password)
+//                    self.performSegue(withIdentifier: self.segueID1, sender: nil)
+//
+//                }else {
+//                    self.statusLabel.text = "Sign up failed, please review your entries"
+//                }
+//            }
 
         }
     }
@@ -121,6 +127,16 @@ class LoginViewController: UIViewController {
             NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
             abort()
         }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        //segue calculator
+        if segue.identifier == segueID1,
+           let cProfileVC = segue.destination as? CreateProfileViewController {
+            cProfileVC.email = usernameTextField.text!
+            cProfileVC.password = cPasswordTextField.text!
+            }
+            
     }
     
     // code to enable tapping on the background to remove software keyboard

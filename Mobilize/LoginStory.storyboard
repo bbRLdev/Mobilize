@@ -111,7 +111,7 @@
                         <outlet property="statusLabel" destination="FmE-oV-9lQ" id="433-S5-FTN"/>
                         <outlet property="usernameTextField" destination="tWO-GG-Bvp" id="XNa-6R-7SZ"/>
                         <segue destination="FUS-MW-fz6" kind="presentation" identifier="signupSegue" modalPresentationStyle="fullScreen" id="Tqn-gI-9Xh"/>
-                        <segue destination="ePX-iN-0oK" kind="presentation" identifier="loginSegue" animates="NO" modalPresentationStyle="fullScreen" id="4YN-mf-c4N"/>
+                        <segue destination="ePX-iN-0oK" kind="presentation" identifier="loginSegue" modalPresentationStyle="fullScreen" id="4YN-mf-c4N"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -155,7 +155,6 @@
                                 <state key="normal" title="Next"/>
                                 <connections>
                                     <action selector="nextButtonPressed:" destination="FUS-MW-fz6" eventType="touchUpInside" id="qG2-pL-nxI"/>
-                                    <segue destination="8dw-mw-Tnc" kind="presentation" identifier="uploadPictureSegue" modalPresentationStyle="fullScreen" id="S8e-tl-dMs"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Last Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mza-X6-avI">
@@ -224,6 +223,7 @@
                         <outlet property="firstNameField" destination="8zj-Uz-CYR" id="TM3-p3-CnN"/>
                         <outlet property="lastNameField" destination="ysx-Mu-Uzi" id="MuI-Ot-Yvc"/>
                         <outlet property="organization" destination="7th-bb-h8J" id="6LR-NS-Ljv"/>
+                        <segue destination="8dw-mw-Tnc" kind="presentation" identifier="uploadPictureSegue" modalPresentationStyle="fullScreen" id="fEP-Tf-Lrq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="08E-Pu-6w3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -315,7 +315,6 @@
                                 <state key="normal" title="Create Profile"/>
                                 <connections>
                                     <action selector="createProfilePressed:" destination="8dw-mw-Tnc" eventType="touchUpInside" id="pop-t0-MV3"/>
-                                    <segue destination="k9Z-SR-3TR" kind="presentation" identifier="createProfileSegue" modalPresentationStyle="fullScreen" id="ttC-R4-Hxo"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="765-4K-HvF">
@@ -330,8 +329,11 @@
                         <viewLayoutGuide key="safeArea" id="UiM-hm-uBj"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
+                    <navigationItem key="navigationItem" id="SaM-BJ-A0m"/>
                     <connections>
                         <outlet property="profilePicture" destination="7x6-wY-IEK" id="Xg3-hl-YpU"/>
+                        <segue destination="k9Z-SR-3TR" kind="presentation" identifier="welcomeSegue" modalPresentationStyle="fullScreen" id="Vz6-HR-ovO"/>
+                        <segue destination="BYZ-38-t0r" kind="presentation" identifier="loginSegue" animates="NO" modalPresentationStyle="fullScreen" id="KWh-rp-WtJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="L0X-TT-zae" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -340,7 +342,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="whQ-dJ-bqs"/>
+        <segue reference="4YN-mf-c4N"/>
     </inferredMetricsTieBreakers>
     <resources>
         <systemColor name="labelColor">
