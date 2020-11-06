@@ -272,28 +272,34 @@ class SideMenuListController: UITableViewController {
             self.show(vc, sender: self)
         }
         else if (indexPath.row == 3) {
-            let appDelegate = UIApplication.shared.delegate as! AppDelegate
-            let context = appDelegate.persistentContainer.viewContext
-            let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "ProfileEntity")
-            let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+            let controller = UIAlertController(title: "Logout", message: "Are you sure you want to log out?", preferredStyle: .alert)
+            controller.addAction(UIAlertAction(title:"Yes", style: .destructive, handler: {_ in self.handleLogout()}))
+            controller.addAction(UIAlertAction(title:"Cancel", style: .cancel, handler: nil))
+            present(controller, animated: true, completion: nil)
+        }
+    }
+    
+    func handleLogout() {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let context = appDelegate.persistentContainer.viewContext
+        let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "ProfileEntity")
+        let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
 
-            do {
-                try
-                    context.execute(deleteRequest)
-            } catch let error as NSError {
-                print(error)
-            }
+        do {
+            try
+                context.execute(deleteRequest)
+        } catch let error as NSError {
+            print(error)
+        }
 
-            do {
-                try Auth.auth().signOut()
-                let storyboard: UIStoryboard = UIStoryboard(name: "LoginStory", bundle: nil)
-                let vc = storyboard.instantiateViewController(withIdentifier: "Login") as! LoginViewController
-                
-                self.show(vc, sender: self)
-            } catch let error {
-                print("Error: ", error.localizedDescription)
-            }
-
+        do {
+            try Auth.auth().signOut()
+            let storyboard: UIStoryboard = UIStoryboard(name: "LoginStory", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "Login") as! LoginViewController
+            
+            self.show(vc, sender: self)
+        } catch let error {
+            print("Error: ", error.localizedDescription)
         }
     }
     
