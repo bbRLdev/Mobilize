@@ -40,6 +40,7 @@ class EventInfoViewController: UIViewController, UITableViewDelegate, UITableVie
         searchCompleter.delegate = self
         searchResultsTableView.delegate = self
         searchResultsTableView.dataSource = self
+        populateFields()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -188,6 +189,16 @@ class EventInfoViewController: UIViewController, UITableViewDelegate, UITableVie
         UIView.setAnimationDuration(moveDuration)
         self.view.frame = self.view.frame.offsetBy(dx: 0, dy: movement)
         UIView.commitAnimations()
+    }
+    
+    func populateFields() {
+        // check if the event has a UID, if so, can populate fields for edit
+        if(event != nil) {
+            eventNameField.text = event.eventName
+            organizationNameField.text = event.organization
+            eventAddressField.text = event.location
+            eventDescriptionField.text = event.description
+        }
     }
 
 
