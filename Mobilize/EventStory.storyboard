@@ -56,7 +56,7 @@
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="onK-6o-acW">
                                         <rect key="frame" x="0.0" y="91" width="374" height="677"/>
-                                        <state key="normal" title="Button"/>
+                                        <state key="normal" title="Edit"/>
                                     </button>
                                 </subviews>
                             </stackView>
@@ -72,6 +72,7 @@
                     </view>
                     <connections>
                         <outlet property="addressLabel" destination="wbz-91-0zk" id="kRZ-XL-Qfp"/>
+                        <outlet property="editButton" destination="onK-6o-acW" id="G9B-Xg-cS2"/>
                         <outlet property="organizerLabel" destination="Nyh-Pp-fZp" id="0JO-RK-mwF"/>
                     </connections>
                 </viewController>

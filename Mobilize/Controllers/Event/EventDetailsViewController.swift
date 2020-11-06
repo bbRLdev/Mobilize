@@ -6,21 +6,32 @@
 //
 
 import UIKit
-import Firebase
+import FirebaseFirestore
+import FirebaseAuth
 
 class EventDetailsViewController: UIViewController {
     let db = Firestore.firestore()
+    let auth = FirebaseAuth.Auth.auth()
     
     var eventID: String?
+    var ownerUID: String = ""
     
     @IBOutlet weak var organizerLabel: UILabel!
     
     @IBOutlet weak var addressLabel: UILabel!
+    @IBOutlet weak  var editButton: UIButton!
+    @IBOutlet weak var stack: UIStackView!
+    
+    override func viewWillAppear(_ animated: Bool) {
+        editButton.isHidden = true
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
+
         loadEventInfo()
+        checkAuth()
         // Do any additional setup after loading the view.
     }
     
@@ -32,9 +43,22 @@ class EventDetailsViewController: UIViewController {
                 let dataDescription = document.data()
                 let addr = dataDescription!["address"] as! String
                 self.addressLabel.text = addr
+                let uid = dataDescription!["owner"] as! String
+                self.ownerUID = uid
+                print(self.ownerUID)
+            }
+            
+        }
+
+    }
+    func checkAuth() {
+        let uid = auth.currentUser?.uid
+        print(uid, ownerUID)
+        if uid! == ownerUID {
+            editButton.isHidden = false
+            stack.reloadInputViews()
         }
     }
-}
 
     /*
     // MARK: - Navigation
