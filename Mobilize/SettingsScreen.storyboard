@@ -309,6 +309,9 @@
                                     <segment title="Your Events"/>
                                     <segment title="RSVP'd Events"/>
                                 </segments>
+                                <connections>
+                                    <action selector="segmentChanged:" destination="BOA-wF-ddr" eventType="valueChanged" id="1jp-l9-ofN"/>
+                                </connections>
                             </segmentedControl>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="e9F-6c-vPW">
                                 <rect key="frame" x="20" y="161" width="374" height="701"/>
@@ -340,6 +343,7 @@
                     <navigationItem key="navigationItem" id="nzd-gH-ied"/>
                     <connections>
                         <outlet property="eventTable" destination="e9F-6c-vPW" id="CB9-a9-C3X"/>
+                        <outlet property="segCtrl" destination="2kQ-77-lZJ" id="rTh-8K-3Zl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XPv-72-kF3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

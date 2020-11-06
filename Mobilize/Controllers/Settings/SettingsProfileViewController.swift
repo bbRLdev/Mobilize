@@ -12,6 +12,9 @@ class SettingsProfileViewController: UIViewController, UITableViewDelegate, UITa
 
     let options = ["Your events", "Settings"]
     let cellTag = "cell"
+    
+    var profile:UserModel!
+    
     @IBOutlet var name: UILabel!
     @IBOutlet var profilePic: UIImageView!
     @IBOutlet var Options: UITableView!
@@ -23,6 +26,7 @@ class SettingsProfileViewController: UIViewController, UITableViewDelegate, UITa
         super.viewDidLoad()
         Options.delegate = self
         Options.dataSource = self
+        
     }
     
 //    override func viewDidAppear(_ animated: Bool) {
@@ -57,16 +61,30 @@ class SettingsProfileViewController: UIViewController, UITableViewDelegate, UITa
         }
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "events",
+           let nextVC = segue.destination as? ProfileEventsViewController {
+            nextVC.uid = profile.userID
+        }
+    }
+    
     func loadProfileInfo() {
         let userID = Auth.auth().currentUser?.uid
         let docRef = self.db.collection("users").document(userID!)
         docRef.getDocument { (document, error) in
             if let document = document, document.exists {
                 let dataDescription = document.data()
+                
                 let firstName = dataDescription!["firstName"] as! String
                 let lastName = dataDescription!["lastName"] as! String
                 let org = dataDescription!["organization"] as! String
                 let bio = dataDescription!["bio"] as! String
+                
+                //
+                //needs more work
+                self.profile = UserModel(uid: userID!, first: firstName, last: lastName, organization: org, bio: bio, profilePicture: "", eventsRSVPd: [], eventsCreated: [], eventsLiked: [])
+                
+                
                 self.name.text = firstName + " " + lastName
                 self.organization.text = org
                 self.bioTextView.text = bio
