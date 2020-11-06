@@ -75,9 +75,10 @@ class QAandConfirmVC: UIViewController {
             let eid = docRef.documentID
             event.eventID = eid
             imgLoadingFlag = true
-            //if(images.count > 0){
-                uploadImages(eventId: event.eventID)
-            //}
+            
+            saveToProfile(uid: uid, eid: eid)
+            uploadImages(eventId: event.eventID)
+            
 //            else{
 //                imgLoadingFlag = false
 //            }
@@ -92,6 +93,21 @@ class QAandConfirmVC: UIViewController {
             return userID
         }
         return nil
+    }
+    
+    func saveToProfile(uid: String, eid: String){
+        let docRef: DocumentReference = db.collection("users").document(uid)
+        
+        docRef.updateData(
+            [
+                "createdEvents": FieldValue.arrayUnion([eid])
+            ], completion: {
+                err in
+                if let err = err {
+                    print("Error adding document: \(err)")
+                }
+            }
+        )
     }
     
     func uploadImages(eventId: String) {
