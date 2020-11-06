@@ -116,42 +116,43 @@ class ProfileEventsViewController: UIViewController, UITableViewDelegate, UITabl
 
     }
     
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            let row = indexPath.row
-            
-            var eid:String?
-            if(RSVPView) {
-                eid = RSVPEvents[row]
-                RSVPEvents.remove(at: indexPath.row)
-                //self.show(vc, sender: self)
-                
-            } else {
-                eid = createdEvents[row]
-                createdEvents.remove(at: indexPath.row)
-                //self.show(vc, sender: self)
-            }
-            
-            if(eid != nil){
-                
-                self.eventTable.deleteRows(at: [indexPath], with: .fade)
-                
-                db.collection("users").document(uid!).updateData(["createdEvents": FieldValue.arrayRemove([eid!])])
-                
-                db.collection("events").document(eid!).delete() { err in
-                    if let err = err {
-                        print("Error removing document: \(err)")
-                    } else {
-                        print("removing event")
-                    }
+    func deleteHandler(indexPath: IndexPath){
+        let row = indexPath.row
+        var eid:String?
+        if(RSVPView) {
+            eid = RSVPEvents[row]
+            RSVPEvents.remove(at: indexPath.row)
+            //self.show(vc, sender: self)
+
+        } else {
+            eid = createdEvents[row]
+            createdEvents.remove(at: indexPath.row)
+            //self.show(vc, sender: self)
+        }
+
+        if(eid != nil){
+
+            self.eventTable.deleteRows(at: [indexPath], with: .fade)
+
+            db.collection("users").document(uid!).updateData(["createdEvents": FieldValue.arrayRemove([eid!])])
+
+            db.collection("events").document(eid!).delete() { err in
+                if let err = err {
+                    print("Error removing document: \(err)")
+                } else {
+                    print("removing event")
                 }
             }
-
+        }
+    }
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        
+        if editingStyle == .delete {
+            let controller = UIAlertController(title: "Delete Event", message: "Are you sure you want to delete this event? This action cannot be undone.", preferredStyle: .alert)
+            controller.addAction(UIAlertAction(title:"Yes", style: .destructive, handler: {_ in self.deleteHandler(indexPath: indexPath)}))
+            controller.addAction(UIAlertAction(title:"Cancel", style: .cancel, handler: nil))
+            present(controller, animated: true, completion: nil)
             
-            
-            
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
         }
     }
  

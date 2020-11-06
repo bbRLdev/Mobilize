@@ -121,29 +121,6 @@ class HomeViewController: UIViewController, GetFilters {
                         self.removePin(diff: diff)
                     }
                 }
-                
-//                guard let documents = querySnapshot?.documents else {
-//                    print("Error fetching documents: \(error!)")
-//                    return
-//                }
-//
-//                for document in documents{
-//                    let dataDescription = document.data()
-//                    let coordDict = dataDescription["coordinates"] as? NSDictionary
-//
-//                    if(coordDict != nil){
-//                        let latitude:Double = coordDict?.value(forKey: "latitude") as! Double
-//                        let longitude:Double = coordDict?.value(forKey: "longitude") as! Double
-//                        let coordinates = CLLocationCoordinate2DMake(latitude, longitude)
-//
-//                        let annotation = AnnotationModel(eid: document.documentID)
-//                        annotation.coordinate = coordinates
-//
-//                        self.mapView.addAnnotation(annotation)
-//                    }
-//
-//                    //print("\(document.documentID) => \(latitude) \(longitude)")
-//                }
             }
     }
     
@@ -265,6 +242,9 @@ class SideMenuListController: UITableViewController {
         } else if (indexPath.row == 1) {
             let storyboard: UIStoryboard = UIStoryboard(name: "SettingsScreen", bundle: nil)
             let vc = storyboard.instantiateViewController(withIdentifier: "ProfileEvents") as! ProfileEventsViewController
+            
+            let userID = Auth.auth().currentUser?.uid
+            vc.uid = userID
             self.show(vc, sender: self)
         } else if (indexPath.row == 2) {
             let storyboard: UIStoryboard = UIStoryboard(name: "SettingsScreen", bundle: nil)
