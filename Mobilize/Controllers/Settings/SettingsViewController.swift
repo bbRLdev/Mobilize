@@ -33,7 +33,6 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         if(indexPath.row == 0) {
-            print("here")
             performSegue(withIdentifier: "edit", sender: self)
         }
         if(indexPath.row == 1) {
@@ -55,7 +54,6 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "ProfileEntity")
         var fetchedResults: [NSManagedObject]
         do {
-            print("GOT HERE")
             try fetchedResults = (context.fetch(request) as? [NSManagedObject])!
             if(fetchedResults.count > 0) {
                 // clear all saved user data
