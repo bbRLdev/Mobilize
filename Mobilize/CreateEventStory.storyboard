@@ -164,6 +164,9 @@ Q29uZmlybWF0aW9uIBBvZiBDb29wZXJhdGlvbg
                                                 <color key="textColor" systemColor="labelColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                <connections>
+                                                    <outlet property="delegate" destination="ohK-Iz-2AK" id="OvI-Dg-fUU"/>
+                                                </connections>
                                             </textView>
                                         </subviews>
                                     </stackView>
