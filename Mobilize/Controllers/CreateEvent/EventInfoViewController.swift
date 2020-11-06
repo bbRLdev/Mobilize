@@ -8,11 +8,12 @@
 import UIKit
 import MapKit
 import Contacts
+import FirebaseAuth
 
 class EventInfoViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, MKLocalSearchCompleterDelegate, UITextViewDelegate {
 
     
-    
+    let auth = FirebaseAuth.Auth.auth()
     let textCellIdentifier = "AddressCell"
     
     var searchCompleter = MKLocalSearchCompleter()
@@ -70,11 +71,12 @@ class EventInfoViewController: UIViewController, UITableViewDelegate, UITableVie
                let orgName = organizationNameField.text,
                let eventAddress = eventAddressField.text,
                let eventDescription = eventAddressField.text,
-               let eventCoordinates = coordinates
+               let eventCoordinates = coordinates,
+               let uid = auth.currentUser?.uid
         else {
             return
         }
-        event = EventModel(name: eventName, desc: eventDescription, loc: eventAddress, org: orgName, coord: eventCoordinates)
+        event = EventModel(name: eventName, desc: eventDescription, loc: eventAddress, org: orgName, coord: eventCoordinates, owner: uid)
         performSegue(withIdentifier: segueId, sender: self)
     }
     

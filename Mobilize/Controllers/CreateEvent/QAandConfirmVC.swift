@@ -162,6 +162,7 @@ class QAandConfirmVC: UIViewController {
                 "imageURL" : event.photoURLCollection,
                 "numLikes" : event.likeNum,
                 "numRSVP" : event.rsvpNum,
+                "owner" : event.organizerUID,
                 
             ], merge: false, completion: {
                 err in
