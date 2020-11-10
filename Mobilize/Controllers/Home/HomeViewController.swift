@@ -77,16 +77,36 @@ class HomeViewController: UIViewController, GetFilters {
     private func addPin(diff :DocumentChange){
         let dataDescription = diff.document.data()
         let coordDict = dataDescription["coordinates"] as? NSDictionary
+        let eventName = dataDescription["name"] as? String
+        let ownerID = dataDescription["owner"] as? String
+        
+
         
         if(coordDict != nil){
-            let latitude:Double = coordDict?.value(forKey: "latitude") as! Double
-            let longitude:Double = coordDict?.value(forKey: "longitude") as! Double
-            let coordinates = CLLocationCoordinate2DMake(latitude, longitude)
+            var ownerOrg:String?
             
-            let annotation = AnnotationModel(eid: diff.document.documentID)
-            annotation.coordinate = coordinates
+            let docRef = self.db.collection("users").document(ownerID!)
+            docRef.getDocument { (document, error) in
+                if let document = document, document.exists {
+                    let userDescription = document.data()
+                    ownerOrg = userDescription?["organization"] as? String
+                    let latitude:Double = coordDict?.value(forKey: "latitude") as! Double
+                    let longitude:Double = coordDict?.value(forKey: "longitude") as! Double
+                    let coordinates = CLLocationCoordinate2DMake(latitude, longitude)
+                    
+                    let annotation = AnnotationModel(eid: diff.document.documentID)
+                    annotation.title = eventName
+                    annotation.subtitle = ownerOrg
+                    //print(ownerOrg!)
+                    annotation.coordinate = coordinates
+                    
+                    self.mapView.addAnnotation(annotation)
+                } else {
+                    print("Document does not exist")
+                }
+            }
             
-            self.mapView.addAnnotation(annotation)
+
         }
     }
     private func removePin(diff :DocumentChange){
@@ -185,11 +205,39 @@ extension HomeViewController: CLLocationManagerDelegate, MKMapViewDelegate {
         if let annotation = view.annotation as? AnnotationModel {
             print(annotation.eventID)
             
-            let storyboard: UIStoryboard = UIStoryboard(name: "EventStory", bundle: nil)
-            let vc = storyboard.instantiateViewController(withIdentifier: "EventView") as! EventDetailsViewController
+            let controller = UIAlertController(title: "Options for",
+                                               message: annotation.title,
+                                                preferredStyle: .actionSheet)
             
-            vc.eventID = annotation.eventID
-            self.show(vc, sender: self)
+            let zoomAction = UIAlertAction(title: "Focus Map",
+                                            style: .default,
+                                            handler: {
+                                                [self](action) in
+                                                self.mapView.deselectAnnotation(annotation, animated: true)
+                                                let region = self.mapView.regionThatFits(MKCoordinateRegion(center: annotation.coordinate, latitudinalMeters: 0, longitudinalMeters: 1000))
+                                                self.mapView.setRegion(region, animated: true)})
+            
+            controller.addAction(zoomAction)
+            
+            let detailsAction = UIAlertAction(title: "Event Details",
+                                            style: .default,
+                                            handler: {
+                                                [self](action) in
+                                                self.mapView.deselectAnnotation(annotation, animated: true)
+                                                let storyboard: UIStoryboard = UIStoryboard(name: "EventStory", bundle: nil)
+                                                let vc = storyboard.instantiateViewController(withIdentifier: "EventView") as! EventDetailsViewController
+                                                
+                                                vc.eventID = annotation.eventID
+                                                self.show(vc, sender: self)})
+            
+            controller.addAction(detailsAction)
+            
+            controller.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: {
+                action in
+                self.mapView.deselectAnnotation(annotation, animated: true)
+            }))
+            
+            present(controller, animated: true, completion: nil)
             
         }
     }
