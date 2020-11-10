@@ -82,7 +82,7 @@ class HomeViewController: UIViewController, GetFilters {
         
 
         
-        if(coordDict != nil){
+        if(coordDict != nil && ownerID != nil){
             var ownerOrg:String?
             
             let docRef = self.db.collection("users").document(ownerID!)
@@ -105,8 +105,6 @@ class HomeViewController: UIViewController, GetFilters {
                     print("Document does not exist")
                 }
             }
-            
-
         }
     }
     private func removePin(diff :DocumentChange){
