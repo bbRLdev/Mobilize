@@ -113,7 +113,7 @@ class EventInfoViewController: UIViewController, UITableViewDelegate, UITableVie
 
     @IBAction func editBegin(_ sender: Any) {
         searchResultsTableView.isHidden = false
-        coordinates = nil
+        //coordinates = nil
     }
     
     @IBAction func editEnd(_ sender: Any) {
@@ -122,6 +122,7 @@ class EventInfoViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     @IBAction func editChanged(_ sender: Any) {
+        coordinates = nil
         searchCompleter.queryFragment = eventAddressField.text!
     }
     
