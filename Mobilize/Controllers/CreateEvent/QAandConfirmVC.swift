@@ -16,7 +16,9 @@ class QAandConfirmVC: UIViewController {
     
     var images: [UIImage] = []
     var event: EventModel!
+    var eventSoFar: [String : Any] = [:]
     var imgURLs: [String] = []
+    var questions: [Question] = []
     
     
     @IBOutlet weak var createButton: UIButton!
@@ -27,9 +29,10 @@ class QAandConfirmVC: UIViewController {
         willSet {
             if newValue == false {
                 print(imgURLs)
-                event.photoURLCollection = imgURLs
+                eventSoFar["imgURLs"] = imgURLs
+                questions.append(q)
                 collectionLoadingFlag = true
-                uploadCollection(event: event)
+                uploadCollection()
             }
         }
         
@@ -63,21 +66,20 @@ class QAandConfirmVC: UIViewController {
         createButton.isUserInteractionEnabled = false
         
         if let uid = getUID() {
-            event.organizerUID = uid
-            event.questions.append(q)
-            let docRef = db.collection("events").addDocument(data: [
-                "exists" : true
-            ]) { err in
-                if let err = err {
-                    print("Error adding document: \(err)")
+            let curUID = eventSoFar["ownerUID"] as! String
+            if curUID == uid {
+                var eid: String!
+                if event == nil {
+                    eid = createEventDocument()
+                    eventSoFar["eventID"] = eid
+                } else {
+                    eventSoFar["eventID"] = event.eventID
                 }
+                imgLoadingFlag = true
+                uploadImages(eventId: eid)
+                saveToProfile(uid: uid, eid: eid)
             }
-            let eid = docRef.documentID
-            event.eventID = eid
-            imgLoadingFlag = true
-            
-            saveToProfile(uid: uid, eid: eid)
-            uploadImages(eventId: event.eventID)
+
             
 //            else{
 //                imgLoadingFlag = false
@@ -95,9 +97,21 @@ class QAandConfirmVC: UIViewController {
         return nil
     }
     
+    func createEventDocument() -> String? {
+        var error: Bool = false
+        let docRef = db.collection("events").addDocument(data: [
+            "exists" : true
+        ]) { err in
+            if let err = err {
+                print("Error adding document: \(err)")
+                error = true
+            }
+        }
+        return error ? nil : docRef.documentID
+    }
+    
     func saveToProfile(uid: String, eid: String){
         let docRef: DocumentReference = db.collection("users").document(uid)
-        
         docRef.updateData(
             [
                 "createdEvents": FieldValue.arrayUnion([eid])
@@ -128,11 +142,9 @@ class QAandConfirmVC: UIViewController {
                 }
             }
         }
-        
         count += 1
         for image in images {
             let imageId = UUID().uuidString
-            
             if let imageData = image.jpegData(compressionQuality: 4.0) {
                 let eventRef = storageRef.child("events").child(eventId).child("\(imageId)")
                 eventRef.putData(imageData, metadata: metadata, completion: {
@@ -145,6 +157,7 @@ class QAandConfirmVC: UIViewController {
                     eventRef.downloadURL(completion: { (url, error) in
                         if let err = error {
                             print(err.localizedDescription)
+                            return
                         }
                         //print("no errors 2")
 
@@ -159,34 +172,27 @@ class QAandConfirmVC: UIViewController {
         }
     }
     
-    func uploadCollection(event: EventModel) {
-        let docRef: DocumentReference = db.collection("events").document(event.eventID)
+    func uploadCollection() {
+        let docRef: DocumentReference = db.collection("events").document(eventSoFar["eventID"] as! String)
+        print("Got here")
         var count: Int = 0 {
             willSet {
-                if newValue >= event.questions.count {
+                if newValue >= questions.count {
                     collectionLoadingFlag = false
                 }
             }
         }
-        docRef.setData(
-            [
-                "coordinates": ["latitude": event.coordinates.latitude,
-                                "longitude": event.coordinates.longitude],
-                "name" : event.eventName,
-                "description" : event.description,
-                "address" : event.location,
-                "imageURL" : event.photoURLCollection,
-                "numLikes" : event.likeNum,
-                "numRSVP" : event.rsvpNum,
-                "owner" : event.organizerUID,
-                
-            ], merge: false, completion: {
+        print(eventSoFar)
+        docRef.setData(eventSoFar,
+            merge: false, completion: {
                 err in
                 if let err = err {
                     print("Error adding document: \(err)")
+                    return
                 }
                 let qaRef = docRef.collection("QA")
-                for question: Question in event.questions {
+                // on Success, upload questions as well
+                for question: Question in self.questions {
                     qaRef.addDocument(data:
                         [
                             "question" : question.question,
@@ -195,36 +201,15 @@ class QAandConfirmVC: UIViewController {
                             err in
                             if let err = err {
                                 print("Error adding question: \(err)")
+                                return
                             }
+                            count += 1
                         }
                     )
-                    count += 1
                 }
             }
         )
-
- 
-        
-        
     }
     
-//    func getImageURLs(eventId: String, uploadCount: Int) -> [String] {
-//        let storageRef = Storage.storage().reference(forURL: "gs://mobilize-77a05.appspot.com")
-//        var ret: [String] = []
-//        for i in 0...uploadCount - 1 {
-//            let eventRef = storageRef.child("events").child(eventId).child(String(i))
-//            eventRef.downloadURL(completion: {
-//                (url, error) in
-//                if error != nil {
-//                    print("Error getting image")
-//                }
-//                if let metaImageURL = url?.absoluteString {
-//                    print(metaImageURL)
-//                    ret.append(metaImageURL)
-//                }
-//            })
-//        }
-//        return ret
-//    }
 
 }

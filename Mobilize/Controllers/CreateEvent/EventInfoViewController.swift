@@ -28,8 +28,15 @@ class EventInfoViewController: UIViewController, UITableViewDelegate, UITableVie
     @IBOutlet weak var eventAddressField: UITextField!
     @IBOutlet weak var eventDescriptionField: UITextView!
     let segueId = "AddMediaSegueId"
+    
+    // Post-Beta, we use this to keep track of values as we build the
+    // new event
+    var eventSoFar: [String : Any] = [:]
+    
+    // Post-Beta, this stays empty until the end if we are creating a new event.
+    // if editing, it will not be nil. This does not matter until the end.
     var event: EventModel!
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         eventDescriptionField.layer.borderWidth = 0.5
@@ -59,15 +66,14 @@ class EventInfoViewController: UIViewController, UITableViewDelegate, UITableVie
             let controller = UIAlertController(title: "Missing fields",
                                                message: msg,
                                                preferredStyle: .alert)
-            
             controller.addAction(UIAlertAction(title: "OK",
                                                style: .default,
                                                handler: nil))
-            
             present(controller, animated: true, completion: nil)
             
             return
         }
+        
         guard let eventName = eventNameField.text,
                let orgName = organizationNameField.text,
                let eventAddress = eventAddressField.text,
@@ -77,7 +83,23 @@ class EventInfoViewController: UIViewController, UITableViewDelegate, UITableVie
         else {
             return
         }
-        event = EventModel(name: eventName, desc: eventDescription, loc: eventAddress, org: orgName, coord: eventCoordinates, owner: uid)
+        
+        eventSoFar = [
+            "name" : eventName,
+            "orgName" : orgName,
+            "address" : eventAddress,
+            "description" : eventDescription,
+            "ownerUID" : uid,
+            "coordinates" : ["latitude": Float(eventCoordinates.latitude),
+                             "longitude" : Float(eventCoordinates.longitude)],
+            "numLikes" : 0,
+            "numRSVPs" : 0,
+        ]
+        
+        if(event != nil) {
+            eventSoFar["numLikes"] = event.likeNum
+            eventSoFar["numRSVPs"] = event.rsvpNum
+        }
         performSegue(withIdentifier: segueId, sender: self)
     }
     
@@ -85,6 +107,7 @@ class EventInfoViewController: UIViewController, UITableViewDelegate, UITableVie
         if segue.identifier == segueId,
            let nextVC = segue.destination as? AddMediaViewController {
             nextVC.event = event
+            nextVC.eventSoFar = eventSoFar
         }
     }
 

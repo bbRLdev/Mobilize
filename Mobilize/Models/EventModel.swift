@@ -11,15 +11,15 @@ import MapKit
 typealias Question = (question: String, answer: String)
 
 class EventModel {
-    var coordinates: CLLocationCoordinate2D
-    var organization: String
-    var description: String
-    var location: String
-    var eventName: String
-    var organizerUID: String
-    var eventID: String!
-    var likeNum = 0
-    var rsvpNum = 0
+    var coordinates: CLLocationCoordinate2D?
+    var organization: String?
+    var description: String?
+    var location: String?
+    var eventName: String?
+    var organizerUID: String?
+    var eventID: String?
+    var likeNum: Int?
+    var rsvpNum: Int?
     var questions: [Question] = []
     var photoURLCollection: [String] = []
     

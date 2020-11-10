@@ -13,6 +13,7 @@ class AddMediaViewController: UIViewController, UIImagePickerControllerDelegate,
     
     
     var event: EventModel!
+    var eventSoFar: [String : Any] = [:]
     var imagePicker = UIImagePickerController()
     var images: [UIImage] = []
     let segueId = "QASegueId"
@@ -71,6 +72,7 @@ class AddMediaViewController: UIViewController, UIImagePickerControllerDelegate,
            let nextVC = segue.destination as? QAandConfirmVC{
             nextVC.images = images
             nextVC.event = event
+            nextVC.eventSoFar = eventSoFar
         }
     }
     
