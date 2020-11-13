@@ -29,6 +29,13 @@ class HomeViewController: UIViewController, GetFilters {
     var eventFilters: [String] = []
     var activismFilters: [String] = []
     var searchRadius: Float = 50.0
+    
+    var user:UserModel?
+    var login:LoginModel?
+    
+    let userNotification = Notification.Name(rawValue: "userModelNotificationKey")
+    
+    var pending = UIAlertController(title: "Signing in\n\n", message: nil, preferredStyle: .alert)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,6 +43,40 @@ class HomeViewController: UIViewController, GetFilters {
         checkLocationServices()
         loadPins()
         setMapDelegate()
+        if(user == nil) {
+            // need to try loading in user data
+            loadInUserData()
+        }
+    }
+    
+    func loadInUserData() {
+        login = LoginModel(userID: Auth.auth().currentUser!.uid)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.dismissLoading), name: self.userNotification, object: nil)
+        self.displaySignInPendingAlert()
+        login!.getInfoFromFirebase()
+        
+    }
+    
+    // called if we need to load in user data first
+    func displaySignInPendingAlert() {
+        
+        //create an activity indicator
+        let indicator = UIActivityIndicatorView(frame: pending.view.bounds)
+        indicator.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+
+        //add the activity indicator as a subview of the alert controller's view
+        pending.view.addSubview(indicator)
+        // required otherwise if there buttons in the UIAlertController you will not be able to press them
+        indicator.isUserInteractionEnabled = false
+        indicator.startAnimating()
+
+        self.present(pending, animated: true, completion: nil)
+    }
+    
+    // called after observer is notified that user data is loaded
+    @objc func dismissLoading() {
+        user = login?.getUserModel()
+        pending.dismiss(animated: true, completion: nil)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -46,7 +87,6 @@ class HomeViewController: UIViewController, GetFilters {
             nextVC.initActivismButtons = activismFilters
             nextVC.initEventButtons = eventFilters
         }
-        
     }
     
     @IBAction func sideNavButtonPressed(_ sender: Any) {

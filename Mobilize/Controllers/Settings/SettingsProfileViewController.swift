@@ -82,7 +82,7 @@ class SettingsProfileViewController: UIViewController, UITableViewDelegate, UITa
                 
                 //
                 //needs more work
-                self.profile = UserModel(uid: userID!, first: firstName, last: lastName, organization: org, bio: bio, profilePicture: "", eventsRSVPd: [], eventsCreated: [], eventsLiked: [])
+                //self.profile = UserModel(uid: userID!, first: firstName, last: lastName, organization: org, bio: bio, profilePicture: "", eventsRSVPd: [], eventsCreated: [], eventsLiked: [])
                 
                 
                 self.name.text = firstName + " " + lastName

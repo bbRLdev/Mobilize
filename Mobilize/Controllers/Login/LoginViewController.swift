@@ -10,12 +10,14 @@ import Firebase
 import CoreData
 
 class LoginViewController: UIViewController {
-
     
     let segueID0 = "loginSegue"
     
     let segueID1 = "signupSegue"
     
+    var login:LoginModel?
+    
+    var user:UserModel?
 
     @IBOutlet weak var segCtrl: UISegmentedControl!
     
@@ -30,6 +32,14 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var statusLabel: UILabel!
     
     @IBOutlet weak var loginButton: UIButton!
+    
+    let userNotification = Notification.Name(rawValue: "userModelNotificationKey")
+    
+    var pending = UIAlertController(title: "Signing in\n\n", message: nil, preferredStyle: .alert)
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,7 +68,6 @@ class LoginViewController: UIViewController {
         }
     }
     
-    
     @IBAction func loginButtonPressed(_ sender: Any) {
         statusLabel.text = nil
 
@@ -71,7 +80,6 @@ class LoginViewController: UIViewController {
           return
         }
 
-
         if(cPasswordLabel.isHidden) {
             Auth.auth().signIn(withEmail: email, password: password) {
               user, error in
@@ -79,8 +87,11 @@ class LoginViewController: UIViewController {
                 self.statusLabel.text = "Sign in failed"
               }else {
                 // store login info
-                self.storeProfile(uid: email, password: password)
-                self.performSegue(withIdentifier: self.segueID0, sender: nil)
+                self.login = LoginModel(loginID: email, password: password)
+                self.login!.storeProfile()
+                NotificationCenter.default.addObserver(self, selector: #selector(self.segueToHome), name: self.userNotification, object: nil)
+                self.login?.getInfoFromFirebase()
+                self.displaySignInPendingAlert()
               }
             }
         }else {
@@ -91,50 +102,44 @@ class LoginViewController: UIViewController {
                 statusLabel.text = "Sign up failed, please review your entries"
                 return
             }
-            
-            
+            self.login = LoginModel(loginID: email, password: password)
             self.performSegue(withIdentifier: segueID1, sender: nil)
-            // 2
-//            Auth.auth().createUser(withEmail: uid, password: password) { user, error in
-//                if error == nil {
-//                    Auth.auth().signIn(withEmail: uid, password: password)
-//                    // store login info
-//                    self.storeProfile(uid: uid, password: password)
-//                    self.performSegue(withIdentifier: self.segueID1, sender: nil)
-//
-//                }else {
-//                    self.statusLabel.text = "Sign up failed, please review your entries"
-//                }
-//            }
-
         }
     }
     
-    // helper method that saves login information into core data
-    private func storeProfile(uid:String, password:String) {
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        let context = appDelegate.persistentContainer.viewContext
-        let profileToStore = NSEntityDescription.insertNewObject(forEntityName: "ProfileEntity", into:context)
-        // set the attribute variables
-        profileToStore.setValue(uid, forKey: "uid")
-        profileToStore.setValue(password, forKey: "password")
-        // commit the changes
-        do {
-            try context.save()
-        } catch {
-            // if an error occurs
-            let nserror = error as NSError
-            NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
-            abort()
-        }
+    // call this when our observer has been notified that loading user is done
+    @objc func segueToHome() {
+        self.user = self.login?.getUserModel()
+        pending.dismiss(animated: true, completion: {
+                            self.performSegue(withIdentifier: self.segueID0, sender: nil)})
+        
+    }
+    
+    func displaySignInPendingAlert() {
+        
+        //create an activity indicator
+        let indicator = UIActivityIndicatorView(frame: pending.view.bounds)
+        indicator.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+
+        //add the activity indicator as a subview of the alert controller's view
+        pending.view.addSubview(indicator)
+        // required otherwise if there buttons in the UIAlertController you will not be able to press them
+        indicator.isUserInteractionEnabled = false
+        indicator.startAnimating()
+
+        self.present(pending, animated: true, completion: nil)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        //segue calculator
+
         if segue.identifier == segueID1,
            let cProfileVC = segue.destination as? CreateProfileViewController {
-            cProfileVC.email = usernameTextField.text!
-            cProfileVC.password = cPasswordTextField.text!
+            cProfileVC.login = login
+            }
+        if segue.identifier! == segueID0,
+           let destinationVC = segue.destination as? UINavigationController,
+           let homeVC = destinationVC.viewControllers[0] as? HomeViewController {
+            homeVC.user = self.user
             }
             
     }
