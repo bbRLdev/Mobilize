@@ -54,11 +54,11 @@ class AddMediaViewController: UIViewController, UIImagePickerControllerDelegate,
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = eventPicturesCollection.dequeueReusableCell(withReuseIdentifier: "MediaCellId", for: indexPath) as! ImageCell
-        
-        cell.backgroundColor = UIColor.black
-        // reference to my variable "image" in MyImageCell.swift
-        print(images[indexPath.row])
+                // reference to my variable "image" in MyImageCell.swift
         cell.image.image = images[indexPath.row]
+        cell.image.layer.cornerRadius = 8.0
+        cell.image.clipsToBounds = true
+        
         return cell
         
     }
@@ -77,6 +77,41 @@ class AddMediaViewController: UIViewController, UIImagePickerControllerDelegate,
     }
     
 
+    
+
+}
+
+extension AddMediaViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+
+        // Big thanks to stackoverflow for giving me this code
+        // https://stackoverflow.com/questions/35281405/fit-given-number-of-cells-in-uicollectionview-per-row
+        
+        
+        let noOfCellsInRow = 2
+
+        let flowLayout = collectionViewLayout as! UICollectionViewFlowLayout
+
+        let totalSpace = flowLayout.sectionInset.left
+            + flowLayout.sectionInset.right
+            + (flowLayout.minimumInteritemSpacing * CGFloat(noOfCellsInRow - 1))
+
+        let size = Int((eventPicturesCollection.bounds.width - totalSpace) / CGFloat(noOfCellsInRow))
+
+        return CGSize(width: size, height: size)
+    }
+    
+    // Asks the delegate for the spacing between successive rows or columns of a section.
+    func collectionView(_ collectionView: UICollectionView, layout: UICollectionViewLayout, minimumLineSpacingForSectionAt: Int) -> CGFloat {
+        let spacing: CGFloat = 8.0
+        return spacing
+    }
+    
+    // Asks the delegate for the spacing between successive items in the rows or columns of a section.
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        let spacing: CGFloat = 8.0
+        return spacing
+    }
 }
 
 class ImageCell: UICollectionViewCell {
