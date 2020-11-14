@@ -17,6 +17,7 @@ class AddMediaViewController: UIViewController, UIImagePickerControllerDelegate,
     var imagePicker = UIImagePickerController()
     var images: [UIImage] = []
     let segueId = "QASegueId"
+    var cellsAdded: Int = 0
 
     @IBOutlet weak var eventPicturesCollection: UICollectionView!
     
@@ -25,6 +26,8 @@ class AddMediaViewController: UIViewController, UIImagePickerControllerDelegate,
         imagePicker.delegate = self
         eventPicturesCollection.dataSource = self
         eventPicturesCollection.delegate = self
+        
+        cellsAdded = 0
 
         // Do any additional setup after loading the view.
     }
@@ -40,12 +43,13 @@ class AddMediaViewController: UIViewController, UIImagePickerControllerDelegate,
         if let image = info[.editedImage] as? UIImage {
             self.images.append(image)
         }
+        cellsAdded = 0
         eventPicturesCollection.reloadData()
         dismiss(animated: true, completion: nil)
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return images.count
+        return 8
     }
     
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
@@ -55,12 +59,41 @@ class AddMediaViewController: UIViewController, UIImagePickerControllerDelegate,
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = eventPicturesCollection.dequeueReusableCell(withReuseIdentifier: "MediaCellId", for: indexPath) as! ImageCell
                 // reference to my variable "image" in MyImageCell.swift
-        cell.image.image = images[indexPath.row]
+        if(cellsAdded < images.count) {
+            cell.image.image = images[indexPath.row]
+        }
+        let insets = UIEdgeInsets(top: -16, left: -16, bottom: -16, right: -16)
+        cell.image.image = cell.image.image?.withAlignmentRectInsets(insets)
         cell.image.layer.cornerRadius = 8.0
+        cell.image.layer.borderWidth = 2.0
         cell.image.clipsToBounds = true
+        cell.image.layer.borderColor = UIColor.lightGray.cgColor
+        
+
+        cell.editButton.layer.zPosition = 99
+//        cell.editButton.trailingAnchor.constraint(equalTo: cell.trailingAnchor, constant: 4).isActive = true
+//        cell.editButton.bottomAnchor.constraint(equalTo: cell.bottomAnchor, constant: 4).isActive = true
+
+        
+        let largeConfig = UIImage.SymbolConfiguration(pointSize: 32, weight: .regular, scale: .large)
+        let smallConfig = UIImage.SymbolConfiguration(pointSize: 24, weight: .medium, scale: .small)
+
+        let plusCircleImage = UIImage(systemName: "circle.fill", withConfiguration: largeConfig)?
+            .withTintColor(.red, renderingMode: .alwaysOriginal)
+        let plusImage = UIImage(systemName: "plus", withConfiguration: smallConfig)?
+            .withTintColor(.white, renderingMode: .alwaysOriginal)
+        let deleteImage = UIImage(systemName: "xmark", withConfiguration: smallConfig)?
+            .withTintColor(.white, renderingMode: .alwaysOriginal)
+        cell.editButton.setBackgroundImage(plusCircleImage, for: .normal)
+        cell.editButton.setImage(plusImage, for: .normal)
+        
+        if(cellsAdded < images.count) {
+            cell.editButton.setImage(deleteImage, for: .normal)
+        }
+        
+        cellsAdded += 1
         
         return cell
-        
     }
 
     @IBAction func onNextButtonPressed(_ sender: Any) {
@@ -77,15 +110,13 @@ class AddMediaViewController: UIViewController, UIImagePickerControllerDelegate,
     }
     
 
-    
-
 }
 
 extension AddMediaViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
 
         // Big thanks to stackoverflow for giving me this code
-        // https://stackoverflow.com/questions/35281405/fit-given-number-of-cells-in-uicollectionview-per-row
+        //https://stackoverflow.com/questions/35281405/fit-given-number-of-cells-in-uicollectionview-per-row
         
         
         let noOfCellsInRow = 2
@@ -116,4 +147,5 @@ extension AddMediaViewController: UICollectionViewDelegateFlowLayout {
 
 class ImageCell: UICollectionViewCell {
     @IBOutlet weak var image: UIImageView!
+    @IBOutlet weak var editButton: UIButton!
 }
