@@ -18,8 +18,8 @@ class AddMediaViewController: UIViewController, UIImagePickerControllerDelegate,
     var images: [UIImage] = []
     var cells: [ImageCell] = []
     let segueId = "QASegueId"
-    var cellsAdded: Int = 0
 
+    
     @IBOutlet weak var eventPicturesCollection: UICollectionView!
     
     override func viewDidLoad() {
@@ -28,30 +28,33 @@ class AddMediaViewController: UIViewController, UIImagePickerControllerDelegate,
         eventPicturesCollection.dataSource = self
         eventPicturesCollection.delegate = self
         
-        cellsAdded = 0
 
         // Do any additional setup after loading the view.
     }
     
     @IBAction func onAddPicturePressed(_ sender: UIButton) {
         if !cells[sender.tag].hasImage {
-            print("HEEEEEE")
             imagePicker.sourceType = .photoLibrary
             imagePicker.allowsEditing = true
             present(imagePicker, animated: true, completion: nil)
         } else {
             //some edit function
+            let controller = UIAlertController(title: "Delete Photo?", message: "", preferredStyle: .actionSheet)
+            controller.addAction(UIAlertAction(title:"Delete", style: .destructive, handler: {
+                _ in
+                self.images.remove(at: sender.tag)
+                self.cells = []
+                self.eventPicturesCollection.reloadData()
+            }))
+            controller.addAction(UIAlertAction(title:"Cancel", style: .cancel))
+            present(controller, animated: true)
         }
-    }
-    @IBAction func onEditPicturePressed(_ sender: Any) {
-        
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let image = info[.editedImage] as? UIImage {
             self.images.append(image)
         }
-        cellsAdded = 0
         cells = []
         eventPicturesCollection.reloadData()
         dismiss(animated: true, completion: nil)
@@ -67,8 +70,10 @@ class AddMediaViewController: UIViewController, UIImagePickerControllerDelegate,
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = eventPicturesCollection.dequeueReusableCell(withReuseIdentifier: "MediaCellId", for: indexPath) as! ImageCell
+        cell.image.image = nil
+        cell.hasImage = false
                 // reference to my variable "image" in MyImageCell.swift
-        if(cellsAdded < images.count) {
+        if(indexPath.row < images.count) {
             cell.image.image = images[indexPath.row]
             cell.hasImage = true
         }
@@ -96,14 +101,12 @@ class AddMediaViewController: UIViewController, UIImagePickerControllerDelegate,
             .withTintColor(.white, renderingMode: .alwaysOriginal)
         cell.editButton.setBackgroundImage(plusCircleImage, for: .normal)
         cell.editButton.setImage(plusImage, for: .normal)
-        
-        if(cellsAdded < images.count) {
+        if(indexPath.row < images.count) {
             cell.editButton.setImage(deleteImage, for: .normal)
         }
         cell.editButton.addTarget(self, action: #selector(onAddPicturePressed(_:)), for: .touchUpInside)
-        cell.editButton.tag = cellsAdded
+        cell.editButton.tag = indexPath.row
         cells.append(cell)
-        cellsAdded += 1
         return cell
     }
 
