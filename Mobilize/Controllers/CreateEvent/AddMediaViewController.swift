@@ -16,6 +16,7 @@ class AddMediaViewController: UIViewController, UIImagePickerControllerDelegate,
     var eventSoFar: [String : Any] = [:]
     var imagePicker = UIImagePickerController()
     var images: [UIImage] = []
+    var cells: [ImageCell] = []
     let segueId = "QASegueId"
     var cellsAdded: Int = 0
 
@@ -32,11 +33,18 @@ class AddMediaViewController: UIViewController, UIImagePickerControllerDelegate,
         // Do any additional setup after loading the view.
     }
     
-    @IBAction func onAddPicturePressed(_ sender: Any) {
-        imagePicker.sourceType = .photoLibrary
-        imagePicker.allowsEditing = true
-        present(imagePicker, animated: true, completion: nil)
-
+    @IBAction func onAddPicturePressed(_ sender: UIButton) {
+        if !cells[sender.tag].hasImage {
+            print("HEEEEEE")
+            imagePicker.sourceType = .photoLibrary
+            imagePicker.allowsEditing = true
+            present(imagePicker, animated: true, completion: nil)
+        } else {
+            //some edit function
+        }
+    }
+    @IBAction func onEditPicturePressed(_ sender: Any) {
+        
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
@@ -44,6 +52,7 @@ class AddMediaViewController: UIViewController, UIImagePickerControllerDelegate,
             self.images.append(image)
         }
         cellsAdded = 0
+        cells = []
         eventPicturesCollection.reloadData()
         dismiss(animated: true, completion: nil)
     }
@@ -61,6 +70,7 @@ class AddMediaViewController: UIViewController, UIImagePickerControllerDelegate,
                 // reference to my variable "image" in MyImageCell.swift
         if(cellsAdded < images.count) {
             cell.image.image = images[indexPath.row]
+            cell.hasImage = true
         }
         let insets = UIEdgeInsets(top: -16, left: -16, bottom: -16, right: -16)
         cell.image.image = cell.image.image?.withAlignmentRectInsets(insets)
@@ -90,9 +100,10 @@ class AddMediaViewController: UIViewController, UIImagePickerControllerDelegate,
         if(cellsAdded < images.count) {
             cell.editButton.setImage(deleteImage, for: .normal)
         }
-        
+        cell.editButton.addTarget(self, action: #selector(onAddPicturePressed(_:)), for: .touchUpInside)
+        cell.editButton.tag = cellsAdded
+        cells.append(cell)
         cellsAdded += 1
-        
         return cell
     }
 
@@ -148,4 +159,5 @@ extension AddMediaViewController: UICollectionViewDelegateFlowLayout {
 class ImageCell: UICollectionViewCell {
     @IBOutlet weak var image: UIImageView!
     @IBOutlet weak var editButton: UIButton!
+    var hasImage: Bool = false
 }
