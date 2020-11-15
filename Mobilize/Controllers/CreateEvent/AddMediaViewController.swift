@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import FirebaseStorage
+import FirebaseAuth
 
 class AddMediaViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
@@ -15,6 +17,9 @@ class AddMediaViewController: UIViewController, UIImagePickerControllerDelegate,
     var images: [UIImage] = []
     var cells: [ImageCell] = []
     let segueId = "QASegueId"
+    
+    let storage = Storage.storage()
+    let auth = Auth.auth()
 
     
     @IBOutlet weak var eventPicturesCollection: UICollectionView!
@@ -79,12 +84,30 @@ class AddMediaViewController: UIViewController, UIImagePickerControllerDelegate,
         }
     }
     
+    // Download the images from our existing model.
     func retrieveImages() -> [UIImage] {
-        return []
+        var returnVal: [UIImage] = []
+        if let uid = event.organizerUID {
+            if uid == auth.currentUser?.uid {
+                for url in event.photoURLCollection {
+                    let downloadURL = URL(string: url)
+                    let data = try? Data(contentsOf: downloadURL!)
+                    if let imageData = data {
+                        let image = UIImage(data: imageData)
+                        returnVal.append(image!)
+                    }
+                }
+
+            }
+        }
+        return returnVal
     }
     
 
 }
+
+// UICollectionView Protocols.
+
 extension AddMediaViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 8
