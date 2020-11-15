@@ -412,7 +412,6 @@ Q29uZmlybWF0aW9uIBBvZiBDb29wZXJhdGlvbg
                                 <rect key="frame" x="171" y="716" width="72" height="32"/>
                                 <state key="normal" title="Add"/>
                                 <connections>
-                                    <action selector="addButtonPressed:" destination="LHM-Mk-FVt" eventType="touchUpInside" id="U04-ts-6Z1"/>
                                     <segue destination="zgf-NV-Olj" kind="presentation" identifier="addSegue" id="7h8-xW-62V"/>
                                 </connections>
                             </button>

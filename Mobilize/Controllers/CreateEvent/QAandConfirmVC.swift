@@ -71,10 +71,6 @@ class QAandConfirmVC: UIViewController {
         //qaTableView.reloadData()
     }
     
-    @IBAction func addButtonPressed(_ sender: Any) {
-
-    }
-    
     @IBAction func editButtonPressed(_ sender: Any) {
         
         if(qaTableView.isEditing){
