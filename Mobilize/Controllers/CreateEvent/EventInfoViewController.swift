@@ -48,7 +48,12 @@ class EventInfoViewController: UIViewController, UITableViewDelegate, UITableVie
         searchCompleter.delegate = self
         searchResultsTableView.delegate = self
         searchResultsTableView.dataSource = self
-        populateFields()
+        
+        // If event != nil, we know we are in this flow while editing. This
+        // fact is important in the following Create Event VC's
+        if event != nil {
+            populateFields()
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -218,12 +223,13 @@ class EventInfoViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     func populateFields() {
-        // check if the event has a UID, if so, can populate fields for edit
-        if(event != nil) {
-            eventNameField.text = event.eventName
-            organizationNameField.text = event.organization
-            eventAddressField.text = event.location
-            eventDescriptionField.text = event.description
+        if let uid = event.organizerUID {
+            if uid == auth.currentUser?.uid {
+                eventNameField.text = event.eventName
+                organizationNameField.text = event.organization
+                eventAddressField.text = event.location
+                eventDescriptionField.text = event.description
+            }
         }
     }
 
