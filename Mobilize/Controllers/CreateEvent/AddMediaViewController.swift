@@ -7,10 +7,7 @@
 
 import UIKit
 
-class AddMediaViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate,
-                              UICollectionViewDataSource, UICollectionViewDelegate {
-
-    
+class AddMediaViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     var event: EventModel!
     var eventSoFar: [String : Any] = [:]
@@ -27,6 +24,11 @@ class AddMediaViewController: UIViewController, UIImagePickerControllerDelegate,
         imagePicker.delegate = self
         eventPicturesCollection.dataSource = self
         eventPicturesCollection.delegate = self
+        if event != nil {
+            // we must be editing an already created event, so
+            // load the images
+            images = retrieveImages()
+        }
         
 
         // Do any additional setup after loading the view.
@@ -60,14 +62,35 @@ class AddMediaViewController: UIViewController, UIImagePickerControllerDelegate,
         dismiss(animated: true, completion: nil)
     }
     
+
+    
+
+
+    @IBAction func onNextButtonPressed(_ sender: Any) {
+        performSegue(withIdentifier: segueId, sender: self)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == segueId,
+           let nextVC = segue.destination as? QAandConfirmVC{
+            nextVC.images = images
+            nextVC.event = event
+            nextVC.eventSoFar = eventSoFar
+        }
+    }
+    
+    func retrieveImages() -> [UIImage] {
+        return []
+    }
+    
+
+}
+extension AddMediaViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 8
     }
-    
-    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
-        return 1
-    }
-    
+}
+extension AddMediaViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = eventPicturesCollection.dequeueReusableCell(withReuseIdentifier: "MediaCellId", for: indexPath) as! ImageCell
         cell.image.image = nil
@@ -109,22 +132,8 @@ class AddMediaViewController: UIViewController, UIImagePickerControllerDelegate,
         cells.append(cell)
         return cell
     }
-
-    @IBAction func onNextButtonPressed(_ sender: Any) {
-        performSegue(withIdentifier: segueId, sender: self)
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == segueId,
-           let nextVC = segue.destination as? QAandConfirmVC{
-            nextVC.images = images
-            nextVC.event = event
-            nextVC.eventSoFar = eventSoFar
-        }
-    }
-    
-
 }
+
 
 extension AddMediaViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
