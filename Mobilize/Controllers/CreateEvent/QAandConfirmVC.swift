@@ -11,8 +11,9 @@ import FirebaseFirestore
 import FirebaseStorage
 
 class QAandConfirmVC: UIViewController {
-    var q: Question = (question: "Is america dumb af", answer: "Yes")
+    //var q: Question = (question: "Is america dumb af", answer: "Yes")
     let db = Firestore.firestore()
+    let cellTag = "tag"
     
     var images: [UIImage] = []
     var event: EventModel!
@@ -23,6 +24,7 @@ class QAandConfirmVC: UIViewController {
     
     @IBOutlet weak var createButton: UIButton!
     
+    @IBOutlet weak var qaTableView: UITableView!
     
     
     var imgLoadingFlag = false {
@@ -30,7 +32,7 @@ class QAandConfirmVC: UIViewController {
             if newValue == false {
                 print(imgURLs)
                 eventSoFar["imgURLs"] = imgURLs
-                questions.append(q)
+                //questions.append(q)
                 collectionLoadingFlag = true
                 uploadCollection()
             }
@@ -59,6 +61,23 @@ class QAandConfirmVC: UIViewController {
     }
     
     
+    @IBAction func addButtonPressed(_ sender: Any) {
+        let alert = UIAlertController(title: "Some Title", message: "Enter a text", preferredStyle: .alert)
+
+        //2. Add the text field. You can configure it however you need.
+        alert.addTextField { (textField) in
+            textField.text = "Some default text"
+        }
+
+        // 3. Grab the value from the text field, and print it when the user clicks OK.
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { [weak alert] (_) in
+            let textField = alert?.textFields![0] // Force unwrapping because we know it exists.
+            print("Text field: \(textField!.text)")
+        }))
+
+        // 4. Present the alert.
+        self.present(alert, animated: true, completion: nil)
+    }
     
     
     @IBAction func createEvent(_ sender: Any) {
@@ -212,4 +231,26 @@ class QAandConfirmVC: UIViewController {
     }
     
 
+}
+extension QAandConfirmVC: UITableViewDelegate, UITableViewDataSource{
+    
+    
+    
+    
+    func loadTable(){
+        
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return questions.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellTag, for: indexPath as IndexPath)
+        let row = indexPath.row
+        cell.textLabel?.numberOfLines = 0
+        return cell
+    }
+    
+    
 }
