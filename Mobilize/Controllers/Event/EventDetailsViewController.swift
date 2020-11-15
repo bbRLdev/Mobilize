@@ -43,7 +43,7 @@ class EventDetailsViewController: UIViewController {
                 let dataDescription = document.data()
                 let addr = dataDescription!["address"] as! String
                 self.addressLabel.text = addr
-                let uid = dataDescription!["owner"] as! String
+                let uid = dataDescription!["ownerUID"] as! String
                 self.ownerUID = uid
                 print(self.ownerUID)
             }

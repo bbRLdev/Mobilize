@@ -79,33 +79,19 @@ class HomeViewController: UIViewController, GetFilters {
         let coordDict = dataDescription["coordinates"] as? NSDictionary
         let eventName = dataDescription["name"] as? String
         let ownerID = dataDescription["owner"] as? String
+        let ownerOrg = dataDescription["orgName"] as? String
+        let latitude:Double = coordDict?.value(forKey: "latitude") as! Double
+        let longitude:Double = coordDict?.value(forKey: "longitude") as! Double
+        let coordinates = CLLocationCoordinate2DMake(latitude, longitude)
         
+        let annotation = AnnotationModel(eid: diff.document.documentID)
+        annotation.title = eventName
+        annotation.subtitle = ownerOrg
+        //print(ownerOrg!)
+        annotation.coordinate = coordinates
+        
+        self.mapView.addAnnotation(annotation)
 
-        
-        if(coordDict != nil && ownerID != nil){
-            var ownerOrg:String?
-            
-            let docRef = self.db.collection("users").document(ownerID!)
-            docRef.getDocument { (document, error) in
-                if let document = document, document.exists {
-                    let userDescription = document.data()
-                    ownerOrg = userDescription?["organization"] as? String
-                    let latitude:Double = coordDict?.value(forKey: "latitude") as! Double
-                    let longitude:Double = coordDict?.value(forKey: "longitude") as! Double
-                    let coordinates = CLLocationCoordinate2DMake(latitude, longitude)
-                    
-                    let annotation = AnnotationModel(eid: diff.document.documentID)
-                    annotation.title = eventName
-                    annotation.subtitle = ownerOrg
-                    //print(ownerOrg!)
-                    annotation.coordinate = coordinates
-                    
-                    self.mapView.addAnnotation(annotation)
-                } else {
-                    print("Document does not exist")
-                }
-            }
-        }
     }
     private func removePin(diff :DocumentChange){
         let eventID = diff.document.documentID
