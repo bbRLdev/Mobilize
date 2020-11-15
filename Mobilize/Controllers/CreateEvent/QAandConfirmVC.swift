@@ -10,26 +10,35 @@ import FirebaseAuth
 import FirebaseFirestore
 import FirebaseStorage
 
+
 class QAandConfirmVC: UIViewController {
-    var q: Question = (question: "Is america dumb af", answer: "Yes")
+    //var q: Question = (question: "Is america dumb af", answer: "Yes")
     let db = Firestore.firestore()
+    let cellTag = "tag"
+    let segueIdentifier0 = "editSegue"
+    let segueIdentifier1 = "addSegue"
     
     var images: [UIImage] = []
     var event: EventModel!
+    var eventSoFar: [String : Any] = [:]
     var imgURLs: [String] = []
+    var questions: [Question] = []
     
     
     @IBOutlet weak var createButton: UIButton!
     
+    
+    @IBOutlet weak var qaTableView: UITableView!
     
     
     var imgLoadingFlag = false {
         willSet {
             if newValue == false {
                 print(imgURLs)
-                event.photoURLCollection = imgURLs
+                eventSoFar["imgURLs"] = imgURLs
+                //questions.append(q)
                 collectionLoadingFlag = true
-                uploadCollection(event: event)
+                uploadCollection()
             }
         }
         
@@ -51,11 +60,31 @@ class QAandConfirmVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("Did load \(images)")
+        //print("Did load \(images)")
+        qaTableView.delegate = self
+        qaTableView.dataSource = self
+        //qaTableView.isEditing = false
+        
         
     }
+    override func viewWillAppear(_ animated: Bool) {
+        //qaTableView.reloadData()
+    }
     
-    
+    @IBAction func editButtonPressed(_ sender: Any) {
+        
+        if(qaTableView.isEditing){
+            navigationItem.rightBarButtonItem?.style = .plain
+            navigationItem.rightBarButtonItem?.title = "Edit"
+        }
+        else{
+            navigationItem.rightBarButtonItem?.style = .done
+            navigationItem.rightBarButtonItem?.title = "Done"
+        }
+        qaTableView.isEditing = !qaTableView.isEditing
+        
+
+    }
     
     
     @IBAction func createEvent(_ sender: Any) {
@@ -63,21 +92,20 @@ class QAandConfirmVC: UIViewController {
         createButton.isUserInteractionEnabled = false
         
         if let uid = getUID() {
-            event.organizerUID = uid
-            event.questions.append(q)
-            let docRef = db.collection("events").addDocument(data: [
-                "exists" : true
-            ]) { err in
-                if let err = err {
-                    print("Error adding document: \(err)")
+            let curUID = eventSoFar["ownerUID"] as! String
+            if curUID == uid {
+                var eid: String!
+                if event == nil {
+                    eid = createEventDocument()
+                    eventSoFar["eventID"] = eid
+                } else {
+                    eventSoFar["eventID"] = event.eventID
                 }
+                imgLoadingFlag = true
+                uploadImages(eventId: eid)
+                saveToProfile(uid: uid, eid: eid)
             }
-            let eid = docRef.documentID
-            event.eventID = eid
-            imgLoadingFlag = true
-            
-            saveToProfile(uid: uid, eid: eid)
-            uploadImages(eventId: event.eventID)
+
             
 //            else{
 //                imgLoadingFlag = false
@@ -95,9 +123,21 @@ class QAandConfirmVC: UIViewController {
         return nil
     }
     
+    func createEventDocument() -> String? {
+        var error: Bool = false
+        let docRef = db.collection("events").addDocument(data: [
+            "exists" : true
+        ]) { err in
+            if let err = err {
+                print("Error adding document: \(err)")
+                error = true
+            }
+        }
+        return error ? nil : docRef.documentID
+    }
+    
     func saveToProfile(uid: String, eid: String){
         let docRef: DocumentReference = db.collection("users").document(uid)
-        
         docRef.updateData(
             [
                 "createdEvents": FieldValue.arrayUnion([eid])
@@ -128,11 +168,9 @@ class QAandConfirmVC: UIViewController {
                 }
             }
         }
-        
         count += 1
         for image in images {
             let imageId = UUID().uuidString
-            
             if let imageData = image.jpegData(compressionQuality: 4.0) {
                 let eventRef = storageRef.child("events").child(eventId).child("\(imageId)")
                 eventRef.putData(imageData, metadata: metadata, completion: {
@@ -145,6 +183,7 @@ class QAandConfirmVC: UIViewController {
                     eventRef.downloadURL(completion: { (url, error) in
                         if let err = error {
                             print(err.localizedDescription)
+                            return
                         }
                         //print("no errors 2")
 
@@ -159,72 +198,179 @@ class QAandConfirmVC: UIViewController {
         }
     }
     
-    func uploadCollection(event: EventModel) {
-        let docRef: DocumentReference = db.collection("events").document(event.eventID)
-        var count: Int = 0 {
-            willSet {
-                if newValue >= event.questions.count {
-                    collectionLoadingFlag = false
-                }
-            }
+    func uploadCollection() {
+        let docRef: DocumentReference = db.collection("events").document(eventSoFar["eventID"] as! String)
+        print("Got here")
+//        var count: Int = 0 {
+//            willSet {
+//                if newValue >= questions.count {
+//                    collectionLoadingFlag = false
+//                }
+//            }
+//        }
+        
+        print(eventSoFar)
+        var questionsList = [[String:String]]()
+        
+        for question: Question in questions{
+            let temp: [String:String] = ["question": question.question, "answer": question.answer]
+            questionsList.append(temp)
         }
-        docRef.setData(
-            [
-                "coordinates": ["latitude": event.coordinates.latitude,
-                                "longitude": event.coordinates.longitude],
-                "name" : event.eventName,
-                "description" : event.description,
-                "address" : event.location,
-                "imageURL" : event.photoURLCollection,
-                "numLikes" : event.likeNum,
-                "numRSVP" : event.rsvpNum,
-                "owner" : event.organizerUID,
-                
-            ], merge: false, completion: {
+        eventSoFar["questions"] = questionsList
+
+        docRef.setData(eventSoFar,
+            merge: false, completion: {
                 err in
                 if let err = err {
                     print("Error adding document: \(err)")
+                    return
                 }
-                let qaRef = docRef.collection("QA")
-                for question: Question in event.questions {
-                    qaRef.addDocument(data:
-                        [
-                            "question" : question.question,
-                            "answer" : question.answer
-                        ], completion: {
-                            err in
-                            if let err = err {
-                                print("Error adding question: \(err)")
-                            }
-                        }
-                    )
-                    count += 1
+                else{
+                    self.collectionLoadingFlag = false
                 }
+                
+//                let qaRef = docRef.collection("QA")
+//                // on Success, upload questions as well
+//                for question: Question in self.questions {
+//                    qaRef.addDocument(data:
+//                        [
+//                            "question" : question.question,
+//                            "answer" : question.answer
+//                        ], completion: {
+//                            err in
+//                            if let err = err {
+//                                print("Error adding question: \(err)")
+//                                return
+//                            }
+//                            count += 1
+//                        }
+//                    )
+//                }
             }
         )
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier == segueIdentifier0,
+            let destination = segue.destination as? addQA,
+            let index = qaTableView.indexPathForSelectedRow?.row
+            {
+            destination.delegate = self
 
- 
+            destination.question = questions[index].question
+            destination.answer = questions[index].answer
+            destination.index = index
+            
+        }
+        if segue.identifier == segueIdentifier1,
+           let destination = segue.destination as? addQA{
+            destination.delegate = self
+        }
         
         
     }
-    
-//    func getImageURLs(eventId: String, uploadCount: Int) -> [String] {
-//        let storageRef = Storage.storage().reference(forURL: "gs://mobilize-77a05.appspot.com")
-//        var ret: [String] = []
-//        for i in 0...uploadCount - 1 {
-//            let eventRef = storageRef.child("events").child(eventId).child(String(i))
-//            eventRef.downloadURL(completion: {
-//                (url, error) in
-//                if error != nil {
-//                    print("Error getting image")
-//                }
-//                if let metaImageURL = url?.absoluteString {
-//                    print(metaImageURL)
-//                    ret.append(metaImageURL)
-//                }
-//            })
-//        }
-//        return ret
-//    }
 
+}
+extension QAandConfirmVC: UITableViewDelegate, UITableViewDataSource{
+    
+    
+    func loadTable(){
+        qaTableView.reloadData()
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return questions.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = qaTableView.dequeueReusableCell(withIdentifier: cellTag, for: indexPath as IndexPath)
+        let row = indexPath.row
+        //cell.textLabel?.numberOfLines = 0
+        cell.textLabel?.text = questions[row].question
+        cell.detailTextLabel?.text = questions[row].answer
+        //cell.textLabel?.text = questions[row].
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        qaTableView.deselectRow(at: indexPath, animated: true)
+        
+
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        
+        if editingStyle == .delete {
+            questions.remove(at: indexPath.row)
+            qaTableView.deleteRows(at: [indexPath], with: .fade)
+        }
+
+    }
+    
+    func tableView(_ tableView: UITableView, moveRowAt indexPath: IndexPath, to: IndexPath) {
+        let itemToMove = questions[indexPath.row]
+        questions.remove(at: indexPath.row)
+        questions.insert(itemToMove, at: to.row)
+
+    }
+    
+
+}
+
+class addQA: UIViewController, UITextViewDelegate {
+    @IBOutlet weak var qTextView: UITextView!
+    @IBOutlet weak var aTextView: UITextView!
+    
+    var delegate: UIViewController!
+    var index = -1
+    
+    var question = "Question"
+    var answer = "Answer"
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        qTextView.delegate = self
+        aTextView.delegate = self
+        qTextView.layer.borderColor = UIColor.lightGray.cgColor
+        qTextView.layer.borderWidth = 1
+        aTextView.layer.borderColor = UIColor.lightGray.cgColor
+        aTextView.layer.borderWidth = 1
+        qTextView.isScrollEnabled = false
+        aTextView.isScrollEnabled = false
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        qTextView.text = question
+        aTextView.text = answer
+    }
+    
+    
+    
+    
+    @IBAction func saveButtonPressed(_ sender: Any) {
+        let otherVC = delegate as! QAandConfirmVC
+        
+        if(qTextView.text != "" && aTextView.text != ""){
+            if(index == -1){
+                otherVC.questions.append(Question(question: qTextView.text, answer: aTextView.text))
+            }
+            else{
+                otherVC.questions[index].question = qTextView.text
+                otherVC.questions[index].answer = aTextView.text
+            }
+        }
+
+
+        otherVC.qaTableView.reloadData()
+        //print(otherVC.questions[0].question)
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
 }

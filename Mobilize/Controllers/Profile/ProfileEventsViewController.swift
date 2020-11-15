@@ -54,6 +54,45 @@ class ProfileEventsViewController: UIViewController, UITableViewDelegate, UITabl
         }
     }
     
+    @IBAction func editButtonPressed(_ sender: Any) {
+        
+        if(eventTable.isEditing){
+            navigationItem.rightBarButtonItem?.style = .plain
+            navigationItem.rightBarButtonItem?.title = "Edit"
+            
+            let userID = uid
+            let docRef = self.db.collection("users").document(userID!)
+            var listName = ""
+            var list: [String] = []
+            if(RSVPView){
+                listName = "RSVPEvents"
+                list = RSVPEvents
+                
+            }
+            else{
+                
+                listName = "createdEvents"
+                list = createdEvents
+            }
+
+            docRef.updateData([
+                listName: list
+            ], completion: {
+                err in
+                if let err = err {
+                    print("Error updating document: \(err)")
+                }
+            })
+
+            
+        }
+        else{
+            navigationItem.rightBarButtonItem?.style = .done
+            navigationItem.rightBarButtonItem?.title = "Done"
+        }
+        eventTable.isEditing = !eventTable.isEditing
+        
+    }
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -68,7 +107,7 @@ class ProfileEventsViewController: UIViewController, UITableViewDelegate, UITabl
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellTag, for: indexPath as IndexPath)
         let row = indexPath.row
-        cell.textLabel?.numberOfLines = 0
+        //cell.textLabel?.numberOfLines = 0
         
         var eid:String?
         if(RSVPView) {
@@ -116,7 +155,7 @@ class ProfileEventsViewController: UIViewController, UITableViewDelegate, UITabl
 
     }
     
-    func deleteHandler(indexPath: IndexPath){
+    private func deleteHandler(indexPath: IndexPath){
         let row = indexPath.row
         var eid:String?
         if(RSVPView) {
@@ -154,6 +193,21 @@ class ProfileEventsViewController: UIViewController, UITableViewDelegate, UITabl
             present(controller, animated: true, completion: nil)
             
         }
+    }
+    
+    func tableView(_ tableView: UITableView, moveRowAt indexPath: IndexPath, to: IndexPath) {
+        
+        if(RSVPView){
+            let itemToMove = RSVPEvents[indexPath.row]
+            RSVPEvents.remove(at: indexPath.row)
+            RSVPEvents.insert(itemToMove, at: to.row)
+        }
+        else{
+            let itemToMove = createdEvents[indexPath.row]
+            createdEvents.remove(at: indexPath.row)
+            createdEvents.insert(itemToMove, at: to.row)
+        }
+
     }
  
     @IBAction func RSVP(_ sender: Any) {
