@@ -12,7 +12,7 @@ import FirebaseStorage
 
 
 class QAandConfirmVC: UIViewController {
-    var q: Question = (question: "Is america dumb af", answer: "Yes")
+    //var q: Question = (question: "Is america dumb af", answer: "Yes")
     let db = Firestore.firestore()
     let cellTag = "tag"
     let segueIdentifier0 = "editSegue"

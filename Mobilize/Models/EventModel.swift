@@ -23,6 +23,8 @@ class EventModel {
     var questions: [Question] = []
     var photoURLCollection: [String] = []
     
+    init(){}
+    
     init(name: String, desc: String, loc: String, org: String, coord: CLLocationCoordinate2D, owner: String) {
         eventName = name
         description = desc
