@@ -74,7 +74,7 @@ class ProfileEventsViewController: UIViewController, UITableViewDelegate, UITabl
                 listName = "createdEvents"
                 list = createdEvents
             }
-            print("updating doc")
+
             docRef.updateData([
                 listName: list
             ], completion: {
@@ -107,7 +107,7 @@ class ProfileEventsViewController: UIViewController, UITableViewDelegate, UITabl
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellTag, for: indexPath as IndexPath)
         let row = indexPath.row
-        cell.textLabel?.numberOfLines = 0
+        //cell.textLabel?.numberOfLines = 0
         
         var eid:String?
         if(RSVPView) {
