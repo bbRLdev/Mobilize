@@ -18,6 +18,9 @@
 		1AF47AD6253666DA0092CE1B /* Mobilize.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1AF47AD4253666DA0092CE1B /* Mobilize.xcdatamodeld */; };
 		1AF47AD8253666DA0092CE1B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1AF47AD7253666DA0092CE1B /* Assets.xcassets */; };
 		934E6AFC253F8EA000DA9392 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 934E6AFB253F8EA000DA9392 /* LoginViewController.swift */; };
+		938CC6BC255DDCE200244304 /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 938CC6BB255DDCE200244304 /* LoginModel.swift */; };
+		938CC6C0255DDFC700244304 /* UploadPictureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 938CC6BF255DDFC700244304 /* UploadPictureViewController.swift */; };
+		938CC6C4255DE10400244304 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 938CC6C3255DE10400244304 /* WelcomeViewController.swift */; };
 		93CC665A254B36EE0075A9EE /* NotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93CC6659254B36ED0075A9EE /* NotificationsViewController.swift */; };
 		93CC665D254B38A60075A9EE /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 93CC665C254B38A60075A9EE /* Settings.bundle */; };
 		93CC6663254F9BC70075A9EE /* EventModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93CC6662254F9BC70075A9EE /* EventModel.swift */; };
@@ -62,6 +65,9 @@
 		2CC66262A03F9E3F9A513159 /* Pods-Mobilize.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mobilize.debug.xcconfig"; path = "Target Support Files/Pods-Mobilize/Pods-Mobilize.debug.xcconfig"; sourceTree = "<group>"; };
 		2F96F08B931D41834245C92F /* Pods-Mobilize.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mobilize.release.xcconfig"; path = "Target Support Files/Pods-Mobilize/Pods-Mobilize.release.xcconfig"; sourceTree = "<group>"; };
 		934E6AFB253F8EA000DA9392 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		938CC6BB255DDCE200244304 /* LoginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
+		938CC6BF255DDFC700244304 /* UploadPictureViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadPictureViewController.swift; sourceTree = "<group>"; };
+		938CC6C3255DE10400244304 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		93CC6659254B36ED0075A9EE /* NotificationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsViewController.swift; sourceTree = "<group>"; };
 		93CC665C254B38A60075A9EE /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		93CC6662254F9BC70075A9EE /* EventModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventModel.swift; sourceTree = "<group>"; };
@@ -193,6 +199,7 @@
 			children = (
 				93CC6662254F9BC70075A9EE /* EventModel.swift */,
 				93CC6666254F9BDF0075A9EE /* UserModel.swift */,
+				938CC6BB255DDCE200244304 /* LoginModel.swift */,
 				DB51BE312554B862007C65F6 /* AnnotationModel.swift */,
 			);
 			path = Models;
@@ -250,6 +257,8 @@
 			children = (
 				934E6AFB253F8EA000DA9392 /* LoginViewController.swift */,
 				DBB830AB253E958400F2B48E /* CreateProfileViewController.swift */,
+				938CC6BF255DDFC700244304 /* UploadPictureViewController.swift */,
+				938CC6C3255DE10400244304 /* WelcomeViewController.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -386,8 +395,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				938CC6C4255DE10400244304 /* WelcomeViewController.swift in Sources */,
 				1A91533B254A51A500370962 /* FilterViewController.swift in Sources */,
 				1AF47AD6253666DA0092CE1B /* Mobilize.xcdatamodeld in Sources */,
+				938CC6C0255DDFC700244304 /* UploadPictureViewController.swift in Sources */,
 				B960A01C2542093700BC5559 /* SettingsViewController.swift in Sources */,
 				1AF47ACC253666DA0092CE1B /* AppDelegate.swift in Sources */,
 				DB51BE322554B862007C65F6 /* AnnotationModel.swift in Sources */,
@@ -396,6 +407,7 @@
 				DBB17776254A52C700E2AFAA /* HomeViewController.swift in Sources */,
 				1A915341254E068D00370962 /* EventInfoViewController.swift in Sources */,
 				1A603726254286D600E874D5 /* ConfirmViewController.swift in Sources */,
+				938CC6BC255DDCE200244304 /* LoginModel.swift in Sources */,
 				93CC665A254B36EE0075A9EE /* NotificationsViewController.swift in Sources */,
 				934E6AFC253F8EA000DA9392 /* LoginViewController.swift in Sources */,
 				B9050AC025507C2F00272F63 /* EditProfileViewController.swift in Sources */,

@@ -6,30 +6,32 @@
 //
 
 import Foundation
+import UIKit
 
 class UserModel {
     
     var userID:String?
     var first:String?
     var last:String?
-    //var password:String?
     var organization:String?
     var bio:String?
-    var profilePicture:String?
+    var profilePicture:UIImage?
     var eventsRSVPd:[String]?
     var eventsCreated:[String]?
     var eventsLiked:[String]?
+    var loginInfo:LoginModel?
     
-    init(uid:String, first:String, last:String, organization:String, bio:String, profilePicture:String, eventsRSVPd:[String], eventsCreated:[String], eventsLiked:[String]) {
+    init(uid:String, first:String, last:String, organization:String, bio:String, profilePicture:UIImage, eventsRSVPd:[String], eventsCreated:[String], eventsLiked:[String], loginInfo:LoginModel) {
         self.userID = uid
         self.first = first
         self.last = last
-        //self.password = password
         self.organization = organization
         self.bio = bio
         self.profilePicture = profilePicture
         self.eventsRSVPd = eventsRSVPd
         self.eventsCreated = eventsCreated
         self.eventsLiked = eventsLiked
+        self.loginInfo = loginInfo
     }
+    
 }

@@ -249,7 +249,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="32"/>
                                 <state key="normal" title="Continue"/>
                                 <connections>
-                                    <segue destination="ePX-iN-0oK" kind="presentation" animates="NO" modalPresentationStyle="fullScreen" id="whQ-dJ-bqs"/>
+                                    <segue destination="ePX-iN-0oK" kind="presentation" identifier="homeSegue" animates="NO" modalPresentationStyle="fullScreen" id="whQ-dJ-bqs"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EHN-Z6-oon">
@@ -342,7 +342,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="4YN-mf-c4N"/>
+        <segue reference="whQ-dJ-bqs"/>
     </inferredMetricsTieBreakers>
     <resources>
         <systemColor name="labelColor">
