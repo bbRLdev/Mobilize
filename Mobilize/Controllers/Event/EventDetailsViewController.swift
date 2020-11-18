@@ -20,6 +20,14 @@ class EventDetailsViewController: UIViewController {
     var ownerUID: String = ""
     var event: EventModel!
     
+    var imageData = ["BlankProfile",
+                     "BlankProfile",
+                     "BlankProfile",
+                     "BlankProfile",
+                     "BlankProfile",
+                     "BlankProfile",
+                     "BlankProfile",
+                     "BlankProfile"]
     
 //    @IBOutlet weak var organizerLabel: UILabel!
 //
@@ -46,11 +54,14 @@ class EventDetailsViewController: UIViewController {
     
     @IBOutlet weak var qaTableView: SelfSizingTableView!
     
-    @IBOutlet weak var imagePreview0: UIImageView!
     
-    @IBOutlet weak var imagePreview1: UIImageView!
+    @IBOutlet weak var collectionView: UICollectionView!
     
-    @IBOutlet weak var imagePreview2: UIImageView!
+    //    @IBOutlet weak var imagePreview0: UIImageView!
+//
+//    @IBOutlet weak var imagePreview1: UIImageView!
+//
+//    @IBOutlet weak var imagePreview2: UIImageView!
     
     
     
@@ -72,18 +83,21 @@ class EventDetailsViewController: UIViewController {
         creatorLabel.numberOfLines = 0
         descriptionLabel.numberOfLines = 0
         
+        let mosaicLayout = MosaicLayout()
+        collectionView.frame = self.view.bounds
+        collectionView.collectionViewLayout = mosaicLayout
+        collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        collectionView.isScrollEnabled = false
+        collectionView.indicatorStyle = .white
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        collectionView.register(MosaicCell.self, forCellWithReuseIdentifier: MosaicCell.identifer)
+        
         loadEventInfo()
         
         // Do any additional setup after loading the view.
     }
     
-    
-    
-    @IBAction func recognizeTapGesture(recognizer: UITapGestureRecognizer)
-    {
-        self.performSegue(withIdentifier: imgCollectionSegue, sender: nil)
-
-    }
     
     @IBAction func editButtonPressed(_ sender: Any) {
     }
@@ -221,6 +235,51 @@ class EventDetailsViewController: UIViewController {
 
     }
 
+
+}
+
+extension EventDetailsViewController: UICollectionViewDelegate, UICollectionViewDataSource{
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return imageData.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MosaicCell.identifer, for: indexPath) as? MosaicCell
+            else { preconditionFailure("Failed to load collection view cell") }
+        
+        let curImageName = imageData[indexPath.row]
+
+        let imgToAdd = UIImage(named:curImageName)!
+        
+        cell.imageView.image = imgToAdd
+
+//        if !assets.isEmpty {
+//            let assetIndex = indexPath.item % assets.count
+//            let asset = assets[assetIndex]
+//            let assetIdentifier = asset.localIdentifier
+//
+//            cell.assetIdentifier = assetIdentifier
+//
+//            PHImageManager.default().requestImage(for: asset, targetSize: cell.frame.size,
+//                                                  contentMode: .aspectFill, options: nil) { (image, hashable)  in
+//                                                    if let loadedImage = image, let cellIdentifier = cell.assetIdentifier {
+//
+//                                                        // Verify that the cell still has the same asset identifier,
+//                                                        // so the image in a reused cell is not overwritten.
+//                                                        if cellIdentifier == assetIdentifier {
+//                                                            cell.imageView.image = loadedImage
+//                                                        }
+//                                                    }
+//            }
+//        }
+
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        self.performSegue(withIdentifier: imgCollectionSegue, sender: nil)
+    }
 
 }
 

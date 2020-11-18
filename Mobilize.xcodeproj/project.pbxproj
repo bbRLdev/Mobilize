@@ -39,6 +39,9 @@
 		B960A01C2542093700BC5559 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B960A01B2542093600BC5559 /* SettingsViewController.swift */; };
 		BF47B03D5A51FD2ADD1E0002 /* Pods_Mobilize.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D16664B2B4F5523DAF4E7C5A /* Pods_Mobilize.framework */; };
 		DB4DAC8725647CD3001C6126 /* EventImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4DAC8625647CD3001C6126 /* EventImageViewController.swift */; };
+		DB4DAC8D2564C11A001C6126 /* MosaicLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4DAC8C2564C11A001C6126 /* MosaicLayout.swift */; };
+		DB4DAC912564C1AE001C6126 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4DAC902564C1AE001C6126 /* Utilities.swift */; };
+		DB4DAC952564C213001C6126 /* MosaicCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4DAC942564C213001C6126 /* MosaicCell.swift */; };
 		DB51BE0D25527AF3007C65F6 /* EventModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB51BE0B25527AF3007C65F6 /* EventModel.swift */; };
 		DB51BE0E25527AF3007C65F6 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB51BE0C25527AF3007C65F6 /* UserModel.swift */; };
 		DB51BE1125527B22007C65F6 /* AddMediaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB51BE1025527B22007C65F6 /* AddMediaViewController.swift */; };
@@ -87,6 +90,9 @@
 		B960A01B2542093600BC5559 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		D16664B2B4F5523DAF4E7C5A /* Pods_Mobilize.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Mobilize.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB4DAC8625647CD3001C6126 /* EventImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventImageViewController.swift; sourceTree = "<group>"; };
+		DB4DAC8C2564C11A001C6126 /* MosaicLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MosaicLayout.swift; sourceTree = "<group>"; };
+		DB4DAC902564C1AE001C6126 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
+		DB4DAC942564C213001C6126 /* MosaicCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MosaicCell.swift; sourceTree = "<group>"; };
 		DB51BE0B25527AF3007C65F6 /* EventModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventModel.swift; sourceTree = "<group>"; };
 		DB51BE0C25527AF3007C65F6 /* UserModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		DB51BE1025527B22007C65F6 /* AddMediaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddMediaViewController.swift; sourceTree = "<group>"; };
@@ -152,6 +158,9 @@
 		1AF47ACA253666DA0092CE1B /* Mobilize */ = {
 			isa = PBXGroup;
 			children = (
+				DB4DAC932564C1F6001C6126 /* Cells */,
+				DB4DAC8F2564C17B001C6126 /* Utilities */,
+				DB4DAC8B2564C0D5001C6126 /* Layouts */,
 				93CC6661254F9BAD0075A9EE /* Models */,
 				1A6037162542804A00E874D5 /* GoogleService-Info.plist */,
 				1AC8D93C2554F58E00DD90F4 /* GoogleService-Info.plist */,
@@ -235,6 +244,30 @@
 				B960A0152542079900BC5559 /* ProfileEventsViewController.swift */,
 			);
 			path = Profile;
+			sourceTree = "<group>";
+		};
+		DB4DAC8B2564C0D5001C6126 /* Layouts */ = {
+			isa = PBXGroup;
+			children = (
+				DB4DAC8C2564C11A001C6126 /* MosaicLayout.swift */,
+			);
+			path = Layouts;
+			sourceTree = "<group>";
+		};
+		DB4DAC8F2564C17B001C6126 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				DB4DAC902564C1AE001C6126 /* Utilities.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		DB4DAC932564C1F6001C6126 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				DB4DAC942564C213001C6126 /* MosaicCell.swift */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 		DB51BE0A25527AF3007C65F6 /* Models */ = {
@@ -401,7 +434,9 @@
 				938CC6C4255DE10400244304 /* WelcomeViewController.swift in Sources */,
 				1A91533B254A51A500370962 /* FilterViewController.swift in Sources */,
 				1AF47AD6253666DA0092CE1B /* Mobilize.xcdatamodeld in Sources */,
+				DB4DAC952564C213001C6126 /* MosaicCell.swift in Sources */,
 				938CC6C0255DDFC700244304 /* UploadPictureViewController.swift in Sources */,
+				DB4DAC8D2564C11A001C6126 /* MosaicLayout.swift in Sources */,
 				B960A01C2542093700BC5559 /* SettingsViewController.swift in Sources */,
 				DB4DAC8725647CD3001C6126 /* EventImageViewController.swift in Sources */,
 				1AF47ACC253666DA0092CE1B /* AppDelegate.swift in Sources */,
@@ -415,6 +450,7 @@
 				93CC665A254B36EE0075A9EE /* NotificationsViewController.swift in Sources */,
 				934E6AFC253F8EA000DA9392 /* LoginViewController.swift in Sources */,
 				B9050AC025507C2F00272F63 /* EditProfileViewController.swift in Sources */,
+				DB4DAC912564C1AE001C6126 /* Utilities.swift in Sources */,
 				93CC6667254F9BDF0075A9EE /* UserModel.swift in Sources */,
 				1A60372925428D5100E874D5 /* QAandConfirmVC.swift in Sources */,
 				93E47C7D254A0BE1006D76BF /* SearchViewController.swift in Sources */,
