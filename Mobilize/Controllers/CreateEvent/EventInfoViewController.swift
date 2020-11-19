@@ -27,12 +27,17 @@ class EventInfoViewController: UIViewController, UITableViewDelegate, UITableVie
     @IBOutlet weak var organizationNameField: UITextField!
     @IBOutlet weak var eventAddressField: UITextField!
     @IBOutlet weak var eventDescriptionField: UITextView!
+    
+    @IBOutlet weak var activismTypeFilterButton: UIButton!
+    @IBOutlet weak var eventTypeFilterButton: UIButton!
+
     let segueId = "AddMediaSegueId"
     
     // Post-Beta, we use this to keep track of values as we build the
     // new event
     var eventSoFar: [String : Any] = [:]
-    
+    var selectedActivismTypeFilter: String?
+    var selectedEventTypeFilter: String?
     // Post-Beta, this stays empty until the end if we are creating a new event.
     // if editing, it will not be nil. This does not matter until the end.
     var event: EventModel!
@@ -60,6 +65,43 @@ class EventInfoViewController: UIViewController, UITableViewDelegate, UITableVie
 //        searchResultsTableView.isHidden = true
     }
     
+    func startFade(target: UIButton, title: String, color: UIColor, image: UIImage) {
+        UIView.animate(
+            withDuration: 0.5,
+            delay: 0.0,
+            options: .curveEaseOut,
+            animations: {
+                target.alpha = 0.0
+            },
+            completion: {
+                finished in
+                if finished {
+                    let image = UIImage(systemName: "circle.fill")?
+                        .withRenderingMode(.alwaysOriginal)
+                        .withTintColor(color)
+                    target.setTitle(title, for: .normal)
+                    target.setImage(image, for: .normal)
+                    target.setTitleColor(UIColor.black, for: .normal)
+                    target.titleEdgeInsets.left = 6
+                    target.titleEdgeInsets.right = -6
+                    self.endFade(target: target)
+                }
+            }
+        )
+    }
+    
+    func endFade(target: UIButton) {
+        UIView.animate(
+            withDuration: 1.5,
+            delay: 0.0,
+            options: .curveEaseIn,
+            animations: {
+                target.alpha = 1.0
+            },
+            completion: nil
+        )
+    }
+    
     @IBAction func onActivismTypePressed() {
         var filterSet: [String] = []
         for activismType in EventModel.ActivismFilterType.allCases {
@@ -72,8 +114,8 @@ class EventInfoViewController: UIViewController, UITableViewDelegate, UITableVie
                                    UIColor.green,
                                    UIColor.systemPink]
         
-        if let actionSheet = getFilterActionSheet(filters: filterSet, colors: colorSet) {
-            self.present(actionSheet, animated: true, completion: nil)
+        if let actionSheet = getFilterActionSheet(filters: filterSet, colors: colorSet, forActivism: true) {
+            self.present(actionSheet, animated: true)
         }
     }
     
@@ -89,12 +131,12 @@ class EventInfoViewController: UIViewController, UITableViewDelegate, UITableVie
         for _ in 0...count-1 {
             colorSet.append(UIColor.lightGray)
         }
-        if let actionSheet = getFilterActionSheet(filters: filterSet, colors: colorSet) {
-            self.present(actionSheet, animated: true, completion: nil)
+        if let actionSheet = getFilterActionSheet(filters: filterSet, colors: colorSet, forActivism: false) {
+            self.present(actionSheet, animated: true)
         }
     }
     
-    func getFilterActionSheet(filters: [String], colors: [UIColor]) -> UIAlertController? {
+    func getFilterActionSheet(filters: [String], colors: [UIColor], forActivism: Bool) -> UIAlertController? {
         let filterSheet = UIAlertController()
         if filters.count == colors.count {
             for i in 0...filters.count - 1 {
@@ -103,7 +145,22 @@ class EventInfoViewController: UIViewController, UITableViewDelegate, UITableVie
                 let image = UIImage(systemName: "circle.fill")?
                     .withRenderingMode(.alwaysOriginal)
                     .withTintColor(filterColor)
-                let filterAction = UIAlertAction(title: filterTitle, style: .default)
+                let filterAction = UIAlertAction(title: filterTitle, style: .default, handler: {
+                    _ in
+                    if forActivism {
+                        self.startFade(target: self.activismTypeFilterButton,
+                                       title: filterTitle,
+                                       color: filterColor, image: image!)
+                        self.selectedActivismTypeFilter = filterTitle
+                       
+                    } else {
+                        self.startFade(target: self.eventTypeFilterButton,
+                                       title: filterTitle,
+                                       color: filterColor,
+                                       image: image!)
+                        self.selectedEventTypeFilter = filterTitle
+                    }
+                })
                 filterAction.setValue(image, forKey: "image")
                 filterAction.setValue(UIColor.black, forKey: "titleTextColor")
                 filterSheet.addAction(filterAction)
@@ -138,7 +195,9 @@ class EventInfoViewController: UIViewController, UITableViewDelegate, UITableVie
                let eventAddress = eventAddressField.text,
                let eventDescription = eventDescriptionField.text,
                let eventCoordinates = coordinates,
-               let uid = auth.currentUser?.uid
+               let uid = auth.currentUser?.uid,
+               let activismTypeFilter = selectedActivismTypeFilter,
+               let eventTypeFilter = selectedEventTypeFilter
         else {
             return
         }
@@ -153,6 +212,9 @@ class EventInfoViewController: UIViewController, UITableViewDelegate, UITableVie
                              "longitude" : Float(eventCoordinates.longitude)],
             "numLikes" : 0,
             "numRSVPs" : 0,
+            "activismTypeFilter" : activismTypeFilter,
+            "eventTypeFiler" : eventTypeFilter
+
         ]
         
         if(event != nil) {
@@ -283,6 +345,25 @@ class EventInfoViewController: UIViewController, UITableViewDelegate, UITableVie
                 organizationNameField.text = event.organization
                 eventAddressField.text = event.location
                 eventDescriptionField.text = event.description
+//                let colorSet: [UIColor] = [UIColor.purple,
+//                                           UIColor.red,
+//                                           UIColor.cyan,
+//                                           UIColor.orange,
+//                                           UIColor.green,
+//                                           UIColor.systemPink]
+                // let eventFilter: String = event.eventType.rawValue
+                // var count = 0
+                // for filter in EventModel.EventFilterType.allCases {
+                // if eventFilter == filter {
+                //  break
+                // }
+                // count += 1
+                // }
+                // color = EventModel.EventFilterType.allCases[count]
+                //eventFilterTitle = EventModel.EventFilterType.allCases[count]
+                //
+                // filterColor =
+                // startFade(target: , title: , color: , image: )
             }
         }
     }

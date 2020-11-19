@@ -110,16 +110,16 @@ Q29uZmlybWF0aW9uIBBvZiBDb29wZXJhdGlvbg
                                         <rect key="frame" x="20" y="20" width="374" height="523"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="Lyk-nR-ufz">
-                                                <rect key="frame" x="0.0" y="0.0" width="374" height="52.666666666666664"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="374" height="51.333333333333336"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Event Name*" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h8y-pw-hA4">
-                                                        <rect key="frame" x="0.0" y="0.0" width="99.666666666666671" height="16.666666666666668"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="99.666666666666671" height="15.333333333333334"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ddr-Tn-YnH">
-                                                        <rect key="frame" x="0.0" y="16.666666666666657" width="374" height="36"/>
+                                                        <rect key="frame" x="0.0" y="15.333333333333343" width="374" height="36"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
                                                     </textField>
@@ -129,16 +129,16 @@ Q29uZmlybWF0aW9uIBBvZiBDb29wZXJhdGlvbg
                                                 </constraints>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="j4z-Zr-AFU">
-                                                <rect key="frame" x="0.0" y="86.666666666666657" width="374" height="62.333333333333343"/>
+                                                <rect key="frame" x="0.0" y="85.333333333333343" width="374" height="60.666666666666657"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Event Address*" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="coM-6T-Rq5">
-                                                        <rect key="frame" x="0.0" y="0.0" width="117" height="18.333333333333332"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="117" height="16.666666666666668"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="N06-6i-jIv">
-                                                        <rect key="frame" x="0.0" y="26.333333333333343" width="374" height="36"/>
+                                                        <rect key="frame" x="0.0" y="24.666666666666657" width="374" height="36"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="36" id="Ygi-4O-4vd"/>
                                                         </constraints>
@@ -156,16 +156,16 @@ Q29uZmlybWF0aW9uIBBvZiBDb29wZXJhdGlvbg
                                                 </constraints>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="hCH-IZ-Eaa">
-                                                <rect key="frame" x="0.0" y="183" width="374" height="60.666666666666657"/>
+                                                <rect key="frame" x="0.0" y="180" width="374" height="59"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hosting Organization*" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KQH-Tl-BeF">
-                                                        <rect key="frame" x="0.0" y="0.0" width="168" height="16.666666666666668"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="168" height="15"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="d8o-xb-Ve0">
-                                                        <rect key="frame" x="0.0" y="24.666666666666686" width="374" height="36"/>
+                                                        <rect key="frame" x="0.0" y="23" width="374" height="36"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
                                                     </textField>
@@ -175,16 +175,16 @@ Q29uZmlybWF0aW9uIBBvZiBDb29wZXJhdGlvbg
                                                 </constraints>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="T3w-iC-W44">
-                                                <rect key="frame" x="0.0" y="277.66666666666669" width="374" height="157.33333333333331"/>
+                                                <rect key="frame" x="0.0" y="273" width="374" height="136"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Event Description" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qI4-5M-tqb">
-                                                        <rect key="frame" x="0.0" y="0.0" width="134.33333333333334" height="15.333333333333334"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="134.33333333333334" height="0.0"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" indicatorStyle="black" translatesAutoresizingMaskIntoConstraints="NO" id="8Ai-1J-l6x">
-                                                        <rect key="frame" x="0.0" y="23.333333333333314" width="374" height="134"/>
+                                                        <rect key="frame" x="0.0" y="8" width="374" height="128"/>
                                                         <color key="textColor" systemColor="labelColor"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -198,23 +198,32 @@ Q29uZmlybWF0aW9uIBBvZiBDb29wZXJhdGlvbg
                                                 </constraints>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="tTg-DN-mSB">
-                                                <rect key="frame" x="0.0" y="469" width="374" height="54"/>
+                                                <rect key="frame" x="0.0" y="443" width="374" height="80"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QwB-SE-NZk">
-                                                        <rect key="frame" x="111" y="0.0" width="152" height="24"/>
+                                                        <rect key="frame" x="111" y="0.0" width="152" height="40"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="40" id="FjY-fr-oeM"/>
+                                                        </constraints>
                                                         <state key="normal" title="Choose Activism Type"/>
                                                         <connections>
                                                             <action selector="onActivismTypePressed" destination="ohK-Iz-2AK" eventType="touchUpInside" id="S3r-sF-Afq"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M9m-Jp-KQN">
-                                                        <rect key="frame" x="120.66666666666666" y="24" width="133" height="30"/>
+                                                        <rect key="frame" x="111" y="40" width="152" height="40"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="40" id="sFz-Lt-1lV"/>
+                                                        </constraints>
                                                         <state key="normal" title="Choose Event Type"/>
                                                         <connections>
                                                             <action selector="onEventTypePressed" destination="ohK-Iz-2AK" eventType="touchUpInside" id="fz5-in-ANa"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>
+                                                <constraints>
+                                                    <constraint firstItem="M9m-Jp-KQN" firstAttribute="width" secondItem="QwB-SE-NZk" secondAttribute="width" id="AeN-4k-fcu"/>
+                                                </constraints>
                                             </stackView>
                                         </subviews>
                                         <constraints>
@@ -258,9 +267,11 @@ Q29uZmlybWF0aW9uIBBvZiBDb29wZXJhdGlvbg
                     </view>
                     <navigationItem key="navigationItem" id="cFZ-0E-VZU"/>
                     <connections>
+                        <outlet property="activismTypeFilterButton" destination="QwB-SE-NZk" id="CJv-ah-JJ7"/>
                         <outlet property="eventAddressField" destination="N06-6i-jIv" id="3Wg-Bs-aPk"/>
                         <outlet property="eventDescriptionField" destination="8Ai-1J-l6x" id="Hlz-Ee-mYd"/>
                         <outlet property="eventNameField" destination="ddr-Tn-YnH" id="OFL-BE-hUs"/>
+                        <outlet property="eventTypeFilterButton" destination="M9m-Jp-KQN" id="8Ku-AR-504"/>
                         <outlet property="organizationNameField" destination="d8o-xb-Ve0" id="Y5e-1u-wyT"/>
                         <segue destination="bw4-xE-N17" kind="show" identifier="AddMediaSegueId" id="VbO-0N-sb6"/>
                     </connections>
