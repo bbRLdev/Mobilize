@@ -46,8 +46,8 @@ class EventInfoViewController: UIViewController, UITableViewDelegate, UITableVie
         // Do any additional setup after loading the view.
         
         searchCompleter.delegate = self
-        searchResultsTableView.delegate = self
-        searchResultsTableView.dataSource = self
+//        searchResultsTableView.delegate = self
+//        searchResultsTableView.dataSource = self
         
         // If event != nil, we know we are in this flow while editing. This
         // fact is important in the following Create Event VC's
@@ -57,7 +57,61 @@ class EventInfoViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        searchResultsTableView.isHidden = true
+//        searchResultsTableView.isHidden = true
+    }
+    
+    @IBAction func onActivismTypePressed() {
+        var filterSet: [String] = []
+        for activismType in EventModel.ActivismFilterType.allCases {
+            filterSet.append(activismType.rawValue)
+        }
+        let colorSet: [UIColor] = [UIColor.purple,
+                                   UIColor.red,
+                                   UIColor.cyan,
+                                   UIColor.orange,
+                                   UIColor.green,
+                                   UIColor.systemPink]
+        
+        if let actionSheet = getFilterActionSheet(filters: filterSet, colors: colorSet) {
+            self.present(actionSheet, animated: true, completion: nil)
+        }
+    }
+    
+    @IBAction func onEventTypePressed() {
+        var filterSet: [String] = []
+        var colorSet: [UIColor] = []
+
+        var count = 0
+        for activismType in EventModel.EventFilterType.allCases {
+            filterSet.append(activismType.rawValue)
+            count += 1
+        }
+        for _ in 0...count-1 {
+            colorSet.append(UIColor.lightGray)
+        }
+        if let actionSheet = getFilterActionSheet(filters: filterSet, colors: colorSet) {
+            self.present(actionSheet, animated: true, completion: nil)
+        }
+    }
+    
+    func getFilterActionSheet(filters: [String], colors: [UIColor]) -> UIAlertController? {
+        let filterSheet = UIAlertController()
+        if filters.count == colors.count {
+            for i in 0...filters.count - 1 {
+                let filterTitle = filters[i]
+                let filterColor = colors[i]
+                let image = UIImage(systemName: "circle.fill")?
+                    .withRenderingMode(.alwaysOriginal)
+                    .withTintColor(filterColor)
+                let filterAction = UIAlertAction(title: filterTitle, style: .default)
+                filterAction.setValue(image, forKey: "image")
+                filterAction.setValue(UIColor.black, forKey: "titleTextColor")
+                filterSheet.addAction(filterAction)
+            }
+            filterSheet.addAction(UIAlertAction(title:"Cancel", style: .cancel))
+            return filterSheet
+        }
+        return nil
     }
     
     @IBAction func onNextButtonPressed(_ sender: Any) {
@@ -117,7 +171,7 @@ class EventInfoViewController: UIViewController, UITableViewDelegate, UITableVie
     }
 
     @IBAction func editBegin(_ sender: Any) {
-        searchResultsTableView.isHidden = false
+//        searchResultsTableView.isHidden = false
         //coordinates = nil
     }
     

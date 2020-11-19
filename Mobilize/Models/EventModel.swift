@@ -10,6 +10,8 @@ import MapKit
 
 typealias Question = (question: String, answer: String)
 
+
+
 class EventModel {
     var coordinates: CLLocationCoordinate2D?
     var organization: String?
@@ -22,6 +24,22 @@ class EventModel {
     var rsvpNum: Int?
     var questions: [Question] = []
     var photoURLCollection: [String] = []
+
+    enum ActivismFilterType: String, CaseIterable {
+        case racialJustice = "Racial Justice",
+             workersRights = "Worker's Rights",
+             lgbtq = "LGBTQ+ Rights",
+             votersRights = "Voter's Rights",
+             environment = "Environmental",
+             womensRights = "Women's Rights"
+    }
+
+    enum EventFilterType: String, CaseIterable {
+        case march = "March",
+             protest = "Protest",
+             political = "Political",
+             voting = "Voting"
+    }
     
     init(){}
     
@@ -33,5 +51,7 @@ class EventModel {
         coordinates = coord
         organizerUID = owner
     }
+    
+   
     
 }
