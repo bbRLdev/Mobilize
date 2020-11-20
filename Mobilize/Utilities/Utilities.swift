@@ -6,6 +6,7 @@ Utility functions for helping display the user interface.
 */
 
 import UIKit
+import CoreLocation
 
 extension CGRect {
     func dividedIntegral(fraction: CGFloat, from fromEdge: CGRectEdge) -> (first: CGRect, second: CGRect) {
@@ -37,3 +38,5 @@ extension CGRect {
 extension UIColor {
     static let appBackgroundColor = UIColor.white
 }
+
+

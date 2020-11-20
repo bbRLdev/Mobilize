@@ -37,7 +37,7 @@ class QAandConfirmVC: UIViewController {
                 print(imgURLs)
                 eventSoFar["imgURLs"] = imgURLs
                 //questions.append(q)
-                collectionLoadingFlag = true
+                //collectionLoadingFlag = true
                 uploadCollection()
             }
         }
@@ -45,17 +45,17 @@ class QAandConfirmVC: UIViewController {
     }
     
     
-    var collectionLoadingFlag = false {
-        willSet {
-            if newValue == false {
-                self.navigationController?.popToRootViewController(animated: true)
-            }
-            else{
-                //createButton.isUserInteractionEnabled = true
-                //createButton.setTitle("Create Event", for: .normal)
-            }
-        }
-    }
+//    var collectionLoadingFlag = false {
+//        willSet {
+//            if newValue == false {
+//                self.navigationController?.popToRootViewController(animated: true)
+//            }
+//            else{
+//                //createButton.isUserInteractionEnabled = true
+//                //createButton.setTitle("Create Event", for: .normal)
+//            }
+//        }
+//    }
     
 
     override func viewDidLoad() {
@@ -200,7 +200,7 @@ class QAandConfirmVC: UIViewController {
     
     func uploadCollection() {
         let docRef: DocumentReference = db.collection("events").document(eventSoFar["eventID"] as! String)
-        print("Got here")
+        //print("Got here")
 //        var count: Int = 0 {
 //            willSet {
 //                if newValue >= questions.count {
@@ -221,31 +221,15 @@ class QAandConfirmVC: UIViewController {
         docRef.setData(eventSoFar,
             merge: false, completion: {
                 err in
+
                 if let err = err {
                     print("Error adding document: \(err)")
                     return
                 }
                 else{
-                    self.collectionLoadingFlag = false
+                    self.navigationController?.popToRootViewController(animated: true)
+
                 }
-                
-//                let qaRef = docRef.collection("QA")
-//                // on Success, upload questions as well
-//                for question: Question in self.questions {
-//                    qaRef.addDocument(data:
-//                        [
-//                            "question" : question.question,
-//                            "answer" : question.answer
-//                        ], completion: {
-//                            err in
-//                            if let err = err {
-//                                print("Error adding question: \(err)")
-//                                return
-//                            }
-//                            count += 1
-//                        }
-//                    )
-//                }
             }
         )
     }
