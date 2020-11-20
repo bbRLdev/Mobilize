@@ -110,8 +110,7 @@ class HomeViewController: UIViewController, GetFilters {
     func setUpSideMenu() {
         sideMenu = SideMenuNavigationController(rootViewController: SideMenuListController())
         sideMenu?.leftSide = true
-        SideMenuManager.default.leftMenuNavigationController = sideMenu
-        SideMenuManager.default.addScreenEdgePanGesturesToPresent(toView: mapView)
+        SideMenuManager.default.leftMenuNavigationController = sideMenu        
     }
     
     private func addPin(diff :DocumentChange){
