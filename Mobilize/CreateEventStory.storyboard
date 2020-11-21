@@ -155,8 +155,31 @@ Q29uZmlybWF0aW9uIBBvZiBDb29wZXJhdGlvbg
                                                     <constraint firstItem="N06-6i-jIv" firstAttribute="width" secondItem="j4z-Zr-AFU" secondAttribute="width" id="p2K-ag-r5h"/>
                                                 </constraints>
                                             </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="OCq-mM-lvT">
+                                                <rect key="frame" x="0.0" y="160.66666666666669" width="374" height="124.33333333333331"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date / Time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PcH-Ne-f2E">
+                                                        <rect key="frame" x="0.0" y="0.0" width="374" height="20.333333333333332"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <datePicker contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="15" style="compact" translatesAutoresizingMaskIntoConstraints="NO" id="fcM-bG-PzW">
+                                                        <rect key="frame" x="0.0" y="28.333333333333314" width="374" height="96"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="96" id="9pu-jF-pQi"/>
+                                                        </constraints>
+                                                        <connections>
+                                                            <action selector="onDateSelected:" destination="ohK-Iz-2AK" eventType="valueChanged" id="GkX-xo-JyV"/>
+                                                        </connections>
+                                                    </datePicker>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstItem="fcM-bG-PzW" firstAttribute="width" secondItem="OCq-mM-lvT" secondAttribute="width" id="joZ-Of-FGp"/>
+                                                </constraints>
+                                            </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="hCH-IZ-Eaa">
-                                                <rect key="frame" x="0.0" y="160.66666666666669" width="374" height="64.333333333333314"/>
+                                                <rect key="frame" x="0.0" y="301" width="374" height="64.333333333333314"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hosting Organization*" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KQH-Tl-BeF">
                                                         <rect key="frame" x="0.0" y="0.0" width="168" height="20.333333333333332"/>
@@ -174,8 +197,8 @@ Q29uZmlybWF0aW9uIBBvZiBDb29wZXJhdGlvbg
                                                     <constraint firstItem="d8o-xb-Ve0" firstAttribute="width" secondItem="hCH-IZ-Eaa" secondAttribute="width" id="bvF-jS-idU"/>
                                                 </constraints>
                                             </stackView>
-                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="T3w-iC-W44">
-                                                <rect key="frame" x="0.0" y="241" width="374" height="413"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="T3w-iC-W44">
+                                                <rect key="frame" x="0.0" y="381.33333333333337" width="374" height="272.66666666666663"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Event Description" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qI4-5M-tqb">
                                                         <rect key="frame" x="0.0" y="0.0" width="134.33333333333334" height="20.333333333333332"/>
@@ -184,7 +207,7 @@ Q29uZmlybWF0aW9uIBBvZiBDb29wZXJhdGlvbg
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" indicatorStyle="black" translatesAutoresizingMaskIntoConstraints="NO" id="8Ai-1J-l6x">
-                                                        <rect key="frame" x="0.0" y="28.333333333333314" width="374" height="384.66666666666669"/>
+                                                        <rect key="frame" x="0.0" y="27.333333333333272" width="374" height="245.33333333333337"/>
                                                         <color key="textColor" systemColor="labelColor"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -228,6 +251,7 @@ Q29uZmlybWF0aW9uIBBvZiBDb29wZXJhdGlvbg
                                         </subviews>
                                         <constraints>
                                             <constraint firstItem="tTg-DN-mSB" firstAttribute="width" secondItem="CLY-d8-pPu" secondAttribute="width" id="0ZQ-Wt-9wv"/>
+                                            <constraint firstItem="OCq-mM-lvT" firstAttribute="width" secondItem="CLY-d8-pPu" secondAttribute="width" id="95I-xa-cpM"/>
                                             <constraint firstItem="T3w-iC-W44" firstAttribute="width" secondItem="CLY-d8-pPu" secondAttribute="width" id="Hgf-YI-UOB"/>
                                             <constraint firstItem="Lyk-nR-ufz" firstAttribute="width" secondItem="CLY-d8-pPu" secondAttribute="width" id="Ju9-4a-OHx"/>
                                             <constraint firstItem="j4z-Zr-AFU" firstAttribute="width" secondItem="CLY-d8-pPu" secondAttribute="width" id="LJT-zn-E7H"/>
@@ -304,6 +328,7 @@ Q29uZmlybWF0aW9uIBBvZiBDb29wZXJhdGlvbg
                     <connections>
                         <outlet property="activismTypeFilterButton" destination="QwB-SE-NZk" id="CJv-ah-JJ7"/>
                         <outlet property="eventAddressField" destination="N06-6i-jIv" id="3Wg-Bs-aPk"/>
+                        <outlet property="eventDatePicker" destination="fcM-bG-PzW" id="naQ-Xb-pOk"/>
                         <outlet property="eventDescriptionField" destination="8Ai-1J-l6x" id="Hlz-Ee-mYd"/>
                         <outlet property="eventNameField" destination="ddr-Tn-YnH" id="OFL-BE-hUs"/>
                         <outlet property="eventTypeFilterButton" destination="M9m-Jp-KQN" id="8Ku-AR-504"/>

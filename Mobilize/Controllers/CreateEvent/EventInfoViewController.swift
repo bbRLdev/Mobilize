@@ -9,6 +9,7 @@ import UIKit
 import MapKit
 import Contacts
 import FirebaseAuth
+import Firebase
 
 class EventInfoViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, MKLocalSearchCompleterDelegate, UITextViewDelegate {
 
@@ -31,6 +32,8 @@ class EventInfoViewController: UIViewController, UITableViewDelegate, UITableVie
     @IBOutlet weak var activismTypeFilterButton: UIButton!
     @IBOutlet weak var eventTypeFilterButton: UIButton!
 
+    @IBOutlet weak var eventDatePicker: UIDatePicker!
+
     let segueId = "AddMediaSegueId"
     
     // Post-Beta, we use this to keep track of values as we build the
@@ -38,6 +41,7 @@ class EventInfoViewController: UIViewController, UITableViewDelegate, UITableVie
     var eventSoFar: [String : Any] = [:]
     var selectedActivismTypeFilter: String?
     var selectedEventTypeFilter: String?
+    var selectedDate: Date?
     // Post-Beta, this stays empty until the end if we are creating a new event.
     // if editing, it will not be nil. This does not matter until the end.
     var event: EventModel!
@@ -53,7 +57,10 @@ class EventInfoViewController: UIViewController, UITableViewDelegate, UITableVie
         searchCompleter.delegate = self
         searchResultsTableView.delegate = self
         searchResultsTableView.dataSource = self
-        
+        // Users cannot post an event in the same day. That would be
+        // bad.
+        eventDatePicker.minimumDate = Date().addingTimeInterval(86400)
+
         // If event != nil, we know we are in this flow while editing. This
         // fact is important in the following Create Event VC's5
         if event != nil {
@@ -63,6 +70,10 @@ class EventInfoViewController: UIViewController, UITableViewDelegate, UITableVie
     
     override func viewWillAppear(_ animated: Bool) {
         searchResultsTableView.isHidden = true
+    }
+    @IBAction func onDateSelected(_ sender: Any) {
+        let date = eventDatePicker.date
+        selectedDate = date
     }
     
     func startFade(target: UIButton, title: String, color: UIColor, image: UIImage) {
@@ -197,11 +208,12 @@ class EventInfoViewController: UIViewController, UITableViewDelegate, UITableVie
                let eventCoordinates = coordinates,
                let uid = auth.currentUser?.uid,
                let activismTypeFilter = selectedActivismTypeFilter,
-               let eventTypeFilter = selectedEventTypeFilter
+               let eventTypeFilter = selectedEventTypeFilter,
+               let eventDate = selectedDate
         else {
             return
         }
-        
+        let timeStampDate = Timestamp(date: eventDate)
         eventSoFar = [
             "name" : eventName,
             "orgName" : orgName,
@@ -213,8 +225,8 @@ class EventInfoViewController: UIViewController, UITableViewDelegate, UITableVie
             "numLikes" : 0,
             "numRSVPs" : 0,
             "activismTypeFilter" : activismTypeFilter,
-            "eventTypeFiler" : eventTypeFilter
-
+            "eventTypeFiler" : eventTypeFilter,
+            "date" : timeStampDate
         ]
         
         if(event != nil) {
