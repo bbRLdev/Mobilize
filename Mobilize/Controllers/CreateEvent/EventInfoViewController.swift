@@ -51,18 +51,18 @@ class EventInfoViewController: UIViewController, UITableViewDelegate, UITableVie
         // Do any additional setup after loading the view.
         
         searchCompleter.delegate = self
-//        searchResultsTableView.delegate = self
-//        searchResultsTableView.dataSource = self
+        searchResultsTableView.delegate = self
+        searchResultsTableView.dataSource = self
         
         // If event != nil, we know we are in this flow while editing. This
-        // fact is important in the following Create Event VC's
+        // fact is important in the following Create Event VC's5
         if event != nil {
             populateFields()
         }
     }
     
     override func viewWillAppear(_ animated: Bool) {
-//        searchResultsTableView.isHidden = true
+        searchResultsTableView.isHidden = true
     }
     
     func startFade(target: UIButton, title: String, color: UIColor, image: UIImage) {
@@ -233,8 +233,8 @@ class EventInfoViewController: UIViewController, UITableViewDelegate, UITableVie
     }
 
     @IBAction func editBegin(_ sender: Any) {
-//        searchResultsTableView.isHidden = false
-        //coordinates = nil
+        searchResultsTableView.isHidden = false
+        coordinates = nil
     }
     
     @IBAction func editEnd(_ sender: Any) {
