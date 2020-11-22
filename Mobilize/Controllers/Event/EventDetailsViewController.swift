@@ -9,16 +9,23 @@ import UIKit
 import FirebaseFirestore
 import Firebase
 import CoreLocation
+import MapKit
 
 class EventDetailsViewController: UIViewController {
     let db = Firestore.firestore()
     let auth = Auth.auth()
     let cellTag = "qCell"
     let imgCollectionSegue = "imageCollectionSegue"
+    let qSegue = "qSegue"
+    //let homeSegue = "homeSegue"
     
     var eventID: String?
-    var ownerUID: String = ""
+    var userID: String?
+    var ownerUID: String?
     var event: EventModel!
+    var eventRef: DocumentReference?
+    var userRef: DocumentReference?
+    
     
     var imageData = ["BlankProfile",
                      "BlankProfile",
@@ -29,6 +36,8 @@ class EventDetailsViewController: UIViewController {
                      "BlankProfile",
                      "BlankProfile"]
     
+    var imageArray=[UIImage]()
+    
 //    @IBOutlet weak var organizerLabel: UILabel!
 //
 //    @IBOutlet weak var addressLabel: UILabel!
@@ -38,6 +47,10 @@ class EventDetailsViewController: UIViewController {
     
     @IBOutlet weak var editButton: UIButton!
     
+    @IBOutlet weak var likeButton: UIButton!
+    
+    @IBOutlet weak var RSVPButton: UIButton!
+    
     @IBOutlet weak var titleLabel: UILabel!
     
     @IBOutlet weak var dateLabel: UILabel!
@@ -45,6 +58,8 @@ class EventDetailsViewController: UIViewController {
     @IBOutlet weak var addressLabel: UILabel!
     
     @IBOutlet weak var likesLabel: UILabel!
+    
+    @IBOutlet weak var RSVPsLabel: UILabel!
     
     @IBOutlet weak var organizationLabel: UILabel!
     
@@ -56,14 +71,6 @@ class EventDetailsViewController: UIViewController {
     
     
     @IBOutlet weak var collectionView: UICollectionView!
-    
-    //    @IBOutlet weak var imagePreview0: UIImageView!
-//
-//    @IBOutlet weak var imagePreview1: UIImageView!
-//
-//    @IBOutlet weak var imagePreview2: UIImageView!
-    
-    
     
     override func viewWillAppear(_ animated: Bool) {
         
@@ -77,11 +84,17 @@ class EventDetailsViewController: UIViewController {
         qaTableView.delegate = self
         qaTableView.dataSource = self
         
+        
         titleLabel.numberOfLines = 0
         addressLabel.numberOfLines = 0
         organizationLabel.numberOfLines = 0
         creatorLabel.numberOfLines = 0
         descriptionLabel.numberOfLines = 0
+        
+        likeButton.setTitle("Like", for: .normal)
+        likeButton.setTitle("Liked!", for: .selected)
+        RSVPButton.setTitle("RSVP", for: .normal)
+        RSVPButton.setTitle("RSVP'd!", for: .selected)
         
         let mosaicLayout = MosaicLayout()
         collectionView.frame = self.view.bounds
@@ -93,8 +106,13 @@ class EventDetailsViewController: UIViewController {
         collectionView.dataSource = self
         collectionView.register(MosaicCell.self, forCellWithReuseIdentifier: MosaicCell.identifer)
         
-        loadEventInfo()
+        userID = auth.currentUser?.uid
         
+        eventRef = self.db.collection("events").document(eventID!)
+        userRef = self.db.collection("users").document(userID!)
+        loadEventInfo()
+        updateLikeButton()
+        updateRSVPButton()
         // Do any additional setup after loading the view.
     }
     
@@ -103,28 +121,189 @@ class EventDetailsViewController: UIViewController {
     }
     
     @IBAction func viewMapButtonPressed(_ sender: Any) {
+        
+        let nav = self.navigationController
+        let homeVC = nav!.viewControllers[0] as! HomeViewController
+        
+        let region = (homeVC.mapView.regionThatFits(MKCoordinateRegion(center: event.coordinates!, latitudinalMeters: 0, longitudinalMeters: 1500)))
+
+        homeVC.mapView.setRegion(region, animated: true)
+            
+        self.navigationController?.popToRootViewController(animated: true)
     }
     
     @IBAction func likeButtonPressed(_ sender: Any) {
+        likeButton.isUserInteractionEnabled = false
+        //let docRef = self.db.collection("events").document(eventID!)
+        
+        let operation = likeButton.isSelected ? -1 : 1
+
+        eventRef?.updateData([
+            "numLikes": FieldValue.increment(Int64(operation))
+        ], completion: {
+            err in
+            if let err = err {
+                print("Error updating document: \(err)")
+            }
+            else{
+                //updateLikeButton()
+            }
+        })
+        
+        if(operation == 1){
+            userRef?.updateData(
+                [
+                    "likedEvents": FieldValue.arrayUnion([eventID!])
+                ], completion: {
+                    err in
+                    if let err = err {
+                        print("Error adding document: \(err)")
+                    }
+                    else{
+                        self.updateLikeButton()
+                    }
+                }
+            )
+        }
+        else{
+            userRef?.updateData(
+                [
+                    "likedEvents": FieldValue.arrayRemove([eventID!])
+                ], completion: {
+                    err in
+                    if let err = err {
+                        print("Error adding document: \(err)")
+                    }
+                    else{
+                        self.updateLikeButton()
+                    }
+                }
+            )
+        }
+        
+
+
     }
     
     @IBAction func RSVPButtonPressed(_ sender: Any) {
+        RSVPButton.isUserInteractionEnabled = false
+        //let docRef = self.db.collection("events").document(eventID!)
+        
+        
+        let operation = RSVPButton.isSelected ? -1 : 1
+
+        eventRef?.updateData([
+            "numRSVPs": FieldValue.increment(Int64(operation))
+        ], completion: {
+            err in
+            if let err = err {
+                print("Error updating document: \(err)")
+            }
+            else{
+                //self.updateRSVPButton()
+            }
+        })
+        
+        if(operation == 1){
+            userRef?.updateData(
+                [
+                    "rsvpEvents": FieldValue.arrayUnion([eventID!])
+                ], completion: {
+                    err in
+                    if let err = err {
+                        print("Error adding document: \(err)")
+                    }
+                    else{
+                        self.updateRSVPButton()
+                    }
+                }
+            )
+        }
+        else{
+            userRef?.updateData(
+                [
+                    "rsvpEvents": FieldValue.arrayRemove([eventID!])
+                ], completion: {
+                    err in
+                    if let err = err {
+                        print("Error adding document: \(err)")
+                    }
+                    else{
+                        self.updateRSVPButton()
+                    }
+                }
+            )
+        }
+
+        
+        
     }
     
     @IBAction func creatorButtonPressed(_ sender: Any) {
+        
+        if(event.organizerUID != nil){
+            let storyboard: UIStoryboard = UIStoryboard(name: "ProfileStory", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "Profile") as! ProfileViewController
+            vc.userID = event.organizerUID
+            self.show(vc, sender: self)
+        }
+
     }
     
     @IBAction func questionButtonPressed(_ sender: Any) {
+        //segue
     }
     
     @IBAction func reportButtonPressed(_ sender: Any) {
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-            if segue.identifier == imgCollectionSegue,
-               let nextVC = segue.destination as? EventImageViewController{
-                //nextVC.images = images
+    private func updateLikeButton(){
+        //let docRef = self.db.collection("users").document(userID!)
+        userRef?.getDocument { (document, error) in
+            if let document = document, document.exists {
+                let dataDescription = document.data()
+                let liked = dataDescription!["likedEvents"] as! [String]
+                if liked.contains(self.eventID!){
+                    self.likeButton.isSelected = true
+                }
+                else{
+                    self.likeButton.isSelected = false
+                }
+                self.likeButton.isUserInteractionEnabled = true
             }
+        }
+    }
+    private func updateRSVPButton(){
+        //let docRef = self.db.collection("users").document(userID!)
+        userRef?.getDocument { (document, error) in
+            if let document = document, document.exists {
+                let dataDescription = document.data()
+                let rsvp = dataDescription!["rsvpEvents"] as! [String]
+                if rsvp.contains(self.eventID!){
+                    //print("RSVP'd")
+                    //self.RSVPButton.setTitle("RSVP'd!", for: .selected)
+                    self.RSVPButton.isSelected = true
+                }
+                else{
+                    //print("did not RSVP")
+                    self.RSVPButton.isSelected = false
+                    //self.RSVPButton.setTitle("RSVP", for: .normal)
+                }
+                self.RSVPButton.isUserInteractionEnabled = true
+            }
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == imgCollectionSegue,
+           let nextVC = segue.destination as? EventImageViewController{
+            //nextVC.images = images
+        }
+        if segue.identifier == qSegue,
+           let nextVC = segue.destination as? AddQ{
+            nextVC.eventRef = eventRef
+        }
+
     }
     
     private func setOrganizerName(uid: String) {
@@ -134,7 +313,7 @@ class EventDetailsViewController: UIViewController {
                 let dataDescription = document.data()
                 let firstName = dataDescription!["firstName"] as! String
                 let lastName = dataDescription!["lastName"] as! String
-                self.creatorLabel.text = firstName + " " + lastName
+                self.creatorLabel.text = "Organized by: " + firstName + " " + lastName
             }
         }
         
@@ -146,12 +325,6 @@ class EventDetailsViewController: UIViewController {
         docRef.getDocument { [self] (document, error) in
             if let document = document, document.exists {
                 let dataDescription = document.data()
-                
-//                let addr = dataDescription!["address"] as! String
-//                self.addressLabel.text = addr
-//                let uid = dataDescription!["ownerUID"] as! String
-//                self.ownerUID = uid
-                //print(self.ownerUID)
                 
                 let address = dataDescription!["address"] as! String
                 let coordDict = dataDescription!["coordinates"] as! NSDictionary
@@ -187,44 +360,48 @@ class EventDetailsViewController: UIViewController {
                 event.organizerUID = ownerID
                 event.questions = qList
                 
-                print(event.location!)
-                print(event.coordinates!)
-                print(event.description!)
-                print(event.photoURLCollection)
-                print(event.eventName!)
-                print(event.likeNum!)
-                print(event.rsvpNum!)
-                print(event.organization!)
-                print(event.organizerUID!)
-                print(event.questions)
                 
                 titleLabel.text = event.eventName
-                dateLabel.text = "11/11/11"
+                dateLabel.text = "11/11/11" // placeholder
                 addressLabel.text = event.location
                 likesLabel.text = String(event.likeNum!)
+                RSVPsLabel.text = String(event.rsvpNum!)
                 organizationLabel.text = event.organization
                 setOrganizerName(uid: event.organizerUID!)
                 descriptionLabel.text = event.description
+                
+                for name in imageData{
+                    imageArray.append(UIImage(named: name)!)
+                }
                 
                 
                 checkAuth()
                 loadTable()
                 
+                docRef.addSnapshotListener { documentSnapshot, error in
+                        
+                        guard let document = documentSnapshot else {
+                            print("Error fetching snapshots: \(error!)")
+                            return
+                        }
+                        if let data = document.data(){
+                            let dataDescription = data
+                            self.event.likeNum = dataDescription["numLikes"] as? Int
+                            self.event.rsvpNum = dataDescription["numRSVPs"] as? Int
+                            self.likesLabel.text = "\(self.event.likeNum!) likes"
+                            self.RSVPsLabel.text = "\(self.event.rsvpNum!) going"
+                        }
+                    }
+                
             }
             
         }
+
     }
     
     func checkAuth() {
-        if (auth.currentUser == nil){
-            //print("user is nil")
-        }
-        else{
-            //print("user is not nil")
-        }
+
         if let uid = auth.currentUser?.uid{
-            //print(uid)
-            //print(ownerUID)
             
             if uid == ownerUID {
                 //print("i am the creator")
@@ -250,35 +427,20 @@ extension EventDetailsViewController: UICollectionViewDelegate, UICollectionView
         
         let curImageName = imageData[indexPath.row]
 
-        let imgToAdd = UIImage(named:curImageName)!
+        let imgToAdd = UIImage(named:curImageName)! //change later
         
         cell.imageView.image = imgToAdd
-
-//        if !assets.isEmpty {
-//            let assetIndex = indexPath.item % assets.count
-//            let asset = assets[assetIndex]
-//            let assetIdentifier = asset.localIdentifier
-//
-//            cell.assetIdentifier = assetIdentifier
-//
-//            PHImageManager.default().requestImage(for: asset, targetSize: cell.frame.size,
-//                                                  contentMode: .aspectFill, options: nil) { (image, hashable)  in
-//                                                    if let loadedImage = image, let cellIdentifier = cell.assetIdentifier {
-//
-//                                                        // Verify that the cell still has the same asset identifier,
-//                                                        // so the image in a reused cell is not overwritten.
-//                                                        if cellIdentifier == assetIdentifier {
-//                                                            cell.imageView.image = loadedImage
-//                                                        }
-//                                                    }
-//            }
-//        }
 
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        self.performSegue(withIdentifier: imgCollectionSegue, sender: nil)
+        let vc=ImagePreviewViewController()
+        vc.imgArray = self.imageArray
+        vc.passedContentOffset = IndexPath(index: 0)
+        self.navigationController?.pushViewController(vc, animated: true)
+        
+        //self.performSegue(withIdentifier: imgCollectionSegue, sender: nil)
     }
 
 }
@@ -301,29 +463,57 @@ extension EventDetailsViewController: UITableViewDelegate, UITableViewDataSource
         let cell = qaTableView.dequeueReusableCell(withIdentifier: cellTag, for: indexPath as IndexPath)
         let row = indexPath.row
         cell.textLabel?.numberOfLines = 0
+        cell.detailTextLabel?.numberOfLines = 0
         cell.textLabel?.text = event.questions[row].question
         cell.detailTextLabel?.text = event.questions[row].answer
-        //cell.textLabel?.text = questions[row].
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        qaTableView.deselectRow(at: indexPath, animated: true)
-        
-
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
 }
 
+class AddQ: UIViewController{
+    var eventRef: DocumentReference?
+    
+    let db = Firestore.firestore()
+    
+    @IBOutlet weak var qTextView: UITextView!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        qTextView.layer.borderColor = UIColor.lightGray.cgColor
+        qTextView.layer.borderWidth = 1
+    }
+    
+    @IBAction func saveButtonPressed(_ sender: Any) {
+        
+        if(qTextView.text != ""){
+            let controller = UIAlertController(title: "Confirmation", message: "Submit Question?", preferredStyle: .alert)
+            controller.addAction(UIAlertAction(title:"Yes", style: .default, handler: { [self]_ in eventRef?.updateData(["pendingQuestions": FieldValue.arrayUnion([qTextView.text!])])
+                self.dismiss(animated: true, completion: nil)
+            }))
+            controller.addAction(UIAlertAction(title:"Cancel", style: .cancel, handler: nil))
+            present(controller, animated: true, completion: nil)
+            
+        }
+        
+
+    }
+}
+
+
+
 class SelfSizingTableView: UITableView {
     var maxHeight: CGFloat = UIScreen.main.bounds.size.height
-    var padding = CGFloat(30)
+    var padding = CGFloat(80)
   
   override func reloadData() {
     super.reloadData()
     self.invalidateIntrinsicContentSize()
-    //heightConstraint.constant = tableView.contentSize.height
+    //heightConstraint.constant = contentSize.height
 //    UIView.animate(withDuration: 0.2) {
 //      self.layoutIfNeeded()
 //    }
@@ -333,6 +523,8 @@ class SelfSizingTableView: UITableView {
   
   override var intrinsicContentSize: CGSize {
     let height = min(contentSize.height + padding , maxHeight)
+    //let height = maxHeight
+    
     return CGSize(width: contentSize.width, height: height)
   }
 }

@@ -171,7 +171,7 @@ class HomeViewController: UIViewController, GetFilters {
                 }
                 snapshot.documentChanges.forEach { diff in
                     if (diff.type == .added) {
-                        print("New event: \(diff.document.data())")
+                        //print("New event: \(diff.document.data())")
                         self.addPin(diff: diff)
                     }
                     else if (diff.type == .modified) {
@@ -302,7 +302,7 @@ extension HomeViewController: CLLocationManagerDelegate, MKMapViewDelegate {
                                                 style: .default,
                                                 handler: {
                                                     [self](action) in
-                                                    //self.mapView.deselectAnnotation(annotation, animated: true)
+                                                    self.mapView.deselectAnnotation(annotation, animated: true)
                                                     let region = self.mapView.regionThatFits(MKCoordinateRegion(center: annotation.coordinate, latitudinalMeters: 0, longitudinalMeters: 10000))
                                                     self.mapView.setRegion(region, animated: true)})
 
@@ -312,15 +312,22 @@ extension HomeViewController: CLLocationManagerDelegate, MKMapViewDelegate {
                                                 style: .default,
                                                 handler: {
                                                     [self](action) in
-                                                    print(annotation.memberAnnotations)
-                                                    //self.mapView.deselectAnnotation(annotation, animated: true)
+
+                                                    let storyboard: UIStoryboard = UIStoryboard(name: "ClusterPin", bundle: nil)
+                                                    let vc = storyboard.instantiateViewController(withIdentifier: "PinTable") as! ClusterPinViewController
+                                                    
+                                                    vc.pins = annotation.memberAnnotations
+                                                    self.mapView.deselectAnnotation(annotation, animated: true)
+                                                    self.show(vc, sender: self)
+                                                    //self.present(vc, animated: true, completion: nil)
+                                                    
                                                     })
 
                 controller.addAction(detailsAction)
 
                 controller.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: {
                     action in
-                    //self.mapView.deselectAnnotation(annotation, animated: true)
+                    self.mapView.deselectAnnotation(annotation, animated: true)
                 }))
 
                 present(controller, animated: true, completion: nil)
@@ -388,6 +395,7 @@ class SideMenuListController: UITableViewController {
             let storyboard: UIStoryboard = UIStoryboard(name: "SettingsScreen", bundle: nil)
             let vc = storyboard.instantiateViewController(withIdentifier: "SettingsView") as! SettingsViewController
             self.show(vc, sender: self)
+            //self.present(vc, animated: true, completion: nil)
         }
         else if (indexPath.row == 3) {
             let controller = UIAlertController(title: "Logout", message: "Are you sure you want to log out?", preferredStyle: .alert)

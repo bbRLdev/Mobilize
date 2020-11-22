@@ -227,6 +227,7 @@ class QAandConfirmVC: UIViewController {
                     return
                 }
                 else{
+                    
                     self.navigationController?.popToRootViewController(animated: true)
 
                 }
@@ -303,7 +304,7 @@ extension QAandConfirmVC: UITableViewDelegate, UITableViewDataSource{
 
 }
 
-class addQA: UIViewController, UITextViewDelegate {
+class addQA: UIViewController{
     @IBOutlet weak var qTextView: UITextView!
     @IBOutlet weak var aTextView: UITextView!
     
@@ -316,14 +317,10 @@ class addQA: UIViewController, UITextViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        qTextView.delegate = self
-        aTextView.delegate = self
         qTextView.layer.borderColor = UIColor.lightGray.cgColor
         qTextView.layer.borderWidth = 1
         aTextView.layer.borderColor = UIColor.lightGray.cgColor
         aTextView.layer.borderWidth = 1
-        qTextView.isScrollEnabled = false
-        aTextView.isScrollEnabled = false
         
     }
     
@@ -331,8 +328,6 @@ class addQA: UIViewController, UITextViewDelegate {
         qTextView.text = question
         aTextView.text = answer
     }
-    
-    
     
     
     @IBAction func saveButtonPressed(_ sender: Any) {

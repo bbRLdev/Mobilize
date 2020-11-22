@@ -39,4 +39,6 @@ extension UIColor {
     static let appBackgroundColor = UIColor.white
 }
 
-
+func deleteEvent(eid:String){
+    
+}

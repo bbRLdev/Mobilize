@@ -42,6 +42,11 @@
 		DB4DAC8D2564C11A001C6126 /* MosaicLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4DAC8C2564C11A001C6126 /* MosaicLayout.swift */; };
 		DB4DAC912564C1AE001C6126 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4DAC902564C1AE001C6126 /* Utilities.swift */; };
 		DB4DAC952564C213001C6126 /* MosaicCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4DAC942564C213001C6126 /* MosaicCell.swift */; };
+		DB4DACDE2568A6FD001C6126 /* ClusterPin.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DB4DACDD2568A6FD001C6126 /* ClusterPin.storyboard */; };
+		DB4DACE12568AA19001C6126 /* ClusterPinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4DACE02568AA19001C6126 /* ClusterPinViewController.swift */; };
+		DB4DACE92569F46A001C6126 /* PendingQuestionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4DACE82569F46A001C6126 /* PendingQuestionsViewController.swift */; };
+		DB4DACEE256A2D13001C6126 /* ReportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4DACED256A2D12001C6126 /* ReportViewController.swift */; };
+		DB4DACF3256A3FB4001C6126 /* ImagePreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4DACF2256A3FB4001C6126 /* ImagePreviewViewController.swift */; };
 		DB51BE0D25527AF3007C65F6 /* EventModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB51BE0B25527AF3007C65F6 /* EventModel.swift */; };
 		DB51BE0E25527AF3007C65F6 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB51BE0C25527AF3007C65F6 /* UserModel.swift */; };
 		DB51BE1125527B22007C65F6 /* AddMediaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB51BE1025527B22007C65F6 /* AddMediaViewController.swift */; };
@@ -93,6 +98,11 @@
 		DB4DAC8C2564C11A001C6126 /* MosaicLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MosaicLayout.swift; sourceTree = "<group>"; };
 		DB4DAC902564C1AE001C6126 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		DB4DAC942564C213001C6126 /* MosaicCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MosaicCell.swift; sourceTree = "<group>"; };
+		DB4DACDD2568A6FD001C6126 /* ClusterPin.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ClusterPin.storyboard; sourceTree = "<group>"; };
+		DB4DACE02568AA19001C6126 /* ClusterPinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClusterPinViewController.swift; sourceTree = "<group>"; };
+		DB4DACE82569F46A001C6126 /* PendingQuestionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PendingQuestionsViewController.swift; sourceTree = "<group>"; };
+		DB4DACED256A2D12001C6126 /* ReportViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportViewController.swift; sourceTree = "<group>"; };
+		DB4DACF2256A3FB4001C6126 /* ImagePreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePreviewViewController.swift; sourceTree = "<group>"; };
 		DB51BE0B25527AF3007C65F6 /* EventModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventModel.swift; sourceTree = "<group>"; };
 		DB51BE0C25527AF3007C65F6 /* UserModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		DB51BE1025527B22007C65F6 /* AddMediaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddMediaViewController.swift; sourceTree = "<group>"; };
@@ -175,6 +185,7 @@
 				93E47C6725491704006D76BF /* LaunchScreen.storyboard */,
 				93E47C6C2549185D006D76BF /* ProfileStory.storyboard */,
 				93E47C48254912B2006D76BF /* Home.storyboard */,
+				DB4DACDD2568A6FD001C6126 /* ClusterPin.storyboard */,
 				93E47C4E254912DE006D76BF /* FilterStory.storyboard */,
 				93E47C49254912B4006D76BF /* LoginStory.storyboard */,
 				1AF47AD7253666DA0092CE1B /* Assets.xcassets */,
@@ -222,6 +233,7 @@
 				DBB17775254A52C700E2AFAA /* HomeViewController.swift */,
 				93E47C7C254A0BE1006D76BF /* SearchViewController.swift */,
 				1A91533A254A51A500370962 /* FilterViewController.swift */,
+				DB4DACE02568AA19001C6126 /* ClusterPinViewController.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -240,8 +252,9 @@
 		B960A0142542076900BC5559 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
-				DBB17773254A52B800E2AFAA /* ProfileViewController.swift */,
 				B960A0152542079900BC5559 /* ProfileEventsViewController.swift */,
+				DB4DACE82569F46A001C6126 /* PendingQuestionsViewController.swift */,
+				DBB17773254A52B800E2AFAA /* ProfileViewController.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -284,6 +297,8 @@
 			children = (
 				DB51BE1425527B7D007C65F6 /* EventDetailsViewController.swift */,
 				DB4DAC8625647CD3001C6126 /* EventImageViewController.swift */,
+				DB4DACED256A2D12001C6126 /* ReportViewController.swift */,
+				DB4DACF2256A3FB4001C6126 /* ImagePreviewViewController.swift */,
 			);
 			path = Event;
 			sourceTree = "<group>";
@@ -370,6 +385,7 @@
 				93E47C4C254912BC006D76BF /* LoginStory.storyboard in Resources */,
 				93E47C6E25491871006D76BF /* SettingsScreen.storyboard in Resources */,
 				93CC665D254B38A60075A9EE /* Settings.bundle in Resources */,
+				DB4DACDE2568A6FD001C6126 /* ClusterPin.storyboard in Resources */,
 				1AF47AD8253666DA0092CE1B /* Assets.xcassets in Resources */,
 				DBB17778254A52D900E2AFAA /* EventStory.storyboard in Resources */,
 				1AC8D93D2554F58E00DD90F4 /* GoogleService-Info.plist in Resources */,
@@ -432,12 +448,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				938CC6C4255DE10400244304 /* WelcomeViewController.swift in Sources */,
+				DB4DACE12568AA19001C6126 /* ClusterPinViewController.swift in Sources */,
 				1A91533B254A51A500370962 /* FilterViewController.swift in Sources */,
+				DB4DACE92569F46A001C6126 /* PendingQuestionsViewController.swift in Sources */,
 				1AF47AD6253666DA0092CE1B /* Mobilize.xcdatamodeld in Sources */,
 				DB4DAC952564C213001C6126 /* MosaicCell.swift in Sources */,
 				938CC6C0255DDFC700244304 /* UploadPictureViewController.swift in Sources */,
 				DB4DAC8D2564C11A001C6126 /* MosaicLayout.swift in Sources */,
 				B960A01C2542093700BC5559 /* SettingsViewController.swift in Sources */,
+				DB4DACF3256A3FB4001C6126 /* ImagePreviewViewController.swift in Sources */,
 				DB4DAC8725647CD3001C6126 /* EventImageViewController.swift in Sources */,
 				1AF47ACC253666DA0092CE1B /* AppDelegate.swift in Sources */,
 				DB51BE322554B862007C65F6 /* AnnotationModel.swift in Sources */,
@@ -453,6 +472,7 @@
 				DB4DAC912564C1AE001C6126 /* Utilities.swift in Sources */,
 				93CC6667254F9BDF0075A9EE /* UserModel.swift in Sources */,
 				1A60372925428D5100E874D5 /* QAandConfirmVC.swift in Sources */,
+				DB4DACEE256A2D13001C6126 /* ReportViewController.swift in Sources */,
 				93E47C7D254A0BE1006D76BF /* SearchViewController.swift in Sources */,
 				B960A0162542079900BC5559 /* ProfileEventsViewController.swift in Sources */,
 				DB51BE1125527B22007C65F6 /* AddMediaViewController.swift in Sources */,

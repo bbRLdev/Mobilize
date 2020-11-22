@@ -46,7 +46,7 @@ class SettingsProfileViewController: UIViewController, UITableViewDelegate, UITa
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellTag, for: indexPath as IndexPath)
         let row = indexPath.row
-        print(row)
+        //print(row)
         cell.textLabel?.text = options[row]
         return cell
     }
@@ -64,7 +64,7 @@ class SettingsProfileViewController: UIViewController, UITableViewDelegate, UITa
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "events",
            let nextVC = segue.destination as? ProfileEventsViewController {
-            nextVC.uid = profile.userID
+            nextVC.uid = Auth.auth().currentUser?.uid
         }
     }
     
