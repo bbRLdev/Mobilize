@@ -306,8 +306,8 @@
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="2kQ-77-lZJ">
                                 <rect key="frame" x="20" y="112" width="374" height="32"/>
                                 <segments>
-                                    <segment title="Created Events"/>
                                     <segment title="RSVP'd Events"/>
+                                    <segment title="Created Events"/>
                                 </segments>
                                 <connections>
                                     <action selector="segmentChanged:" destination="BOA-wF-ddr" eventType="valueChanged" id="1jp-l9-ofN"/>

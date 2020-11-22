@@ -23,7 +23,7 @@ class ProfileEventsViewController: UIViewController, UITableViewDelegate, UITabl
     var rsvpEvents:[String] = []
     var likedEvents:[String] = []
     
-    var RSVPView = false
+    var RSVPView = true
     
     var uid:String?
     
@@ -52,10 +52,10 @@ class ProfileEventsViewController: UIViewController, UITableViewDelegate, UITabl
     @IBAction func segmentChanged(_ sender: Any) {
         switch segCtrl.selectedSegmentIndex{
         case 0:
-            RSVPView = false
+            RSVPView = true
             DispatchQueue.main.async { self.eventTable.reloadData() }
         case 1:
-            RSVPView = true
+            RSVPView = false
             DispatchQueue.main.async { self.eventTable.reloadData() }
         default:
             print("error")
