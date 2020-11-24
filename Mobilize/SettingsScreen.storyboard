@@ -148,13 +148,13 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f7x-Mh-cjh">
-                                <rect key="frame" x="183" y="735" width="48" height="30"/>
+                                <rect key="frame" x="155" y="735" width="105" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Logout">
+                                <state key="normal" title="Delete Account">
                                     <color key="titleColor" systemColor="systemRedColor"/>
                                 </state>
                                 <connections>
-                                    <action selector="logoutPressed:" destination="eju-mY-WGX" eventType="touchUpInside" id="6ew-7X-xQD"/>
+                                    <action selector="deletePressed:" destination="eju-mY-WGX" eventType="touchUpInside" id="6ew-7X-xQD"/>
                                 </connections>
                             </button>
                         </subviews>

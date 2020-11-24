@@ -25,8 +25,13 @@ class CreateProfileViewController: UIViewController {
     
     @IBOutlet weak var organization: UITextField!
     
+    @IBOutlet weak var nextButton: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        nextButton.layer.cornerRadius = 4
+        bioTextView.layer.borderColor = UIColor.lightGray.cgColor
+        bioTextView.layer.borderWidth = 1
     }
     
     @IBAction func nextButtonPressed(_ sender: Any) {

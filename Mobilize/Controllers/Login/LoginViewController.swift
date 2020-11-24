@@ -45,7 +45,7 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
         cPasswordLabel.isHidden = true
         cPasswordTextField.isHidden = true
-
+        loginButton.layer.cornerRadius = 4
     }
     
     override func viewWillAppear(_ animated: Bool) {
