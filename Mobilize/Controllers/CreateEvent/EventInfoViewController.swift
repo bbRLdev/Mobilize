@@ -57,6 +57,7 @@ class EventInfoViewController: UIViewController, UITableViewDelegate, UITableVie
         searchCompleter.delegate = self
         searchResultsTableView.delegate = self
         searchResultsTableView.dataSource = self
+
         // Users cannot post an event in the same day. That would be
         // bad.
         eventDatePicker.minimumDate = Date().addingTimeInterval(86400)
@@ -225,7 +226,7 @@ class EventInfoViewController: UIViewController, UITableViewDelegate, UITableVie
             "numLikes" : 0,
             "numRSVPs" : 0,
             "activismTypeFilter" : activismTypeFilter,
-            "eventTypeFiler" : eventTypeFilter,
+            "eventTypeFilter" : eventTypeFilter,
             "date" : timeStampDate
         ]
         
@@ -261,8 +262,12 @@ class EventInfoViewController: UIViewController, UITableViewDelegate, UITableVie
     
     
     func completerDidUpdateResults(_ completer: MKLocalSearchCompleter) {
-        //searchCompleter.queryFragment = eventAddressField.text!
-        searchResults = completer.results
+        searchResults = completer.results.filter { (a) -> Bool in
+            if(a.subtitle == ""){
+                return false
+            }
+            return true
+        }
         searchResultsTableView.reloadData()
     }
     
