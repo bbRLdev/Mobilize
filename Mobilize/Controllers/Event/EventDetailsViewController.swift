@@ -312,9 +312,7 @@ class EventDetailsViewController: UIViewController {
         
     }
     func loadEventInfo() {
-        let eid = eventID
-        let docRef = self.db.collection("events").document(eid!)
-        docRef.getDocument { [self] (document, error) in
+        eventRef?.getDocument { [self] (document, error) in
             if let document = document, document.exists {
                 let dataDescription = document.data()
                 
@@ -346,7 +344,7 @@ class EventDetailsViewController: UIViewController {
                 event.coordinates = coordinates
                 event.date = date.dateValue()
                 event.description = eventDesc
-                event.photoURLCollection = imgList //change later
+                event.photoURLCollection = imgList
                 event.eventName = eventName
                 event.likeNum = likes
                 event.rsvpNum = RSVPs
@@ -368,24 +366,30 @@ class EventDetailsViewController: UIViewController {
                 descriptionLabel.text = event.description
                 
                 
-                //imageArray.append(UIImage(named: blankImage)!)
+                imageArray.append(UIImage(named: blankImage)!)
                 //collectionView.reloadData()
                 
                 let storageRef = Storage.storage().reference(forURL: "gs://mobilize-77a05.appspot.com")
                 
+                let total = event.photoURLCollection.count
+                if(total == 0){
+                    collectionView.reloadData()
+                }
+                
+                var count = 0
+                var empty = true
+                var loadedImages = [UIImage](repeating: UIImage(), count: total)
+                
                 var imgLoadingFlag = false {
                         willSet {
                             if newValue == true {
+                                if(!empty){
+                                    imageArray = loadedImages
+                                }
                                 collectionView.reloadData()
-                                //imageArray.remove(at: 0)
                             }
                         }
                 }
-                
-                let total = event.photoURLCollection.count
-                var count = 0
-                
-                imageArray = [UIImage](repeating: UIImage(), count: total)
                 
                 for (i, pid) in event.photoURLCollection.enumerated(){
                     let imgRef = storageRef.child("events/\(eventID!)").child(pid)
@@ -394,8 +398,8 @@ class EventDetailsViewController: UIViewController {
                         if error != nil {
                             print("error getting image")
                         } else {
-                            imageArray[i] = UIImage(data: data!)!
-
+                            loadedImages[i] = UIImage(data: data!)!
+                            empty = false
                         }
                         count += 1
                         if(count >= total){
@@ -406,17 +410,10 @@ class EventDetailsViewController: UIViewController {
                     })
                 }
                 
-                
-
-//                for name in imageData{
-//                    imageArray.append(UIImage(named: name)!)
-//                }
-                
-                
                 checkAuth()
                 loadTable()
                 
-                docRef.addSnapshotListener { documentSnapshot, error in
+                eventRef?.addSnapshotListener { documentSnapshot, error in
                         
                         guard let document = documentSnapshot else {
                             print("Error fetching snapshots: \(error!)")
