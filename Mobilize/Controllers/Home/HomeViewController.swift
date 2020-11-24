@@ -116,6 +116,9 @@ class HomeViewController: UIViewController, GetFilters {
     
     private func addPin(diff :DocumentChange){
         let dataDescription = diff.document.data()
+        if(dataDescription["coordinates"] == nil){
+            return
+        }
         let coordDict = dataDescription["coordinates"] as? NSDictionary
         let eventName = dataDescription["name"] as? String
         let ownerID = dataDescription["owner"] as? String
