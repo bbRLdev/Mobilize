@@ -152,10 +152,13 @@ class QAandConfirmVC: UIViewController {
         }
         
         func uploadNewImages(eventId: String) {
+            if(images.count == 0){
+                imgLoadingFlag = false
+                return
+            }
             
             let storageRef = Storage.storage().reference(forURL: "gs://mobilize-77a05.appspot.com")
             let metadata = StorageMetadata()
-            
             
             metadata.contentType = "image/jpg"
             var refs: [String] = []

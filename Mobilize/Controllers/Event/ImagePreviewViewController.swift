@@ -30,7 +30,15 @@ class ImagePreviewViewController: UIViewController, UICollectionViewDelegate, UI
         myCollectionView.dataSource=self
         myCollectionView.register(ImagePreviewFullViewCell.self, forCellWithReuseIdentifier: "Cell")
         myCollectionView.isPagingEnabled = true
-        myCollectionView.scrollToItem(at: passedContentOffset, at: .left, animated: true)
+
+        let offset = myCollectionView.contentOffset
+        let width  = myCollectionView.bounds.size.width
+        
+        let newOffset = CGPoint(x: CGFloat(passedContentOffset.row) * width, y: offset.y)
+        
+        myCollectionView.setContentOffset(newOffset, animated: false)
+
+        
         
         self.view.addSubview(myCollectionView)
         
