@@ -10,6 +10,7 @@ import MapKit
 
 class AnnotationModel: MKPointAnnotation{
     var eventID: String
+    var date:Date?
     init(eid: String){
         eventID = eid
     }

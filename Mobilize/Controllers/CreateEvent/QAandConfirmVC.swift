@@ -35,7 +35,7 @@ class QAandConfirmVC: UIViewController {
         willSet {
             if newValue == false {
                 //questions.append(q)
-                collectionLoadingFlag = true
+                //collectionLoadingFlag = true
                 uploadCollection()
             }
         }
@@ -184,6 +184,7 @@ class QAandConfirmVC: UIViewController {
     
     func uploadCollection() {
         let docRef: DocumentReference = db.collection("events").document(eventSoFar["eventID"] as! String)
+      
         var questionsList = [[String:String]]()
         
         for question: Question in questions{
@@ -194,12 +195,15 @@ class QAandConfirmVC: UIViewController {
         docRef.setData(eventSoFar,
             merge: false, completion: {
                 err in
+
                 if let err = err {
                     print("Error adding document: \(err)")
                     return
                 }
                 else{
-                    self.collectionLoadingFlag = false
+                    
+                    self.navigationController?.popToRootViewController(animated: true)
+
                 }
             }
         )
@@ -274,7 +278,7 @@ extension QAandConfirmVC: UITableViewDelegate, UITableViewDataSource {
 
 }
 
-class addQA: UIViewController, UITextViewDelegate {
+class addQA: UIViewController{
     @IBOutlet weak var qTextView: UITextView!
     @IBOutlet weak var aTextView: UITextView!
     
@@ -287,14 +291,10 @@ class addQA: UIViewController, UITextViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        qTextView.delegate = self
-        aTextView.delegate = self
         qTextView.layer.borderColor = UIColor.lightGray.cgColor
         qTextView.layer.borderWidth = 1
         aTextView.layer.borderColor = UIColor.lightGray.cgColor
         aTextView.layer.borderWidth = 1
-        qTextView.isScrollEnabled = false
-        aTextView.isScrollEnabled = false
         
     }
     
@@ -302,8 +302,6 @@ class addQA: UIViewController, UITextViewDelegate {
         qTextView.text = question
         aTextView.text = answer
     }
-    
-    
     
     
     @IBAction func saveButtonPressed(_ sender: Any) {

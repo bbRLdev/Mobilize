@@ -33,6 +33,11 @@ class HomeViewController: UIViewController, GetFilters {
     var user:UserModel?
     var login:LoginModel?
     
+    var eventListener:ListenerRegistration?
+    var selectedPin:MKAnnotation?
+    
+    //var coordToPin:[CLLocationCoordinate2D:[AnnotationModel]] = [:]
+    
     let userNotification = Notification.Name(rawValue: "userModelNotificationKey")
     
     var pending = UIAlertController(title: "Signing in\n\n", message: nil, preferredStyle: .alert)
@@ -47,6 +52,7 @@ class HomeViewController: UIViewController, GetFilters {
             // need to try loading in user data
             loadInUserData()
         }
+        mapView.register(LocationDataMapClusterView.self, forAnnotationViewWithReuseIdentifier: "cluster")
     }
     
     func loadInUserData() {
@@ -87,6 +93,14 @@ class HomeViewController: UIViewController, GetFilters {
             nextVC.initActivismButtons = activismFilters
             nextVC.initEventButtons = eventFilters
         }
+//        else if segue.identifier == "ListEventsSegue"{
+//            let nextVC = segue.destination as? FilterViewController {
+//             nextVC.delegate = self
+//             nextVC.radius = searchRadius
+//             nextVC.initActivismButtons = activismFilters
+//             nextVC.initEventButtons = eventFilters
+//         }
+//        }
     }
     
     @IBAction func sideNavButtonPressed(_ sender: Any) {
@@ -127,10 +141,12 @@ class HomeViewController: UIViewController, GetFilters {
         let coordinates = CLLocationCoordinate2DMake(latitude, longitude)
         
         let annotation = AnnotationModel(eid: diff.document.documentID)
+        
         annotation.title = eventName
         annotation.subtitle = ownerOrg
         //print(ownerOrg!)
         annotation.coordinate = coordinates
+        
         
         self.mapView.addAnnotation(annotation)
 
@@ -145,7 +161,7 @@ class HomeViewController: UIViewController, GetFilters {
         }
     }
     func loadPins(){
-        db.collection("events")
+        eventListener = db.collection("events")
             .addSnapshotListener { querySnapshot, error in
                 
                 guard let snapshot = querySnapshot else {
@@ -220,6 +236,7 @@ class HomeViewController: UIViewController, GetFilters {
     
 }
 
+
 extension HomeViewController: CLLocationManagerDelegate, MKMapViewDelegate {
     
     
@@ -227,45 +244,98 @@ extension HomeViewController: CLLocationManagerDelegate, MKMapViewDelegate {
         mapView.delegate = self
     }
     
-    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-        if let annotation = view.annotation as? AnnotationModel {
+
+    @objc func infoClicked(){
+        if let annotation = selectedPin as? AnnotationModel{
             print(annotation.eventID)
-            
-            let controller = UIAlertController(title: "Options for",
-                                               message: annotation.title,
-                                                preferredStyle: .actionSheet)
-            
-            let zoomAction = UIAlertAction(title: "Focus Map",
-                                            style: .default,
-                                            handler: {
-                                                [self](action) in
-                                                self.mapView.deselectAnnotation(annotation, animated: true)
-                                                let region = self.mapView.regionThatFits(MKCoordinateRegion(center: annotation.coordinate, latitudinalMeters: 0, longitudinalMeters: 1000))
-                                                self.mapView.setRegion(region, animated: true)})
-            
-            controller.addAction(zoomAction)
-            
-            let detailsAction = UIAlertAction(title: "Event Details",
-                                            style: .default,
-                                            handler: {
-                                                [self](action) in
-                                                self.mapView.deselectAnnotation(annotation, animated: true)
-                                                let storyboard: UIStoryboard = UIStoryboard(name: "EventStory", bundle: nil)
-                                                let vc = storyboard.instantiateViewController(withIdentifier: "EventView") as! EventDetailsViewController
-                                                
-                                                vc.eventID = annotation.eventID
-                                                self.show(vc, sender: self)})
-            
-            controller.addAction(detailsAction)
-            
-            controller.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: {
-                action in
-                self.mapView.deselectAnnotation(annotation, animated: true)
-            }))
-            
-            present(controller, animated: true, completion: nil)
-            
+            let storyboard: UIStoryboard = UIStoryboard(name: "EventStory", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "EventView") as! EventDetailsViewController
+
+            vc.eventID = annotation.eventID
+            self.show(vc, sender: self)
+
         }
+    }
+    
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        
+        switch annotation {
+        
+        case is AnnotationModel:
+
+
+            
+            let view = mapView.dequeueReusableAnnotationView(withIdentifier: MKMapViewDefaultAnnotationViewReuseIdentifier, for: annotation)
+            view.clusteringIdentifier = "cluster"
+            view.canShowCallout = true
+            
+            let btn = UIButton(type: .detailDisclosure)
+            
+            btn.addTarget(self, action:#selector(self.infoClicked), for: .touchUpInside)
+            view.rightCalloutAccessoryView = btn
+            
+            
+            return view
+        case is MKClusterAnnotation:
+            let view = mapView.dequeueReusableAnnotationView(withIdentifier: MKMapViewDefaultClusterAnnotationViewReuseIdentifier, for: annotation)
+            return view
+        default:
+            return nil
+        }
+    }
+    
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        
+        switch view.annotation {
+        
+        case is AnnotationModel:
+            selectedPin = view.annotation
+        case is MKClusterAnnotation:
+            
+            if let annotation = view.annotation as? MKClusterAnnotation{
+                let controller = UIAlertController(title: "Options for",
+                                                   message: "annotation cluster",
+                                                    preferredStyle: .actionSheet)
+
+                let zoomAction = UIAlertAction(title: "Focus Map",
+                                                style: .default,
+                                                handler: {
+                                                    [self](action) in
+                                                    self.mapView.deselectAnnotation(annotation, animated: true)
+                                                    let region = self.mapView.regionThatFits(MKCoordinateRegion(center: annotation.coordinate, latitudinalMeters: 0, longitudinalMeters: 10000))
+                                                    self.mapView.setRegion(region, animated: true)})
+
+                controller.addAction(zoomAction)
+
+                let detailsAction = UIAlertAction(title: "List All Events",
+                                                style: .default,
+                                                handler: {
+                                                    [self](action) in
+
+                                                    let storyboard: UIStoryboard = UIStoryboard(name: "ClusterPin", bundle: nil)
+                                                    let vc = storyboard.instantiateViewController(withIdentifier: "PinTable") as! ClusterPinViewController
+                                                    
+                                                    vc.pins = annotation.memberAnnotations
+                                                    self.mapView.deselectAnnotation(annotation, animated: true)
+                                                    self.show(vc, sender: self)
+                                                    //self.present(vc, animated: true, completion: nil)
+                                                    
+                                                    })
+
+                controller.addAction(detailsAction)
+
+                controller.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: {
+                    action in
+                    self.mapView.deselectAnnotation(annotation, animated: true)
+                }))
+
+                present(controller, animated: true, completion: nil)
+            }
+
+        default:
+            return
+        }
+
     }
     // update the location on map when user moves around
     // (leave out? annoying b/c stops user from moving map around)

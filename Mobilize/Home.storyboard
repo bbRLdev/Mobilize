@@ -11,7 +11,7 @@
         <!--Home View Controller-->
         <scene sceneID="Fbg-xe-3kO">
             <objects>
-                <viewController id="DcC-jA-gKe" customClass="HomeViewController" customModule="Mobilize" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="map" id="DcC-jA-gKe" customClass="HomeViewController" customModule="Mobilize" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="0hl-5C-Uz0">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
