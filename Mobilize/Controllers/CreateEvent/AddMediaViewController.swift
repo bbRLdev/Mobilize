@@ -159,7 +159,10 @@ class AddMediaViewController: UIViewController, UIImagePickerControllerDelegate,
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == segueId,
            let nextVC = segue.destination as? QAandConfirmVC {
-            event.photoURLCollection = imageRefs
+            if(event != nil){
+                event.photoURLCollection = imageRefs
+            }
+
             eventSoFar["photoIDCollection"] = nil
             var imageRefList = [[String : String]]()
             var count: Int = 0
@@ -168,6 +171,7 @@ class AddMediaViewController: UIViewController, UIImagePickerControllerDelegate,
                 count += 1
             }
             eventSoFar["photoIDCollection"] = imageRefList
+            nextVC.images = images
             nextVC.event = event
             nextVC.eventSoFar = eventSoFar
         }
