@@ -26,15 +26,7 @@ class EventDetailsViewController: UIViewController {
     var eventRef: DocumentReference?
     var userRef: DocumentReference?
     
-    
-    var imageData = ["BlankProfile",
-                     "BlankProfile",
-                     "BlankProfile",
-                     "BlankProfile",
-                     "BlankProfile",
-                     "BlankProfile",
-                     "BlankProfile",
-                     "BlankProfile"]
+    var blankImage = "PeopleIcon"
     
     var imageArray=[UIImage]()
     
@@ -328,8 +320,9 @@ class EventDetailsViewController: UIViewController {
                 
                 let address = dataDescription!["address"] as! String
                 let coordDict = dataDescription!["coordinates"] as! NSDictionary
+                let date = dataDescription!["date"] as! Timestamp
                 let eventDesc = dataDescription!["description"] as! String
-                let imgList = dataDescription!["imgURLs"] as? [String] ?? []
+                let imgList = dataDescription!["photoIDCollection"] as? [String] ?? []
                 let eventName = dataDescription!["name"] as! String
                 let likes = dataDescription!["numLikes"] as! Int
                 let RSVPs = dataDescription!["numRSVPs"] as! Int
@@ -351,6 +344,7 @@ class EventDetailsViewController: UIViewController {
                 event = EventModel()
                 event.location = address
                 event.coordinates = coordinates
+                event.date = date.dateValue()
                 event.description = eventDesc
                 event.photoURLCollection = imgList //change later
                 event.eventName = eventName
@@ -360,9 +354,12 @@ class EventDetailsViewController: UIViewController {
                 event.organizerUID = ownerID
                 event.questions = qList
                 
+                let dFormatter = DateFormatter()
+                dFormatter.dateStyle = .medium
+                dFormatter.timeStyle = .medium
                 
                 titleLabel.text = event.eventName
-                dateLabel.text = "11/11/11" // placeholder
+                dateLabel.text = dFormatter.string(from: event.date ?? Date())
                 addressLabel.text = event.location
                 likesLabel.text = String(event.likeNum!)
                 RSVPsLabel.text = String(event.rsvpNum!)
@@ -370,9 +367,50 @@ class EventDetailsViewController: UIViewController {
                 setOrganizerName(uid: event.organizerUID!)
                 descriptionLabel.text = event.description
                 
-                for name in imageData{
-                    imageArray.append(UIImage(named: name)!)
+                
+                //imageArray.append(UIImage(named: blankImage)!)
+                //collectionView.reloadData()
+                
+                let storageRef = Storage.storage().reference(forURL: "gs://mobilize-77a05.appspot.com")
+                
+                var imgLoadingFlag = false {
+                        willSet {
+                            if newValue == true {
+                                collectionView.reloadData()
+                                //imageArray.remove(at: 0)
+                            }
+                        }
                 }
+                
+                let total = event.photoURLCollection.count
+                var count = 0
+                
+                imageArray = [UIImage](repeating: UIImage(), count: total)
+                
+                for (i, pid) in event.photoURLCollection.enumerated(){
+                    let imgRef = storageRef.child("events/\(eventID!)").child(pid)
+                    imgRef.getData(maxSize: 1 * 2048 * 2048, completion: {
+                        data, error in
+                        if error != nil {
+                            print("error getting image")
+                        } else {
+                            imageArray[i] = UIImage(data: data!)!
+
+                        }
+                        count += 1
+                        if(count >= total){
+                            if(!imgLoadingFlag){
+                                imgLoadingFlag = true
+                            }
+                        }
+                    })
+                }
+                
+                
+
+//                for name in imageData{
+//                    imageArray.append(UIImage(named: name)!)
+//                }
                 
                 
                 checkAuth()
@@ -418,16 +456,14 @@ class EventDetailsViewController: UIViewController {
 extension EventDetailsViewController: UICollectionViewDelegate, UICollectionViewDataSource{
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return imageData.count
+        return imageArray.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MosaicCell.identifer, for: indexPath) as? MosaicCell
             else { preconditionFailure("Failed to load collection view cell") }
         
-        let curImageName = imageData[indexPath.row]
-
-        let imgToAdd = UIImage(named:curImageName)! //change later
+        let imgToAdd = imageArray[indexPath.row]
         
         cell.imageView.image = imgToAdd
 
@@ -437,7 +473,7 @@ extension EventDetailsViewController: UICollectionViewDelegate, UICollectionView
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let vc=ImagePreviewViewController()
         vc.imgArray = self.imageArray
-        vc.passedContentOffset = IndexPath(index: 0)
+        vc.passedContentOffset = indexPath
         self.navigationController?.pushViewController(vc, animated: true)
         
         //self.performSegue(withIdentifier: imgCollectionSegue, sender: nil)
