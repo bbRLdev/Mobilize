@@ -29,6 +29,10 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
     override func viewDidLoad() {
         super.viewDidLoad()
         imagePicker.delegate = self
+        profilePicture.layer.cornerRadius = profilePicture.frame.size.width / 2
+        profilePicture.clipsToBounds = true
+        profilePicture.layer.borderColor = UIColor.gray.cgColor
+        profilePicture.layer.borderWidth = 4
         //loadProfileInfo()
     }
     

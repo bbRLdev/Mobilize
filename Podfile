@@ -14,7 +14,9 @@ target 'Mobilize' do
   pod 'Firebase/Auth'
   pod 'Firebase/Database'
   pod 'Firebase/Firestore'
+  # Storage pods
   pod 'Firebase/Storage'
+  pod 'FirebaseUI/Storage'
   # Optionally, include the Swift extensions if you're using Swift.
   pod 'FirebaseFirestoreSwift'
   pod 'Firebase/Storage'

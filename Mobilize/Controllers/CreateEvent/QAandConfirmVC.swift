@@ -34,8 +34,6 @@ class QAandConfirmVC: UIViewController {
     var imgLoadingFlag = false {
         willSet {
             if newValue == false {
-                print(imgURLs)
-                eventSoFar["imgURLs"] = imgURLs
                 //questions.append(q)
                 //collectionLoadingFlag = true
                 uploadCollection()
@@ -45,17 +43,19 @@ class QAandConfirmVC: UIViewController {
     }
     
     
-//    var collectionLoadingFlag = false {
-//        willSet {
-//            if newValue == false {
-//                self.navigationController?.popToRootViewController(animated: true)
-//            }
-//            else{
-//                //createButton.isUserInteractionEnabled = true
-//                //createButton.setTitle("Create Event", for: .normal)
-//            }
-//        }
-//    }
+    var collectionLoadingFlag = false {
+        willSet {
+            if newValue == false {
+                saveToProfile(uid: eventSoFar["ownerUID"] as! String,
+                              eid: eventSoFar["eventID"] as! String)
+                self.navigationController?.popToRootViewController(animated: true)
+            }
+            else{
+                //createButton.isUserInteractionEnabled = true
+                //createButton.setTitle("Create Event", for: .normal)
+            }
+        }
+    }
     
 
     override func viewDidLoad() {
@@ -102,8 +102,10 @@ class QAandConfirmVC: UIViewController {
                     eventSoFar["eventID"] = event.eventID
                 }
                 imgLoadingFlag = true
-                uploadImages(eventId: eid)
-                saveToProfile(uid: uid, eid: eid)
+                //check if event So Far has any photo ids in delete
+                // field and handle requests if necessary
+                // deleteImages(eventID: eid)
+                uploadNewImages(eventId: eid)
             }
 
             
@@ -150,25 +152,19 @@ class QAandConfirmVC: UIViewController {
         )
     }
     
-    func uploadImages(eventId: String) {
-//        var noError: Bool
-        
-//        if (images.count == 0){
-//            imgLoadingFlag = false
-//            return
-//        }
-        
+    func uploadNewImages(eventId: String) {
         let storageRef = Storage.storage().reference(forURL: "gs://mobilize-77a05.appspot.com")
         let metadata = StorageMetadata()
         metadata.contentType = "image/jpg"
+        var refs: [String] = []
         var count: Int = 0 {
             willSet {
                 if newValue > images.count {
+                    eventSoFar["photoIDCollection"] = refs
                     imgLoadingFlag = false
                 }
             }
         }
-        count += 1
         for image in images {
             let imageId = UUID().uuidString
             if let imageData = image.jpegData(compressionQuality: 4.0) {
@@ -179,20 +175,8 @@ class QAandConfirmVC: UIViewController {
                         print("error uploading image \(imageId)")
                         return
                     }
-                    //print("no errors")
-                    eventRef.downloadURL(completion: { (url, error) in
-                        if let err = error {
-                            print(err.localizedDescription)
-                            return
-                        }
-                        //print("no errors 2")
-
-                        guard let url = url else { return }
-                        self.imgURLs.append(url.absoluteString)
-                        
-                        //increment does not allow printing of updated value
-                        count += 1
-                    })
+                    refs.append(imageId)
+                    count += 1
                 })
             }
         }
@@ -200,16 +184,7 @@ class QAandConfirmVC: UIViewController {
     
     func uploadCollection() {
         let docRef: DocumentReference = db.collection("events").document(eventSoFar["eventID"] as! String)
-        //print("Got here")
-//        var count: Int = 0 {
-//            willSet {
-//                if newValue >= questions.count {
-//                    collectionLoadingFlag = false
-//                }
-//            }
-//        }
-        
-        print(eventSoFar)
+      
         var questionsList = [[String:String]]()
         
         for question: Question in questions{
@@ -217,7 +192,6 @@ class QAandConfirmVC: UIViewController {
             questionsList.append(temp)
         }
         eventSoFar["questions"] = questionsList
-
         docRef.setData(eventSoFar,
             merge: false, completion: {
                 err in
@@ -257,7 +231,7 @@ class QAandConfirmVC: UIViewController {
     }
 
 }
-extension QAandConfirmVC: UITableViewDelegate, UITableViewDataSource{
+extension QAandConfirmVC: UITableViewDelegate, UITableViewDataSource {
     
     
     func loadTable(){

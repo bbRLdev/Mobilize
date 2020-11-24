@@ -12,10 +12,21 @@ class WelcomeViewController: UIViewController {
     
     @IBOutlet weak var nameLabel: UILabel!
     
+    @IBOutlet weak var continueButton: UIButton!
+    
+    @IBOutlet weak var profilePicture: UIImageView!
+    
     var user:UserModel?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        continueButton.layer.cornerRadius = 4
+        profilePicture.image = user?.profilePicture
+        profilePicture.layer.cornerRadius = profilePicture.frame.size.width / 2
+        profilePicture.clipsToBounds = true
+        profilePicture.layer.borderColor = UIColor.gray.cgColor
+        profilePicture.layer.borderWidth = 3
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {

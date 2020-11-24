@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1A55F5C125678A5F00B5903E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1A55F5C025678A5F00B5903E /* GoogleService-Info.plist */; };
 		1A6036E4254234A900E874D5 /* ControlContainableScrollview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A6036E3254234A900E874D5 /* ControlContainableScrollview.swift */; };
 		1A6037172542804A00E874D5 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1A6037162542804A00E874D5 /* GoogleService-Info.plist */; };
 		1A603726254286D600E874D5 /* ConfirmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A603725254286D600E874D5 /* ConfirmViewController.swift */; };
@@ -17,6 +18,7 @@
 		1AF47ACC253666DA0092CE1B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF47ACB253666DA0092CE1B /* AppDelegate.swift */; };
 		1AF47AD6253666DA0092CE1B /* Mobilize.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1AF47AD4253666DA0092CE1B /* Mobilize.xcdatamodeld */; };
 		1AF47AD8253666DA0092CE1B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1AF47AD7253666DA0092CE1B /* Assets.xcassets */; };
+		9334F52F2566E230004F5B53 /* SideMenuListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9334F52E2566E230004F5B53 /* SideMenuListController.swift */; };
 		934E6AFC253F8EA000DA9392 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 934E6AFB253F8EA000DA9392 /* LoginViewController.swift */; };
 		938CC6BC255DDCE200244304 /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 938CC6BB255DDCE200244304 /* LoginModel.swift */; };
 		938CC6C0255DDFC700244304 /* UploadPictureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 938CC6BF255DDFC700244304 /* UploadPictureViewController.swift */; };
@@ -59,6 +61,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1A55F5C025678A5F00B5903E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		1A6036E3254234A900E874D5 /* ControlContainableScrollview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlContainableScrollview.swift; sourceTree = "<group>"; };
 		1A6037162542804A00E874D5 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		1A603725254286D600E874D5 /* ConfirmViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmViewController.swift; sourceTree = "<group>"; };
@@ -73,6 +76,7 @@
 		1AF47ADC253666DA0092CE1B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2CC66262A03F9E3F9A513159 /* Pods-Mobilize.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mobilize.debug.xcconfig"; path = "Target Support Files/Pods-Mobilize/Pods-Mobilize.debug.xcconfig"; sourceTree = "<group>"; };
 		2F96F08B931D41834245C92F /* Pods-Mobilize.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mobilize.release.xcconfig"; path = "Target Support Files/Pods-Mobilize/Pods-Mobilize.release.xcconfig"; sourceTree = "<group>"; };
+		9334F52E2566E230004F5B53 /* SideMenuListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuListController.swift; sourceTree = "<group>"; };
 		934E6AFB253F8EA000DA9392 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		938CC6BB255DDCE200244304 /* LoginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
 		938CC6BF255DDFC700244304 /* UploadPictureViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadPictureViewController.swift; sourceTree = "<group>"; };
@@ -171,6 +175,7 @@
 				DB4DAC932564C1F6001C6126 /* Cells */,
 				DB4DAC8F2564C17B001C6126 /* Utilities */,
 				DB4DAC8B2564C0D5001C6126 /* Layouts */,
+				1A55F5C025678A5F00B5903E /* GoogleService-Info.plist */,
 				93CC6661254F9BAD0075A9EE /* Models */,
 				1A6037162542804A00E874D5 /* GoogleService-Info.plist */,
 				1AC8D93C2554F58E00DD90F4 /* GoogleService-Info.plist */,
@@ -234,6 +239,7 @@
 				93E47C7C254A0BE1006D76BF /* SearchViewController.swift */,
 				1A91533A254A51A500370962 /* FilterViewController.swift */,
 				DB4DACE02568AA19001C6126 /* ClusterPinViewController.swift */,
+				9334F52E2566E230004F5B53 /* SideMenuListController.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -382,6 +388,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1A55F5C125678A5F00B5903E /* GoogleService-Info.plist in Resources */,
 				93E47C4C254912BC006D76BF /* LoginStory.storyboard in Resources */,
 				93E47C6E25491871006D76BF /* SettingsScreen.storyboard in Resources */,
 				93CC665D254B38A60075A9EE /* Settings.bundle in Resources */,
@@ -458,6 +465,7 @@
 				B960A01C2542093700BC5559 /* SettingsViewController.swift in Sources */,
 				DB4DACF3256A3FB4001C6126 /* ImagePreviewViewController.swift in Sources */,
 				DB4DAC8725647CD3001C6126 /* EventImageViewController.swift in Sources */,
+				9334F52F2566E230004F5B53 /* SideMenuListController.swift in Sources */,
 				1AF47ACC253666DA0092CE1B /* AppDelegate.swift in Sources */,
 				DB51BE322554B862007C65F6 /* AnnotationModel.swift in Sources */,
 				1A6036E4254234A900E874D5 /* ControlContainableScrollview.swift in Sources */,

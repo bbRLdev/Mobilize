@@ -33,10 +33,16 @@ class UploadPictureViewController: UIViewController, UIImagePickerControllerDele
     var pending = UIAlertController(title: "Creating Profile\n\n", message: nil, preferredStyle: .alert)
     
     @IBOutlet weak var profilePicture: UIImageView!
+    @IBOutlet weak var createProfileButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         imagePicker.delegate = self
+        profilePicture.layer.cornerRadius = profilePicture.frame.size.width / 2
+        profilePicture.clipsToBounds = true
+        profilePicture.layer.borderColor = UIColor.gray.cgColor
+        profilePicture.layer.borderWidth = 4
+        createProfileButton.layer.cornerRadius = 4
     }
     
     @IBAction func choosePicturePressed(_ sender: Any) {
