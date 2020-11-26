@@ -57,6 +57,10 @@ class EventDetailsViewController: UIViewController {
     
     @IBOutlet weak var creatorLabel: UILabel!
     
+    @IBOutlet weak var activismTypeLabel: UILabel!
+    
+    @IBOutlet weak var eventTypeLabel: UILabel!
+    
     @IBOutlet weak var descriptionLabel: UILabel!
     
     @IBOutlet weak var qaTableView: SelfSizingTableView!
@@ -316,6 +320,8 @@ class EventDetailsViewController: UIViewController {
             if let document = document, document.exists {
                 let dataDescription = document.data()
                 
+                let activismTypeFilter = dataDescription?["activismTypeFilter"] as! String
+                let eventTypeFilter = dataDescription?["eventTypeFilter"] as! String
                 let address = dataDescription!["address"] as! String
                 let coordDict = dataDescription!["coordinates"] as! NSDictionary
                 let date = dataDescription!["date"] as! Timestamp
@@ -364,6 +370,8 @@ class EventDetailsViewController: UIViewController {
                 organizationLabel.text = event.organization
                 setOrganizerName(uid: event.organizerUID!)
                 descriptionLabel.text = event.description
+                activismTypeLabel.text = "Activism: " + activismTypeFilter
+                eventTypeLabel.text = "Event Type: " + eventTypeFilter
                 
                 
                 imageArray.append(UIImage(named: blankImage)!)
