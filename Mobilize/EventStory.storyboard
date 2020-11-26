@@ -242,9 +242,9 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lG6-V8-aoU">
-                                                <rect key="frame" x="40" y="482" width="81" height="30"/>
-                                                <state key="normal" title="View profile"/>
-                                                <state key="disabled" title="Profile view disabled">
+                                                <rect key="frame" x="40" y="482" width="149" height="30"/>
+                                                <state key="normal" title="View organizer profile"/>
+                                                <state key="disabled" title="Go back to view organizer profile">
                                                     <color key="titleColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
