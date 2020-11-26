@@ -19,6 +19,8 @@ class EventDetailsViewController: UIViewController {
     let qSegue = "qSegue"
     //let homeSegue = "homeSegue"
     
+    var disableButtons = false
+    
     var eventID: String?
     var userID: String?
     var ownerUID: String?
@@ -43,6 +45,10 @@ class EventDetailsViewController: UIViewController {
     
     @IBOutlet weak var RSVPButton: UIButton!
     
+    @IBOutlet weak var questionButton: UIButton!
+    
+    @IBOutlet weak var viewProfileButton: UIButton!
+    
     @IBOutlet weak var titleLabel: UILabel!
     
     @IBOutlet weak var dateLabel: UILabel!
@@ -65,7 +71,6 @@ class EventDetailsViewController: UIViewController {
     
     @IBOutlet weak var qaTableView: SelfSizingTableView!
     
-    
     @IBOutlet weak var collectionView: UICollectionView!
     
     override func viewWillAppear(_ animated: Bool) {
@@ -74,7 +79,13 @@ class EventDetailsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        if(disableButtons){
+            viewProfileButton.isUserInteractionEnabled = false
+            viewProfileButton.isEnabled = false
+        }
+        
         editButton.isHidden = true
+        questionButton.isHidden = true
         
         qaTableView.maxHeight = 400
         qaTableView.delegate = self
@@ -346,6 +357,7 @@ class EventDetailsViewController: UIViewController {
                 
                 ownerUID = ownerID
                 event = EventModel()
+                event.eventID = eventID
                 event.location = address
                 event.coordinates = coordinates
                 event.date = date.dateValue()
@@ -372,6 +384,28 @@ class EventDetailsViewController: UIViewController {
                 descriptionLabel.text = event.description
                 activismTypeLabel.text = "Activism: " + activismTypeFilter
                 eventTypeLabel.text = "Event Type: " + eventTypeFilter
+                
+                var aFilter: EventModel.ActivismFilterType?
+                var eFilter: EventModel.EventFilterType?
+                
+                for activism in EventModel.ActivismFilterType.allCases{
+                    if(activism.rawValue == activismTypeFilter){
+                        aFilter = activism
+                        break
+                    }
+                }
+                
+                for event in EventModel.EventFilterType.allCases{
+                    if(event.rawValue == eventTypeFilter){
+                        eFilter = event
+                        break
+                    }
+                }
+                
+                event.activismType = aFilter?.rawValue
+                event.eventType = eFilter?.rawValue
+                
+                
                 
                 
                 imageArray.append(UIImage(named: blankImage)!)
@@ -443,19 +477,13 @@ class EventDetailsViewController: UIViewController {
     }
     
     func checkAuth() {
-
         if let uid = auth.currentUser?.uid{
-            
-            if uid == ownerUID {
-                //print("i am the creator")
-                editButton.isHidden = false
-                
+            if uid != ownerUID {
+                questionButton.isHidden = false
             }
         }
 
     }
-
-
 }
 
 extension EventDetailsViewController: UICollectionViewDelegate, UICollectionViewDataSource{

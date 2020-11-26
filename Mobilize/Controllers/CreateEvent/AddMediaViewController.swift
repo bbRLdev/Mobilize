@@ -5,6 +5,7 @@
 //  Created by Michael Labarca on 11/3/20.
 //
 
+//MARK: TODO: fix imageref indexing
 import UIKit
 import FirebaseStorage
 import FirebaseUI
@@ -29,20 +30,34 @@ class AddMediaViewController: UIViewController, UIImagePickerControllerDelegate,
     
     override func viewDidLoad() {
         super.viewDidLoad()
+//        if event != nil {
+//            // we must be editing an already created event, so
+//            // load the images
+//            images = retrieveImages()
+//        }
+//
+//        setUpCells()
+        imagePicker.delegate = self
+        eventPicturesCollection.dataSource = self
+        eventPicturesCollection.delegate = self
+
+        //eventPicturesCollection.reloadData()
+        //setUpCells()
+
+        // Do any additional setup after loading the view.
+    }
+    
+    // MARK: EDIT
+    override func viewWillAppear(_ animated: Bool) {
         if event != nil {
             // we must be editing an already created event, so
             // load the images
             images = retrieveImages()
         }
+
         setUpCells()
-        imagePicker.delegate = self
-        eventPicturesCollection.dataSource = self
-        eventPicturesCollection.delegate = self
-
-        eventPicturesCollection.reloadData()
-
-        // Do any additional setup after loading the view.
     }
+    // MARK: ENDEDIT
     
     func setUpCells() {
         var placeholderCount: Int = 0
@@ -51,13 +66,22 @@ class AddMediaViewController: UIViewController, UIImagePickerControllerDelegate,
         var numImages = 0
         if images.count != 0 {
             numImages = images.count
+
             for i in 0...numImages - 1 {
                 let imageCell = createImageCell()
                 imageCell.hasImage = true
                 let placeholderImage = UIImage(systemName: "questionmark")
+                
                 if images[i] != nil && images[i]!.isEqual(placeholderImage) {
                     let ref = storageRef.child("events/\(event.eventID!)").child(imageRefs[placeholderCount])
-                    imageCell.imageMeta.sd_setImage(with: ref, placeholderImage: images[i])
+                    
+                    // MARK: EDIT
+                    imageCell.imageMeta.sd_setImage(with: ref, placeholderImage: images[i]){_,_,_,_ in
+                        self.eventPicturesCollection.reloadData()
+
+                    }
+                    // MARK: ENDEDIT
+                    
                     imageCell.imageIndex = i
                     imageCell.refIndex = placeholderCount
                     placeholderCount += 1
@@ -65,12 +89,13 @@ class AddMediaViewController: UIViewController, UIImagePickerControllerDelegate,
                     imageCell.imageMeta.image = images[i]
                     imageCell.imageIndex = i
                 }
+                
                 imageCell.editButtonMeta.tag = i
                 let smallConfig = UIImage.SymbolConfiguration(pointSize: 24, weight: .medium, scale: .small)
                 let deleteImage = UIImage(systemName: "xmark", withConfiguration: smallConfig)?
                            .withTintColor(.white, renderingMode: .alwaysOriginal)
                 imageCell.editButtonMeta.setImage(deleteImage, for: .normal)
-                cells.append(imageCell)
+                self.cells.append(imageCell)
             }
         }
         for i in numImages...7 {
@@ -83,6 +108,7 @@ class AddMediaViewController: UIViewController, UIImagePickerControllerDelegate,
             imageCell.editButtonMeta.setImage(plusImage, for: .normal)
             cells.append(imageCell)
         }
+        
     }
     
     // Create a basic ImageCell by setting up the looks that are shared between all regardless of whether there
@@ -122,13 +148,17 @@ class AddMediaViewController: UIViewController, UIImagePickerControllerDelegate,
             let controller = UIAlertController(title: "Delete Photo?", message: "", preferredStyle: .actionSheet)
             controller.addAction(UIAlertAction(title:"Delete", style: .destructive, handler: {
                 _ in
-                let cell = self.cells[sender.tag]
+                
+
+                var cell = self.cells[sender.tag] //changed from let to var
                 if let refIndex = cell.refIndex {
                     self.imageRefs.remove(at: refIndex)
                     self.images.remove(at: cell.imageIndex)
                 } else {
                     self.images.remove(at: cell.imageIndex)
                 }
+                
+                
                 self.cells = []
                 self.setUpCells()
                 self.eventPicturesCollection.reloadData()
@@ -140,7 +170,9 @@ class AddMediaViewController: UIViewController, UIImagePickerControllerDelegate,
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let image = info[.editedImage] as? UIImage {
+            
             self.images.append(image)
+            
         }
         self.cells = []
         setUpCells()
@@ -180,10 +212,16 @@ class AddMediaViewController: UIViewController, UIImagePickerControllerDelegate,
     // Download the images from our existing model.
     func retrieveImages() -> [UIImage?] {
         var ret: [UIImage?] = []
-        for i in 0...event.photoURLCollection.count - 1 {
-            imageRefs.append(event.photoURLCollection[i])
-            ret.append(UIImage(systemName: "questionmark"))
+        
+        // MARK: EDIT
+        if(event.photoURLCollection.count > 0){
+            for i in 0...event.photoURLCollection.count-1 {
+                imageRefs.append(event.photoURLCollection[i])
+                ret.append(UIImage(systemName: "questionmark"))
+            }
         }
+        // MARK: ENDEDIT
+
         return ret
     }
     

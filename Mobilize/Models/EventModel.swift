@@ -11,7 +11,6 @@ import MapKit
 typealias Question = (question: String, answer: String)
 
 
-
 class EventModel {
     var coordinates: CLLocationCoordinate2D?
     var date: Date?
@@ -25,6 +24,8 @@ class EventModel {
     var rsvpNum: Int?
     var questions: [Question] = []
     var photoURLCollection: [String] = []
+    var activismType: String?
+    var eventType: String?
 
     enum ActivismFilterType: String, CaseIterable {
         case racialJustice = "Racial Justice",

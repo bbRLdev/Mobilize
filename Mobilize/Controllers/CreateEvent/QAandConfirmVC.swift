@@ -5,6 +5,7 @@
 //  Created by Michael Labarca on 10/22/20.
 //
 
+//MARK: TODO: remove image ref from event.photoIDCollection when deleting
 import UIKit
 import FirebaseAuth
 import FirebaseFirestore
@@ -104,7 +105,7 @@ class QAandConfirmVC: UIViewController {
                     //check if event So Far has any photo ids in delete
                     // field and handle requests if necessary
                     // deleteImages(eventID: eid)
-                    uploadNewImages(eventId: eid)
+                    uploadNewImages(eventId: eventSoFar["eventID"] as? String ?? "")
                 }
 
                 

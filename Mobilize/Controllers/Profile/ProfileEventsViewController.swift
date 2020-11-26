@@ -7,7 +7,7 @@
 import UIKit
 import Firebase
 
-class ProfileEventsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class ProfileEventsViewController: UIViewController {
     
     let db = Firestore.firestore()
     
@@ -38,7 +38,7 @@ class ProfileEventsViewController: UIViewController, UITableViewDelegate, UITabl
         refreshControl.addTarget(self, action: #selector(refreshTable), for: .valueChanged)
         // Do any additional setup after loading the view.
         //load()
-
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -103,6 +103,90 @@ class ProfileEventsViewController: UIViewController, UITableViewDelegate, UITabl
         
     }
     
+ 
+    @IBAction func RSVP(_ sender: Any) {
+        RSVPView = true
+        DispatchQueue.main.async { self.eventTable.reloadData() }
+    }
+    @IBAction func organizingEvent(_ sender: Any) {
+        RSVPView = false
+        DispatchQueue.main.async { self.eventTable.reloadData() }
+    }
+    
+    private func load() {
+
+        let userRef = self.db.collection("users").document(uid!)
+        userRef.getDocument { (document, error) in
+            if let document = document, document.exists {
+                let dataDescription = document.data()
+                
+                self.createdEvents = dataDescription!["createdEvents"] as? [String] ?? []
+                self.rsvpEvents = dataDescription!["rsvpEvents"] as? [String] ?? []
+                self.likedEvents = dataDescription!["likedEvents"] as? [String] ?? []
+                
+                DispatchQueue.main.async { self.eventTable.reloadData() }
+                self.checkData(userRef: userRef)
+                self.refreshControl.endRefreshing()
+            } else {
+                print("Document does not exist")
+            }
+        }
+    }
+    
+    private func checkData(userRef: DocumentReference){
+        let createdList = createdEvents
+        let RSVPList = rsvpEvents
+        let likedList = likedEvents
+        
+        for created in createdList{
+            //print(created)
+            let eventRef = self.db.collection("events").document(created)
+            eventRef.getDocument{ (document, error) in
+                if let document = document, document.exists{}
+                else{
+                    if let idx = self.createdEvents.firstIndex(of: created){
+                        self.createdEvents.remove(at: idx)
+                        DispatchQueue.main.async { self.eventTable.reloadData() }
+                    }
+                    userRef.updateData(["createdEvents": FieldValue.arrayRemove([created])])
+                }
+
+            }
+        }
+        for rsvped in RSVPList{
+            let eventRef = self.db.collection("events").document(rsvped)
+            eventRef.getDocument{ (document, error) in
+                if let document = document, document.exists{}
+                else{
+                    if let idx = self.rsvpEvents.firstIndex(of: rsvped){
+                        self.rsvpEvents.remove(at: idx)
+                        DispatchQueue.main.async { self.eventTable.reloadData() }
+                    }
+                    userRef.updateData(["rsvpEvents": FieldValue.arrayRemove([rsvped])])
+                }
+
+            }
+        }
+        for liked in likedList{
+            let eventRef = self.db.collection("events").document(liked)
+            eventRef.getDocument{ (document, error) in
+                if let document = document, document.exists{}
+                else{
+                    if let idx = self.likedEvents.firstIndex(of: liked){
+                        self.likedEvents.remove(at: idx)
+                        DispatchQueue.main.async { self.eventTable.reloadData() }
+                    }
+                    userRef.updateData(["likedEvents": FieldValue.arrayRemove([liked])])
+                }
+
+            }
+        }
+    }
+    
+
+}
+
+extension ProfileEventsViewController: UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if(RSVPView){
@@ -249,86 +333,7 @@ class ProfileEventsViewController: UIViewController, UITableViewDelegate, UITabl
         }
 
     }
- 
-    @IBAction func RSVP(_ sender: Any) {
-        RSVPView = true
-        DispatchQueue.main.async { self.eventTable.reloadData() }
-    }
-    @IBAction func organizingEvent(_ sender: Any) {
-        RSVPView = false
-        DispatchQueue.main.async { self.eventTable.reloadData() }
-    }
     
-    private func load() {
-
-        let userRef = self.db.collection("users").document(uid!)
-        userRef.getDocument { (document, error) in
-            if let document = document, document.exists {
-                let dataDescription = document.data()
-                
-                self.createdEvents = dataDescription!["createdEvents"] as? [String] ?? []
-                self.rsvpEvents = dataDescription!["rsvpEvents"] as? [String] ?? []
-                self.likedEvents = dataDescription!["likedEvents"] as? [String] ?? []
-                
-                DispatchQueue.main.async { self.eventTable.reloadData() }
-                self.checkData(userRef: userRef)
-                self.refreshControl.endRefreshing()
-            } else {
-                print("Document does not exist")
-            }
-        }
-    }
-    
-    private func checkData(userRef: DocumentReference){
-        let createdList = createdEvents
-        let RSVPList = rsvpEvents
-        let likedList = likedEvents
-        
-        for created in createdList{
-            //print(created)
-            let eventRef = self.db.collection("events").document(created)
-            eventRef.getDocument{ (document, error) in
-                if let document = document, document.exists{}
-                else{
-                    if let idx = self.createdEvents.firstIndex(of: created){
-                        self.createdEvents.remove(at: idx)
-                        DispatchQueue.main.async { self.eventTable.reloadData() }
-                    }
-                    userRef.updateData(["createdEvents": FieldValue.arrayRemove([created])])
-                }
-
-            }
-        }
-        for rsvped in RSVPList{
-            let eventRef = self.db.collection("events").document(rsvped)
-            eventRef.getDocument{ (document, error) in
-                if let document = document, document.exists{}
-                else{
-                    if let idx = self.rsvpEvents.firstIndex(of: rsvped){
-                        self.rsvpEvents.remove(at: idx)
-                        DispatchQueue.main.async { self.eventTable.reloadData() }
-                    }
-                    userRef.updateData(["rsvpEvents": FieldValue.arrayRemove([rsvped])])
-                }
-
-            }
-        }
-        for liked in likedList{
-            let eventRef = self.db.collection("events").document(liked)
-            eventRef.getDocument{ (document, error) in
-                if let document = document, document.exists{}
-                else{
-                    if let idx = self.likedEvents.firstIndex(of: liked){
-                        self.likedEvents.remove(at: idx)
-                        DispatchQueue.main.async { self.eventTable.reloadData() }
-                    }
-                    userRef.updateData(["likedEvents": FieldValue.arrayRemove([liked])])
-                }
-
-            }
-        }
-    }
-
 }
 
 

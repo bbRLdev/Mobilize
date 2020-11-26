@@ -81,6 +81,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         let storyboard: UIStoryboard = UIStoryboard(name: "EventStory", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "EventView") as! EventDetailsViewController
         vc.eventID = createdEvents[indexPath.row]
+        vc.disableButtons = true
         self.show(vc, sender: self)
     }
     

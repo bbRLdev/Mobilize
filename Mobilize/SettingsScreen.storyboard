@@ -3,6 +3,7 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -382,7 +383,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="XiO-Bu-9LO">
-                                <rect key="frame" x="20" y="161" width="374" height="463"/>
+                                <rect key="frame" x="20" y="161" width="374" height="505"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="qCell" id="A7k-T5-MLr">
@@ -395,20 +396,33 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pending Questions" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="16x-pH-Fnt">
-                                <rect key="frame" x="40" y="112" width="195" height="29"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Event Management" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="16x-pH-Fnt">
+                                <rect key="frame" x="20" y="124" width="200" height="29"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Szu-Sy-gGX">
+                                <rect key="frame" x="129" y="675" width="156" height="39"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="32"/>
+                                <state key="normal" title="Edit Event" image="pencil" catalog="system">
+                                    <color key="titleColor" systemColor="systemBlueColor"/>
+                                </state>
+                                <state key="disabled" title="Edit My Event">
+                                    <color key="titleColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="editEventButtonPressed:" destination="AeH-LT-peI" eventType="touchUpInside" id="Qhb-0J-G7v"/>
+                                </connections>
+                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="203-Fl-Iii">
-                                <rect key="frame" x="121" y="724" width="172" height="38"/>
+                                <rect key="frame" x="20" y="105" width="145.5" height="19"/>
                                 <state key="normal" image="arrow.right" catalog="system">
                                     <attributedString key="attributedTitle">
-                                        <fragment content="View Event">
+                                        <fragment content="View event details">
                                             <attributes>
                                                 <color key="NSColor" name="systemBlueColor" catalog="System" colorSpace="catalog"/>
-                                                <font key="NSFont" metaFont="system" size="32"/>
+                                                <font key="NSFont" metaFont="system" size="17"/>
                                                 <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                             </attributes>
                                         </fragment>
@@ -418,18 +432,33 @@
                                     <action selector="viewButtonPressed:" destination="AeH-LT-peI" eventType="touchUpInside" id="dNg-xK-s6o"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vf3-GE-4mu">
+                                <rect key="frame" x="153.5" y="786" width="107" height="21"/>
+                                <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="15"/>
+                                <state key="normal" title="Delete Event">
+                                    <color key="titleColor" systemColor="systemRedColor"/>
+                                    <imageReference key="image" image="trash" catalog="system" symbolScale="default" renderingMode="original"/>
+                                </state>
+                                <connections>
+                                    <action selector="deleteEventButtonPressed:" destination="AeH-LT-peI" eventType="touchUpInside" id="WZN-7E-AZw"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Q9x-QN-QxH"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="16x-pH-Fnt" firstAttribute="top" secondItem="Q9x-QN-QxH" secondAttribute="top" constant="24" id="0Di-2c-DvZ"/>
-                            <constraint firstItem="Q9x-QN-QxH" firstAttribute="bottom" secondItem="203-Fl-Iii" secondAttribute="bottom" constant="100" id="21k-je-n50"/>
-                            <constraint firstItem="XiO-Bu-9LO" firstAttribute="top" secondItem="16x-pH-Fnt" secondAttribute="bottom" constant="20" id="4Yh-2S-3XM"/>
+                            <constraint firstItem="16x-pH-Fnt" firstAttribute="top" secondItem="Q9x-QN-QxH" secondAttribute="top" constant="36" id="0Di-2c-DvZ"/>
+                            <constraint firstItem="XiO-Bu-9LO" firstAttribute="top" secondItem="16x-pH-Fnt" secondAttribute="bottom" constant="8" id="4Yh-2S-3XM"/>
                             <constraint firstItem="XiO-Bu-9LO" firstAttribute="leading" secondItem="Q9x-QN-QxH" secondAttribute="leading" constant="20" id="4j1-zD-IwR"/>
+                            <constraint firstItem="XiO-Bu-9LO" firstAttribute="bottom" secondItem="Szu-Sy-gGX" secondAttribute="bottom" constant="-48" id="AMx-nX-iSU"/>
+                            <constraint firstItem="Vf3-GE-4mu" firstAttribute="centerX" secondItem="U3m-BY-nCC" secondAttribute="centerX" id="HwC-qL-8dF"/>
+                            <constraint firstItem="16x-pH-Fnt" firstAttribute="top" secondItem="203-Fl-Iii" secondAttribute="bottom" id="JVa-VA-Ovv"/>
+                            <constraint firstItem="Q9x-QN-QxH" firstAttribute="bottom" secondItem="Vf3-GE-4mu" secondAttribute="bottom" constant="55" id="Mul-vu-I0Q"/>
+                            <constraint firstItem="Szu-Sy-gGX" firstAttribute="centerX" secondItem="U3m-BY-nCC" secondAttribute="centerX" id="O3Y-My-xy3"/>
                             <constraint firstItem="Q9x-QN-QxH" firstAttribute="trailing" secondItem="XiO-Bu-9LO" secondAttribute="trailing" constant="20" id="SK2-XC-gTD"/>
-                            <constraint firstItem="203-Fl-Iii" firstAttribute="top" secondItem="XiO-Bu-9LO" secondAttribute="bottom" constant="100" id="ZIO-tY-Fs9"/>
-                            <constraint firstItem="203-Fl-Iii" firstAttribute="centerX" secondItem="U3m-BY-nCC" secondAttribute="centerX" id="b54-mB-h1y"/>
-                            <constraint firstItem="16x-pH-Fnt" firstAttribute="leading" secondItem="Q9x-QN-QxH" secondAttribute="leading" constant="40" id="xHP-5s-h2Z"/>
+                            <constraint firstItem="Vf3-GE-4mu" firstAttribute="top" secondItem="Szu-Sy-gGX" secondAttribute="bottom" constant="72" id="dcx-UI-xig"/>
+                            <constraint firstItem="16x-pH-Fnt" firstAttribute="leading" secondItem="Q9x-QN-QxH" secondAttribute="leading" constant="20" id="xHP-5s-h2Z"/>
+                            <constraint firstItem="203-Fl-Iii" firstAttribute="leading" secondItem="Q9x-QN-QxH" secondAttribute="leading" constant="20" id="xrT-7O-Ryb"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Jex-uU-i0L">
@@ -440,6 +469,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="editEventButton" destination="Szu-Sy-gGX" id="9Kb-4Q-CTL"/>
                         <outlet property="tableView" destination="XiO-Bu-9LO" id="TC9-dV-9BS"/>
                     </connections>
                 </viewController>
@@ -536,11 +566,16 @@
     </scenes>
     <resources>
         <image name="arrow.right" catalog="system" width="128" height="98"/>
+        <image name="pencil" catalog="system" width="128" height="113"/>
+        <image name="trash" catalog="system" width="121" height="128"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemBlueColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemRedColor">
             <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

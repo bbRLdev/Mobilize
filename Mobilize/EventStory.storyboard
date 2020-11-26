@@ -244,6 +244,9 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lG6-V8-aoU">
                                                 <rect key="frame" x="40" y="482" width="81" height="30"/>
                                                 <state key="normal" title="View profile"/>
+                                                <state key="disabled" title="Profile view disabled">
+                                                    <color key="titleColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
                                                 <connections>
                                                     <action selector="creatorButtonPressed:" destination="66d-7J-4gf" eventType="touchUpInside" id="0Dv-qF-O5o"/>
                                                 </connections>
@@ -383,7 +386,9 @@
                         <outlet property="likesLabel" destination="O5m-ts-AqY" id="Zz5-cl-EC4"/>
                         <outlet property="organizationLabel" destination="08m-Tg-18Y" id="PvC-sx-Ujo"/>
                         <outlet property="qaTableView" destination="eTs-87-WMt" id="ws9-cf-dKb"/>
+                        <outlet property="questionButton" destination="dzb-tx-Hwc" id="sgZ-MU-A1L"/>
                         <outlet property="titleLabel" destination="xfl-SY-xBy" id="gWf-FY-VJh"/>
+                        <outlet property="viewProfileButton" destination="lG6-V8-aoU" id="L9p-3T-yVN"/>
                         <segue destination="2bN-A4-caj" kind="presentation" identifier="imageCollectionSegue" id="yPL-Ok-2tq"/>
                     </connections>
                 </viewController>
