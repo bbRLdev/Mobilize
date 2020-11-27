@@ -192,7 +192,7 @@ class AddMediaViewController: UIViewController, UIImagePickerControllerDelegate,
         if segue.identifier == segueId,
            let nextVC = segue.destination as? QAandConfirmVC {
             if(event != nil){
-                event.photoURLCollection = imageRefs
+                event.photoIdCollection = imageRefs
             }
 
             eventSoFar["photoIDCollection"] = nil
@@ -214,9 +214,9 @@ class AddMediaViewController: UIViewController, UIImagePickerControllerDelegate,
         var ret: [UIImage?] = []
         
         // MARK: EDIT
-        if(event.photoURLCollection.count > 0){
-            for i in 0...event.photoURLCollection.count-1 {
-                imageRefs.append(event.photoURLCollection[i])
+        if(event.photoIdCollection.count > 0){
+            for i in 0...event.photoIdCollection.count-1 {
+                imageRefs.append(event.photoIdCollection[i])
                 ret.append(UIImage(systemName: "questionmark"))
             }
         }

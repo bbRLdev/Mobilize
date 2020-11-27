@@ -23,7 +23,7 @@ class EventModel {
     var likeNum: Int?
     var rsvpNum: Int?
     var questions: [Question] = []
-    var photoURLCollection: [String] = []
+    var photoIdCollection: [String] = []
     var activismType: String?
     var eventType: String?
 

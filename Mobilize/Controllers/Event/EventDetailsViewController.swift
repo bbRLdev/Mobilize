@@ -362,7 +362,7 @@ class EventDetailsViewController: UIViewController {
                 event.coordinates = coordinates
                 event.date = date.dateValue()
                 event.description = eventDesc
-                event.photoURLCollection = imgList
+                event.photoIdCollection = imgList
                 event.eventName = eventName
                 event.likeNum = likes
                 event.rsvpNum = RSVPs
@@ -413,7 +413,7 @@ class EventDetailsViewController: UIViewController {
                 
                 let storageRef = Storage.storage().reference(forURL: "gs://mobilize-77a05.appspot.com")
                 
-                let total = event.photoURLCollection.count
+                let total = event.photoIdCollection.count
                 if(total == 0){
                     collectionView.reloadData()
                 }
@@ -433,7 +433,7 @@ class EventDetailsViewController: UIViewController {
                         }
                 }
                 
-                for (i, pid) in event.photoURLCollection.enumerated(){
+                for (i, pid) in event.photoIdCollection.enumerated(){
                     let imgRef = storageRef.child("events/\(eventID!)").child(pid)
                     imgRef.getData(maxSize: 1 * 2048 * 2048, completion: {
                         data, error in

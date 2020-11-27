@@ -171,7 +171,7 @@ class PendingQuestionsViewController: UIViewController {
                 event.coordinates = coordinates
                 event.date = date.dateValue()
                 event.description = eventDesc
-                event.photoURLCollection = imgList
+                event.photoIdCollection = imgList
                 event.eventName = eventName
                 event.likeNum = likes
                 event.rsvpNum = RSVPs
