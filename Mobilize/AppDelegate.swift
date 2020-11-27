@@ -12,7 +12,7 @@ import FirebaseAuth
 import CoreLocation
 
 @main
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
     
     let userDefault = UserDefaults.standard
     let launchedBefore = UserDefaults.standard.bool(forKey: "usersingedin")
@@ -25,9 +25,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // request notifications
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert], completionHandler: { (success, error) in
         })
+        UNUserNotificationCenter.current().delegate = self
         locationManager.requestWhenInUseAuthorization()
         return true
     }
+    
+    // This method is called when user clicked on the notification
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void)
+    {
+        let rootViewController = self.window!.rootViewController as! UINavigationController
+
+        let eventStoryboard : UIStoryboard = UIStoryboard(name: "EventStory", bundle: nil)
+        let vc : EventDetailsViewController = eventStoryboard.instantiateViewController(withIdentifier: "EventView") as! EventDetailsViewController
+        
+        let eventID = response.notification.request.identifier
+        vc.eventID = eventID
+
+        rootViewController.pushViewController(vc, animated: true)
+    }
+
     
     private func configureInitialViewController() {
         let loggedIn = checkIfLoggedIn()

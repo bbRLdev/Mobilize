@@ -17,26 +17,34 @@ class SideMenuListController: UIViewController {
     var tableView = UITableView()
     var imageView: UIImageView!
     var name: UILabel!
+    var user: UserModel?
         
     var items = [NavLinks.profile.rawValue, NavLinks.events.rawValue, NavLinks.settings.rawValue, NavLinks.logout.rawValue]
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         view.backgroundColor = UIColor.white
-        
         setUpImageView()
-        
         setUpLabel()
-        
         setupTableView()
-        
         self.tableView.separatorStyle = UITableViewCell.SeparatorStyle.none
-        
-        loadProfileInfo()
-        
+        //loadProfileInfo()
+        //loadUserModelInfo()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        loadProfileInfo()
+        //loadUserModelInfo()
+    }
+    
+    // load in from user state
+    func loadUserModelInfo() {
+        self.name.text = (user?.first)! + " " + (user?.last)!
+        self.imageView.image = user?.profilePicture
+    }
+    
+    // load in from firebase
     func loadProfileInfo() {
         let userID = Auth.auth().currentUser?.uid
         let docRef = Firestore.firestore().collection("users").document(userID!)
@@ -161,7 +169,6 @@ extension SideMenuListController: UITableViewDataSource, UITableViewDelegate {
             cell.imageView?.image = resizeImageWithAspect(image: UIImage(systemName: "arrow.right")!, scaledToMaxWidth: 25, maxHeight: 25)?.withTintColor(UIColor.red)
         }
         
-        
         return cell
     }
     
@@ -188,17 +195,18 @@ extension SideMenuListController: UITableViewDataSource, UITableViewDelegate {
         if(indexPath.row == 0) {
             let storyboard: UIStoryboard = UIStoryboard(name: "SettingsScreen", bundle: nil)
             let vc = storyboard.instantiateViewController(withIdentifier: "Profile") as! SettingsProfileViewController
+            vc.profile = user
             self.show(vc, sender: self)
         } else if (indexPath.row == 1) {
             let storyboard: UIStoryboard = UIStoryboard(name: "SettingsScreen", bundle: nil)
             let vc = storyboard.instantiateViewController(withIdentifier: "ProfileEvents") as! ProfileEventsViewController
-            
             let userID = Auth.auth().currentUser?.uid
             vc.uid = userID
             self.show(vc, sender: self)
         } else if (indexPath.row == 2) {
             let storyboard: UIStoryboard = UIStoryboard(name: "SettingsScreen", bundle: nil)
             let vc = storyboard.instantiateViewController(withIdentifier: "SettingsView") as! SettingsViewController
+            vc.user = user
             self.show(vc, sender: self)
         }
         else if (indexPath.row == 3) {

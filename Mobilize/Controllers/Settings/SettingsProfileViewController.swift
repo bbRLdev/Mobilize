@@ -21,7 +21,7 @@ class SettingsProfileViewController: UIViewController, UITableViewDelegate, UITa
     @IBOutlet var organization: UILabel!
     @IBOutlet weak var bioTextView: UITextView!
     let db = Firestore.firestore()
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         Options.delegate = self
@@ -30,17 +30,19 @@ class SettingsProfileViewController: UIViewController, UITableViewDelegate, UITa
         profilePic.clipsToBounds = true
         profilePic.layer.borderColor = UIColor.gray.cgColor
         profilePic.layer.borderWidth = 4
-        
     }
     
-//    override func viewDidAppear(_ animated: Bool) {
-//        super.viewDidAppear(false)
-//        loadProfileInfo()
-//    }
-    
     override func viewWillAppear(_ animated: Bool) {
-        //super.viewWillAppear(false)
         loadProfileInfo()
+        //loadUserModelInfo()
+    }
+    
+    // load in from user state
+    func loadUserModelInfo() {
+        self.profilePic.image = profile.profilePicture
+        self.name.text = (profile?.first)! + " " + (profile?.last)!
+        self.organization.text = profile?.organization
+        self.bioTextView.text = profile?.bio
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -50,7 +52,6 @@ class SettingsProfileViewController: UIViewController, UITableViewDelegate, UITa
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellTag, for: indexPath as IndexPath)
         let row = indexPath.row
-        //print(row)
         cell.textLabel?.text = options[row]
         return cell
     }
@@ -72,6 +73,7 @@ class SettingsProfileViewController: UIViewController, UITableViewDelegate, UITa
         }
     }
     
+    // load in from firebase
     func loadProfileInfo() {
         let userID = Auth.auth().currentUser?.uid
         let docRef = self.db.collection("users").document(userID!)
@@ -83,11 +85,6 @@ class SettingsProfileViewController: UIViewController, UITableViewDelegate, UITa
                 let lastName = dataDescription!["lastName"] as! String
                 let org = dataDescription!["organization"] as! String
                 let bio = dataDescription!["bio"] as! String
-                
-                //
-                //needs more work
-                //self.profile = UserModel(uid: userID!, first: firstName, last: lastName, organization: org, bio: bio, profilePicture: "", eventsRSVPd: [], eventsCreated: [], eventsLiked: [])
-                
                 
                 self.name.text = firstName + " " + lastName
                 self.organization.text = org

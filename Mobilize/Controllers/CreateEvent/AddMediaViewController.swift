@@ -22,6 +22,7 @@ class AddMediaViewController: UIViewController, UIImagePickerControllerDelegate,
     
     let storage = Storage.storage()
     let auth = Auth.auth()
+    var dateComponents: DateComponents!
 
     
     @IBOutlet weak var eventPicturesCollection: UICollectionView!
@@ -174,6 +175,7 @@ class AddMediaViewController: UIViewController, UIImagePickerControllerDelegate,
             nextVC.images = images
             nextVC.event = event
             nextVC.eventSoFar = eventSoFar
+            nextVC.dateComponents = dateComponents
         }
     }
     

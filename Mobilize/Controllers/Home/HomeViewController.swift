@@ -81,7 +81,9 @@ class HomeViewController: UIViewController, GetFilters {
     
     // called after observer is notified that user data is loaded
     @objc func dismissLoading() {
-        user = login?.getUserModel()
+        user = login!.getUserModel()
+        let menuVC = SideMenuManager.default.leftMenuNavigationController?.viewControllers.first as! SideMenuListController
+        menuVC.user = user
         pending.dismiss(animated: true, completion: nil)
     }
     
@@ -93,6 +95,10 @@ class HomeViewController: UIViewController, GetFilters {
             nextVC.initActivismButtons = activismFilters
             nextVC.initEventButtons = eventFilters
         }
+//        if let sideMenuVC = segue.destination as? SideMenuListController {
+//            print("GOT HERE")
+//            sideMenuVC.user = user!
+//        }
 //        else if segue.identifier == "ListEventsSegue"{
 //            let nextVC = segue.destination as? FilterViewController {
 //             nextVC.delegate = self
@@ -104,7 +110,7 @@ class HomeViewController: UIViewController, GetFilters {
     }
     
     @IBAction func sideNavButtonPressed(_ sender: Any) {
-        present(sideMenu!, animated: true)
+        present(SideMenuManager.default.leftMenuNavigationController!, animated: true)
     }
     
     @IBAction func createEvent(_ sender: Any) {
@@ -118,13 +124,12 @@ class HomeViewController: UIViewController, GetFilters {
         activismFilters = actFilters
         eventFilters = evtFilters
         searchRadius = radius
-
     }
     
     func setUpSideMenu() {
         sideMenu = SideMenuNavigationController(rootViewController: SideMenuListController())
         sideMenu?.leftSide = true
-        SideMenuManager.default.leftMenuNavigationController = sideMenu        
+        SideMenuManager.default.leftMenuNavigationController = sideMenu
     }
     
     private func addPin(diff :DocumentChange){
@@ -147,7 +152,6 @@ class HomeViewController: UIViewController, GetFilters {
         //print(ownerOrg!)
         annotation.coordinate = coordinates
         
-        
         self.mapView.addAnnotation(annotation)
 
     }
@@ -160,6 +164,7 @@ class HomeViewController: UIViewController, GetFilters {
             }
         }
     }
+    
     func loadPins(){
         eventListener = db.collection("events")
             .addSnapshotListener { querySnapshot, error in
@@ -239,11 +244,9 @@ class HomeViewController: UIViewController, GetFilters {
 
 extension HomeViewController: CLLocationManagerDelegate, MKMapViewDelegate {
     
-    
     func setMapDelegate(){
         mapView.delegate = self
     }
-    
 
     @objc func infoClicked(){
         if let annotation = selectedPin as? AnnotationModel{
@@ -262,8 +265,6 @@ extension HomeViewController: CLLocationManagerDelegate, MKMapViewDelegate {
         switch annotation {
         
         case is AnnotationModel:
-
-
             
             let view = mapView.dequeueReusableAnnotationView(withIdentifier: MKMapViewDefaultAnnotationViewReuseIdentifier, for: annotation)
             view.clusteringIdentifier = "cluster"
@@ -273,7 +274,6 @@ extension HomeViewController: CLLocationManagerDelegate, MKMapViewDelegate {
             
             btn.addTarget(self, action:#selector(self.infoClicked), for: .touchUpInside)
             view.rightCalloutAccessoryView = btn
-            
             
             return view
         case is MKClusterAnnotation:
