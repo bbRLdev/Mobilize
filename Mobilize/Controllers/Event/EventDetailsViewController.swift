@@ -269,7 +269,7 @@ class EventDetailsViewController: UIViewController {
         userRef?.getDocument { (document, error) in
             if let document = document, document.exists {
                 let dataDescription = document.data()
-                let liked = dataDescription!["likedEvents"] as! [String]
+                let liked = dataDescription!["likedEvents"] as? [String] ?? []
                 if liked.contains(self.eventID!){
                     self.likeButton.isSelected = true
                 }
@@ -285,7 +285,7 @@ class EventDetailsViewController: UIViewController {
         userRef?.getDocument { (document, error) in
             if let document = document, document.exists {
                 let dataDescription = document.data()
-                let rsvp = dataDescription!["rsvpEvents"] as! [String]
+                let rsvp = dataDescription!["rsvpEvents"] as? [String] ?? []
                 if rsvp.contains(self.eventID!){
                     //print("RSVP'd")
                     //self.RSVPButton.setTitle("RSVP'd!", for: .selected)

@@ -11,6 +11,7 @@
 		1A6036E4254234A900E874D5 /* ControlContainableScrollview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A6036E3254234A900E874D5 /* ControlContainableScrollview.swift */; };
 		1A603726254286D600E874D5 /* ConfirmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A603725254286D600E874D5 /* ConfirmViewController.swift */; };
 		1A60372925428D5100E874D5 /* QAandConfirmVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A60372825428D5100E874D5 /* QAandConfirmVC.swift */; };
+		1A63C4B42570761A00E65868 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1A63C4B32570761A00E65868 /* GoogleService-Info.plist */; };
 		1A91533B254A51A500370962 /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A91533A254A51A500370962 /* FilterViewController.swift */; };
 		1A915341254E068D00370962 /* EventInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A915340254E068D00370962 /* EventInfoViewController.swift */; };
 		1AF47ACC253666DA0092CE1B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF47ACB253666DA0092CE1B /* AppDelegate.swift */; };
@@ -61,6 +62,7 @@
 		1A6036E3254234A900E874D5 /* ControlContainableScrollview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlContainableScrollview.swift; sourceTree = "<group>"; };
 		1A603725254286D600E874D5 /* ConfirmViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmViewController.swift; sourceTree = "<group>"; };
 		1A60372825428D5100E874D5 /* QAandConfirmVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QAandConfirmVC.swift; sourceTree = "<group>"; };
+		1A63C4B32570761A00E65868 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		1A91533A254A51A500370962 /* FilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
 		1A915340254E068D00370962 /* EventInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventInfoViewController.swift; sourceTree = "<group>"; };
 		1AF47AC8253666DA0092CE1B /* Mobilize.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Mobilize.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -183,6 +185,7 @@
 				93E47C49254912B4006D76BF /* LoginStory.storyboard */,
 				1AF47AD7253666DA0092CE1B /* Assets.xcassets */,
 				1A55F5C025678A5F00B5903E /* GoogleService-Info.plist */,
+				1A63C4B32570761A00E65868 /* GoogleService-Info.plist */,
 				1AF47ADC253666DA0092CE1B /* Info.plist */,
 				1AF47AD4253666DA0092CE1B /* Mobilize.xcdatamodeld */,
 			);
@@ -368,6 +371,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1A63C4B42570761A00E65868 /* GoogleService-Info.plist in Resources */,
 				1A55F5C125678A5F00B5903E /* GoogleService-Info.plist in Resources */,
 				93E47C4C254912BC006D76BF /* LoginStory.storyboard in Resources */,
 				93E47C6E25491871006D76BF /* SettingsScreen.storyboard in Resources */,

@@ -362,25 +362,48 @@ class EventInfoViewController: UIViewController, UITableViewDelegate, UITableVie
                 organizationNameField.text = event.organization
                 eventAddressField.text = event.location
                 eventDescriptionField.text = event.description
-//                let colorSet: [UIColor] = [UIColor.purple,
-//                                           UIColor.red,
-//                                           UIColor.cyan,
-//                                           UIColor.orange,
-//                                           UIColor.green,
-//                                           UIColor.systemPink]
-                // let eventFilter: String = event.eventType.rawValue
-                // var count = 0
-                // for filter in EventModel.EventFilterType.allCases {
-                // if eventFilter == filter {
-                //  break
-                // }
-                // count += 1
-                // }
-                // color = EventModel.EventFilterType.allCases[count]
-                //eventFilterTitle = EventModel.EventFilterType.allCases[count]
-                //
-                // filterColor =
-                // startFade(target: , title: , color: , image: )
+                let colorSet: [UIColor] = [UIColor.purple,
+                                           UIColor.red,
+                                           UIColor.cyan,
+                                           UIColor.orange,
+                                           UIColor.green,
+                                           UIColor.systemPink]
+                 let activismFilter: String = event.activismType!
+                 var count = 0
+                 for filter in EventModel.ActivismFilterType.allCases {
+                    print(activismFilter, filter.rawValue)
+                    if activismFilter == filter.rawValue {
+                          break
+                    }
+                    count += 1
+                 }
+                var color = colorSet[count]
+                selectedActivismTypeFilter = EventModel.ActivismFilterType
+                    .allCases[count].rawValue
+                var image = UIImage(systemName: "circle.fill")?
+                    .withRenderingMode(.alwaysOriginal)
+                    .withTintColor(color)
+                startFade(target: activismTypeFilterButton,
+                          title: selectedActivismTypeFilter!,
+                          color: color,
+                          image: image!)
+                let eventFilter: String = event.eventType!
+                count = 0
+                for filter in EventModel.EventFilterType.allCases {
+                   if eventFilter == filter.rawValue {
+                         break
+                   }
+                   count += 1
+                }
+                selectedEventTypeFilter = EventModel.EventFilterType
+                    .allCases[count].rawValue
+                color = UIColor.lightGray
+                image = image?.withTintColor(color)
+                startFade(target: eventTypeFilterButton,
+                          title: selectedEventTypeFilter!,
+                          color: color,
+                          image: image!)
+                
             }
         }
     }
