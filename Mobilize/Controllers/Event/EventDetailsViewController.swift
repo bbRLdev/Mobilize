@@ -337,7 +337,7 @@ class EventDetailsViewController: UIViewController {
                 let coordDict = dataDescription!["coordinates"] as! NSDictionary
                 let date = dataDescription!["date"] as! Timestamp
                 let eventDesc = dataDescription!["description"] as! String
-                let imgList = dataDescription!["photoIDCollection"] as? [String] ?? []
+                let imgList = dataDescription!["photoIDCollection"] as? [NSDictionary] ?? []
                 let eventName = dataDescription!["name"] as! String
                 let likes = dataDescription!["numLikes"] as! Int
                 let RSVPs = dataDescription!["numRSVPs"] as! Int
@@ -362,13 +362,18 @@ class EventDetailsViewController: UIViewController {
                 event.coordinates = coordinates
                 event.date = date.dateValue()
                 event.description = eventDesc
-                event.photoIdCollection = imgList
                 event.eventName = eventName
                 event.likeNum = likes
                 event.rsvpNum = RSVPs
                 event.organization = orgName
                 event.organizerUID = ownerID
                 event.questions = qList
+                
+                event.photoIdCollection = Array(repeating: "", count: imgList.count)
+                
+                for entry in imgList{
+                    event.photoIdCollection[Int(entry.value(forKey: "index") as! String)!] = entry.value(forKey: "id") as! String
+                }
                 
                 let dFormatter = DateFormatter()
                 dFormatter.dateStyle = .medium
@@ -406,8 +411,6 @@ class EventDetailsViewController: UIViewController {
                 event.eventType = eFilter?.rawValue
                 
                 
-                
-                
                 imageArray.append(UIImage(named: blankImage)!)
                 //collectionView.reloadData()
                 
@@ -433,11 +436,14 @@ class EventDetailsViewController: UIViewController {
                         }
                 }
                 
+                
                 for (i, pid) in event.photoIdCollection.enumerated(){
                     let imgRef = storageRef.child("events/\(eventID!)").child(pid)
                     imgRef.getData(maxSize: 1 * 2048 * 2048, completion: {
                         data, error in
                         if error != nil {
+                            let toRemove: NSDictionary = ["id": pid, "index": i]
+                            eventRef?.updateData(["photoIDCollection": FieldValue.arrayRemove([toRemove])])
                             print("error getting image")
                         } else {
                             loadedImages[i] = UIImage(data: data!)!

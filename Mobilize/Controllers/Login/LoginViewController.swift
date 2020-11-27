@@ -73,8 +73,8 @@ class LoginViewController: UIViewController {
 
         guard let email = usernameTextField.text,
               let password = passwordTextField.text,
-              email.count > 0,
-              password.count > 0
+              email.count > 5,
+              password.count > 5
         else {
             statusLabel.text = "Please try again"
           return

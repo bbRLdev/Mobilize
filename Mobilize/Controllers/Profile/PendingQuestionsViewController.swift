@@ -147,7 +147,7 @@ class PendingQuestionsViewController: UIViewController {
                 let coordDict = dataDescription!["coordinates"] as! NSDictionary
                 let date = dataDescription!["date"] as! Timestamp
                 let eventDesc = dataDescription!["description"] as! String
-                let imgList = dataDescription!["photoIDCollection"] as? [String] ?? []
+                let imgList = dataDescription!["photoIDCollection"] as? [NSDictionary] ?? []
                 let eventName = dataDescription!["name"] as! String
                 let likes = dataDescription!["numLikes"] as! Int
                 let RSVPs = dataDescription!["numRSVPs"] as! Int
@@ -171,28 +171,17 @@ class PendingQuestionsViewController: UIViewController {
                 event.coordinates = coordinates
                 event.date = date.dateValue()
                 event.description = eventDesc
-                event.photoIdCollection = imgList
                 event.eventName = eventName
                 event.likeNum = likes
                 event.rsvpNum = RSVPs
                 event.organization = orgName
                 event.organizerUID = ownerID
                 event.questions = qList
+                event.photoIdCollection = Array(repeating: "", count: imgList.count)
                 
-//                let dFormatter = DateFormatter()
-//                dFormatter.dateStyle = .medium
-//                dFormatter.timeStyle = .medium
-                
-//                titleLabel.text = event.eventName
-//                dateLabel.text = dFormatter.string(from: event.date ?? Date())
-//                addressLabel.text = event.location
-//                likesLabel.text = String(event.likeNum!)
-//                RSVPsLabel.text = String(event.rsvpNum!)
-//                organizationLabel.text = event.organization
-//                setOrganizerName(uid: event.organizerUID!)
-//                descriptionLabel.text = event.description
-//                activismTypeLabel.text = "Activism: " + activismTypeFilter
-//                eventTypeLabel.text = "Event Type: " + eventTypeFilter
+                for entry in imgList{
+                    event.photoIdCollection[Int(entry.value(forKey: "index") as! String)!] = entry.value(forKey: "id") as! String
+                }
                 
                 var aFilter: EventModel.ActivismFilterType?
                 var eFilter: EventModel.EventFilterType?
