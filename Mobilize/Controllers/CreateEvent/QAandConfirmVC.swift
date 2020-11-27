@@ -157,16 +157,16 @@ class QAandConfirmVC: UIViewController {
                 imgLoadingFlag = false
                 return
             }
-            
+            var photoRefList = [[String:String]]()
+
             let storageRef = Storage.storage().reference(forURL: "gs://mobilize-77a05.appspot.com")
             let metadata = StorageMetadata()
             
             metadata.contentType = "image/jpg"
-            var refs: [String] = []
             var count: Int = 0 {
                 willSet {
                     if newValue >= images.count {
-                        eventSoFar["photoIDCollection"] = refs
+                        eventSoFar["photoIDCollection"] = photoRefList
                         imgLoadingFlag = false
                     }
                 }
@@ -183,7 +183,8 @@ class QAandConfirmVC: UIViewController {
                             print("error uploading image \(imageId)")
                             return
                         }
-                        refs.append(imageId)
+                        let temp: [String:String] = ["index" : "\(count)", "id" : imageId]
+                        photoRefList.append(temp)
                         count += 1
                     })
                 }
