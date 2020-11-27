@@ -403,7 +403,8 @@ class EventInfoViewController: UIViewController, UITableViewDelegate, UITableVie
                           title: selectedEventTypeFilter!,
                           color: color,
                           image: image!)
-                
+                let date = event.date!
+                eventDatePicker.setDate(date, animated: false)
             }
         }
     }
