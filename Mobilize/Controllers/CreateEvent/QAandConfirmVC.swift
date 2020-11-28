@@ -162,37 +162,40 @@ class QAandConfirmVC: UIViewController {
         )
     }
     
-    func uploadNewImages(eventId: String) {
-        
-        let storageRef = Storage.storage().reference(forURL: "gs://mobilize-77a05.appspot.com")
-        let metadata = StorageMetadata()
-        
-        
-        metadata.contentType = "image/jpg"
-        var refs: [String] = []
-        var count: Int = 0 {
-            willSet {
-                if newValue >= images.count {
-                    eventSoFar["photoIDCollection"] = refs
-                    imgLoadingFlag = false
+        func uploadNewImages(eventId: String) {
+            if(images.count == 0){
+                imgLoadingFlag = false
+                return
+            }
+            
+            let storageRef = Storage.storage().reference(forURL: "gs://mobilize-77a05.appspot.com")
+            let metadata = StorageMetadata()
+            
+            metadata.contentType = "image/jpg"
+            var refs: [String] = []
+            var count: Int = 0 {
+                willSet {
+                    if newValue >= images.count {
+                        eventSoFar["photoIDCollection"] = refs
+                        imgLoadingFlag = false
+                    }
                 }
             }
-        }
-        for image in images {
-            let imageId = UUID().uuidString
-            if let imageData = image?.jpegData(compressionQuality: 4.0) {
-                let eventRef = storageRef.child("events").child(eventId).child("\(imageId)")
-                
-                print(eventRef)
-                eventRef.putData(imageData, metadata: metadata, completion: {
-                    (storageMetadata, error) in
-                    if error != nil {
-                        print("error uploading image \(imageId)")
-                        return
-                    }
-                    refs.append(imageId)
-                    count += 1
-                })
+            for image in images {
+                let imageId = UUID().uuidString
+                if let imageData = image?.jpegData(compressionQuality: 4.0) {
+                    let eventRef = storageRef.child("events").child(eventId).child("\(imageId)")
+                    
+                    print(eventRef)
+                    eventRef.putData(imageData, metadata: metadata, completion: {
+                        (storageMetadata, error) in
+                        if error != nil {
+                            print("error uploading image \(imageId)")
+                            return
+                        }
+                        refs.append(imageId)
+                        count += 1
+                    })
             }
         }
     }
