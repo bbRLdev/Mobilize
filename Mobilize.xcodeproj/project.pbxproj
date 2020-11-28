@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1A55F5C125678A5F00B5903E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1A55F5C025678A5F00B5903E /* GoogleService-Info.plist */; };
 		1A6036E4254234A900E874D5 /* ControlContainableScrollview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A6036E3254234A900E874D5 /* ControlContainableScrollview.swift */; };
 		1A603726254286D600E874D5 /* ConfirmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A603725254286D600E874D5 /* ConfirmViewController.swift */; };
 		1A60372925428D5100E874D5 /* QAandConfirmVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A60372825428D5100E874D5 /* QAandConfirmVC.swift */; };
@@ -21,6 +20,7 @@
 		938CC6BC255DDCE200244304 /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 938CC6BB255DDCE200244304 /* LoginModel.swift */; };
 		938CC6C0255DDFC700244304 /* UploadPictureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 938CC6BF255DDFC700244304 /* UploadPictureViewController.swift */; };
 		938CC6C4255DE10400244304 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 938CC6C3255DE10400244304 /* WelcomeViewController.swift */; };
+		93951BE1256D794D00053A74 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 93951BE0256D794D00053A74 /* GoogleService-Info.plist */; };
 		93CC665A254B36EE0075A9EE /* NotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93CC6659254B36ED0075A9EE /* NotificationsViewController.swift */; };
 		93CC665D254B38A60075A9EE /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 93CC665C254B38A60075A9EE /* Settings.bundle */; };
 		93CC6663254F9BC70075A9EE /* EventModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93CC6662254F9BC70075A9EE /* EventModel.swift */; };
@@ -57,7 +57,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		1A55F5C025678A5F00B5903E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		1A6036E3254234A900E874D5 /* ControlContainableScrollview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlContainableScrollview.swift; sourceTree = "<group>"; };
 		1A603725254286D600E874D5 /* ConfirmViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmViewController.swift; sourceTree = "<group>"; };
 		1A60372825428D5100E874D5 /* QAandConfirmVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QAandConfirmVC.swift; sourceTree = "<group>"; };
@@ -75,6 +74,7 @@
 		938CC6BB255DDCE200244304 /* LoginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
 		938CC6BF255DDFC700244304 /* UploadPictureViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadPictureViewController.swift; sourceTree = "<group>"; };
 		938CC6C3255DE10400244304 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
+		93951BE0256D794D00053A74 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		93CC6659254B36ED0075A9EE /* NotificationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsViewController.swift; sourceTree = "<group>"; };
 		93CC665C254B38A60075A9EE /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		93CC6662254F9BC70075A9EE /* EventModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventModel.swift; sourceTree = "<group>"; };
@@ -169,9 +169,9 @@
 				DB4DAC8B2564C0D5001C6126 /* Layouts */,
 				93CC6661254F9BAD0075A9EE /* Models */,
 				1A6036E22542347800E874D5 /* UIClasses */,
-				DBB830A3253E7A6B00F2B48E /* Mobilize.entitlements */,
 				1AF4962A253903DA00CABA30 /* Controllers */,
 				1AF47ACB253666DA0092CE1B /* AppDelegate.swift */,
+				DBB830A3253E7A6B00F2B48E /* Mobilize.entitlements */,
 				DBB17777254A52D900E2AFAA /* EventStory.storyboard */,
 				93E47C6D2549185F006D76BF /* CreateEventStory.storyboard */,
 				93E47C6B25491859006D76BF /* SettingsScreen.storyboard */,
@@ -182,9 +182,9 @@
 				93E47C4E254912DE006D76BF /* FilterStory.storyboard */,
 				93E47C49254912B4006D76BF /* LoginStory.storyboard */,
 				1AF47AD7253666DA0092CE1B /* Assets.xcassets */,
-				1A55F5C025678A5F00B5903E /* GoogleService-Info.plist */,
 				1AF47ADC253666DA0092CE1B /* Info.plist */,
 				1AF47AD4253666DA0092CE1B /* Mobilize.xcdatamodeld */,
+				93951BE0256D794D00053A74 /* GoogleService-Info.plist */,
 			);
 			path = Mobilize;
 			sourceTree = "<group>";
@@ -368,7 +368,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1A55F5C125678A5F00B5903E /* GoogleService-Info.plist in Resources */,
 				93E47C4C254912BC006D76BF /* LoginStory.storyboard in Resources */,
 				93E47C6E25491871006D76BF /* SettingsScreen.storyboard in Resources */,
 				93CC665D254B38A60075A9EE /* Settings.bundle in Resources */,
@@ -376,6 +375,7 @@
 				1AF47AD8253666DA0092CE1B /* Assets.xcassets in Resources */,
 				DBB17778254A52D900E2AFAA /* EventStory.storyboard in Resources */,
 				93E47C4F254912E1006D76BF /* FilterStory.storyboard in Resources */,
+				93951BE1256D794D00053A74 /* GoogleService-Info.plist in Resources */,
 				93E47C7125491879006D76BF /* ProfileStory.storyboard in Resources */,
 				93E47C6825491712006D76BF /* LaunchScreen.storyboard in Resources */,
 				93E47C4A254912B7006D76BF /* Home.storyboard in Resources */,

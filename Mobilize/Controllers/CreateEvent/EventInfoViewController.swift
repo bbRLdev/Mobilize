@@ -42,6 +42,7 @@ class EventInfoViewController: UIViewController, UITableViewDelegate, UITableVie
     var selectedActivismTypeFilter: String?
     var selectedEventTypeFilter: String?
     var selectedDate: Date?
+    var dateComponents: DateComponents?
     // Post-Beta, this stays empty until the end if we are creating a new event.
     // if editing, it will not be nil. This does not matter until the end.
     var event: EventModel!
@@ -60,8 +61,9 @@ class EventInfoViewController: UIViewController, UITableViewDelegate, UITableVie
 
         // Users cannot post an event in the same day. That would be
         // bad.
-        eventDatePicker.minimumDate = Date().addingTimeInterval(86400)
-
+        // commenting for testing notifications
+        //eventDatePicker.minimumDate = Date().addingTimeInterval(86400)
+        eventDatePicker.minuteInterval = 1
         // If event != nil, we know we are in this flow while editing. This
         // fact is important in the following Create Event VC's5
         if event != nil {
@@ -75,6 +77,7 @@ class EventInfoViewController: UIViewController, UITableViewDelegate, UITableVie
     @IBAction func onDateSelected(_ sender: Any) {
         let date = eventDatePicker.date
         selectedDate = date
+        dateComponents = eventDatePicker.calendar.dateComponents([.day, .hour, .minute], from: eventDatePicker.date)
     }
     
     func startFade(target: UIButton, title: String, color: UIColor, image: UIImage) {
@@ -201,7 +204,6 @@ class EventInfoViewController: UIViewController, UITableViewDelegate, UITableVie
             
             return
         }
-        
         guard let eventName = eventNameField.text,
                let orgName = organizationNameField.text,
                let eventAddress = eventAddressField.text,
@@ -242,6 +244,7 @@ class EventInfoViewController: UIViewController, UITableViewDelegate, UITableVie
            let nextVC = segue.destination as? AddMediaViewController {
             nextVC.event = event
             nextVC.eventSoFar = eventSoFar
+            nextVC.dateComponents = dateComponents
         }
     }
 
@@ -329,12 +332,12 @@ class EventInfoViewController: UIViewController, UITableViewDelegate, UITableVie
     
     // Start Editing The Text Field
     func textViewDidBeginEditing(_ textView: UITextView) {
-        moveTextView(textView, moveDistance: -250, up: true)
+        //moveTextView(textView, moveDistance: -250, up: true)
     }
     
     // Finish Editing The Text Field
     func textViewDidEndEditing(_ textView: UITextView) {
-        moveTextView(textView, moveDistance: -250, up: false)
+        //moveTextView(textView, moveDistance: -250, up: false)
     }
     
     // Hide the keyboard when the return key pressed
@@ -343,17 +346,17 @@ class EventInfoViewController: UIViewController, UITableViewDelegate, UITableVie
         return true
     }
     
-    // Move the text field in a pretty animation!
-    func moveTextView(_ textField: UITextView, moveDistance: Int, up: Bool) {
-        let moveDuration = 0.3
-        let movement: CGFloat = CGFloat(up ? moveDistance : -moveDistance)
-        
-        UIView.beginAnimations("animateTextField", context: nil)
-        UIView.setAnimationBeginsFromCurrentState(true)
-        UIView.setAnimationDuration(moveDuration)
-        self.view.frame = self.view.frame.offsetBy(dx: 0, dy: movement)
-        UIView.commitAnimations()
-    }
+//    // Move the text field in a pretty animation!
+//    func moveTextView(_ textField: UITextView, moveDistance: Int, up: Bool) {
+//        let moveDuration = 0.3
+//        let movement: CGFloat = CGFloat(up ? moveDistance : -moveDistance)
+//
+//        UIView.beginAnimations("animateTextField", context: nil)
+//        UIView.setAnimationBeginsFromCurrentState(true)
+//        UIView.setAnimationDuration(moveDuration)
+//        self.view.frame = self.view.frame.offsetBy(dx: 0, dy: movement)
+//        UIView.commitAnimations()
+//    }
     
     func populateFields() {
         if let uid = event.organizerUID {
