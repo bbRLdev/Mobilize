@@ -405,6 +405,7 @@ class EventInfoViewController: UIViewController, UITableViewDelegate, UITableVie
                           image: image!)
                 let date = event.date!
                 eventDatePicker.setDate(date, animated: false)
+                selectedDate = date
             }
         }
     }

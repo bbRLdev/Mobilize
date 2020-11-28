@@ -22,7 +22,7 @@ class PendingQuestionsViewController: UIViewController {
     var eventID:String?
     var eventRef: DocumentReference?
     
-    var questions:[String] = []
+    var pendingQuestions:[String] = []
     
     var imageArray=[UIImage]()
     
@@ -57,7 +57,7 @@ class PendingQuestionsViewController: UIViewController {
             let listName = "pendingQuestions"
 
             docRef.updateData([
-                listName: questions
+                listName: pendingQuestions
             ], completion: {
                 err in
                 if let err = err {
@@ -123,7 +123,7 @@ class PendingQuestionsViewController: UIViewController {
         docRef.getDocument { [self] (document, error) in
             if let document = document, document.exists {
                 let dataDescription = document.data()
-                self.questions = dataDescription?["pendingQuestions"] as? [String] ?? []
+                self.pendingQuestions = dataDescription?["pendingQuestions"] as? [String] ?? []
                 
                 DispatchQueue.main.async {
                     tableView.reloadData()
@@ -154,7 +154,8 @@ class PendingQuestionsViewController: UIViewController {
                 let orgName = dataDescription!["orgName"] as! String
                 let ownerID = dataDescription!["ownerUID"] as! String
                 let questions = dataDescription!["questions"] as? [NSDictionary] ?? []
-                
+                let pQuestions = dataDescription!["pendingQuestions"] as? [String] ?? []
+                print("pendingQuestions: ", pendingQuestions)
                 let latitude:Double = coordDict.value(forKey: "latitude") as! Double
                 let longitude:Double = coordDict.value(forKey: "longitude") as! Double
                 let coordinates = CLLocationCoordinate2DMake(latitude, longitude)
@@ -164,6 +165,8 @@ class PendingQuestionsViewController: UIViewController {
                 for qa in questions{
                     qList.append(Question(question: qa.value(forKey: "question") as! String, answer: qa.value(forKey: "answer") as! String))
                 }
+                
+                pendingQuestions = pQuestions
                 
                 event = EventModel()
                 event.eventID = eventID
@@ -178,7 +181,7 @@ class PendingQuestionsViewController: UIViewController {
                 event.organizerUID = ownerID
                 event.questions = qList
                 event.photoIdCollection = Array(repeating: "", count: imgList.count)
-                
+
                 for entry in imgList{
                     event.photoIdCollection[Int(entry.value(forKey: "index") as! String)!] = entry.value(forKey: "id") as! String
                 }
@@ -269,13 +272,13 @@ extension PendingQuestionsViewController: UITableViewDelegate, UITableViewDataSo
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return questions.count
+        return pendingQuestions.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "qCell", for: indexPath)
         
-        cell.textLabel?.text = questions[indexPath.row]
+        cell.textLabel?.text = pendingQuestions[indexPath.row]
         return cell
     }
     
@@ -288,7 +291,7 @@ extension PendingQuestionsViewController: UITableViewDelegate, UITableViewDataSo
         let vc = storyboard.instantiateViewController(withIdentifier: "AnswerQuestion") as! AnswerQuestionViewController
         
         vc.modalPresentationStyle = .pageSheet
-        vc.question = questions[row]
+        vc.question = pendingQuestions[row]
         vc.indexPath = indexPath
         vc.parentVC = self
 
@@ -299,8 +302,8 @@ extension PendingQuestionsViewController: UITableViewDelegate, UITableViewDataSo
     func deleteHandler(indexPath: IndexPath){
         let row = indexPath.row
         
-        let toRemove = questions[row]
-        questions.remove(at: indexPath.row)
+        let toRemove = pendingQuestions[row]
+        pendingQuestions.remove(at: indexPath.row)
 
         db.collection("events").document(eventID!).updateData(["pendingQuestions": FieldValue.arrayRemove([toRemove])],
             completion: {
@@ -321,9 +324,9 @@ extension PendingQuestionsViewController: UITableViewDelegate, UITableViewDataSo
     }
     
     func tableView(_ tableView: UITableView, moveRowAt indexPath: IndexPath, to: IndexPath) {
-        let itemToMove = questions[indexPath.row]
-        questions.remove(at: indexPath.row)
-        questions.insert(itemToMove, at: to.row)
+        let itemToMove = pendingQuestions[indexPath.row]
+        pendingQuestions.remove(at: indexPath.row)
+        pendingQuestions.insert(itemToMove, at: to.row)
         
     }
 }
