@@ -64,6 +64,9 @@ class QAandConfirmVC: UIViewController {
             //print("Did load \(images)")
             qaTableView.delegate = self
             qaTableView.dataSource = self
+            if event != nil {
+                questions = event.questions
+            }
             
             
         }
