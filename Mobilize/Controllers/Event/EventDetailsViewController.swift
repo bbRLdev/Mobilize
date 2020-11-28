@@ -371,8 +371,10 @@ class EventDetailsViewController: UIViewController {
                 
                 event.photoIdCollection = Array(repeating: "", count: imgList.count)
                 
+                var imgCount = 0
                 for entry in imgList{
-                    event.photoIdCollection[Int(entry.value(forKey: "index") as! String)!] = entry.value(forKey: "id") as! String
+                    event.photoIdCollection[imgCount] = entry.value(forKey: "\(imgCount)") as! String
+                    imgCount += 1
                 }
                 
                 let dFormatter = DateFormatter()

@@ -181,9 +181,11 @@ class PendingQuestionsViewController: UIViewController {
                 event.organizerUID = ownerID
                 event.questions = qList
                 event.photoIdCollection = Array(repeating: "", count: imgList.count)
-
+                
+                var count = 0
                 for entry in imgList{
-                    event.photoIdCollection[Int(entry.value(forKey: "index") as! String)!] = entry.value(forKey: "id") as! String
+                    event.photoIdCollection[count] = entry.value(forKey: "\(count)") as! String
+                    count += 1
                 }
                 
                 var aFilter: EventModel.ActivismFilterType?

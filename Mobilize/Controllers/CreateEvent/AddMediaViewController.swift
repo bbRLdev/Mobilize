@@ -21,6 +21,7 @@ class AddMediaViewController: UIViewController, UIImagePickerControllerDelegate,
     let segueId = "QASegueId"
     var imageRefs: [String] = []
     
+    var imageRefList = [[String : String]]()
     let storage = Storage.storage()
     let auth = Auth.auth()
 
@@ -80,7 +81,7 @@ class AddMediaViewController: UIViewController, UIImagePickerControllerDelegate,
                         self.eventPicturesCollection.reloadData()
 
                     }
-                    // MARK: ENDEDIT
+                    // MARK: ENDEDIT=VLOOKUP("Monthly Charge", C7:H9, MATCH(C2,C6:H6,0), 0)
                     
                     imageCell.imageIndex = i
                     imageCell.refIndex = placeholderCount
@@ -154,10 +155,10 @@ class AddMediaViewController: UIViewController, UIImagePickerControllerDelegate,
                 if let refIndex = cell.refIndex {
                     self.imageRefs.remove(at: refIndex)
                     self.images.remove(at: cell.imageIndex)
+                    print(refIndex, cell.imageIndex)
                 } else {
                     self.images.remove(at: cell.imageIndex)
                 }
-                
                 
                 self.cells = []
                 self.setUpCells()
@@ -196,14 +197,22 @@ class AddMediaViewController: UIViewController, UIImagePickerControllerDelegate,
             }
 
             eventSoFar["photoIDCollection"] = nil
-            var imageRefList = [[String : String]]()
             var count: Int = 0
             for ref in imageRefs {
                 imageRefList.append(["\(count)" : ref])
                 count += 1
             }
-            eventSoFar["photoIDCollection"] = imageRefList
+//            count = 0
+//            for image in images {
+//                let placeholderImage = UIImage(systemName: "questionmark")
+//                
+//                if image != nil && image!.isEqual(placeholderImage) {
+//                    images.remove(at: count)
+//                }
+//                count += 1
+//            }
             nextVC.images = images
+            nextVC.imgRefList = imageRefList
             nextVC.event = event
             nextVC.eventSoFar = eventSoFar
         }

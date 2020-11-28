@@ -23,6 +23,7 @@ class QAandConfirmVC: UIViewController {
     var event: EventModel!
     var eventSoFar: [String : Any] = [:]
     var imgURLs: [String] = []
+    var imgRefList = [[String : String]]()
     var questions: [Question] = []
     
     
@@ -160,7 +161,6 @@ class QAandConfirmVC: UIViewController {
                 imgLoadingFlag = false
                 return
             }
-            var photoRefList = [[String:String]]()
 
             let storageRef = Storage.storage().reference(forURL: "gs://mobilize-77a05.appspot.com")
             let metadata = StorageMetadata()
@@ -169,27 +169,36 @@ class QAandConfirmVC: UIViewController {
             var count: Int = 0 {
                 willSet {
                     if newValue >= images.count {
-                        eventSoFar["photoIDCollection"] = photoRefList
+                        eventSoFar["photoIDCollection"] = imgRefList
                         imgLoadingFlag = false
                     }
                 }
             }
             for image in images {
-                let imageId = UUID().uuidString
-                if let imageData = image?.jpegData(compressionQuality: 4.0) {
-                    let eventRef = storageRef.child("events").child(eventId).child("\(imageId)")
-                    
-                    print(eventRef)
-                    eventRef.putData(imageData, metadata: metadata, completion: {
-                        (storageMetadata, error) in
-                        if error != nil {
-                            print("error uploading image \(imageId)")
-                            return
-                        }
-                        let temp: [String:String] = ["index" : "\(count)", "id" : imageId]
-                        photoRefList.append(temp)
-                        count += 1
-                    })
+                let placeholderImage = UIImage(systemName: "questionmark")
+
+                if image != nil && image!.isEqual(placeholderImage) {
+                    images.remove(at: count)
+                    count += 1
+                } else {
+                    let imageId = UUID().uuidString
+                    if let imageData = image?.jpegData(compressionQuality: 4.0) {
+                        let eventRef = storageRef.child("events").child(eventId).child("\(imageId)")
+                        
+                        print(eventRef)
+                        eventRef.putData(imageData, metadata: metadata, completion: {
+                            (storageMetadata, error) in
+                            if error != nil {
+                                print("error uploading image \(imageId)")
+                                return
+                            }
+                            let temp: [String:String] = self.imgRefList.count != 0
+                                ? ["\(self.imgRefList.count - 1 + count)" : imageId]
+                                : ["0" : imageId]
+                            self.imgRefList.append(temp)
+                            count += 1
+                        })
+                    }
                 }
             }
         }
