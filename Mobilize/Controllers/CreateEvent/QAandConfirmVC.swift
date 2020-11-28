@@ -120,11 +120,7 @@ class QAandConfirmVC: UIViewController {
         let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents!, repeats: false)
         let request = UNNotificationRequest(identifier: eventSoFar["eventID"] as! String, content: content, trigger: trigger)
         
-        UNUserNotificationCenter.current().add(request, withCompletionHandler: {(error) in
-            if let error = error {
-                print("SOMETHING WENT WRONG")
-            }
-        })
+        UNUserNotificationCenter.current().add(request)
     }
         
     func getUID() -> String? {
