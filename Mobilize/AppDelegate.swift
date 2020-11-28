@@ -43,6 +43,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
         rootViewController.pushViewController(vc, animated: true)
     }
+    
+    // called if app is running in foreground
+    func userNotificationCenter(_ center: UNUserNotificationCenter,
+       willPresent notification: UNNotification,
+       withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void)
+    {
+        completionHandler(.banner)
+    }
 
     
     private func configureInitialViewController() {
