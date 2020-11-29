@@ -11,6 +11,7 @@ import MapKit
 class AnnotationModel: MKPointAnnotation{
     var eventID: String
     var date:Date?
+    var activismType: String?
     init(eid: String){
         eventID = eid
     }

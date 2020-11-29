@@ -145,6 +145,7 @@ class HomeViewController: UIViewController, GetFilters {
         
         annotation.title = eventName
         annotation.subtitle = ownerOrg
+        annotation.activismType = activismType
         //print(ownerOrg!)
         annotation.coordinate = coordinates
         
@@ -265,8 +266,9 @@ extension HomeViewController: CLLocationManagerDelegate, MKMapViewDelegate {
 
 
             
-            let view = mapView.dequeueReusableAnnotationView(withIdentifier: MKMapViewDefaultAnnotationViewReuseIdentifier, for: annotation)
-            
+            var view = mapView.dequeueReusableAnnotationView(withIdentifier: MKMapViewDefaultAnnotationViewReuseIdentifier, for: annotation)
+
+        
             let image = UIImage(systemName: "circle.fill")
             let resizedSize = CGSize(width: 100, height: 100)
 
@@ -276,9 +278,9 @@ extension HomeViewController: CLLocationManagerDelegate, MKMapViewDelegate {
             UIGraphicsEndImageContext()
             
             view.image = resizedImage
-            view.tintColor = UIColor.red
             view.clusteringIdentifier = "cluster"
             view.canShowCallout = true
+            
             
             
             let btn = UIButton(type: .detailDisclosure)
