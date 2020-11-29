@@ -53,6 +53,7 @@ class HomeViewController: UIViewController, GetFilters {
             loadInUserData()
         }
         mapView.register(LocationDataMapClusterView.self, forAnnotationViewWithReuseIdentifier: "cluster")
+        mapView.register(EventAnnotationView.self, forAnnotationViewWithReuseIdentifier: "event")
     }
     
     func loadInUserData() {
@@ -139,9 +140,11 @@ class HomeViewController: UIViewController, GetFilters {
         let latitude:Double = coordDict?.value(forKey: "latitude") as! Double
         let longitude:Double = coordDict?.value(forKey: "longitude") as! Double
         let activismType = dataDescription["activismTypeFilter"] as? String
+        let likes = dataDescription["numLikes"] as! Int
         let coordinates = CLLocationCoordinate2DMake(latitude, longitude)
         
-        let annotation = AnnotationModel(eid: diff.document.documentID)
+        //let annotation = AnnotationModel(eid: diff.document.documentID)
+        let annotation = EventAnnotation(eid: diff.document.documentID, numLikes: likes)
         
         annotation.title = eventName
         annotation.subtitle = "Organization: \(ownerOrg!), Type: \(activismType!)"
@@ -155,7 +158,7 @@ class HomeViewController: UIViewController, GetFilters {
     private func removePin(diff :DocumentChange){
         let eventID = diff.document.documentID
         for annotation in self.mapView.annotations {
-            if let model = annotation as? AnnotationModel,
+            if let model = annotation as? EventAnnotation,
                model.eventID == eventID{
                 self.mapView.removeAnnotation(model)
             }
@@ -244,10 +247,9 @@ extension HomeViewController: CLLocationManagerDelegate, MKMapViewDelegate {
     func setMapDelegate(){
         mapView.delegate = self
     }
-    
 
     @objc func infoClicked(){
-        if let annotation = selectedPin as? AnnotationModel{
+        if let annotation = selectedPin as? EventAnnotation{
             print(annotation.eventID)
             let storyboard: UIStoryboard = UIStoryboard(name: "EventStory", bundle: nil)
             let vc = storyboard.instantiateViewController(withIdentifier: "EventView") as! EventDetailsViewController
@@ -262,34 +264,37 @@ extension HomeViewController: CLLocationManagerDelegate, MKMapViewDelegate {
         
         switch annotation {
         
-        case is AnnotationModel:
+        case is EventAnnotation:
+            let view: EventAnnotationView? = mapView.dequeueReusableAnnotationView(withIdentifier: "event") as? EventAnnotationView
 
 
-            
-            var view = mapView.dequeueReusableAnnotationView(withIdentifier: MKMapViewDefaultAnnotationViewReuseIdentifier, for: annotation)
-
+            let eventAnnotation = annotation as! EventAnnotation
         
             let image = UIImage(systemName: "circle.fill")
-            let resizedSize = CGSize(width: 100, height: 100)
+            
+            let width = min(20 + 0.5 * Double(eventAnnotation.likes).squareRoot(), 100)
+            let height = min(20 + 0.5 * Double(eventAnnotation.likes).squareRoot(), 100)
+            
+            let resizedSize = CGSize(width: width, height: height)
 
             UIGraphicsBeginImageContext(resizedSize)
             image?.draw(in: CGRect(origin: .zero, size: resizedSize))
             let resizedImage = UIGraphicsGetImageFromCurrentImageContext()
             UIGraphicsEndImageContext()
             
-            view.image = resizedImage
-            view.clusteringIdentifier = "cluster"
-            view.canShowCallout = true
-            
+            view?.image = resizedImage
+            view?.clusteringIdentifier = "cluster"
+            view?.canShowCallout = true
+            view?.annotation = eventAnnotation
             
             
             let btn = UIButton(type: .detailDisclosure)
             
             btn.addTarget(self, action:#selector(self.infoClicked), for: .touchUpInside)
-            view.rightCalloutAccessoryView = btn
-            
+            view?.rightCalloutAccessoryView = btn
             
             return view
+        
         case is MKClusterAnnotation:
             let view = mapView.dequeueReusableAnnotationView(withIdentifier: MKMapViewDefaultClusterAnnotationViewReuseIdentifier, for: annotation)
             return view
@@ -302,7 +307,7 @@ extension HomeViewController: CLLocationManagerDelegate, MKMapViewDelegate {
         
         switch view.annotation {
         
-        case is AnnotationModel:
+        case is EventAnnotation:
             selectedPin = view.annotation
         case is MKClusterAnnotation:
             
@@ -316,7 +321,9 @@ extension HomeViewController: CLLocationManagerDelegate, MKMapViewDelegate {
                                                 handler: {
                                                     [self](action) in
                                                     self.mapView.deselectAnnotation(annotation, animated: true)
-                                                    let region = self.mapView.regionThatFits(MKCoordinateRegion(center: annotation.coordinate, latitudinalMeters: 0, longitudinalMeters: 10000))
+//                                                    print(self.mapView.region.span.longitudeDelta.magnitude)
+                                                    
+                                                    let region = self.mapView.regionThatFits(MKCoordinateRegion(center: annotation.coordinate, latitudinalMeters: 0, longitudinalMeters: self.mapView.region.span.longitudeDelta.magnitude.squareRoot()*10000)) // may break near the poles
                                                     self.mapView.setRegion(region, animated: true)})
 
                 controller.addAction(zoomAction)
@@ -369,40 +376,3 @@ extension HomeViewController: CLLocationManagerDelegate, MKMapViewDelegate {
     
 }
 
-final class LocationDataMapClusterView: MKAnnotationView {
-
-    private let countLabel = UILabel()
-
-    override var annotation: MKAnnotation? {
-        didSet {
-             guard let annotation = annotation as? MKClusterAnnotation else {
-                assertionFailure("Using LocationDataMapClusterView with wrong annotation type")
-                return
-            }
-
-            countLabel.text = annotation.memberAnnotations.count < 100 ? "\(annotation.memberAnnotations.count)" : "99+"
-        }
-    }
-
-    override init(annotation: MKAnnotation?, reuseIdentifier: String?) {
-        super.init(annotation: annotation, reuseIdentifier: reuseIdentifier)
-
-        displayPriority = .defaultHigh
-        collisionMode = .circle
-
-        frame = CGRect(x: 0, y: 0, width: 40, height: 50)
-        centerOffset = CGPoint(x: 0, y: -frame.size.height / 2)
-
-       
-        setupUI()
-    }
-
-    @available(*, unavailable)
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-
-    private func setupUI() {
-        
-    }
-}

@@ -46,7 +46,7 @@ class ClusterPinViewController: UIViewController, UITableViewDelegate, UITableVi
         let cell = tableView.dequeueReusableCell(withIdentifier: "eventCell", for: indexPath as IndexPath)
         
         let row = indexPath.row
-        let pin = pins?[row] as? AnnotationModel
+        let pin = pins?[row] as? EventAnnotation
         cell.textLabel?.text = pin?.title
         cell.detailTextLabel?.text = pin?.subtitle
         let activismType = pin?.activismType
@@ -61,7 +61,7 @@ class ClusterPinViewController: UIViewController, UITableViewDelegate, UITableVi
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let row = indexPath.row
-        let pin = pins?[row] as? AnnotationModel
+        let pin = pins?[row] as? EventAnnotation
 
         let storyboard: UIStoryboard = UIStoryboard(name: "EventStory", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "EventView") as! EventDetailsViewController
