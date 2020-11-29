@@ -138,6 +138,7 @@ class HomeViewController: UIViewController, GetFilters {
         let ownerOrg = dataDescription["orgName"] as? String
         let latitude:Double = coordDict?.value(forKey: "latitude") as! Double
         let longitude:Double = coordDict?.value(forKey: "longitude") as! Double
+        let activismType = dataDescription["activismTypeFilter"] as? String
         let coordinates = CLLocationCoordinate2DMake(latitude, longitude)
         
         let annotation = AnnotationModel(eid: diff.document.documentID)
@@ -146,7 +147,6 @@ class HomeViewController: UIViewController, GetFilters {
         annotation.subtitle = ownerOrg
         //print(ownerOrg!)
         annotation.coordinate = coordinates
-        
         
         self.mapView.addAnnotation(annotation)
 
@@ -266,8 +266,20 @@ extension HomeViewController: CLLocationManagerDelegate, MKMapViewDelegate {
 
             
             let view = mapView.dequeueReusableAnnotationView(withIdentifier: MKMapViewDefaultAnnotationViewReuseIdentifier, for: annotation)
+            
+            let image = UIImage(systemName: "circle.fill")
+            let resizedSize = CGSize(width: 100, height: 100)
+
+            UIGraphicsBeginImageContext(resizedSize)
+            image?.draw(in: CGRect(origin: .zero, size: resizedSize))
+            let resizedImage = UIGraphicsGetImageFromCurrentImageContext()
+            UIGraphicsEndImageContext()
+            
+            view.image = resizedImage
+            view.tintColor = UIColor.red
             view.clusteringIdentifier = "cluster"
             view.canShowCallout = true
+            
             
             let btn = UIButton(type: .detailDisclosure)
             
