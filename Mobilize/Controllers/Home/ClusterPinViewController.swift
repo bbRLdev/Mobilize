@@ -50,20 +50,7 @@ class ClusterPinViewController: UIViewController, UITableViewDelegate, UITableVi
         cell.textLabel?.text = pin?.title
         cell.detailTextLabel?.text = pin?.subtitle
         let activismType = pin?.activismType
-        let colorSet: [UIColor] = [UIColor.purple,
-                                   UIColor.red,
-                                   UIColor.cyan,
-                                   UIColor.orange,
-                                   UIColor.green,
-                                   UIColor.systemPink]
-         var count = 0
-         for filter in EventModel.ActivismFilterType.allCases {
-            if activismType == filter.rawValue {
-                  break
-            }
-            count += 1
-         }
-        let color = colorSet[count]
+        let color = EventModel.returnColor(activismType: activismType!)
         let image = UIImage(systemName: "circle.fill")?
             .withRenderingMode(.alwaysOriginal)
             .withTintColor(color)

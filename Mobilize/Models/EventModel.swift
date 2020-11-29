@@ -54,6 +54,21 @@ class EventModel {
         organizerUID = owner
     }
     
-   
+    static func returnColor(activismType: String) -> UIColor {
+        let colorSet: [UIColor] = [UIColor.purple,
+                                   UIColor.red,
+                                   UIColor.cyan,
+                                   UIColor.orange,
+                                   UIColor.green,
+                                   UIColor.systemPink]
+        var count = 0
+        for activism in EventFilterType.allCases {
+            if activism.rawValue == activismType {
+                break
+            }
+            count += 1
+        }
+        return colorSet[count]
+    }
     
 }
