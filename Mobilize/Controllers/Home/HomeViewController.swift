@@ -144,7 +144,7 @@ class HomeViewController: UIViewController, GetFilters {
         let annotation = AnnotationModel(eid: diff.document.documentID)
         
         annotation.title = eventName
-        annotation.subtitle = ownerOrg
+        annotation.subtitle = "Organization: \(ownerOrg!), Type: \(activismType!)"
         annotation.activismType = activismType
         //print(ownerOrg!)
         annotation.coordinate = coordinates
