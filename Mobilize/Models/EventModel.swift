@@ -62,7 +62,7 @@ class EventModel {
                                    UIColor.green,
                                    UIColor.systemPink]
         var count = 0
-        for activism in EventFilterType.allCases {
+        for activism in ActivismFilterType.allCases {
             if activism.rawValue == activismType {
                 break
             }
