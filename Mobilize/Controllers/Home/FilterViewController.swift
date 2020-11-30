@@ -11,6 +11,7 @@ import UIKit
 
 class FilterViewController: UIViewController {
     
+    @IBOutlet weak var radiusLabel: UILabel!
     @IBOutlet weak var filterStack: UIStackView!
     @IBOutlet weak var eventStack: UIStackView!
     @IBOutlet weak var radiusSlider: UISlider!
@@ -77,6 +78,8 @@ class FilterViewController: UIViewController {
         }
         
         radiusSlider.setValue(radius, animated: true)
+        let formattedRadius = String(format: "%.1f", radius)
+        radiusLabel.text = "Current Radius: \(formattedRadius) mi."
     }
 
     @IBAction func selectFilter(_ sender: UIButton!) {
@@ -118,6 +121,13 @@ class FilterViewController: UIViewController {
                           radius: radius)
         // pass to main vc
     }
+    
+    @IBAction func radiusValueChanged(_ sender: Any) {
+        radius = radiusSlider.value
+        let formattedRadius = String(format: "%.1f", radius)
+        radiusLabel.text = "Current Radius: \(formattedRadius) mi."
+    }
+    
 
     /*
     // MARK: - Navigation

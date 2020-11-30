@@ -30,7 +30,7 @@ class HomeViewController: UIViewController, GetFilters {
     
     var eventFilters: [String] = []
     var activismFilters: [String] = []
-    var searchRadius: Float = 50.0
+    var searchRadius: Float = 0.0
     
     var user:UserModel?
     var login:LoginModel?
@@ -38,6 +38,8 @@ class HomeViewController: UIViewController, GetFilters {
     var eventListener:ListenerRegistration?
     var selectedPin:MKAnnotation?
     
+    var filteredAnnotations : [EventAnnotation] = []
+
     var trackLocation = false
     
     //var coordToPin:[CLLocationCoordinate2D:[AnnotationModel]] = [:]
@@ -61,6 +63,7 @@ class HomeViewController: UIViewController, GetFilters {
         }
         mapView.register(LocationDataMapClusterView.self, forAnnotationViewWithReuseIdentifier: "cluster")
         mapView.register(EventAnnotationView.self, forAnnotationViewWithReuseIdentifier: "event")
+        print(mapView.selectedAnnotations)
     }
     
     func loadInUserData() {
@@ -143,10 +146,63 @@ class HomeViewController: UIViewController, GetFilters {
     
     // Protocol method
     func getFilters(actFilters: [String], evtFilters: [String], radius: Float) {
+        if filteredAnnotations.count != 0 {
+            mapView.addAnnotations(filteredAnnotations)
+            filteredAnnotations = []
+        }
         activismFilters = actFilters
         eventFilters = evtFilters
         searchRadius = radius
-
+        
+        let currentAnnotations = mapView.annotations
+        for annotation in currentAnnotations {
+            if let eventAnnotation = annotation as? EventAnnotation {
+                var keep: Bool = true
+                let eventActivismFilter = eventAnnotation.activismType
+                let eventEventFilter = eventAnnotation.eventType
+                if searchRadius != 0 {
+                    if let currentLocation = locationManager.location?.coordinate {
+                        let locationPoint = MKMapPoint(currentLocation)
+                        let eventMapPoint = MKMapPoint(eventAnnotation.coordinate)
+                        let distance = locationPoint.distance(to: eventMapPoint)
+                        let distanceMiles = distance * 0.000621371192
+                        keep = keepAnnotationEvent(evtFilters: eventFilters, filter: eventEventFilter!) && distanceMiles.isLessThanOrEqualTo(Double(searchRadius)) && keepAnnotationActivism(actFilters: actFilters, filter: eventActivismFilter!)
+                    }
+                } else {
+                    keep = keepAnnotationEvent(evtFilters: eventFilters, filter: eventEventFilter!) && keepAnnotationActivism(actFilters: actFilters, filter: eventActivismFilter!)
+                }
+                if !keep {
+                    filteredAnnotations.append(eventAnnotation)
+                }
+            }
+        }
+        mapView.removeAnnotations(filteredAnnotations)
+    }
+    
+    // Check if filter is equal to one of the filters in act filter
+    func keepAnnotationActivism(actFilters: [String], filter: String) -> Bool {
+        if actFilters.count == 0 {
+            return true
+        }
+        for activismFilter in actFilters {
+            if filter == activismFilter {
+                return true
+            }
+        }
+        // filter not equal to anything in act filter
+        return false
+    }
+    
+    func keepAnnotationEvent(evtFilters: [String], filter: String) -> Bool {
+        if evtFilters.count == 0 {
+            return true
+        }
+        for eventFilter in evtFilters {
+            if filter == eventFilter {
+                return true
+            }
+        }
+        return false
     }
     
     func setUpSideMenu() {
@@ -184,12 +240,13 @@ class HomeViewController: UIViewController, GetFilters {
         annotation.title = eventName
         annotation.subtitle = "Date: \(dateString)\nOrganization: \(ownerOrg!)\nActivism Type: \(activismType ?? "None")\nEvent Type: \(eventType ?? "None")"
         annotation.activismType = activismType
+        annotation.eventType = eventType
         //print(ownerOrg!)
         annotation.coordinate = coordinates
         
         self.mapView.addAnnotation(annotation)
-
     }
+    
     private func removePin(diff :DocumentChange){
         let eventID = diff.document.documentID
         for annotation in self.mapView.annotations {
@@ -199,6 +256,7 @@ class HomeViewController: UIViewController, GetFilters {
             }
         }
     }
+    
     func loadPins(){
         eventListener = db.collection("events")
             .addSnapshotListener { querySnapshot, error in
@@ -224,7 +282,6 @@ class HomeViewController: UIViewController, GetFilters {
                 }
             }
     }
-    
     func setUpLocationManager() {
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
