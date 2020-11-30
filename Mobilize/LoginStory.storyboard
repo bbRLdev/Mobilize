@@ -22,6 +22,7 @@
                                     <segment title="Login"/>
                                     <segment title="Sign Up"/>
                                 </segments>
+                                <color key="selectedSegmentTintColor" red="0.0" green="0.56284224989999998" blue="0.31881666180000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
                                     <action selector="segmentChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="SpP-bM-3xX"/>
                                 </connections>
@@ -404,7 +405,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="whQ-dJ-bqs"/>
+        <segue reference="4YN-mf-c4N"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="defaultProfile" width="1024" height="1024"/>
