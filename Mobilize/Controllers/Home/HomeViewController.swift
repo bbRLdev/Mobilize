@@ -386,24 +386,22 @@ extension HomeViewController: CLLocationManagerDelegate, MKMapViewDelegate {
             view?.canShowCallout = true
             view?.annotation = eventAnnotation
 
-        case is AnnotationModel:    
-            
             let btn = UIButton(type: .detailDisclosure)
-            
+
             let annotationTitle = UILabel()
             let annotationSubtitle = UILabel()
             annotationTitle.font = UIFont.boldSystemFont(ofSize: 12)
             annotationSubtitle.font = UIFont.systemFont(ofSize: 11)
-            
+
             annotationSubtitle.numberOfLines = 0
             annotationTitle.text = annotation.title as? String
             annotationSubtitle.text = annotation.subtitle as? String
-            
+
             btn.addTarget(self, action:#selector(self.infoClicked), for: .touchUpInside)
             view?.rightCalloutAccessoryView = btn
             view?.leftCalloutAccessoryView = annotationTitle
             view?.detailCalloutAccessoryView = annotationSubtitle
-            
+
             return view
         
         case is MKClusterAnnotation:

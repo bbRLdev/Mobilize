@@ -184,7 +184,6 @@
 				93E47C4E254912DE006D76BF /* FilterStory.storyboard */,
 				93E47C49254912B4006D76BF /* LoginStory.storyboard */,
 				1AF47AD7253666DA0092CE1B /* Assets.xcassets */,
-				1A55F5C025678A5F00B5903E /* GoogleService-Info.plist */,
 				1A63C4B32570761A00E65868 /* GoogleService-Info.plist */,
 				1AF47ADC253666DA0092CE1B /* Info.plist */,
 				1AF47AD4253666DA0092CE1B /* Mobilize.xcdatamodeld */,
@@ -324,7 +323,7 @@
 				1AF47AC4253666DA0092CE1B /* Sources */,
 				1AF47AC5253666DA0092CE1B /* Frameworks */,
 				1AF47AC6253666DA0092CE1B /* Resources */,
-				592009D7A5F138AE476B1947 /* [CP] Embed Pods Frameworks */,
+				13BE317E8EA8DBBD7F34AC7B /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -373,7 +372,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				1A63C4B42570761A00E65868 /* GoogleService-Info.plist in Resources */,
-				1A55F5C125678A5F00B5903E /* GoogleService-Info.plist in Resources */,
 				93E47C4C254912BC006D76BF /* LoginStory.storyboard in Resources */,
 				93E47C6E25491871006D76BF /* SettingsScreen.storyboard in Resources */,
 				93CC665D254B38A60075A9EE /* Settings.bundle in Resources */,
@@ -414,7 +412,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		592009D7A5F138AE476B1947 /* [CP] Embed Pods Frameworks */ = {
+		13BE317E8EA8DBBD7F34AC7B /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
