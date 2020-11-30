@@ -3,6 +3,7 @@
     <device id="retina6_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -47,14 +48,50 @@
                                     <action selector="createEvent:" destination="gQ3-T5-1Qu" eventType="touchUpInside" id="YMd-i0-mRc"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qwk-fU-5ve">
+                                <rect key="frame" x="354" y="129" width="40" height="38.333333333333329"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="3Bx-zW-vMm"/>
+                                    <constraint firstAttribute="width" constant="40" id="fAQ-QH-egj"/>
+                                </constraints>
+                                <state key="normal">
+                                    <imageReference key="backgroundImage" image="map" catalog="system" renderingMode="original"/>
+                                </state>
+                                <connections>
+                                    <action selector="changeMapButtonPressed:" destination="DcC-jA-gKe" eventType="touchUpInside" id="sJm-Zg-cGe"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cs1-Xy-nAb">
+                                <rect key="frame" x="20" y="129.33333333333334" width="40" height="38.666666666666657"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="40" id="YAM-XD-5fQ"/>
+                                    <constraint firstAttribute="height" constant="40" id="kLh-68-LOj"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="1"/>
+                                <state key="normal">
+                                    <color key="titleColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <imageReference key="backgroundImage" image="location" catalog="system" renderingMode="original"/>
+                                </state>
+                                <state key="selected" backgroundImage="location.fill" catalog="system">
+                                    <color key="titleColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <state key="highlighted" backgroundImage="location.fill" catalog="system"/>
+                                <connections>
+                                    <action selector="trackLocationButtonPressed:" destination="DcC-jA-gKe" eventType="touchUpInside" id="3hK-x6-YaA"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="AUD-Sq-IuA"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="qxk-WA-yGa" firstAttribute="leading" secondItem="AUD-Sq-IuA" secondAttribute="leading" constant="20" id="4Qt-af-Udi"/>
+                            <constraint firstItem="cs1-Xy-nAb" firstAttribute="top" secondItem="AUD-Sq-IuA" secondAttribute="top" constant="40" id="GMr-tF-T6O"/>
                             <constraint firstItem="AUD-Sq-IuA" firstAttribute="trailing" secondItem="zF9-9j-w7N" secondAttribute="trailing" constant="20" id="LlA-wg-emx"/>
                             <constraint firstItem="Gjb-KE-SyA" firstAttribute="trailing" secondItem="AUD-Sq-IuA" secondAttribute="trailing" id="Lxp-Nf-ZDd"/>
+                            <constraint firstItem="qwk-fU-5ve" firstAttribute="top" secondItem="AUD-Sq-IuA" secondAttribute="top" constant="40" id="PsZ-Ry-AcG"/>
+                            <constraint firstItem="AUD-Sq-IuA" firstAttribute="trailing" secondItem="qwk-fU-5ve" secondAttribute="trailing" constant="20" id="Roz-Pa-GwR"/>
                             <constraint firstItem="AUD-Sq-IuA" firstAttribute="bottom" secondItem="zF9-9j-w7N" secondAttribute="bottom" constant="30" id="YXy-d3-eJ5"/>
+                            <constraint firstItem="cs1-Xy-nAb" firstAttribute="leading" secondItem="AUD-Sq-IuA" secondAttribute="leading" constant="20" id="dmZ-wo-6xj"/>
                             <constraint firstItem="qxk-WA-yGa" firstAttribute="leading" secondItem="AUD-Sq-IuA" secondAttribute="leading" constant="20" id="dxY-Z4-HpS"/>
                             <constraint firstItem="Gjb-KE-SyA" firstAttribute="top" secondItem="0hl-5C-Uz0" secondAttribute="top" id="nP8-zL-JCK"/>
                             <constraint firstAttribute="bottom" secondItem="Gjb-KE-SyA" secondAttribute="bottom" id="sFR-29-PWc"/>
@@ -88,6 +125,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="mapView" destination="Gjb-KE-SyA" id="bTj-zp-jWD"/>
+                        <outlet property="trackLocationButton" destination="cs1-Xy-nAb" id="Rpx-To-OxZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nTq-iE-xEh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -200,7 +238,10 @@
     </scenes>
     <resources>
         <image name="line.horizontal.3" catalog="system" width="128" height="64"/>
+        <image name="location" catalog="system" width="128" height="121"/>
+        <image name="location.fill" catalog="system" width="128" height="121"/>
         <image name="magnifyingglass" catalog="system" width="128" height="115"/>
+        <image name="map" catalog="system" width="128" height="110"/>
         <image name="slider.horizontal.3" catalog="system" width="128" height="100"/>
         <image name="square.and.pencil" catalog="system" width="128" height="115"/>
         <systemColor name="labelColor">

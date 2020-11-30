@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="i79-iS-sC4">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="i79-iS-sC4">
     <device id="retina6_5" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -22,20 +22,20 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="34" translatesAutoresizingMaskIntoConstraints="NO" id="5Ba-9o-lXX">
-                                <rect key="frame" x="20" y="100" width="374" height="293"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="78" translatesAutoresizingMaskIntoConstraints="NO" id="5Ba-9o-lXX">
+                                <rect key="frame" x="20" y="99.999999999999972" width="374" height="410.33333333333326"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="ZRh-t5-vPA">
-                                        <rect key="frame" x="0.0" y="0.0" width="374" height="108.33333333333333"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="374" height="110.33333333333333"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Activism Type" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vf4-28-x67">
-                                                <rect key="frame" x="0.0" y="0.0" width="106.33333333333333" height="18.333333333333332"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="106.33333333333333" height="20.333333333333332"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" delaysContentTouches="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vFt-4p-628" customClass="ControlContainableScrollView" customModule="Mobilize" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="26.333333333333329" width="374" height="82"/>
+                                                <rect key="frame" x="0.0" y="28.333333333333343" width="374" height="82"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="3J1-UF-iFU">
                                                         <rect key="frame" x="0.0" y="0.0" width="374" height="82"/>
@@ -58,7 +58,7 @@
                                         </constraints>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="hRC-ys-XMB">
-                                        <rect key="frame" x="0.0" y="142.33333333333334" width="374" height="59.333333333333343"/>
+                                        <rect key="frame" x="0.0" y="188.33333333333331" width="374" height="59.333333333333343"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Event Type" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nRu-JL-J43">
                                                 <rect key="frame" x="0.0" y="0.0" width="84.333333333333329" height="20.333333333333332"/>
@@ -67,7 +67,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="149-6l-VEj">
-                                                <rect key="frame" x="0.0" y="27.333333333333343" width="374" height="32"/>
+                                                <rect key="frame" x="0.0" y="27.333333333333371" width="374" height="32"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="32" id="In5-VO-IUI"/>
                                                 </constraints>
@@ -75,7 +75,7 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="rOx-1e-EQs">
-                                        <rect key="frame" x="0.0" y="235.66666666666671" width="374" height="57.333333333333343"/>
+                                        <rect key="frame" x="0.0" y="325.66666666666669" width="374" height="84.666666666666686"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Search Radius" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ojs-FR-Gcr">
                                                 <rect key="frame" x="0.0" y="0.0" width="109" height="20.333333333333332"/>
@@ -83,9 +83,18 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="ota-s5-EN3">
+                                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="ota-s5-EN3">
                                                 <rect key="frame" x="-2" y="27.333333333333314" width="378" height="31"/>
+                                                <connections>
+                                                    <action selector="radiusValueChanged:" destination="i79-iS-sC4" eventType="valueChanged" id="JAe-fz-yG6"/>
+                                                </connections>
                                             </slider>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Current Radius" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5E3-KV-2X0">
+                                                <rect key="frame" x="0.0" y="64.333333333333314" width="113.66666666666667" height="20.333333333333329"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                         </subviews>
                                         <constraints>
                                             <constraint firstItem="ota-s5-EN3" firstAttribute="width" secondItem="rOx-1e-EQs" secondAttribute="width" id="o23-LW-lLI"/>
@@ -101,7 +110,7 @@
                         <viewLayoutGuide key="safeArea" id="fur-mK-Hih"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="fur-mK-Hih" firstAttribute="bottom" secondItem="5Ba-9o-lXX" secondAttribute="bottom" constant="469" id="NvY-i2-P1R"/>
+                            <constraint firstItem="fur-mK-Hih" firstAttribute="bottom" secondItem="5Ba-9o-lXX" secondAttribute="bottom" constant="351.66666666666674" id="Pf6-5H-Ll6"/>
                             <constraint firstItem="5Ba-9o-lXX" firstAttribute="top" secondItem="QbY-He-Sw9" secondAttribute="top" constant="100" id="Yda-PY-t3S"/>
                             <constraint firstItem="5Ba-9o-lXX" firstAttribute="centerX" secondItem="1Sn-1K-lLt" secondAttribute="centerX" id="irt-Vk-WeV"/>
                             <constraint firstItem="5Ba-9o-lXX" firstAttribute="centerX" secondItem="fur-mK-Hih" secondAttribute="centerX" id="qU3-b5-Ech"/>
@@ -112,6 +121,7 @@
                     <connections>
                         <outlet property="eventStack" destination="149-6l-VEj" id="2oR-iB-1zd"/>
                         <outlet property="filterStack" destination="3J1-UF-iFU" id="6fj-g0-IRk"/>
+                        <outlet property="radiusLabel" destination="5E3-KV-2X0" id="Dfy-Tb-Un3"/>
                         <outlet property="radiusSlider" destination="ota-s5-EN3" id="FYs-0P-1Te"/>
                     </connections>
                 </viewController>

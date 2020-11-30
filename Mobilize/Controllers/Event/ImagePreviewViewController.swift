@@ -34,6 +34,8 @@ class ImagePreviewViewController: UIViewController, UICollectionViewDelegate, UI
         let offset = myCollectionView.contentOffset
         let width  = myCollectionView.bounds.size.width
         
+        self.navigationItem.title = "< Image: \(passedContentOffset.row + 1)/\(imgArray.count) >"
+        
         let newOffset = CGPoint(x: CGFloat(passedContentOffset.row) * width, y: offset.y)
         
         myCollectionView.setContentOffset(newOffset, animated: false)
@@ -45,6 +47,19 @@ class ImagePreviewViewController: UIViewController, UICollectionViewDelegate, UI
         myCollectionView.autoresizingMask = UIView.AutoresizingMask(rawValue: UIView.AutoresizingMask.RawValue(UInt8(UIView.AutoresizingMask.flexibleWidth.rawValue) | UInt8(UIView.AutoresizingMask.flexibleHeight.rawValue)))
     }
     
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        var visibleRect = CGRect()
+
+        visibleRect.origin = myCollectionView.contentOffset
+        visibleRect.size = myCollectionView.bounds.size
+
+        let visiblePoint = CGPoint(x: visibleRect.midX, y: visibleRect.midY)
+
+        guard let indexPath = myCollectionView.indexPathForItem(at: visiblePoint) else { return }
+
+        self.navigationItem.title = "< Image: \(indexPath.row + 1)/\(imgArray.count) >"
+    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return imgArray.count
     }
@@ -54,6 +69,7 @@ class ImagePreviewViewController: UIViewController, UICollectionViewDelegate, UI
         cell.imgView.image=imgArray[indexPath.row]
         return cell
     }
+    
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
@@ -71,15 +87,15 @@ class ImagePreviewViewController: UIViewController, UICollectionViewDelegate, UI
         super.viewWillTransition(to: size, with: coordinator)
         let offset = myCollectionView.contentOffset
         let width  = myCollectionView.bounds.size.width
-        
+
         let index = round(offset.x / width)
         let newOffset = CGPoint(x: index * size.width, y: offset.y)
-        
+
         myCollectionView.setContentOffset(newOffset, animated: false)
-        
+
         coordinator.animate(alongsideTransition: { (context) in
             self.myCollectionView.reloadData()
-            
+
             self.myCollectionView.setContentOffset(newOffset, animated: false)
         }, completion: nil)
     }

@@ -10,6 +10,7 @@
 		1A6036E4254234A900E874D5 /* ControlContainableScrollview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A6036E3254234A900E874D5 /* ControlContainableScrollview.swift */; };
 		1A603726254286D600E874D5 /* ConfirmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A603725254286D600E874D5 /* ConfirmViewController.swift */; };
 		1A60372925428D5100E874D5 /* QAandConfirmVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A60372825428D5100E874D5 /* QAandConfirmVC.swift */; };
+		1A63C4B42570761A00E65868 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1A63C4B32570761A00E65868 /* GoogleService-Info.plist */; };
 		1A91533B254A51A500370962 /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A91533A254A51A500370962 /* FilterViewController.swift */; };
 		1A915341254E068D00370962 /* EventInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A915340254E068D00370962 /* EventInfoViewController.swift */; };
 		1AF47ACC253666DA0092CE1B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF47ACB253666DA0092CE1B /* AppDelegate.swift */; };
@@ -49,7 +50,7 @@
 		DB4DACF3256A3FB4001C6126 /* ImagePreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4DACF2256A3FB4001C6126 /* ImagePreviewViewController.swift */; };
 		DB51BE1125527B22007C65F6 /* AddMediaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB51BE1025527B22007C65F6 /* AddMediaViewController.swift */; };
 		DB51BE1525527B7D007C65F6 /* EventDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB51BE1425527B7D007C65F6 /* EventDetailsViewController.swift */; };
-		DB51BE322554B862007C65F6 /* AnnotationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB51BE312554B862007C65F6 /* AnnotationModel.swift */; };
+		DB51BE322554B862007C65F6 /* Annotations.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB51BE312554B862007C65F6 /* Annotations.swift */; };
 		DBB17774254A52B800E2AFAA /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB17773254A52B800E2AFAA /* ProfileViewController.swift */; };
 		DBB17776254A52C700E2AFAA /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB17775254A52C700E2AFAA /* HomeViewController.swift */; };
 		DBB17778254A52D900E2AFAA /* EventStory.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DBB17777254A52D900E2AFAA /* EventStory.storyboard */; };
@@ -60,6 +61,7 @@
 		1A6036E3254234A900E874D5 /* ControlContainableScrollview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlContainableScrollview.swift; sourceTree = "<group>"; };
 		1A603725254286D600E874D5 /* ConfirmViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmViewController.swift; sourceTree = "<group>"; };
 		1A60372825428D5100E874D5 /* QAandConfirmVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QAandConfirmVC.swift; sourceTree = "<group>"; };
+		1A63C4B32570761A00E65868 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		1A91533A254A51A500370962 /* FilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
 		1A915340254E068D00370962 /* EventInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventInfoViewController.swift; sourceTree = "<group>"; };
 		1AF47AC8253666DA0092CE1B /* Mobilize.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Mobilize.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -103,7 +105,7 @@
 		DB4DACF2256A3FB4001C6126 /* ImagePreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePreviewViewController.swift; sourceTree = "<group>"; };
 		DB51BE1025527B22007C65F6 /* AddMediaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddMediaViewController.swift; sourceTree = "<group>"; };
 		DB51BE1425527B7D007C65F6 /* EventDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetailsViewController.swift; sourceTree = "<group>"; };
-		DB51BE312554B862007C65F6 /* AnnotationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnotationModel.swift; sourceTree = "<group>"; };
+		DB51BE312554B862007C65F6 /* Annotations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Annotations.swift; sourceTree = "<group>"; };
 		DBB17773254A52B800E2AFAA /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		DBB17775254A52C700E2AFAA /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		DBB17777254A52D900E2AFAA /* EventStory.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = EventStory.storyboard; sourceTree = "<group>"; };
@@ -182,6 +184,7 @@
 				93E47C4E254912DE006D76BF /* FilterStory.storyboard */,
 				93E47C49254912B4006D76BF /* LoginStory.storyboard */,
 				1AF47AD7253666DA0092CE1B /* Assets.xcassets */,
+				1A63C4B32570761A00E65868 /* GoogleService-Info.plist */,
 				1AF47ADC253666DA0092CE1B /* Info.plist */,
 				1AF47AD4253666DA0092CE1B /* Mobilize.xcdatamodeld */,
 				93951BE0256D794D00053A74 /* GoogleService-Info.plist */,
@@ -216,7 +219,7 @@
 				93CC6662254F9BC70075A9EE /* EventModel.swift */,
 				93CC6666254F9BDF0075A9EE /* UserModel.swift */,
 				938CC6BB255DDCE200244304 /* LoginModel.swift */,
-				DB51BE312554B862007C65F6 /* AnnotationModel.swift */,
+				DB51BE312554B862007C65F6 /* Annotations.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -320,7 +323,7 @@
 				1AF47AC4253666DA0092CE1B /* Sources */,
 				1AF47AC5253666DA0092CE1B /* Frameworks */,
 				1AF47AC6253666DA0092CE1B /* Resources */,
-				592009D7A5F138AE476B1947 /* [CP] Embed Pods Frameworks */,
+				13BE317E8EA8DBBD7F34AC7B /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -368,6 +371,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1A63C4B42570761A00E65868 /* GoogleService-Info.plist in Resources */,
 				93E47C4C254912BC006D76BF /* LoginStory.storyboard in Resources */,
 				93E47C6E25491871006D76BF /* SettingsScreen.storyboard in Resources */,
 				93CC665D254B38A60075A9EE /* Settings.bundle in Resources */,
@@ -408,7 +412,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		592009D7A5F138AE476B1947 /* [CP] Embed Pods Frameworks */ = {
+		13BE317E8EA8DBBD7F34AC7B /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -445,7 +449,7 @@
 				DB4DAC8725647CD3001C6126 /* EventImageViewController.swift in Sources */,
 				9334F52F2566E230004F5B53 /* SideMenuListController.swift in Sources */,
 				1AF47ACC253666DA0092CE1B /* AppDelegate.swift in Sources */,
-				DB51BE322554B862007C65F6 /* AnnotationModel.swift in Sources */,
+				DB51BE322554B862007C65F6 /* Annotations.swift in Sources */,
 				1A6036E4254234A900E874D5 /* ControlContainableScrollview.swift in Sources */,
 				DBB17776254A52C700E2AFAA /* HomeViewController.swift in Sources */,
 				1A915341254E068D00370962 /* EventInfoViewController.swift in Sources */,
