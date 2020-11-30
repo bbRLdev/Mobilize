@@ -22,6 +22,7 @@ class EventAnnotation : NSObject, MKAnnotation {
     var likes: Int
     var date:Date?
     var activismType: String?
+    var eventType: String?
     var coordinate: CLLocationCoordinate2D
     var title: String?
     var subtitle: String?
