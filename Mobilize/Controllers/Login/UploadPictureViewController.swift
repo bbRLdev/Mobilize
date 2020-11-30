@@ -133,16 +133,18 @@ class UploadPictureViewController: UIViewController, UIImagePickerControllerDele
                     })
                 }
             }else {
-                let msg = "check the validity of your email address"
-                let controller = UIAlertController(title: "Error",
-                                                   message: msg,
-                                                   preferredStyle: .alert)
-                
-                controller.addAction(UIAlertAction(title: "OK",
-                                                   style: .default,
-                                                   handler: createProfileAlertHandler(alert:)))
-                
-                self.present(controller, animated: true, completion: nil)
+                pending.dismiss(animated: true, completion: {
+                    let msg = "Check the validity of your email address. An account may have already been created."
+                    let controller = UIAlertController(title: "Error",
+                                                       message: msg,
+                                                       preferredStyle: .alert)
+                    
+                    controller.addAction(UIAlertAction(title: "OK",
+                                                       style: .default,
+                                                       handler: createProfileAlertHandler(alert:)))
+                    
+                    self.present(controller, animated: true, completion: nil)
+                })
 
             }
         }

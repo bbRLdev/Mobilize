@@ -5,6 +5,7 @@
 //  Created by Michael Labarca on 10/22/20.
 //
 
+//MARK: TODO: remove image ref from event.photoIDCollection when deleting
 import UIKit
 import FirebaseAuth
 import FirebaseFirestore
@@ -23,6 +24,7 @@ class QAandConfirmVC: UIViewController {
     var event: EventModel!
     var eventSoFar: [String : Any] = [:]
     var imgURLs: [String] = []
+    var imgRefList = [[String : String]]()
     var questions: [Question] = []
     
     var dateComponents: DateComponents?
@@ -55,15 +57,16 @@ class QAandConfirmVC: UIViewController {
         }
     }
         
-
     override func viewDidLoad() {
         super.viewDidLoad()
         //print("Did load \(images)")
         qaTableView.delegate = self
         qaTableView.dataSource = self
-        
-        
+        if event != nil {
+            questions = event.questions
+        }       
     }
+  
     override func viewWillAppear(_ animated: Bool) {
         //qaTableView.reloadData()
     }
@@ -85,7 +88,7 @@ class QAandConfirmVC: UIViewController {
     @IBAction func createEvent(_ sender: Any) {
         createButton.setTitle("Uploading...", for: .normal)
         createButton.isUserInteractionEnabled = false
-        
+
         if let uid = getUID() {
             let curUID = eventSoFar["ownerUID"] as! String
             if curUID == uid {
@@ -100,7 +103,7 @@ class QAandConfirmVC: UIViewController {
                 //check if event So Far has any photo ids in delete
                 // field and handle requests if necessary
                 // deleteImages(eventID: eid)
-                uploadNewImages(eventId: eid)
+                uploadNewImages(eventId: eventSoFar["eventID"] as? String ?? "")
                 // set notification timer
                 setNotificationTimer()
             }
@@ -163,35 +166,46 @@ class QAandConfirmVC: UIViewController {
                 imgLoadingFlag = false
                 return
             }
-            
+
             let storageRef = Storage.storage().reference(forURL: "gs://mobilize-77a05.appspot.com")
             let metadata = StorageMetadata()
             
             metadata.contentType = "image/jpg"
-            var refs: [String] = []
             var count: Int = 0 {
                 willSet {
                     if newValue >= images.count {
-                        eventSoFar["photoIDCollection"] = refs
+                        eventSoFar["photoIDCollection"] = imgRefList
                         imgLoadingFlag = false
                     }
                 }
             }
             for image in images {
-                let imageId = UUID().uuidString
-                if let imageData = image?.jpegData(compressionQuality: 4.0) {
-                    let eventRef = storageRef.child("events").child(eventId).child("\(imageId)")
-                    
-                    print(eventRef)
-                    eventRef.putData(imageData, metadata: metadata, completion: {
-                        (storageMetadata, error) in
-                        if error != nil {
-                            print("error uploading image \(imageId)")
-                            return
-                        }
-                        refs.append(imageId)
-                        count += 1
-                    })
+             
+                let placeholderImage = UIImage(systemName: "questionmark")
+
+                if image != nil && image!.isEqual(placeholderImage) {
+                    images.remove(at: count)
+                    count += 1
+                } else {
+                    let imageId = UUID().uuidString
+                    if let imageData = image?.jpegData(compressionQuality: 4.0) {
+                        let eventRef = storageRef.child("events").child(eventId).child("\(imageId)")
+                        
+                        print(eventRef)
+                        eventRef.putData(imageData, metadata: metadata, completion: {
+                            (storageMetadata, error) in
+                            if error != nil {
+                                print("error uploading image \(imageId)")
+                                return
+                            }
+                            let temp: [String:String] = self.imgRefList.count != 0
+                                ? ["\(self.imgRefList.count - 1 + count)" : imageId]
+                                : ["0" : imageId]
+                            self.imgRefList.append(temp)
+                            count += 1
+                        })
+                    }
+                }
             }
         }
     }

@@ -11,6 +11,7 @@ import UIKit
 
 class FilterViewController: UIViewController {
     
+    @IBOutlet weak var radiusLabel: UILabel!
     @IBOutlet weak var filterStack: UIStackView!
     @IBOutlet weak var eventStack: UIStackView!
     @IBOutlet weak var radiusSlider: UISlider!
@@ -31,13 +32,6 @@ class FilterViewController: UIViewController {
              political = "Political",
              voting = "Voting"
     }
-    
-    let colorSet: [UIColor] = [UIColor.purple,
-                               UIColor.red,
-                               UIColor.cyan,
-                               UIColor.orange,
-                               UIColor.green,
-                               UIColor.systemPink]
     var initActivismButtons: [String] = []
     var initEventButtons: [String] = []
     var radius: Float = 0
@@ -49,7 +43,6 @@ class FilterViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        var caseNum = 0
         for activism in ActivismFilterTypes.allCases {
             let button = UIButton()
             button.setTitle(activism.rawValue, for: .normal)
@@ -58,10 +51,9 @@ class FilterViewController: UIViewController {
             button.setImage(UIImage(systemName: "circle.fill"), for: .selected)
             button.titleEdgeInsets.left = 6
             button.titleEdgeInsets.right = -6
-            button.tintColor = colorSet[caseNum]
+            button.tintColor = EventModel.returnColor(activismType: activism.rawValue)
             button.addTarget(self, action: #selector(selectFilter(_:)), for: .touchUpInside)
             activismButtonSet.append(button)
-            caseNum += 1
             filterStack.addArrangedSubview(button)
             if(initActivismButtons.contains(activism.rawValue)) {
                 button.isSelected = true
@@ -86,6 +78,8 @@ class FilterViewController: UIViewController {
         }
         
         radiusSlider.setValue(radius, animated: true)
+        let formattedRadius = String(format: "%.1f", radius)
+        radiusLabel.text = "Current Radius: \(formattedRadius) mi."
     }
 
     @IBAction func selectFilter(_ sender: UIButton!) {
@@ -127,6 +121,13 @@ class FilterViewController: UIViewController {
                           radius: radius)
         // pass to main vc
     }
+    
+    @IBAction func radiusValueChanged(_ sender: Any) {
+        radius = radiusSlider.value
+        let formattedRadius = String(format: "%.1f", radius)
+        radiusLabel.text = "Current Radius: \(formattedRadius) mi."
+    }
+    
 
     /*
     // MARK: - Navigation

@@ -365,25 +365,27 @@ class EventInfoViewController: UIViewController, UITableViewDelegate, UITableVie
                 organizationNameField.text = event.organization
                 eventAddressField.text = event.location
                 eventDescriptionField.text = event.description
-//                let colorSet: [UIColor] = [UIColor.purple,
-//                                           UIColor.red,
-//                                           UIColor.cyan,
-//                                           UIColor.orange,
-//                                           UIColor.green,
-//                                           UIColor.systemPink]
-                // let eventFilter: String = event.eventType.rawValue
-                // var count = 0
-                // for filter in EventModel.EventFilterType.allCases {
-                // if eventFilter == filter {
-                //  break
-                // }
-                // count += 1
-                // }
-                // color = EventModel.EventFilterType.allCases[count]
-                //eventFilterTitle = EventModel.EventFilterType.allCases[count]
-                //
-                // filterColor =
-                // startFade(target: , title: , color: , image: )
+                let activismFilter: String = event.activismType!
+                var color = EventModel.returnColor(activismType: activismFilter)
+                selectedActivismTypeFilter = activismFilter
+                var image = UIImage(systemName: "circle.fill")?
+                    .withRenderingMode(.alwaysOriginal)
+                    .withTintColor(color)
+                startFade(target: activismTypeFilterButton,
+                          title: selectedActivismTypeFilter!,
+                          color: color,
+                          image: image!)
+                let eventFilter: String = event.eventType!
+                selectedActivismTypeFilter = eventFilter
+                color = UIColor.lightGray
+                image = image?.withTintColor(color)
+                startFade(target: eventTypeFilterButton,
+                          title: selectedEventTypeFilter!,
+                          color: color,
+                          image: image!)
+                let date = event.date!
+                eventDatePicker.setDate(date, animated: false)
+                selectedDate = date
             }
         }
     }

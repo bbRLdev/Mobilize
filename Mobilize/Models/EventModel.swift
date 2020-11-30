@@ -11,7 +11,6 @@ import MapKit
 typealias Question = (question: String, answer: String)
 
 
-
 class EventModel {
     var coordinates: CLLocationCoordinate2D?
     var date: Date?
@@ -24,7 +23,9 @@ class EventModel {
     var likeNum: Int?
     var rsvpNum: Int?
     var questions: [Question] = []
-    var photoURLCollection: [String] = []
+    var photoIdCollection: [String] = []
+    var activismType: String?
+    var eventType: String?
 
     enum ActivismFilterType: String, CaseIterable {
         case racialJustice = "Racial Justice",
@@ -53,6 +54,21 @@ class EventModel {
         organizerUID = owner
     }
     
-   
+    static func returnColor(activismType: String) -> UIColor {
+        let colorSet: [UIColor] = [UIColor.purple,
+                                   UIColor.red,
+                                   UIColor.cyan,
+                                   UIColor.orange,
+                                   UIColor.green,
+                                   UIColor.systemPink]
+        var count = 0
+        for activism in ActivismFilterType.allCases {
+            if activism.rawValue == activismType {
+                break
+            }
+            count += 1
+        }
+        return colorSet[count]
+    }
     
 }

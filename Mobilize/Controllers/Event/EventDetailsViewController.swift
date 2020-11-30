@@ -19,6 +19,8 @@ class EventDetailsViewController: UIViewController {
     let qSegue = "qSegue"
     //let homeSegue = "homeSegue"
     
+    var disableButtons = false
+    
     var eventID: String?
     var userID: String?
     var ownerUID: String?
@@ -43,6 +45,10 @@ class EventDetailsViewController: UIViewController {
     
     @IBOutlet weak var RSVPButton: UIButton!
     
+    @IBOutlet weak var questionButton: UIButton!
+    
+    @IBOutlet weak var viewProfileButton: UIButton!
+    
     @IBOutlet weak var titleLabel: UILabel!
     
     @IBOutlet weak var dateLabel: UILabel!
@@ -57,10 +63,13 @@ class EventDetailsViewController: UIViewController {
     
     @IBOutlet weak var creatorLabel: UILabel!
     
+    @IBOutlet weak var activismTypeLabel: UILabel!
+    
+    @IBOutlet weak var eventTypeLabel: UILabel!
+    
     @IBOutlet weak var descriptionLabel: UILabel!
     
     @IBOutlet weak var qaTableView: SelfSizingTableView!
-    
     
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -70,7 +79,13 @@ class EventDetailsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        if(disableButtons){
+            viewProfileButton.isUserInteractionEnabled = false
+            viewProfileButton.isEnabled = false
+        }
+        
         editButton.isHidden = true
+        questionButton.isHidden = true
         
         qaTableView.maxHeight = 400
         qaTableView.delegate = self
@@ -332,11 +347,13 @@ class EventDetailsViewController: UIViewController {
             if let document = document, document.exists {
                 let dataDescription = document.data()
                 
+                let activismTypeFilter = dataDescription?["activismTypeFilter"] as! String
+                let eventTypeFilter = dataDescription?["eventTypeFilter"] as! String
                 let address = dataDescription!["address"] as! String
                 let coordDict = dataDescription!["coordinates"] as! NSDictionary
                 let date = dataDescription!["date"] as! Timestamp
                 let eventDesc = dataDescription!["description"] as! String
-                let imgList = dataDescription!["photoIDCollection"] as? [String] ?? []
+                let imgList = dataDescription!["photoIDCollection"] as? [NSDictionary] ?? []
                 let eventName = dataDescription!["name"] as! String
                 let likes = dataDescription!["numLikes"] as! Int
                 let RSVPs = dataDescription!["numRSVPs"] as! Int
@@ -356,17 +373,25 @@ class EventDetailsViewController: UIViewController {
                 
                 ownerUID = ownerID
                 event = EventModel()
+                event.eventID = eventID
                 event.location = address
                 event.coordinates = coordinates
                 event.date = date.dateValue()
                 event.description = eventDesc
-                event.photoURLCollection = imgList
                 event.eventName = eventName
                 event.likeNum = likes
                 event.rsvpNum = RSVPs
                 event.organization = orgName
                 event.organizerUID = ownerID
                 event.questions = qList
+                
+                event.photoIdCollection = Array(repeating: "", count: imgList.count)
+                
+                var imgCount = 0
+                for entry in imgList{
+                    event.photoIdCollection[imgCount] = entry.value(forKey: "\(imgCount)") as! String
+                    imgCount += 1
+                }
                 
                 let dFormatter = DateFormatter()
                 dFormatter.dateStyle = .medium
@@ -380,6 +405,28 @@ class EventDetailsViewController: UIViewController {
                 organizationLabel.text = event.organization
                 setOrganizerName(uid: event.organizerUID!)
                 descriptionLabel.text = event.description
+                activismTypeLabel.text = "Activism: " + activismTypeFilter
+                eventTypeLabel.text = "Event Type: " + eventTypeFilter
+                
+                var aFilter: EventModel.ActivismFilterType?
+                var eFilter: EventModel.EventFilterType?
+                
+                for activism in EventModel.ActivismFilterType.allCases{
+                    if(activism.rawValue == activismTypeFilter){
+                        aFilter = activism
+                        break
+                    }
+                }
+                
+                for event in EventModel.EventFilterType.allCases{
+                    if(event.rawValue == eventTypeFilter){
+                        eFilter = event
+                        break
+                    }
+                }
+                
+                event.activismType = aFilter?.rawValue
+                event.eventType = eFilter?.rawValue
                 
                 
                 imageArray.append(UIImage(named: blankImage)!)
@@ -387,7 +434,7 @@ class EventDetailsViewController: UIViewController {
                 
                 let storageRef = Storage.storage().reference(forURL: "gs://mobilize-77a05.appspot.com")
                 
-                let total = event.photoURLCollection.count
+                let total = event.photoIdCollection.count
                 if(total == 0){
                     collectionView.reloadData()
                 }
@@ -407,11 +454,14 @@ class EventDetailsViewController: UIViewController {
                         }
                 }
                 
-                for (i, pid) in event.photoURLCollection.enumerated(){
+                
+                for (i, pid) in event.photoIdCollection.enumerated(){
                     let imgRef = storageRef.child("events/\(eventID!)").child(pid)
                     imgRef.getData(maxSize: 1 * 2048 * 2048, completion: {
                         data, error in
                         if error != nil {
+                            let toRemove: NSDictionary = ["id": pid, "index": i]
+                            eventRef?.updateData(["photoIDCollection": FieldValue.arrayRemove([toRemove])])
                             print("error getting image")
                         } else {
                             loadedImages[i] = UIImage(data: data!)!
@@ -451,19 +501,13 @@ class EventDetailsViewController: UIViewController {
     }
     
     func checkAuth() {
-
         if let uid = auth.currentUser?.uid{
-            
-            if uid == ownerUID {
-                //print("i am the creator")
-                editButton.isHidden = false
-                
+            if uid != ownerUID {
+                questionButton.isHidden = false
             }
         }
 
     }
-
-
 }
 
 extension EventDetailsViewController: UICollectionViewDelegate, UICollectionViewDataSource{
@@ -513,8 +557,8 @@ extension EventDetailsViewController: UITableViewDelegate, UITableViewDataSource
         let row = indexPath.row
         cell.textLabel?.numberOfLines = 0
         cell.detailTextLabel?.numberOfLines = 0
-        cell.textLabel?.text = event.questions[row].question
-        cell.detailTextLabel?.text = event.questions[row].answer
+        cell.textLabel?.text = "Question: " + event.questions[row].question
+        cell.detailTextLabel?.text = "Answer: " + event.questions[row].answer
         return cell
     }
     

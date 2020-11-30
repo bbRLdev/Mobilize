@@ -21,6 +21,8 @@ class HomeViewController: UIViewController, GetFilters {
     
     @IBOutlet weak var mapView: MKMapView!
     
+    @IBOutlet weak var trackLocationButton: UIButton!
+    
     var sideMenu: SideMenuNavigationController?
     
     let locationManager = CLLocationManager()
@@ -28,13 +30,17 @@ class HomeViewController: UIViewController, GetFilters {
     
     var eventFilters: [String] = []
     var activismFilters: [String] = []
-    var searchRadius: Float = 50.0
+    var searchRadius: Float = 0.0
     
     var user:UserModel?
     var login:LoginModel?
     
     var eventListener:ListenerRegistration?
     var selectedPin:MKAnnotation?
+    
+    var filteredAnnotations : [EventAnnotation] = []
+
+    var trackLocation = false
     
     //var coordToPin:[CLLocationCoordinate2D:[AnnotationModel]] = [:]
     
@@ -48,11 +54,16 @@ class HomeViewController: UIViewController, GetFilters {
         checkLocationServices()
         loadPins()
         setMapDelegate()
+        
+        trackLocationButton.isSelected = trackLocation
+        
         if(user == nil) {
             // need to try loading in user data
             loadInUserData()
         }
         mapView.register(LocationDataMapClusterView.self, forAnnotationViewWithReuseIdentifier: "cluster")
+        mapView.register(EventAnnotationView.self, forAnnotationViewWithReuseIdentifier: "event")
+        print(mapView.selectedAnnotations)
     }
     
     func loadInUserData() {
@@ -113,6 +124,26 @@ class HomeViewController: UIViewController, GetFilters {
         present(SideMenuManager.default.leftMenuNavigationController!, animated: true)
     }
     
+    
+    @IBAction func trackLocationButtonPressed(_ sender: Any) {
+        trackLocation = !trackLocation
+        trackLocationButton.isSelected = trackLocation
+    }
+    
+    
+    @IBAction func changeMapButtonPressed(_ sender: Any) {
+        switch mapView.mapType {
+        case .standard:
+            mapView.mapType = MKMapType.satellite
+        case .satellite:
+            mapView.mapType = MKMapType.hybrid
+        case .hybrid:
+            mapView.mapType = MKMapType.standard
+        default:
+            print("This shouldn't happen")
+        }
+    }
+    
     @IBAction func createEvent(_ sender: Any) {
         let storyboard: UIStoryboard = UIStoryboard(name: "CreateEventStory", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "Confirm") as! ConfirmViewController
@@ -121,9 +152,63 @@ class HomeViewController: UIViewController, GetFilters {
     
     // Protocol method
     func getFilters(actFilters: [String], evtFilters: [String], radius: Float) {
+        if filteredAnnotations.count != 0 {
+            mapView.addAnnotations(filteredAnnotations)
+            filteredAnnotations = []
+        }
         activismFilters = actFilters
         eventFilters = evtFilters
         searchRadius = radius
+        
+        let currentAnnotations = mapView.annotations
+        for annotation in currentAnnotations {
+            if let eventAnnotation = annotation as? EventAnnotation {
+                var keep: Bool = true
+                let eventActivismFilter = eventAnnotation.activismType
+                let eventEventFilter = eventAnnotation.eventType
+                if searchRadius != 0 {
+                    if let currentLocation = locationManager.location?.coordinate {
+                        let locationPoint = MKMapPoint(currentLocation)
+                        let eventMapPoint = MKMapPoint(eventAnnotation.coordinate)
+                        let distance = locationPoint.distance(to: eventMapPoint)
+                        let distanceMiles = distance * 0.000621371192
+                        keep = keepAnnotationEvent(evtFilters: eventFilters, filter: eventEventFilter!) && distanceMiles.isLessThanOrEqualTo(Double(searchRadius)) && keepAnnotationActivism(actFilters: actFilters, filter: eventActivismFilter!)
+                    }
+                } else {
+                    keep = keepAnnotationEvent(evtFilters: eventFilters, filter: eventEventFilter!) && keepAnnotationActivism(actFilters: actFilters, filter: eventActivismFilter!)
+                }
+                if !keep {
+                    filteredAnnotations.append(eventAnnotation)
+                }
+            }
+        }
+        mapView.removeAnnotations(filteredAnnotations)
+    }
+    
+    // Check if filter is equal to one of the filters in act filter
+    func keepAnnotationActivism(actFilters: [String], filter: String) -> Bool {
+        if actFilters.count == 0 {
+            return true
+        }
+        for activismFilter in actFilters {
+            if filter == activismFilter {
+                return true
+            }
+        }
+        // filter not equal to anything in act filter
+        return false
+    }
+    
+    func keepAnnotationEvent(evtFilters: [String], filter: String) -> Bool {
+        if evtFilters.count == 0 {
+            return true
+        }
+        for eventFilter in evtFilters {
+            if filter == eventFilter {
+                return true
+            }
+        }
+        return false
     }
     
     func setUpSideMenu() {
@@ -139,26 +224,39 @@ class HomeViewController: UIViewController, GetFilters {
         }
         let coordDict = dataDescription["coordinates"] as? NSDictionary
         let eventName = dataDescription["name"] as? String
+        let date = dataDescription["date"] as! Timestamp
         let ownerID = dataDescription["owner"] as? String
         let ownerOrg = dataDescription["orgName"] as? String
         let latitude:Double = coordDict?.value(forKey: "latitude") as! Double
         let longitude:Double = coordDict?.value(forKey: "longitude") as! Double
+        let activismType = dataDescription["activismTypeFilter"] as? String
+        let eventType = dataDescription["eventTypeFilter"] as? String
+        let likes = dataDescription["numLikes"] as! Int
         let coordinates = CLLocationCoordinate2DMake(latitude, longitude)
         
-        let annotation = AnnotationModel(eid: diff.document.documentID)
+        //let annotation = AnnotationModel(eid: diff.document.documentID)
+        let annotation = EventAnnotation(eid: diff.document.documentID, numLikes: likes)
+        
+        
+        let dFormatter = DateFormatter()
+        dFormatter.dateStyle = .medium
+        
+        let dateString = dFormatter.string(from: date.dateValue() )
         
         annotation.title = eventName
-        annotation.subtitle = ownerOrg
+        annotation.subtitle = "Date: \(dateString)\nOrganization: \(ownerOrg!)\nActivism Type: \(activismType ?? "None")\nEvent Type: \(eventType ?? "None")"
+        annotation.activismType = activismType
+        annotation.eventType = eventType
         //print(ownerOrg!)
         annotation.coordinate = coordinates
         
         self.mapView.addAnnotation(annotation)
-
     }
+    
     private func removePin(diff :DocumentChange){
         let eventID = diff.document.documentID
         for annotation in self.mapView.annotations {
-            if let model = annotation as? AnnotationModel,
+            if let model = annotation as? EventAnnotation,
                model.eventID == eventID{
                 self.mapView.removeAnnotation(model)
             }
@@ -190,7 +288,6 @@ class HomeViewController: UIViewController, GetFilters {
                 }
             }
     }
-    
     func setUpLocationManager() {
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
@@ -249,7 +346,7 @@ extension HomeViewController: CLLocationManagerDelegate, MKMapViewDelegate {
     }
 
     @objc func infoClicked(){
-        if let annotation = selectedPin as? AnnotationModel{
+        if let annotation = selectedPin as? EventAnnotation{
             print(annotation.eventID)
             let storyboard: UIStoryboard = UIStoryboard(name: "EventStory", bundle: nil)
             let vc = storyboard.instantiateViewController(withIdentifier: "EventView") as! EventDetailsViewController
@@ -263,19 +360,52 @@ extension HomeViewController: CLLocationManagerDelegate, MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         
         switch annotation {
+    
+        case is EventAnnotation:
+            let view: EventAnnotationView? = mapView.dequeueReusableAnnotationView(withIdentifier: "event") as? EventAnnotationView
+
+
+            let eventAnnotation = annotation as! EventAnnotation
+            let activismType = eventAnnotation.activismType!
+            let annotationColor = EventModel.returnColor(activismType: activismType)
         
-        case is AnnotationModel:
+            let image = UIImage(systemName: "circle.fill")?.withTintColor(annotationColor)
             
-            let view = mapView.dequeueReusableAnnotationView(withIdentifier: MKMapViewDefaultAnnotationViewReuseIdentifier, for: annotation)
-            view.clusteringIdentifier = "cluster"
-            view.canShowCallout = true
+            let width = min(20 + 0.5 * Double(eventAnnotation.likes).squareRoot(), 100)
+            let height = min(20 + 0.5 * Double(eventAnnotation.likes).squareRoot(), 100)
+            
+            let resizedSize = CGSize(width: width, height: height)
+
+            UIGraphicsBeginImageContext(resizedSize)
+            image?.draw(in: CGRect(origin: .zero, size: resizedSize))
+            let resizedImage = UIGraphicsGetImageFromCurrentImageContext()
+            UIGraphicsEndImageContext()
+            
+            view?.image = resizedImage
+            view?.clusteringIdentifier = "cluster"
+            view?.canShowCallout = true
+            view?.annotation = eventAnnotation
+
+        case is AnnotationModel:    
             
             let btn = UIButton(type: .detailDisclosure)
             
+            let annotationTitle = UILabel()
+            let annotationSubtitle = UILabel()
+            annotationTitle.font = UIFont.boldSystemFont(ofSize: 12)
+            annotationSubtitle.font = UIFont.systemFont(ofSize: 11)
+            
+            annotationSubtitle.numberOfLines = 0
+            annotationTitle.text = annotation.title as? String
+            annotationSubtitle.text = annotation.subtitle as? String
+            
             btn.addTarget(self, action:#selector(self.infoClicked), for: .touchUpInside)
-            view.rightCalloutAccessoryView = btn
+            view?.rightCalloutAccessoryView = btn
+            view?.leftCalloutAccessoryView = annotationTitle
+            view?.detailCalloutAccessoryView = annotationSubtitle
             
             return view
+        
         case is MKClusterAnnotation:
             let view = mapView.dequeueReusableAnnotationView(withIdentifier: MKMapViewDefaultClusterAnnotationViewReuseIdentifier, for: annotation)
             return view
@@ -288,7 +418,7 @@ extension HomeViewController: CLLocationManagerDelegate, MKMapViewDelegate {
         
         switch view.annotation {
         
-        case is AnnotationModel:
+        case is EventAnnotation:
             selectedPin = view.annotation
         case is MKClusterAnnotation:
             
@@ -302,7 +432,9 @@ extension HomeViewController: CLLocationManagerDelegate, MKMapViewDelegate {
                                                 handler: {
                                                     [self](action) in
                                                     self.mapView.deselectAnnotation(annotation, animated: true)
-                                                    let region = self.mapView.regionThatFits(MKCoordinateRegion(center: annotation.coordinate, latitudinalMeters: 0, longitudinalMeters: 10000))
+//                                                    print(self.mapView.region.span.longitudeDelta.magnitude)
+                                                    
+                                                    let region = self.mapView.regionThatFits(MKCoordinateRegion(center: annotation.coordinate, latitudinalMeters: 0, longitudinalMeters: self.mapView.region.span.longitudeDelta.magnitude.squareRoot()*regionInMeters)) // may break near the poles
                                                     self.mapView.setRegion(region, animated: true)})
 
                 controller.addAction(zoomAction)
@@ -337,15 +469,17 @@ extension HomeViewController: CLLocationManagerDelegate, MKMapViewDelegate {
         }
 
     }
-    // update the location on map when user moves around
-    // (leave out? annoying b/c stops user from moving map around)
 
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-//        guard let location = locations.last else {
-//            return
-//        }
-//        let region = MKCoordinateRegion.init(center: location.coordinate, latitudinalMeters: regionInMeters, longitudinalMeters: regionInMeters)
-//        mapView.setRegion(region, animated: true)
+        if(trackLocation){
+            guard let location = locations.last else {
+                return
+            }
+            
+            let region = MKCoordinateRegion.init(center: location.coordinate, latitudinalMeters: 0, longitudinalMeters: 1500)
+            mapView.setRegion(region, animated: true)
+        }
+
     }
     
     // called when user changes their location authorization
@@ -355,40 +489,3 @@ extension HomeViewController: CLLocationManagerDelegate, MKMapViewDelegate {
     
 }
 
-final class LocationDataMapClusterView: MKAnnotationView {
-
-    private let countLabel = UILabel()
-
-    override var annotation: MKAnnotation? {
-        didSet {
-             guard let annotation = annotation as? MKClusterAnnotation else {
-                assertionFailure("Using LocationDataMapClusterView with wrong annotation type")
-                return
-            }
-
-            countLabel.text = annotation.memberAnnotations.count < 100 ? "\(annotation.memberAnnotations.count)" : "99+"
-        }
-    }
-
-    override init(annotation: MKAnnotation?, reuseIdentifier: String?) {
-        super.init(annotation: annotation, reuseIdentifier: reuseIdentifier)
-
-        displayPriority = .defaultHigh
-        collisionMode = .circle
-
-        frame = CGRect(x: 0, y: 0, width: 40, height: 50)
-        centerOffset = CGPoint(x: 0, y: -frame.size.height / 2)
-
-       
-        setupUI()
-    }
-
-    @available(*, unavailable)
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-
-    private func setupUI() {
-        
-    }
-}
