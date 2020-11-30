@@ -541,8 +541,8 @@ extension EventDetailsViewController: UITableViewDelegate, UITableViewDataSource
         let row = indexPath.row
         cell.textLabel?.numberOfLines = 0
         cell.detailTextLabel?.numberOfLines = 0
-        cell.textLabel?.text = event.questions[row].question
-        cell.detailTextLabel?.text = event.questions[row].answer
+        cell.textLabel?.text = "Question: " + event.questions[row].question
+        cell.detailTextLabel?.text = "Answer: " + event.questions[row].answer
         return cell
     }
     
