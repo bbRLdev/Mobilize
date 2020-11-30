@@ -95,6 +95,10 @@ class HomeViewController: UIViewController, GetFilters {
             nextVC.initActivismButtons = activismFilters
             nextVC.initEventButtons = eventFilters
         }
+        if segue.identifier == "search",
+           let nextVC = segue.destination as? SearchViewController {
+            nextVC.homeViewController = self
+        }
 //        if let sideMenuVC = segue.destination as? SideMenuListController {
 //            print("GOT HERE")
 //            sideMenuVC.user = user!
