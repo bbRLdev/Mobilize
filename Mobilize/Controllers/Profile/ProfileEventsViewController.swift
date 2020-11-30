@@ -219,12 +219,19 @@ extension ProfileEventsViewController: UITableViewDelegate, UITableViewDataSourc
                     let dataDescription = document.data()
                     let eventName = dataDescription!["name"] as? String
                     let orgName = dataDescription!["orgName"] as? String
+                    let date = dataDescription!["date"] as? Timestamp
                     let pendingQuestions = dataDescription!["pendingQuestions"] as? [String] ?? []
+                    
+                    
+                    let dFormatter = DateFormatter()
+                    dFormatter.dateStyle = .medium
+                    dFormatter.timeStyle = .medium
                     
                     
                     cell.textLabel?.text = eventName
                     if(self.RSVPView){
-                        cell.detailTextLabel?.text = orgName
+                        //cell.detailTextLabel?.text = orgName
+                        cell.detailTextLabel?.text = dFormatter.string(from: date?.dateValue() ?? Date())
                     }
                     else{
                         cell.detailTextLabel?.text = "Pending Questions: \(pendingQuestions.count)"

@@ -46,16 +46,25 @@ class EventAnnotationView: MKAnnotationView {
     
     override var annotation: MKAnnotation? {
         didSet {
+            let strokeTextAttributes = [
+              NSAttributedString.Key.strokeColor : UIColor.white,
+                NSAttributedString.Key.foregroundColor : UIColor.darkGray,
+              NSAttributedString.Key.strokeWidth : -3.0,
+                NSAttributedString.Key.font : UIFont.systemFont(ofSize: 12, weight: UIFont.Weight(rawValue: 0.8))]
             
-            selectedLabel.text = annotation?.title as? String
-            selectedLabel.textColor = UIColor.darkGray
+              as [NSAttributedString.Key : Any]
+
+            selectedLabel.attributedText = NSMutableAttributedString(string: (annotation?.title ?? "")!, attributes: strokeTextAttributes)
+            
+            //selectedLabel.text = annotation?.title as? String
+            //selectedLabel.textColor = UIColor.darkGray
             
             selectedLabel.textAlignment = .center
-            selectedLabel.font = UIFont.init(name: "HelveticaBold", size: 8)
+            //selectedLabel.font = UIFont.init(name: "HelveticaBold", size: 8)
             //selectedLabel.backgroundColor = UIColor.white
             //selectedLabel.layer.borderColor = UIColor.darkGray.cgColor
             //selectedLabel.layer.borderWidth = 2
-            selectedLabel.layer.cornerRadius = 5
+            //selectedLabel.layer.cornerRadius = 5
             selectedLabel.layer.masksToBounds = true
 
             selectedLabel.center.x = 0.5 * self.frame.size.width;

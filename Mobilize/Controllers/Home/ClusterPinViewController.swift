@@ -47,6 +47,8 @@ class ClusterPinViewController: UIViewController, UITableViewDelegate, UITableVi
         
         let row = indexPath.row
         let pin = pins?[row] as? EventAnnotation
+        cell.textLabel?.numberOfLines = 0
+        cell.detailTextLabel?.numberOfLines = 0
         cell.textLabel?.text = pin?.title
         cell.detailTextLabel?.text = pin?.subtitle
         let activismType = pin?.activismType

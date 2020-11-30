@@ -35,6 +35,10 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
+        profilePic.layer.cornerRadius = profilePic.frame.size.width / 2
+        profilePic.clipsToBounds = true
+        profilePic.layer.borderColor = UIColor.gray.cgColor
+        profilePic.layer.borderWidth = 4
         
     }
     

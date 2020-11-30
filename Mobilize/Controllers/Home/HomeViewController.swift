@@ -21,6 +21,8 @@ class HomeViewController: UIViewController, GetFilters {
     
     @IBOutlet weak var mapView: MKMapView!
     
+    @IBOutlet weak var trackLocationButton: UIButton!
+    
     var sideMenu: SideMenuNavigationController?
     
     let locationManager = CLLocationManager()
@@ -36,6 +38,8 @@ class HomeViewController: UIViewController, GetFilters {
     var eventListener:ListenerRegistration?
     var selectedPin:MKAnnotation?
     
+    var trackLocation = false
+    
     //var coordToPin:[CLLocationCoordinate2D:[AnnotationModel]] = [:]
     
     let userNotification = Notification.Name(rawValue: "userModelNotificationKey")
@@ -48,6 +52,9 @@ class HomeViewController: UIViewController, GetFilters {
         checkLocationServices()
         loadPins()
         setMapDelegate()
+        
+        trackLocationButton.isSelected = trackLocation
+        
         if(user == nil) {
             // need to try loading in user data
             loadInUserData()
@@ -108,6 +115,26 @@ class HomeViewController: UIViewController, GetFilters {
         present(sideMenu!, animated: true)
     }
     
+    
+    @IBAction func trackLocationButtonPressed(_ sender: Any) {
+        trackLocation = !trackLocation
+        trackLocationButton.isSelected = trackLocation
+    }
+    
+    
+    @IBAction func changeMapButtonPressed(_ sender: Any) {
+        switch mapView.mapType {
+        case .standard:
+            mapView.mapType = MKMapType.satellite
+        case .satellite:
+            mapView.mapType = MKMapType.hybrid
+        case .hybrid:
+            mapView.mapType = MKMapType.standard
+        default:
+            print("This shouldn't happen")
+        }
+    }
+    
     @IBAction func createEvent(_ sender: Any) {
         let storyboard: UIStoryboard = UIStoryboard(name: "CreateEventStory", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "Confirm") as! ConfirmViewController
@@ -135,19 +162,27 @@ class HomeViewController: UIViewController, GetFilters {
         }
         let coordDict = dataDescription["coordinates"] as? NSDictionary
         let eventName = dataDescription["name"] as? String
+        let date = dataDescription["date"] as! Timestamp
         let ownerID = dataDescription["owner"] as? String
         let ownerOrg = dataDescription["orgName"] as? String
         let latitude:Double = coordDict?.value(forKey: "latitude") as! Double
         let longitude:Double = coordDict?.value(forKey: "longitude") as! Double
         let activismType = dataDescription["activismTypeFilter"] as? String
+        let eventType = dataDescription["eventTypeFilter"] as? String
         let likes = dataDescription["numLikes"] as! Int
         let coordinates = CLLocationCoordinate2DMake(latitude, longitude)
         
         //let annotation = AnnotationModel(eid: diff.document.documentID)
         let annotation = EventAnnotation(eid: diff.document.documentID, numLikes: likes)
         
+        
+        let dFormatter = DateFormatter()
+        dFormatter.dateStyle = .medium
+        
+        let dateString = dFormatter.string(from: date.dateValue() )
+        
         annotation.title = eventName
-        annotation.subtitle = "Organization: \(ownerOrg!), Type: \(activismType!)"
+        annotation.subtitle = "Date: \(dateString)\nOrganization: \(ownerOrg!)\nActivism Type: \(activismType ?? "None")\nEvent Type: \(eventType ?? "None")"
         annotation.activismType = activismType
         //print(ownerOrg!)
         annotation.coordinate = coordinates
@@ -269,8 +304,10 @@ extension HomeViewController: CLLocationManagerDelegate, MKMapViewDelegate {
 
 
             let eventAnnotation = annotation as! EventAnnotation
+            let activismType = eventAnnotation.activismType!
+            let annotationColor = EventModel.returnColor(activismType: activismType)
         
-            let image = UIImage(systemName: "circle.fill")
+            let image = UIImage(systemName: "circle.fill")?.withTintColor(annotationColor)
             
             let width = min(20 + 0.5 * Double(eventAnnotation.likes).squareRoot(), 100)
             let height = min(20 + 0.5 * Double(eventAnnotation.likes).squareRoot(), 100)
@@ -290,8 +327,19 @@ extension HomeViewController: CLLocationManagerDelegate, MKMapViewDelegate {
             
             let btn = UIButton(type: .detailDisclosure)
             
+            let annotationTitle = UILabel()
+            let annotationSubtitle = UILabel()
+            annotationTitle.font = UIFont.boldSystemFont(ofSize: 12)
+            annotationSubtitle.font = UIFont.systemFont(ofSize: 11)
+            
+            annotationSubtitle.numberOfLines = 0
+            annotationTitle.text = annotation.title as? String
+            annotationSubtitle.text = annotation.subtitle as? String
+            
             btn.addTarget(self, action:#selector(self.infoClicked), for: .touchUpInside)
             view?.rightCalloutAccessoryView = btn
+            view?.leftCalloutAccessoryView = annotationTitle
+            view?.detailCalloutAccessoryView = annotationSubtitle
             
             return view
         
@@ -323,7 +371,7 @@ extension HomeViewController: CLLocationManagerDelegate, MKMapViewDelegate {
                                                     self.mapView.deselectAnnotation(annotation, animated: true)
 //                                                    print(self.mapView.region.span.longitudeDelta.magnitude)
                                                     
-                                                    let region = self.mapView.regionThatFits(MKCoordinateRegion(center: annotation.coordinate, latitudinalMeters: 0, longitudinalMeters: self.mapView.region.span.longitudeDelta.magnitude.squareRoot()*10000)) // may break near the poles
+                                                    let region = self.mapView.regionThatFits(MKCoordinateRegion(center: annotation.coordinate, latitudinalMeters: 0, longitudinalMeters: self.mapView.region.span.longitudeDelta.magnitude.squareRoot()*regionInMeters)) // may break near the poles
                                                     self.mapView.setRegion(region, animated: true)})
 
                 controller.addAction(zoomAction)
@@ -358,15 +406,17 @@ extension HomeViewController: CLLocationManagerDelegate, MKMapViewDelegate {
         }
 
     }
-    // update the location on map when user moves around
-    // (leave out? annoying b/c stops user from moving map around)
 
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-//        guard let location = locations.last else {
-//            return
-//        }
-//        let region = MKCoordinateRegion.init(center: location.coordinate, latitudinalMeters: regionInMeters, longitudinalMeters: regionInMeters)
-//        mapView.setRegion(region, animated: true)
+        if(trackLocation){
+            guard let location = locations.last else {
+                return
+            }
+            
+            let region = MKCoordinateRegion.init(center: location.coordinate, latitudinalMeters: 0, longitudinalMeters: 1500)
+            mapView.setRegion(region, animated: true)
+        }
+
     }
     
     // called when user changes their location authorization
