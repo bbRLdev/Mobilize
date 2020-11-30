@@ -22,7 +22,7 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
     var name = ""
     var organization = ""
     var image:UIImage? = nil
-    var profile:UserModel? = nil
+    var profile:UserModel?
     var imagePicker = UIImagePickerController()
     let db = Firestore.firestore()
     
@@ -33,11 +33,19 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
         profilePicture.clipsToBounds = true
         profilePicture.layer.borderColor = UIColor.gray.cgColor
         profilePicture.layer.borderWidth = 4
-        //loadProfileInfo()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         loadProfileInfo()
+        //loadUserModelInfo()
+    }
+    
+    func loadUserModelInfo() {
+        self.profilePicture.image = profile?.profilePicture
+        self.firstNameField.text = profile?.first
+        self.lastNameField.text = profile?.last
+        self.organizationField.text = profile?.organization
+        self.bioField.text = profile?.bio
     }
     
     @IBAction func editPhoto(_ sender: Any) {
@@ -89,6 +97,12 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
                 })
             })
         }
+        // update user model
+        profile?.profilePicture = self.profilePicture.image
+        profile?.first = self.firstNameField.text!
+        profile?.last =  self.lastNameField.text!
+        profile?.organization = self.organizationField.text!
+        profile?.bio = self.bioField.text!
     }
     
     func saveTextFields() {

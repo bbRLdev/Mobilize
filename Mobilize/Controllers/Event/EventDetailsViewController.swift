@@ -290,6 +290,7 @@ class EventDetailsViewController: UIViewController {
                     //print("RSVP'd")
                     //self.RSVPButton.setTitle("RSVP'd!", for: .selected)
                     self.RSVPButton.isSelected = true
+                    self.scheduleNotification(dataDescription: dataDescription)
                 }
                 else{
                     //print("did not RSVP")
@@ -299,6 +300,21 @@ class EventDetailsViewController: UIViewController {
                 self.RSVPButton.isUserInteractionEnabled = true
             }
         }
+    }
+    
+    private func scheduleNotification(dataDescription: [String: Any]?) {
+        let calendar = Calendar.current
+        let components = calendar.dateComponents([.day, .hour, .minute], from: event.date!)
+        
+        let content = UNMutableNotificationContent()
+        content.title = event.eventName! + " is starting now!"
+        content.body = "Tap here to view more"
+        content.sound = UNNotificationSound.default
+
+        let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: false)
+        let request = UNNotificationRequest(identifier: eventID!, content: content, trigger: trigger)
+
+        UNUserNotificationCenter.current().add(request)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

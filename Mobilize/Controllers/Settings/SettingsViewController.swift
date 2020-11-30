@@ -13,6 +13,8 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
 
     let options = ["Edit Profile", "Notifications"]
     let cellTag = "cell"
+    var user: UserModel?
+    
     @IBOutlet var Options: UITableView!
     
     var pending = UIAlertController(title: "Deleting Profile\n\n", message: nil, preferredStyle: .alert)
@@ -42,6 +44,13 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         }
         if(indexPath.row == 1) {
             performSegue(withIdentifier: "notifications", sender: self)
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "edit",
+           let editVC = segue.destination as? EditProfileViewController {
+            editVC.profile = user
         }
     }
     

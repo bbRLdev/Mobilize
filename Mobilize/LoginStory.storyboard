@@ -3,7 +3,6 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
-        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -23,6 +22,7 @@
                                     <segment title="Login"/>
                                     <segment title="Sign Up"/>
                                 </segments>
+                                <color key="selectedSegmentTintColor" red="0.0" green="0.56284224989999998" blue="0.31881666180000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
                                     <action selector="segmentChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="SpP-bM-3xX"/>
                                 </connections>
@@ -68,7 +68,7 @@
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SNB-qr-qDc">
                                 <rect key="frame" x="143" y="602" width="128" height="55"/>
-                                <color key="backgroundColor" name="AccentColor"/>
+                                <color key="backgroundColor" red="0.0" green="0.56284224989999998" blue="0.31881666180000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="55" id="fqs-SW-Nzo"/>
                                     <constraint firstAttribute="width" constant="128" id="up5-Sp-zKf"/>
@@ -80,7 +80,7 @@
                                     <action selector="loginButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="yyc-m4-Dn5"/>
                                 </connections>
                             </button>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="MobilizeLogo" translatesAutoresizingMaskIntoConstraints="NO" id="ibT-CW-CTM">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="f6238bcf-320b-400d-84d9-2317a9e440ad_200x200" translatesAutoresizingMaskIntoConstraints="NO" id="ibT-CW-CTM">
                                 <rect key="frame" x="87" y="83" width="240" height="128"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="128" id="SfY-13-ZVE"/>
@@ -167,7 +167,7 @@
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VOM-NL-cTj">
                                 <rect key="frame" x="167" y="607" width="80" height="55"/>
-                                <color key="backgroundColor" name="AccentColor"/>
+                                <color key="backgroundColor" red="0.0" green="0.56284224989999998" blue="0.31881666180000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="80" id="BMQ-yW-YLw"/>
                                     <constraint firstAttribute="height" constant="55" id="lzl-ek-PHM"/>
@@ -281,7 +281,7 @@
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5ms-pQ-hhR">
                                 <rect key="frame" x="105" y="604" width="214" height="55"/>
-                                <color key="backgroundColor" name="AccentColor"/>
+                                <color key="backgroundColor" red="0.0" green="0.56284224989999998" blue="0.31881666180000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="55" id="VU9-IF-qOf"/>
                                     <constraint firstAttribute="width" constant="214" id="dOo-Nh-Dk1"/>
@@ -356,6 +356,7 @@
                                 <constraints>
                                     <constraint firstAttribute="width" constant="150" id="ua9-7y-rFx"/>
                                 </constraints>
+                                <color key="tintColor" red="0.0" green="0.56284224989999998" blue="0.31881666180000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="Choose a photo"/>
                                 <connections>
                                     <action selector="choosePicturePressed:" destination="8dw-mw-Tnc" eventType="touchUpInside" id="u0p-Kf-m8C"/>
@@ -363,7 +364,7 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QEU-yY-laO">
                                 <rect key="frame" x="112" y="604" width="190" height="55"/>
-                                <color key="backgroundColor" name="AccentColor"/>
+                                <color key="backgroundColor" red="0.0" green="0.56284224989999998" blue="0.31881666180000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="190" id="F2l-hv-rqy"/>
                                     <constraint firstAttribute="height" constant="55" id="SYQ-Fx-89w"/>
@@ -407,11 +408,8 @@
         <segue reference="4YN-mf-c4N"/>
     </inferredMetricsTieBreakers>
     <resources>
-        <image name="MobilizeLogo" width="200" height="200"/>
         <image name="defaultProfile" width="1024" height="1024"/>
-        <namedColor name="AccentColor">
-            <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
+        <image name="f6238bcf-320b-400d-84d9-2317a9e440ad_200x200" width="200" height="200"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

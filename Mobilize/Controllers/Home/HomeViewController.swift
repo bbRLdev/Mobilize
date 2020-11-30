@@ -92,7 +92,9 @@ class HomeViewController: UIViewController, GetFilters {
     
     // called after observer is notified that user data is loaded
     @objc func dismissLoading() {
-        user = login?.getUserModel()
+        user = login!.getUserModel()
+        let menuVC = SideMenuManager.default.leftMenuNavigationController?.viewControllers.first as! SideMenuListController
+        menuVC.user = user
         pending.dismiss(animated: true, completion: nil)
     }
     
@@ -104,6 +106,10 @@ class HomeViewController: UIViewController, GetFilters {
             nextVC.initActivismButtons = activismFilters
             nextVC.initEventButtons = eventFilters
         }
+//        if let sideMenuVC = segue.destination as? SideMenuListController {
+//            print("GOT HERE")
+//            sideMenuVC.user = user!
+//        }
 //        else if segue.identifier == "ListEventsSegue"{
 //            let nextVC = segue.destination as? FilterViewController {
 //             nextVC.delegate = self
@@ -115,7 +121,7 @@ class HomeViewController: UIViewController, GetFilters {
     }
     
     @IBAction func sideNavButtonPressed(_ sender: Any) {
-        present(sideMenu!, animated: true)
+        present(SideMenuManager.default.leftMenuNavigationController!, animated: true)
     }
     
     
@@ -208,7 +214,7 @@ class HomeViewController: UIViewController, GetFilters {
     func setUpSideMenu() {
         sideMenu = SideMenuNavigationController(rootViewController: SideMenuListController())
         sideMenu?.leftSide = true
-        SideMenuManager.default.leftMenuNavigationController = sideMenu        
+        SideMenuManager.default.leftMenuNavigationController = sideMenu
     }
     
     private func addPin(diff :DocumentChange){
@@ -335,7 +341,6 @@ class HomeViewController: UIViewController, GetFilters {
 
 extension HomeViewController: CLLocationManagerDelegate, MKMapViewDelegate {
     
-    
     func setMapDelegate(){
         mapView.delegate = self
     }
@@ -355,7 +360,7 @@ extension HomeViewController: CLLocationManagerDelegate, MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         
         switch annotation {
-        
+    
         case is EventAnnotation:
             let view: EventAnnotationView? = mapView.dequeueReusableAnnotationView(withIdentifier: "event") as? EventAnnotationView
 
@@ -380,7 +385,8 @@ extension HomeViewController: CLLocationManagerDelegate, MKMapViewDelegate {
             view?.clusteringIdentifier = "cluster"
             view?.canShowCallout = true
             view?.annotation = eventAnnotation
-            
+
+        case is AnnotationModel:    
             
             let btn = UIButton(type: .detailDisclosure)
             
