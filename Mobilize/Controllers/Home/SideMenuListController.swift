@@ -91,7 +91,7 @@ class SideMenuListController: UIViewController {
     
     func setUpLabel() {
         name = UILabel(frame: CGRect(x: 0, y: 0, width: 250.0, height: 100.0))
-        name.text = "Firstname Lastname"
+        name.text = ""
         name.backgroundColor = UIColor.white
         view.addSubview(name)
         name.translatesAutoresizingMaskIntoConstraints = false
