@@ -310,8 +310,8 @@ class addQA: UIViewController, UITextViewDelegate {
     var delegate: UIViewController!
     var index = -1
     
-    var question = "Question"
-    var answer = "Answer"
+    var question = ""
+    var answer = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
