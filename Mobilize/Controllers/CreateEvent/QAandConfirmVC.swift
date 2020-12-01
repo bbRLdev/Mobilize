@@ -179,14 +179,14 @@ class QAandConfirmVC: UIViewController {
                 }
             }
         }
-        var index: Int = 0
         var removedCount: Int = 0
         for image in images {
          
             let placeholderImage = UIImage(systemName: "questionmark")
 
             if image != nil && image!.isEqual(placeholderImage) {
-                images.remove(at: index - removedCount)
+                images.remove(at: count - removedCount)
+                count += 1
                 removedCount += 1
             } else {
                 let imageId = UUID().uuidString
@@ -208,7 +208,6 @@ class QAandConfirmVC: UIViewController {
                     })
                 }
             }
-            index += 1
         }
     }
     
