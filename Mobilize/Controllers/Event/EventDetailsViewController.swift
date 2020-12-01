@@ -118,8 +118,6 @@ class EventDetailsViewController: UIViewController {
         eventRef = self.db.collection("events").document(eventID!)
         userRef = self.db.collection("users").document(userID!)
         loadEventInfo()
-        updateLikeButton()
-        updateRSVPButton()
         // Do any additional setup after loading the view.
     }
     
@@ -478,6 +476,8 @@ class EventDetailsViewController: UIViewController {
                 
                 checkAuth()
                 loadTable()
+                updateLikeButton()
+                updateRSVPButton()
                 
                 eventRef?.addSnapshotListener { documentSnapshot, error in
                         
