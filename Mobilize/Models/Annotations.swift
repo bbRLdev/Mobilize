@@ -25,6 +25,7 @@ class EventAnnotation : NSObject, MKAnnotation {
     var eventType: String?
     var coordinate: CLLocationCoordinate2D
     var title: String?
+    var address: String?
     var subtitle: String?
     var image: UIImage?
     var colour: UIColor?
@@ -34,6 +35,7 @@ class EventAnnotation : NSObject, MKAnnotation {
         likes = numLikes
         self.coordinate = CLLocationCoordinate2D()
         self.title = nil
+        self.address = nil
         self.subtitle = nil
         self.image = nil
         //self.colour = UIColor.white

@@ -203,9 +203,11 @@
                         <outlet property="eventResultsTable" destination="dHi-Ss-LfQ" id="4pt-D6-9Hn"/>
                         <outlet property="search" destination="FTH-Sg-lSA" id="dBZ-hb-rxX"/>
                         <outlet property="searchToggle" destination="nyX-ex-cQg" id="aFO-GG-dpE"/>
+                        <segue destination="RTu-FA-X9U" kind="unwind" identifier="unwindToHome" unwindAction="unwind:" id="ptQ-EW-nrS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DTi-bA-Ylo" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="RTu-FA-X9U" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="3244.9275362318845" y="414.50892857142856"/>
         </scene>

@@ -15,7 +15,11 @@ protocol GetFilters {
     func getFilters(actFilters: [String], evtFilters: [String], radius: Float)
 }
 
-class HomeViewController: UIViewController, GetFilters {
+protocol FocusMap {
+    func focusMap(eventCoords: CLLocationCoordinate2D)
+}
+
+class HomeViewController: UIViewController, GetFilters, FocusMap {
     
     let db = Firestore.firestore()
     
@@ -108,7 +112,7 @@ class HomeViewController: UIViewController, GetFilters {
         }
         if segue.identifier == "search",
            let nextVC = segue.destination as? SearchViewController {
-            nextVC.homeViewController = self
+            nextVC.delegate = self
         }
 //        if let sideMenuVC = segue.destination as? SideMenuListController {
 //            print("GOT HERE")
@@ -215,6 +219,15 @@ class HomeViewController: UIViewController, GetFilters {
         return false
     }
     
+    // Protocol method
+    func focusMap(eventCoords: CLLocationCoordinate2D) {
+        let region = (mapView.regionThatFits(MKCoordinateRegion(center: eventCoords as! CLLocationCoordinate2D, latitudinalMeters: 0, longitudinalMeters: 1500)))
+        mapView.setRegion(region, animated: true)
+    }
+    
+    @IBAction func unwind( _ seg: UIStoryboardSegue) {
+    }
+    
     func setUpSideMenu() {
         sideMenu = SideMenuNavigationController(rootViewController: SideMenuListController())
         sideMenu?.leftSide = true
@@ -228,6 +241,7 @@ class HomeViewController: UIViewController, GetFilters {
         }
         let coordDict = dataDescription["coordinates"] as? NSDictionary
         let eventName = dataDescription["name"] as? String
+        let eventAddress = dataDescription["address"] as? String
         let date = dataDescription["date"] as! Timestamp
         let ownerID = dataDescription["owner"] as? String
         let ownerOrg = dataDescription["orgName"] as? String
@@ -248,6 +262,7 @@ class HomeViewController: UIViewController, GetFilters {
         let dateString = dFormatter.string(from: date.dateValue() )
         
         annotation.title = eventName
+        annotation.address = eventAddress
         annotation.subtitle = "Date: \(dateString)\nOrganization: \(ownerOrg!)\nActivism Type: \(activismType ?? "None")\nEvent Type: \(eventType ?? "None")"
         annotation.activismType = activismType
         annotation.eventType = eventType

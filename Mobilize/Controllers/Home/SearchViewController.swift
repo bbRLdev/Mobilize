@@ -17,10 +17,11 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     @IBOutlet weak var searchToggle: UISegmentedControl!
     let eventsRef = Firestore.firestore().collection("events")
     let cellID = "eventCell"
+    var delegate : HomeViewController!
+    var annotations : [EventAnnotation] = []
     var eventNamesReturned: [String] = []
-    var eventIDsReturned: [String] = []
+    var eventCoordsReturned: [CLLocationCoordinate2D] = []
     let myGroup = DispatchGroup()
-    var homeViewController: HomeViewController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,37 +35,37 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
 
     @IBAction func enter(_ sender: Any) {
-        eventNamesReturned = []
-        eventIDsReturned = []
         myGroup.enter()
-        homeViewController.mapView.removeAnnotation(<#T##annotation: MKAnnotation##MKAnnotation#>)
+        eventNamesReturned = []
+        eventCoordsReturned = []
         if(searchToggle.selectedSegmentIndex == 0) {
-            eventsRef.whereField("name", isEqualTo: search.text!).getDocuments() { (querySnapshot, err) in
-                if let err = err {
-                    print("Error getting documents: \(err)")
-                } else {
-                    for document in querySnapshot!.documents {
-                        self.eventNamesReturned.append(document.get("name") as! String)
-                        self.eventIDsReturned.append(document.get("eventID") as! String)
-                        print("\(document.documentID) => \(document.data())")
+            //search for name
+            for annotation in delegate.mapView.annotations {
+                let model = annotation as? EventAnnotation
+                if model?.title != nil {
+                    print("|",search.text!,"|",model!.title!)
+                    if(model!.title!.contains(search.text!)) {
+                        print("HERE")
+                        eventNamesReturned.append(model!.title!)
+                        eventCoordsReturned.append(model!.coordinate)
                     }
-                    self.myGroup.leave()
                 }
             }
+            myGroup.leave()
         }
         else {
-            eventsRef.whereField("address", isEqualTo: search.text!).getDocuments() { (querySnapshot, err) in
-                if let err = err {
-                    print("Error getting documents: \(err)")
-                } else {
-                    for document in querySnapshot!.documents {
-                        self.eventNamesReturned.append(document.get("name") as! String)
-                        self.eventIDsReturned.append(document.get("eventID") as! String)
-                        print("\(document.documentID) => \(document.data())")
+            //search for address
+            for annotation in delegate.mapView.annotations {
+                let model = annotation as? EventAnnotation
+                if model?.address != nil {
+                    if(model!.address!.contains(search.text!)) {
+                        print("HERE")
+                        eventNamesReturned.append(model!.title!)
+                        eventCoordsReturned.append(model!.coordinate)
                     }
-                    self.myGroup.leave()
                 }
             }
+            myGroup.leave()
         }
         myGroup.notify(queue: .main) {
             self.eventResultsTable.reloadData()
@@ -85,26 +86,8 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        myGroup.enter()
-        eventsRef.whereField("eventID", isEqualTo: eventIDsReturned[indexPath.row]).getDocuments() { (querySnapshot, err) in
-            if let err = err {
-                print("Error getting documents: \(err)")
-            } else {
-                for document in querySnapshot!.documents {
-                    let nav = self.navigationController
-                    let homeVC = nav!.viewControllers[0] as! HomeViewController
-                    let docData = document.get("coordinates") as! NSDictionary
-                    let long = docData.value(forKey: "longitude") as! Double
-                    let lat  = docData.value(forKey: "latitude") as! Double
-                    let coordinates = CLLocationCoordinate2DMake(lat, long)
-                    let region = (homeVC.mapView.regionThatFits(MKCoordinateRegion(center: coordinates as! CLLocationCoordinate2D, latitudinalMeters: 0, longitudinalMeters: 1500)))
-                    homeVC.mapView.setRegion(region, animated: true)
-                        
-                    self.navigationController?.popToRootViewController(animated: true)
-                }
-                self.myGroup.leave()
-            }
-        }
+        let homeVC = delegate as! FocusMap
+        homeVC.focusMap(eventCoords: eventCoordsReturned[indexPath.row])
+        performSegue(withIdentifier: "unwindToHome", sender: self)
     }
-    
 }
