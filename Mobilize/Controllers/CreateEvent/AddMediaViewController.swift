@@ -27,6 +27,7 @@ class AddMediaViewController: UIViewController, UIImagePickerControllerDelegate,
     var dateComponents: DateComponents!
 
     
+    @IBOutlet weak var nextButton: UIButton!
     @IBOutlet weak var eventPicturesCollection: UICollectionView!
     
     
@@ -39,6 +40,7 @@ class AddMediaViewController: UIViewController, UIImagePickerControllerDelegate,
 //        }
 //
 //        setUpCells()
+        nextButton.layer.cornerRadius = 4
         imagePicker.delegate = self
         eventPicturesCollection.dataSource = self
         eventPicturesCollection.delegate = self

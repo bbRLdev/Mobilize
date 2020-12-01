@@ -17,6 +17,7 @@ class PendingQuestionsViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     @IBOutlet weak var editEventButton: UIButton!
+    @IBOutlet weak var deleteEventButton: UIButton!
     
     var event: EventModel!
     var eventID:String?
@@ -28,7 +29,8 @@ class PendingQuestionsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        deleteEventButton.layer.cornerRadius = 4
+        editEventButton.layer.cornerRadius = 4
         tableView.delegate = self
         tableView.dataSource = self
         tableView.refreshControl = refreshControl
@@ -339,6 +341,7 @@ class AnswerQuestionViewController : UIViewController{
     
     @IBOutlet weak var qTextView: UITextView!
     
+    @IBOutlet weak var button: UIButton!
     @IBOutlet weak var aTextView: UITextView!
     
     var question = ""
@@ -347,6 +350,7 @@ class AnswerQuestionViewController : UIViewController{
     
     override func viewDidLoad(){
         super.viewDidLoad()
+        button.layer.cornerRadius = 4
         qTextView.text = question
         qTextView.layer.borderColor = UIColor.lightGray.cgColor
         qTextView.layer.borderWidth = 1

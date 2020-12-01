@@ -81,6 +81,10 @@ Q29uZmlybWF0aW9uIBBvZiBDb29wZXJhdGlvbg
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="7Il-rG-RI4"/>
+                    <connections>
+                        <outlet property="backButton" destination="Kuk-mk-Ufw" id="8Ex-1c-5AR"/>
+                        <outlet property="confirmButton" destination="glf-EZ-Wm0" id="soM-TU-jrL"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tn6-NA-HEN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -114,7 +118,7 @@ Q29uZmlybWF0aW9uIBBvZiBDb29wZXJhdGlvbg
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <action selector="onNextButtonPressed:" destination="ohK-Iz-2AK" eventType="touchUpInside" id="VQu-Nr-dhI"/>
+                                    <action selector="onNextButtonPressed:" destination="ohK-Iz-2AK" eventType="touchUpInside" id="KJb-VZ-j1v"/>
                                 </connections>
                             </button>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v2g-Gz-kOi">
@@ -351,6 +355,7 @@ Q29uZmlybWF0aW9uIBBvZiBDb29wZXJhdGlvbg
                         <outlet property="eventDescriptionField" destination="8Ai-1J-l6x" id="Hlz-Ee-mYd"/>
                         <outlet property="eventNameField" destination="ddr-Tn-YnH" id="OFL-BE-hUs"/>
                         <outlet property="eventTypeFilterButton" destination="M9m-Jp-KQN" id="8Ku-AR-504"/>
+                        <outlet property="nextButton" destination="mGY-1G-ywH" id="0fp-dM-z7X"/>
                         <outlet property="organizationNameField" destination="d8o-xb-Ve0" id="Y5e-1u-wyT"/>
                         <outlet property="searchResultsTableView" destination="ZHd-EN-0uJ" id="YDV-6F-BJa"/>
                         <segue destination="bw4-xE-N17" kind="show" identifier="AddMediaSegueId" id="VbO-0N-sb6"/>

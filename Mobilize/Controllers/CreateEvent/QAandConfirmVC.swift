@@ -29,6 +29,7 @@ class QAandConfirmVC: UIViewController {
     
     var dateComponents: DateComponents?
     
+    @IBOutlet weak var addButton: UIButton!
     @IBOutlet weak var createButton: UIButton!
     
     @IBOutlet weak var qaTableView: UITableView!
@@ -59,6 +60,8 @@ class QAandConfirmVC: UIViewController {
         
     override func viewDidLoad() {
         super.viewDidLoad()
+        createButton.layer.cornerRadius = 4
+        addButton.layer.cornerRadius = 4
         //print("Did load \(images)")
         qaTableView.delegate = self
         qaTableView.dataSource = self
@@ -299,6 +302,8 @@ class addQA: UIViewController, UITextViewDelegate {
     @IBOutlet weak var qTextView: UITextView!
     @IBOutlet weak var aTextView: UITextView!
     
+    @IBOutlet weak var saveButton: UIButton!
+    
     var delegate: UIViewController!
     var index = -1
     
@@ -307,7 +312,7 @@ class addQA: UIViewController, UITextViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        saveButton.layer.cornerRadius = 4
         qTextView.delegate = self
         aTextView.delegate = self
         qTextView.layer.borderColor = UIColor.lightGray.cgColor

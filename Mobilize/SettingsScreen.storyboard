@@ -178,6 +178,7 @@
                     <navigationItem key="navigationItem" id="Bh0-CN-pva"/>
                     <connections>
                         <outlet property="Options" destination="aKT-Kg-bMU" id="wUC-6a-O5Y"/>
+                        <outlet property="button" destination="f7x-Mh-cjh" id="D2e-hQ-HT5"/>
                         <segue destination="9ft-VM-haI" kind="show" identifier="edit" id="rL3-cT-SXi"/>
                         <segue destination="IJD-Cx-2mw" kind="show" identifier="notifications" id="Ols-mG-R9r"/>
                     </connections>
@@ -237,6 +238,9 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="fmw-SQ-mce"/>
+                    <connections>
+                        <outlet property="button" destination="W19-bV-qnI" id="VBG-60-wxy"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0S4-QJ-Itq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -336,10 +340,12 @@
                     <navigationItem key="navigationItem" id="iIR-Uf-V3p"/>
                     <connections>
                         <outlet property="bioField" destination="rWr-K3-7GO" id="4Wq-D2-CQk"/>
+                        <outlet property="editButton" destination="ZWG-4P-i7h" id="Kd7-sc-wXl"/>
                         <outlet property="firstNameField" destination="cCU-lc-rQh" id="Kmu-mL-T1I"/>
                         <outlet property="lastNameField" destination="Uuj-Dd-JN5" id="WAO-j8-ROQ"/>
                         <outlet property="organizationField" destination="R4y-A5-GCN" id="UQ7-Yh-7cr"/>
                         <outlet property="profilePicture" destination="4Wh-eY-0bd" id="UOR-Em-7OT"/>
+                        <outlet property="saveButton" destination="jee-bz-7E3" id="9NK-NG-W2u"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bXV-dc-8U3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -535,6 +541,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="deleteEventButton" destination="Vf3-GE-4mu" id="aA7-ng-KdQ"/>
                         <outlet property="editEventButton" destination="Szu-Sy-gGX" id="9Kb-4Q-CTL"/>
                         <outlet property="tableView" destination="XiO-Bu-9LO" id="TC9-dV-9BS"/>
                     </connections>
@@ -628,6 +635,7 @@
                     </view>
                     <connections>
                         <outlet property="aTextView" destination="98R-t3-OeO" id="Dgx-lu-d3w"/>
+                        <outlet property="button" destination="MCa-Jl-9Z9" id="TBN-cX-DnH"/>
                         <outlet property="qTextView" destination="2da-3G-3y5" id="QyP-5C-K4S"/>
                     </connections>
                 </viewController>

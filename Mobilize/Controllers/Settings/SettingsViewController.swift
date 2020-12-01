@@ -16,12 +16,14 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     var user: UserModel?
     
     @IBOutlet var Options: UITableView!
+    @IBOutlet weak var button: UIButton!
     
     var pending = UIAlertController(title: "Deleting Profile\n\n", message: nil, preferredStyle: .alert)
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        button.layer.cornerRadius = 4
         Options.delegate = self
         Options.dataSource = self
     }

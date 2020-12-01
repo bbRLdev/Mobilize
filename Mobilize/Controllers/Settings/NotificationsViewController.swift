@@ -9,7 +9,9 @@ import UIKit
 
 class NotificationsViewController: UIViewController {
 
+    @IBOutlet weak var button: UIButton!
     override func viewDidLoad() {
+        button.layer.cornerRadius = 4
         super.viewDidLoad()
     }
     @IBAction func openSettingsPushed(_ sender: Any) {

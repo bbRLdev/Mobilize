@@ -31,7 +31,8 @@ class EventInfoViewController: UIViewController, UITableViewDelegate, UITableVie
     
     @IBOutlet weak var activismTypeFilterButton: UIButton!
     @IBOutlet weak var eventTypeFilterButton: UIButton!
-
+    @IBOutlet weak var nextButton: UIButton!
+    
     @IBOutlet weak var eventDatePicker: UIDatePicker!
 
     let segueId = "AddMediaSegueId"
@@ -49,6 +50,7 @@ class EventInfoViewController: UIViewController, UITableViewDelegate, UITableVie
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        nextButton.layer.cornerRadius = 4
         eventDescriptionField.layer.borderWidth = 0.5
         eventDescriptionField.layer.cornerRadius = 5.0;
         eventDescriptionField.clipsToBounds = true;
@@ -236,6 +238,7 @@ class EventInfoViewController: UIViewController, UITableViewDelegate, UITableVie
             eventSoFar["numLikes"] = event.likeNum
             eventSoFar["numRSVPs"] = event.rsvpNum
         }
+        print("ERERL")
         performSegue(withIdentifier: segueId, sender: self)
     }
     
