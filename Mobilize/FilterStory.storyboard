@@ -85,6 +85,7 @@
                                             </label>
                                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="ota-s5-EN3">
                                                 <rect key="frame" x="-2" y="27.333333333333314" width="378" height="31"/>
+                                                <color key="tintColor" red="0.0" green="0.56284224989999998" blue="0.31881666180000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <connections>
                                                     <action selector="radiusValueChanged:" destination="i79-iS-sC4" eventType="valueChanged" id="JAe-fz-yG6"/>
                                                 </connections>

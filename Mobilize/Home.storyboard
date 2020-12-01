@@ -247,6 +247,7 @@
             <point key="canvasLocation" x="1501" y="415"/>
         </scene>
     </scenes>
+    <color key="tintColor" red="0.0" green="0.56284224989999998" blue="0.31881666180000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
     <resources>
         <image name="line.horizontal.3" catalog="system" width="128" height="64"/>
         <image name="location" catalog="system" width="128" height="121"/>

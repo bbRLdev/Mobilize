@@ -27,9 +27,16 @@
                                 <rect key="frame" x="0.0" y="189" width="414" height="219"/>
                             </pickerView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e09-sd-KSO">
-                                <rect key="frame" x="170" y="448" width="74" height="41"/>
+                                <rect key="frame" x="159" y="448" width="96" height="41"/>
+                                <color key="backgroundColor" red="0.0" green="0.56284224989999998" blue="0.31881666180000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="96" id="ULs-bh-Eo4"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                <state key="normal" title="Submit"/>
+                                <color key="tintColor" red="0.0" green="0.56284224989999998" blue="0.31881666180000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="Submit">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
                                 <connections>
                                     <action selector="submitButtonPressed:" destination="rO0-aX-SNL" eventType="touchUpInside" id="bOA-Z7-igl"/>
                                 </connections>
@@ -78,6 +85,7 @@
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V8h-JX-yDs">
                                                 <rect key="frame" x="354" y="0.0" width="30" height="30"/>
+                                                <color key="tintColor" red="0.0" green="0.56284224989999998" blue="0.31881666180000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <state key="normal" title="Edit"/>
                                                 <connections>
                                                     <action selector="editButtonPressed:" destination="66d-7J-4gf" eventType="touchUpInside" id="mBR-1z-OSO"/>
@@ -119,58 +127,26 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ddt-5C-eGm">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ddt-5C-eGm">
                                                 <rect key="frame" x="40" y="378.5" width="64" height="29"/>
-                                                <state key="normal" image="hand.thumbsup" catalog="system">
-                                                    <attributedString key="attributedTitle">
-                                                        <fragment content="Like">
-                                                            <attributes>
-                                                                <color key="NSColor" name="systemBlueColor" catalog="System" colorSpace="catalog"/>
-                                                                <font key="NSFont" metaFont="system" size="24"/>
-                                                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                                            </attributes>
-                                                        </fragment>
-                                                    </attributedString>
+                                                <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="24"/>
+                                                <color key="tintColor" red="0.0" green="0.56284224989999998" blue="0.31881666180000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <state key="normal" title="Like" image="hand.thumbsup" catalog="system">
+                                                    <color key="titleColor" red="0.0" green="0.56284224989999998" blue="0.31881666180000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
-                                                <state key="selected" image="hand.thumbsup.fill" catalog="system">
-                                                    <attributedString key="attributedTitle">
-                                                        <fragment content="Liked!">
-                                                            <attributes>
-                                                                <color key="NSColor" name="systemBlueColor" catalog="System" colorSpace="catalog"/>
-                                                                <font key="NSFont" metaFont="system" size="24"/>
-                                                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                                            </attributes>
-                                                        </fragment>
-                                                    </attributedString>
-                                                </state>
+                                                <state key="selected" image="hand.thumbsup.fill" catalog="system"/>
                                                 <connections>
                                                     <action selector="likeButtonPressed:" destination="66d-7J-4gf" eventType="touchUpInside" id="hhp-JM-QLL"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Wrt-6O-K6U">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wrt-6O-K6U">
                                                 <rect key="frame" x="223" y="378.5" width="82" height="29"/>
-                                                <state key="normal" image="calendar.badge.plus" catalog="system">
-                                                    <attributedString key="attributedTitle">
-                                                        <fragment content="RSVP">
-                                                            <attributes>
-                                                                <color key="NSColor" name="systemBlueColor" catalog="System" colorSpace="catalog"/>
-                                                                <font key="NSFont" metaFont="system" size="24"/>
-                                                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                                            </attributes>
-                                                        </fragment>
-                                                    </attributedString>
+                                                <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="24"/>
+                                                <color key="tintColor" red="0.0" green="0.56284224989999998" blue="0.31881666180000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <state key="normal" title="RSVP" image="calendar.badge.plus" catalog="system">
+                                                    <color key="titleColor" red="0.0" green="0.56284224989999998" blue="0.31881666180000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
-                                                <state key="selected" image="calendar.circle.fill" catalog="system">
-                                                    <attributedString key="attributedTitle">
-                                                        <fragment content="RSVP'd!">
-                                                            <attributes>
-                                                                <color key="NSColor" name="systemBlueColor" catalog="System" colorSpace="catalog"/>
-                                                                <font key="NSFont" metaFont="system" size="24"/>
-                                                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                                            </attributes>
-                                                        </fragment>
-                                                    </attributedString>
-                                                </state>
+                                                <state key="selected" image="calendar.circle.fill" catalog="system"/>
                                                 <connections>
                                                     <action selector="RSVPButtonPressed:" destination="66d-7J-4gf" eventType="touchUpInside" id="qD1-DO-wle"/>
                                                 </connections>
@@ -236,13 +212,16 @@
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y3U-fR-NkL">
                                                 <rect key="frame" x="20" y="0.0" width="88" height="30"/>
-                                                <state key="normal" title="View on map"/>
+                                                <state key="normal" title="View on map">
+                                                    <color key="titleColor" red="0.0" green="0.56284224989999998" blue="0.31881666180000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </state>
                                                 <connections>
                                                     <action selector="viewMapButtonPressed:" destination="66d-7J-4gf" eventType="touchUpInside" id="lA2-Er-BwC"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lG6-V8-aoU">
                                                 <rect key="frame" x="40" y="482" width="149" height="30"/>
+                                                <color key="tintColor" red="0.0" green="0.56284224989999998" blue="0.31881666180000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <state key="normal" title="View organizer profile"/>
                                                 <state key="disabled" title="Go back to view organizer profile">
                                                     <color key="titleColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -484,9 +463,16 @@
                                         <rect key="frame" x="0.0" y="401" width="374" height="401"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ny8-4P-bwP">
-                                                <rect key="frame" x="150" y="20" width="74" height="41"/>
+                                                <rect key="frame" x="139" y="20" width="96" height="41"/>
+                                                <color key="backgroundColor" red="0.0" green="0.56284224989999998" blue="0.31881666180000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="96" id="Q09-oa-Jbm"/>
+                                                </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                                <state key="normal" title="Submit"/>
+                                                <color key="tintColor" red="0.0" green="0.56284224989999998" blue="0.31881666180000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <state key="normal" title="Submit">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
                                                 <connections>
                                                     <action selector="saveButtonPressed:" destination="tgr-O4-Tci" eventType="touchUpInside" id="ngW-Sd-9bk"/>
                                                 </connections>
