@@ -105,7 +105,7 @@ class QAandConfirmVC: UIViewController {
                 // deleteImages(eventID: eid)
                 uploadNewImages(eventId: eventSoFar["eventID"] as? String ?? "")
                 // set notification timer
-//                setNotificationTimer()
+                setNotificationTimer()
             }
 //            else{
 //                imgLoadingFlag = false

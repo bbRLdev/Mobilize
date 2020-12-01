@@ -27,6 +27,8 @@ class HomeViewController: UIViewController, GetFilters, FocusMap {
     
     @IBOutlet weak var trackLocationButton: UIButton!
     
+    @IBOutlet weak var navItem: UINavigationItem!
+    
     var sideMenu: SideMenuNavigationController?
     
     let locationManager = CLLocationManager()
@@ -68,6 +70,11 @@ class HomeViewController: UIViewController, GetFilters, FocusMap {
         mapView.register(LocationDataMapClusterView.self, forAnnotationViewWithReuseIdentifier: "cluster")
         mapView.register(EventAnnotationView.self, forAnnotationViewWithReuseIdentifier: "event")
         print(mapView.selectedAnnotations)
+        let logo = UIImage(named: "f6238bcf-320b-400d-84d9-2317a9e440ad_200x200") // Or logo.png if you haven't added it to assets
+        let imageView = UIImageView(frame: CGRect(x:0, y:0, width:50.0, height:50.0))
+        imageView.image = logo
+        imageView.contentMode = .scaleAspectFit
+        self.navItem.titleView = imageView
     }
     
     func loadInUserData() {

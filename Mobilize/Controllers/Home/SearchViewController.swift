@@ -12,6 +12,7 @@ import Firebase
 
 class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
+    @IBOutlet weak var enterButton: UIButton!
     @IBOutlet weak var eventResultsTable: UITableView!
     @IBOutlet weak var search: UISearchBar!
     @IBOutlet weak var searchToggle: UISegmentedControl!
@@ -27,6 +28,8 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         super.viewDidLoad()
         eventResultsTable.delegate = self
         eventResultsTable.dataSource = self
+        
+        enterButton.layer.cornerRadius = 4
     }
     
     // code to enable tapping on the background to remove software keyboard
