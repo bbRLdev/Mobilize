@@ -39,7 +39,7 @@ class MosaicLayout: UICollectionViewLayout {
         let numItems = collectionView.numberOfItems(inSection: 0)
         
         var count = numItems
-        if(count > 3){
+        if(count >= 3){
             count = 3
             segment = .twoThirdsOneThird
         }

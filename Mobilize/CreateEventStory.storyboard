@@ -596,7 +596,7 @@ Q29uZmlybWF0aW9uIBBvZiBDb29wZXJhdGlvbg
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" horizontalHuggingPriority="249" verticalHuggingPriority="249" horizontalCompressionResistancePriority="749" verticalCompressionResistancePriority="749" keyboardDismissMode="interactive" text="Question" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="bSM-yz-4iu">
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" horizontalHuggingPriority="249" verticalHuggingPriority="249" horizontalCompressionResistancePriority="749" verticalCompressionResistancePriority="749" keyboardDismissMode="interactive" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="bSM-yz-4iu">
                                                 <rect key="frame" x="0.0" y="20.333333333333343" width="374" height="247.00000000000003"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <color key="textColor" systemColor="labelColor"/>
@@ -614,7 +614,7 @@ Q29uZmlybWF0aW9uIBBvZiBDb29wZXJhdGlvbg
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" keyboardDismissMode="interactive" text="Answer" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="fp7-57-Twv">
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" keyboardDismissMode="interactive" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="fp7-57-Twv">
                                                 <rect key="frame" x="0.0" y="20.333333333333371" width="374" height="247"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <color key="textColor" systemColor="labelColor"/>

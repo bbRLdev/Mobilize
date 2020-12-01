@@ -189,7 +189,9 @@ class QAandConfirmVC: UIViewController {
 
             if image != nil && image!.isEqual(placeholderImage) {
                 images.remove(at: count - removedCount)
+                print("hello1\(count)")
                 count += 1
+                
                 removedCount += 1
             } else {
                 let imageId = UUID().uuidString
@@ -204,9 +206,10 @@ class QAandConfirmVC: UIViewController {
                             return
                         }
                         let temp: [String:String] = self.imgRefList.count != 0
-                            ? ["\(self.imgRefList.count - 1 + count)" : imageId]
+                            ? ["\(count)" : imageId]
                             : ["0" : imageId]
                         self.imgRefList.append(temp)
+                        print("hello2\(count)")
                         count += 1
                     })
                 }
