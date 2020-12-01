@@ -33,6 +33,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     // This method is called when user clicked on the notification
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void)
     {
+        let storyboard = UIStoryboard(name: "Home", bundle: nil)
+        let mainViewController = storyboard.instantiateViewController(withIdentifier: "MainNavigationController")
+        
+        window?.rootViewController = mainViewController as! UINavigationController
+        
         let rootViewController = self.window!.rootViewController as! UINavigationController
 
         let eventStoryboard : UIStoryboard = UIStoryboard(name: "EventStory", bundle: nil)
