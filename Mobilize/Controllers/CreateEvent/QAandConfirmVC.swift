@@ -105,7 +105,7 @@ class QAandConfirmVC: UIViewController {
                 // deleteImages(eventID: eid)
                 uploadNewImages(eventId: eventSoFar["eventID"] as? String ?? "")
                 // set notification timer
-                setNotificationTimer()
+//                setNotificationTimer()
             }
 //            else{
 //                imgLoadingFlag = false
@@ -179,13 +179,15 @@ class QAandConfirmVC: UIViewController {
                 }
             }
         }
+        var index: Int = 0
+        var removedCount: Int = 0
         for image in images {
          
             let placeholderImage = UIImage(systemName: "questionmark")
 
             if image != nil && image!.isEqual(placeholderImage) {
-                images.remove(at: count)
-                count += 1
+                images.remove(at: index - removedCount)
+                removedCount += 1
             } else {
                 let imageId = UUID().uuidString
                 if let imageData = image?.jpegData(compressionQuality: 4.0) {
@@ -206,6 +208,7 @@ class QAandConfirmVC: UIViewController {
                     })
                 }
             }
+            index += 1
         }
     }
     

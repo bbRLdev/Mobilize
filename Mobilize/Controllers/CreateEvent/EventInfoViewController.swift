@@ -376,7 +376,7 @@ class EventInfoViewController: UIViewController, UITableViewDelegate, UITableVie
                           color: color,
                           image: image!)
                 let eventFilter: String = event.eventType!
-                selectedActivismTypeFilter = eventFilter
+                selectedEventTypeFilter = eventFilter
                 color = UIColor.lightGray
                 image = image?.withTintColor(color)
                 startFade(target: eventTypeFilterButton,
