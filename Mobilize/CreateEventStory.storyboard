@@ -243,7 +243,9 @@ Q29uZmlybWF0aW9uIBBvZiBDb29wZXJhdGlvbg
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="40" id="FjY-fr-oeM"/>
                                                         </constraints>
-                                                        <state key="normal" title="Choose Activism Type"/>
+                                                        <state key="normal" title="Choose Activism Type">
+                                                            <color key="titleColor" red="0.0" green="0.56284224989999998" blue="0.31881666180000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        </state>
                                                         <connections>
                                                             <action selector="onActivismTypePressed" destination="ohK-Iz-2AK" eventType="touchUpInside" id="S3r-sF-Afq"/>
                                                         </connections>
@@ -253,7 +255,9 @@ Q29uZmlybWF0aW9uIBBvZiBDb29wZXJhdGlvbg
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="40" id="sFz-Lt-1lV"/>
                                                         </constraints>
-                                                        <state key="normal" title="Choose Event Type"/>
+                                                        <state key="normal" title="Choose Event Type">
+                                                            <color key="titleColor" red="0.0" green="0.56284224989999998" blue="0.31881666180000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        </state>
                                                         <connections>
                                                             <action selector="onEventTypePressed" destination="ohK-Iz-2AK" eventType="touchUpInside" id="fz5-in-ANa"/>
                                                         </connections>
@@ -288,7 +292,7 @@ Q29uZmlybWF0aW9uIBBvZiBDb29wZXJhdGlvbg
                                 <viewLayoutGuide key="frameLayoutGuide" id="h6I-p6-F1C"/>
                             </scrollView>
                             <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ZHd-EN-0uJ">
-                                <rect key="frame" x="0.0" y="292.66666666666669" width="414" height="603.33333333333326"/>
+                                <rect key="frame" x="0.0" y="166.66666666666669" width="414" height="729.33333333333326"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="AddressCell" textLabel="YW8-c1-fnJ" detailTextLabel="Lrh-vB-U1q" style="IBUITableViewCellStyleSubtitle" id="3XV-As-wcf">

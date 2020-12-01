@@ -196,7 +196,9 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dzb-tx-Hwc">
                                                 <rect key="frame" x="114" y="1085.5" width="186" height="41"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                                <state key="normal" title="Submit a question"/>
+                                                <state key="normal" title="Submit a question">
+                                                    <color key="titleColor" red="0.0" green="0.56284224989999998" blue="0.31881666180000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </state>
                                                 <connections>
                                                     <action selector="questionButtonPressed:" destination="66d-7J-4gf" eventType="touchUpInside" id="xS2-ka-88t"/>
                                                     <segue destination="tgr-O4-Tci" kind="presentation" identifier="qSegue" id="g2x-vM-fbX"/>
@@ -204,7 +206,9 @@
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="43L-JK-O4U">
                                                 <rect key="frame" x="20" y="1146.5" width="128" height="30"/>
-                                                <state key="normal" title="Something wrong?"/>
+                                                <state key="normal" title="Something wrong?">
+                                                    <color key="titleColor" red="0.0" green="0.56284224989999998" blue="0.31881666180000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </state>
                                                 <connections>
                                                     <action selector="reportButtonPressed:" destination="66d-7J-4gf" eventType="touchUpInside" id="EnE-sv-qZn"/>
                                                     <segue destination="rO0-aX-SNL" kind="presentation" id="wVd-LX-hbH"/>
