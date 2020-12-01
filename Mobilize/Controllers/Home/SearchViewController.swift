@@ -28,6 +28,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         super.viewDidLoad()
         eventResultsTable.delegate = self
         eventResultsTable.dataSource = self
+        search.delegate = self
         
         enterButton.layer.cornerRadius = 4
     }
@@ -36,6 +37,8 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
     }
+    
+    
 
     @IBAction func enter(_ sender: Any) {
         myGroup.enter()
@@ -76,21 +79,86 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return eventNamesReturned.count
+        return annotations.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //let cell = UITableViewCell(style: .subtitle, reuseIdentifier: nil)
         let cell = eventResultsTable.dequeueReusableCell(withIdentifier: cellID, for: indexPath as IndexPath)
         
-        cell.textLabel?.text = eventNamesReturned[indexPath.row]
+        let pin = annotations[indexPath.row]
+    
+        cell.textLabel?.numberOfLines = 0
+        cell.detailTextLabel?.numberOfLines = 0
+        cell.textLabel?.text = pin.title
+        cell.detailTextLabel?.text = "\(pin.address!)\n\(pin.subtitle!)"
+        let activismType = pin.activismType
+        let color = EventModel.returnColor(activismType: activismType!)
+        let image = UIImage(systemName: "circle.fill")?
+            .withRenderingMode(.alwaysOriginal)
+            .withTintColor(color)
+        cell.imageView?.image = image
+        //cell.textLabel?.text = eventNamesReturned[indexPath.row]
         //searchResult
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let homeVC = delegate as! FocusMap
-        homeVC.focusMap(eventCoords: eventCoordsReturned[indexPath.row])
+        let coords = annotations[indexPath.row].coordinate
+        homeVC.focusMap(eventCoords: coords)
         performSegue(withIdentifier: "unwindToHome", sender: self)
     }
 }
+
+extension SearchViewController: UISearchBarDelegate {
+
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        myGroup.enter()
+        annotations = []
+        if(searchToggle.selectedSegmentIndex == 0) {
+            //search for name
+            for annotation in delegate.mapView.annotations {
+                let model = annotation as? EventAnnotation
+                if model?.title != nil {
+                    //print("|",search.text!,"|",model!.title!)
+                    if(model!.title!.contains(search.text!)) {
+                        //print("HERE")
+                        annotations.append(model!)
+                        //eventNamesReturned.append(model!.title!)
+                        //eventCoordsReturned.append(model!.coordinate)
+                    }
+                }
+            }
+            myGroup.leave()
+        }
+        else {
+            //search for address
+            for annotation in delegate.mapView.annotations {
+                let model = annotation as? EventAnnotation
+                if model?.address != nil {
+                    if(model!.address!.contains(search.text!)) {
+                        //print("HERE")
+                        annotations.append(model!)
+                        //eventNamesReturned.append(model!.title!)
+                        //eventCoordsReturned.append(model!.coordinate)
+                    }
+                }
+            }
+            myGroup.leave()
+        }
+        myGroup.notify(queue: .main) {
+            self.annotations.sort(by: { (a1, a2) -> Bool in
+                if let s1 = a1.title {
+                    if let s2 = a2.title {
+                        return s1 < s2
+                    }
+                }
+                return false
+            })
+            self.eventResultsTable.reloadData()
+        }
+        
+    }
+}
+
