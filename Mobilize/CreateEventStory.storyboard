@@ -296,7 +296,7 @@ Q29uZmlybWF0aW9uIBBvZiBDb29wZXJhdGlvbg
                                 <viewLayoutGuide key="frameLayoutGuide" id="h6I-p6-F1C"/>
                             </scrollView>
                             <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ZHd-EN-0uJ">
-                                <rect key="frame" x="0.0" y="166.66666666666669" width="414" height="729.33333333333326"/>
+                                <rect key="frame" x="0.0" y="292.66666666666669" width="414" height="603.33333333333326"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="AddressCell" textLabel="YW8-c1-fnJ" detailTextLabel="Lrh-vB-U1q" style="IBUITableViewCellStyleSubtitle" id="3XV-As-wcf">
@@ -451,6 +451,7 @@ Q29uZmlybWF0aW9uIBBvZiBDb29wZXJhdGlvbg
                     <navigationItem key="navigationItem" id="FTv-gn-WuW"/>
                     <connections>
                         <outlet property="eventPicturesCollection" destination="kU7-pv-8p6" id="Znl-qL-g6R"/>
+                        <outlet property="nextButton" destination="PDK-jq-Wjp" id="KAj-ui-d5w"/>
                         <segue destination="LHM-Mk-FVt" kind="show" identifier="QASegueId" id="7gR-lj-ppo"/>
                     </connections>
                 </viewController>
@@ -565,6 +566,7 @@ Q29uZmlybWF0aW9uIBBvZiBDb29wZXJhdGlvbg
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="addButton" destination="ltA-jB-s4v" id="zaJ-7O-ugh"/>
                         <outlet property="createButton" destination="fX9-RZ-06p" id="vJE-Qi-cck"/>
                         <outlet property="qaTableView" destination="Bnt-Pb-foH" id="vkt-iZ-ItK"/>
                     </connections>
@@ -659,6 +661,7 @@ Q29uZmlybWF0aW9uIBBvZiBDb29wZXJhdGlvbg
                     <connections>
                         <outlet property="aTextView" destination="fp7-57-Twv" id="x4b-xc-WJ8"/>
                         <outlet property="qTextView" destination="bSM-yz-4iu" id="Kpp-1K-5cS"/>
+                        <outlet property="saveButton" destination="AXf-ab-Cfp" id="DNf-JD-Ykx"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Gbd-Xg-DNF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
