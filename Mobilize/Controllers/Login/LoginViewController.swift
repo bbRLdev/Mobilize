@@ -18,7 +18,13 @@ class LoginViewController: UIViewController {
     var login:LoginModel?
     
     var user:UserModel?
+    
+    var hidePassword = true
 
+    @IBOutlet weak var hidePasswordButton: UIButton!
+    
+    @IBOutlet weak var cHidePasswordButton: UIButton!
+    
     @IBOutlet weak var segCtrl: UISegmentedControl!
     
     @IBOutlet weak var usernameTextField: UITextField!
@@ -45,22 +51,47 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
         cPasswordLabel.isHidden = true
         cPasswordTextField.isHidden = true
+        cHidePasswordButton.isHidden = true
         loginButton.layer.cornerRadius = 4
+        passwordTextField.isSecureTextEntry = true
+        cPasswordTextField.isSecureTextEntry = true
     }
     
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.isNavigationBarHidden = true
     }
     
+    @IBAction func hidePasswordPressed(_ sender: Any) {
+        hidePasswordHelper()
+    }
+    
+    @IBAction func cHidePasswordPressed(_ sender: Any) {
+        hidePasswordHelper()
+    }
+    
+    private func hidePasswordHelper() {
+        hidePassword = !hidePassword
+        passwordTextField.isSecureTextEntry = !passwordTextField.isSecureTextEntry
+        cPasswordTextField.isSecureTextEntry = !cPasswordTextField.isSecureTextEntry
+        if(hidePassword == true) {
+            hidePasswordButton.setImage(UIImage(systemName: "eye.slash"), for: .normal)
+            cHidePasswordButton.setImage(UIImage(systemName: "eye.slash"), for: .normal)
+        } else {
+            hidePasswordButton.setImage(UIImage(systemName: "eye"), for: .normal)
+            cHidePasswordButton.setImage(UIImage(systemName: "eye"), for: .normal)
+        }
+    }
     @IBAction func segmentChanged(_ sender: Any) {
         switch segCtrl.selectedSegmentIndex {
         case 0:
             cPasswordLabel.isHidden = true
             cPasswordTextField.isHidden = true
+            cHidePasswordButton.isHidden = true
             loginButton.setTitle("Sign In", for: .normal)
         case 1:
             cPasswordLabel.isHidden = false
             cPasswordTextField.isHidden = false
+            cHidePasswordButton.isHidden = false
             loginButton.setTitle("Sign Up", for: .normal)
         default:
             print("error")

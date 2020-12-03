@@ -61,7 +61,6 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
     
     @IBAction func saveChanges(_ sender: Any) {
         guard let imageSelected = self.image else {
-            print("pic is nil")
             saveTextFields()
             return
         }
@@ -107,6 +106,7 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
         profile?.last =  self.lastNameField.text!
         profile?.organization = self.organizationField.text!
         profile?.bio = self.bioField.text!
+        self.navigationController?.popViewController(animated: true)
     }
     
     func saveTextFields() {
@@ -124,6 +124,7 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
                 }
             }
         }
+        self.navigationController?.popViewController(animated: true)
     }
     
     func loadProfileInfo() {

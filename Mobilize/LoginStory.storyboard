@@ -48,7 +48,7 @@
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="YeN-af-LwL">
                                 <rect key="frame" x="20" y="307" width="374" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FmE-oV-9lQ">
                                 <rect key="frame" x="207" y="524" width="0.0" height="0.0"/>
@@ -59,12 +59,12 @@
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tWO-GG-Bvp">
                                 <rect key="frame" x="20" y="236" width="374" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="s5K-Q7-oXy">
                                 <rect key="frame" x="20" y="378" width="374" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SNB-qr-qDc">
                                 <rect key="frame" x="143" y="602" width="128" height="55"/>
@@ -86,6 +86,22 @@
                                     <constraint firstAttribute="height" constant="128" id="SfY-13-ZVE"/>
                                 </constraints>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nin-d0-hEC">
+                                <rect key="frame" x="358" y="313" width="26" height="22"/>
+                                <color key="tintColor" red="0.0" green="0.56284224989999998" blue="0.31881666180000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" image="eye.slash" catalog="system"/>
+                                <connections>
+                                    <action selector="hidePasswordPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="3BD-eC-GKc"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qCg-h4-ZAE">
+                                <rect key="frame" x="358" y="384" width="26" height="22"/>
+                                <color key="tintColor" red="0.0" green="0.56284224989999998" blue="0.31881666180000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" image="eye.slash" catalog="system"/>
+                                <connections>
+                                    <action selector="cHidePasswordPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="eeI-jq-MfI"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -98,9 +114,12 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="ibT-CW-CTM" secondAttribute="trailing" constant="87" id="6sp-B1-t53"/>
                             <constraint firstItem="s5K-Q7-oXy" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="7kK-9b-OpE"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Rj8-UT-ZGu" secondAttribute="trailing" constant="20" id="8Ze-HB-9dv"/>
+                            <constraint firstItem="qCg-h4-ZAE" firstAttribute="leading" secondItem="s5K-Q7-oXy" secondAttribute="trailing" constant="-36" id="CvD-Zv-uxq"/>
                             <constraint firstItem="tWO-GG-Bvp" firstAttribute="top" secondItem="5Tt-ZL-pdT" secondAttribute="bottom" constant="8" symbolic="YES" id="Ej6-dA-ybb"/>
+                            <constraint firstItem="Nin-d0-hEC" firstAttribute="top" secondItem="YeN-af-LwL" secondAttribute="bottom" constant="-28" id="EjU-i2-vnI"/>
                             <constraint firstItem="ibT-CW-CTM" firstAttribute="top" secondItem="Rj8-UT-ZGu" secondAttribute="bottom" constant="8" symbolic="YES" id="IQ9-f6-KZg"/>
                             <constraint firstItem="ibT-CW-CTM" firstAttribute="centerX" secondItem="Rj8-UT-ZGu" secondAttribute="centerX" id="OIE-Yq-PhN"/>
+                            <constraint firstItem="Nin-d0-hEC" firstAttribute="leading" secondItem="YeN-af-LwL" secondAttribute="trailing" constant="-36" id="OY7-Ep-MfC"/>
                             <constraint firstItem="YeN-af-LwL" firstAttribute="leading" secondItem="9FY-qx-XDv" secondAttribute="leading" id="Ofw-Pg-XLr"/>
                             <constraint firstItem="5Tt-ZL-pdT" firstAttribute="top" secondItem="Rj8-UT-ZGu" secondAttribute="bottom" constant="132" id="PQb-E3-NKt"/>
                             <constraint firstItem="YeN-af-LwL" firstAttribute="top" secondItem="9FY-qx-XDv" secondAttribute="bottom" constant="8" symbolic="YES" id="bEz-Uv-AGz"/>
@@ -113,14 +132,17 @@
                             <constraint firstAttribute="bottom" secondItem="FmE-oV-9lQ" secondAttribute="bottom" constant="372" id="oZX-2S-zcc"/>
                             <constraint firstItem="Rj8-UT-ZGu" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="tFM-XU-fBi"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="YeN-af-LwL" secondAttribute="trailing" constant="20" id="tLZ-ou-cft"/>
+                            <constraint firstItem="qCg-h4-ZAE" firstAttribute="top" secondItem="s5K-Q7-oXy" secondAttribute="bottom" constant="-28" id="tfk-C4-BNa"/>
                             <constraint firstItem="YeN-af-LwL" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="307" id="v5f-nZ-qhx"/>
                             <constraint firstItem="SNB-qr-qDc" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="181.5" id="vkI-S9-Gyr"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Uyw-Qy-lmx"/>
                     <connections>
+                        <outlet property="cHidePasswordButton" destination="qCg-h4-ZAE" id="Twt-ud-zyz"/>
                         <outlet property="cPasswordLabel" destination="eQn-AY-g2n" id="uNl-GQ-OFN"/>
                         <outlet property="cPasswordTextField" destination="s5K-Q7-oXy" id="lvV-T1-shz"/>
+                        <outlet property="hidePasswordButton" destination="Nin-d0-hEC" id="fFS-AR-4CD"/>
                         <outlet property="loginButton" destination="SNB-qr-qDc" id="hnQ-VI-xQg"/>
                         <outlet property="passwordTextField" destination="YeN-af-LwL" id="LXS-i0-gu6"/>
                         <outlet property="segCtrl" destination="Rj8-UT-ZGu" id="fMa-nm-zAa"/>
@@ -409,6 +431,7 @@
     </inferredMetricsTieBreakers>
     <resources>
         <image name="defaultProfile" width="1024" height="1024"/>
+        <image name="eye.slash" catalog="system" width="128" height="86"/>
         <image name="f6238bcf-320b-400d-84d9-2317a9e440ad_200x200" width="200" height="200"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
