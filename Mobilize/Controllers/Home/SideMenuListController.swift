@@ -19,7 +19,7 @@ class SideMenuListController: UIViewController {
     var name: UILabel!
     var user: UserModel?
         
-    var items = [NavLinks.profile.rawValue, NavLinks.events.rawValue, NavLinks.settings.rawValue, NavLinks.logout.rawValue]
+    var items = [NavLinks.profile.rawValue, NavLinks.events.rawValue, NavLinks.settings.rawValue, NavLinks.resources.rawValue, NavLinks.logout.rawValue]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -138,7 +138,7 @@ class SideMenuListController: UIViewController {
     }
     
     enum NavLinks: String, CaseIterable {
-        case profile = "Profile", events = "Your Events", settings = "Settings", logout = "Log Out"
+        case profile = "Profile", events = "Your Events", settings = "Settings", resources = "Resources", logout = "Log Out"
     }
 }
 
@@ -162,6 +162,10 @@ extension SideMenuListController: UITableViewDataSource, UITableViewDelegate {
         
         if(cell.textLabel?.text == "Settings") {
             cell.imageView?.image = resizeImageWithAspect(image: UIImage(systemName: "gearshape")!, scaledToMaxWidth: 25, maxHeight: 25)
+        }
+        
+        if(cell.textLabel?.text == "Resources") {
+            cell.imageView?.image = resizeImageWithAspect(image: UIImage(systemName: "gearshape")!, scaledToMaxWidth: 25, maxHeight: 25)?.withTintColor(UIColor.red)
         }
         
         if(cell.textLabel?.text == "Log Out") {
@@ -210,6 +214,11 @@ extension SideMenuListController: UITableViewDataSource, UITableViewDelegate {
             self.show(vc, sender: self)
         }
         else if (indexPath.row == 3) {
+            let storyboard: UIStoryboard = UIStoryboard(name: "ResourcesStory", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "ResourcesStory") as! ResourcesViewController
+            self.show(vc, sender: self)
+        }
+        else if (indexPath.row == 4) {
             let controller = UIAlertController(title: "Logout", message: "Are you sure you want to log out?", preferredStyle: .alert)
             controller.addAction(UIAlertAction(title:"Yes", style: .destructive, handler: {_ in self.handleLogout()}))
             controller.addAction(UIAlertAction(title:"Cancel", style: .cancel, handler: nil))
