@@ -22,17 +22,15 @@ class ResourcesViewController: UIViewController, UITableViewDelegate, UITableVie
     var statesReturned: [String] = []
     var urlsReturned: [String] = []
     let myGroup = DispatchGroup()
+    let db = Firestore.firestore()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         eventResultsTable.delegate = self
         eventResultsTable.dataSource = self
-        FirebaseApp.configure()
-
-        let db = Firestore.firestore()
         
         // Create a reference to the cities collection
-        let citiesRef = db.collection("resources")
         
         enterButton.layer.cornerRadius = 4
     }
@@ -49,44 +47,53 @@ class ResourcesViewController: UIViewController, UITableViewDelegate, UITableVie
         citiesReturned = []
         statesReturned = []
         urlsReturned = []
+        let citiesRef = db.collection("resources")
         if(searchToggle.selectedSegmentIndex == 0) {
             //search for city
-            // Create a query against the collection.
-            let query = citiesRef.whereField("city", isEqualTo: search.text?.lowercased())
+            // Create a query against the collection.\
+            let query = citiesRef.whereField("city", isEqualTo: search.text!.lowercased())
                 .getDocuments() { (querySnapshot, err) in
                 if let err = err {
                     print("Error getting documents: \(err)")
                 } else {
                     for document in querySnapshot!.documents {
-                        citiesReturned.append(document["city"])
-                        statesReturned.append(document["state"])
-                        urlsReturned.append(document["url"])
+                        print(document.get("city") as! String)
+                        self.citiesReturned.append(document.get("city") as! String)
+                        self.statesReturned.append(document.get("state") as! String)
+                        self.urlsReturned.append(document.get("url") as! String)
+                        print("1",self.citiesReturned)
                     }
+                    self.myGroup.leave()
                 }
-        }
-            myGroup.leave()
+                }
         }
         else {
             //search for state
-            for annotation in delegate.mapView.annotations {
-                let model = annotation as? EventAnnotation
-                if model?.address != nil {
-                    if(model!.address!.contains(search.text!)) {
-                        print("HERE")
-                        citiesReturned.append(model!.title!)
-                        statesReturned.append(model!.coordinate)
+            let query = citiesRef.whereField("state", isEqualTo: search.text!.lowercased())
+                .getDocuments() { (querySnapshot, err) in
+                if let err = err {
+                    print("Error getting documents: \(err)")
+                } else {
+                    for document in querySnapshot!.documents {
+                        self.citiesReturned.append(document.get("city") as! String)
+                        self.statesReturned.append(document.get("state") as! String)
+                        self.urlsReturned.append(document.get("url") as! String)
                     }
+                    self.myGroup.leave()
                 }
-            }
-            myGroup.leave()
+                }
         }
         myGroup.notify(queue: .main) {
+            print(self.citiesReturned)
             self.eventResultsTable.reloadData()
         }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return annotations.count
+        if(searchToggle.selectedSegmentIndex == 0) {
+            return citiesReturned.count
+        }
+        return statesReturned.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -100,61 +107,8 @@ class ResourcesViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let homeVC = delegate as! FocusMap
-        let coords = annotations[indexPath.row].coordinate
-        homeVC.focusMap(eventCoords: coords)
-        performSegue(withIdentifier: "unwindToHome", sender: self)
+        if let url = URL(string: urlsReturned[indexPath.row]) {
+            UIApplication.shared.open(url)
+        }
     }
 }
-
-extension SearchViewController: UISearchBarDelegate {
-
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        myGroup.enter()
-        annotations = []
-        if(searchToggle.selectedSegmentIndex == 0) {
-            //search for name
-            for annotation in delegate.mapView.annotations {
-                let model = annotation as? EventAnnotation
-                if model?.title != nil {
-                    //print("|",search.text!,"|",model!.title!)
-                    if(model!.title!.contains(search.text!)) {
-                        //print("HERE")
-                        annotations.append(model!)
-                        //eventNamesReturned.append(model!.title!)
-                        //eventCoordsReturned.append(model!.coordinate)
-                    }
-                }
-            }
-            myGroup.leave()
-        }
-        else {
-            //search for address
-            for annotation in delegate.mapView.annotations {
-                let model = annotation as? EventAnnotation
-                if model?.address != nil {
-                    if(model!.address!.contains(search.text!)) {
-                        //print("HERE")
-                        annotations.append(model!)
-                        //eventNamesReturned.append(model!.title!)
-                        //eventCoordsReturned.append(model!.coordinate)
-                    }
-                }
-            }
-            myGroup.leave()
-        }
-        myGroup.notify(queue: .main) {
-            self.annotations.sort(by: { (a1, a2) -> Bool in
-                if let s1 = a1.title {
-                    if let s2 = a2.title {
-                        return s1 < s2
-                    }
-                }
-                return false
-            })
-            self.eventResultsTable.reloadData()
-        }
-        
-    }
-}
-
