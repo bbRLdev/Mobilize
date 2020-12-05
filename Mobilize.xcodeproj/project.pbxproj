@@ -38,6 +38,8 @@
 		B960A00D25411EFE00BC5559 /* SettingsProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B960A00C25411EFE00BC5559 /* SettingsProfileViewController.swift */; };
 		B960A0162542079900BC5559 /* ProfileEventsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B960A0152542079900BC5559 /* ProfileEventsViewController.swift */; };
 		B960A01C2542093700BC5559 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B960A01B2542093600BC5559 /* SettingsViewController.swift */; };
+		B9932D5E257C346A00FAF1D8 /* ResourcesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9932D5D257C346A00FAF1D8 /* ResourcesController.swift */; };
+		B9932D61257C351200FAF1D8 /* ResourcesStory.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B9932D60257C351200FAF1D8 /* ResourcesStory.storyboard */; };
 		BF47B03D5A51FD2ADD1E0002 /* Pods_Mobilize.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D16664B2B4F5523DAF4E7C5A /* Pods_Mobilize.framework */; };
 		DB4DAC8725647CD3001C6126 /* EventImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4DAC8625647CD3001C6126 /* EventImageViewController.swift */; };
 		DB4DAC8D2564C11A001C6126 /* MosaicLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4DAC8C2564C11A001C6126 /* MosaicLayout.swift */; };
@@ -93,6 +95,8 @@
 		B960A00C25411EFE00BC5559 /* SettingsProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsProfileViewController.swift; sourceTree = "<group>"; };
 		B960A0152542079900BC5559 /* ProfileEventsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEventsViewController.swift; sourceTree = "<group>"; };
 		B960A01B2542093600BC5559 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		B9932D5D257C346A00FAF1D8 /* ResourcesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourcesController.swift; sourceTree = "<group>"; };
+		B9932D60257C351200FAF1D8 /* ResourcesStory.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ResourcesStory.storyboard; sourceTree = "<group>"; };
 		D16664B2B4F5523DAF4E7C5A /* Pods_Mobilize.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Mobilize.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB4DAC8625647CD3001C6126 /* EventImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventImageViewController.swift; sourceTree = "<group>"; };
 		DB4DAC8C2564C11A001C6126 /* MosaicLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MosaicLayout.swift; sourceTree = "<group>"; };
@@ -175,6 +179,7 @@
 				1AF47ACB253666DA0092CE1B /* AppDelegate.swift */,
 				DBB830A3253E7A6B00F2B48E /* Mobilize.entitlements */,
 				DBB17777254A52D900E2AFAA /* EventStory.storyboard */,
+				B9932D60257C351200FAF1D8 /* ResourcesStory.storyboard */,
 				93E47C6D2549185F006D76BF /* CreateEventStory.storyboard */,
 				93E47C6B25491859006D76BF /* SettingsScreen.storyboard */,
 				93E47C6725491704006D76BF /* LaunchScreen.storyboard */,
@@ -195,6 +200,7 @@
 		1AF4962A253903DA00CABA30 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				B9932D5B257C344F00FAF1D8 /* Resources */,
 				DB51BE1325527B7D007C65F6 /* Event */,
 				93E47C7A254A0B23006D76BF /* Settings */,
 				93E47C79254A0B0A006D76BF /* Home */,
@@ -255,6 +261,14 @@
 				DBB17773254A52B800E2AFAA /* ProfileViewController.swift */,
 			);
 			path = Profile;
+			sourceTree = "<group>";
+		};
+		B9932D5B257C344F00FAF1D8 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				B9932D5D257C346A00FAF1D8 /* ResourcesController.swift */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		DB4DAC8B2564C0D5001C6126 /* Layouts */ = {
@@ -371,6 +385,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B9932D61257C351200FAF1D8 /* ResourcesStory.storyboard in Resources */,
 				1A63C4B42570761A00E65868 /* GoogleService-Info.plist in Resources */,
 				93E47C4C254912BC006D76BF /* LoginStory.storyboard in Resources */,
 				93E47C6E25491871006D76BF /* SettingsScreen.storyboard in Resources */,
@@ -443,6 +458,7 @@
 				1AF47AD6253666DA0092CE1B /* Mobilize.xcdatamodeld in Sources */,
 				DB4DAC952564C213001C6126 /* MosaicCell.swift in Sources */,
 				938CC6C0255DDFC700244304 /* UploadPictureViewController.swift in Sources */,
+				B9932D5E257C346A00FAF1D8 /* ResourcesController.swift in Sources */,
 				DB4DAC8D2564C11A001C6126 /* MosaicLayout.swift in Sources */,
 				B960A01C2542093700BC5559 /* SettingsViewController.swift in Sources */,
 				DB4DACF3256A3FB4001C6126 /* ImagePreviewViewController.swift in Sources */,
