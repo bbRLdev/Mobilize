@@ -54,7 +54,8 @@ class LoginViewController: UIViewController {
         cHidePasswordButton.isHidden = true
         loginButton.layer.cornerRadius = 4
         passwordTextField.isSecureTextEntry = true
-        cPasswordTextField.isSecureTextEntry = true
+        cPasswordTextField.isSecureTextEntry = false
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -87,11 +88,17 @@ class LoginViewController: UIViewController {
             cPasswordLabel.isHidden = true
             cPasswordTextField.isHidden = true
             cHidePasswordButton.isHidden = true
+            hidePasswordButton.isHidden = false
+            passwordTextField.isSecureTextEntry = true
+            hidePasswordButton.setImage(UIImage(systemName: "eye.slash"), for: .normal)
             loginButton.setTitle("Sign In", for: .normal)
         case 1:
             cPasswordLabel.isHidden = false
             cPasswordTextField.isHidden = false
-            cHidePasswordButton.isHidden = false
+            cPasswordTextField.isSecureTextEntry = false
+            passwordTextField.isSecureTextEntry = false
+            hidePasswordButton.isHidden = true
+            //cHidePasswordButton.isHidden = false
             loginButton.setTitle("Sign Up", for: .normal)
         default:
             print("error")
