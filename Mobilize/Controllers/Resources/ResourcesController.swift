@@ -99,8 +99,9 @@ class ResourcesViewController: UIViewController, UITableViewDelegate, UITableVie
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //let cell = UITableViewCell(style: .subtitle, reuseIdentifier: nil)
         let cell = eventResultsTable.dequeueReusableCell(withIdentifier: cellID, for: indexPath as IndexPath)
-        
-        cell.textLabel?.text = citiesReturned[indexPath.row] + ", " + statesReturned[indexPath.row]
+        let city = citiesReturned[indexPath.row].prefix(1).capitalized + citiesReturned[indexPath.row].suffix(citiesReturned[indexPath.row].count-1)
+        let state = statesReturned[indexPath.row].prefix(1).capitalized + statesReturned[indexPath.row].suffix(statesReturned[indexPath.row].count-1)
+        cell.textLabel?.text = city + ", " + state
         //cell.textLabel?.text = eventNamesReturned[indexPath.row]
         //searchResult
         return cell
