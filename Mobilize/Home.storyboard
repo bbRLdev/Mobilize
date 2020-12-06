@@ -156,19 +156,6 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q1y-42-dHt">
-                                <rect key="frame" x="179" y="193" width="56" height="30"/>
-                                <color key="backgroundColor" red="0.0" green="0.56284224989999998" blue="0.31881666180000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="56" id="hYY-nc-ACi"/>
-                                </constraints>
-                                <state key="normal" title="Enter">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <connections>
-                                    <action selector="enter:" destination="Hyn-Nu-7Mj" eventType="touchUpInside" id="cU3-6p-oHr"/>
-                                </connections>
-                            </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="dHi-Ss-LfQ">
                                 <rect key="frame" x="20" y="254" width="374" height="545"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -214,8 +201,6 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="FTH-Sg-lSA" firstAttribute="leading" secondItem="xmY-Y2-ga9" secondAttribute="leading" constant="20" id="8FU-dx-Boh"/>
-                            <constraint firstItem="q1y-42-dHt" firstAttribute="top" secondItem="FTH-Sg-lSA" secondAttribute="bottom" constant="49" id="Hfh-NC-frN"/>
-                            <constraint firstItem="q1y-42-dHt" firstAttribute="centerX" secondItem="Fh8-XF-2xj" secondAttribute="centerX" id="LQc-dV-Veq"/>
                             <constraint firstItem="FTH-Sg-lSA" firstAttribute="top" secondItem="hVZ-Ej-x9l" secondAttribute="bottom" constant="15" id="PaA-Vb-kfD"/>
                             <constraint firstItem="hVZ-Ej-x9l" firstAttribute="centerX" secondItem="Fh8-XF-2xj" secondAttribute="centerX" id="bwD-ZS-FTJ"/>
                             <constraint firstItem="FTH-Sg-lSA" firstAttribute="top" secondItem="xmY-Y2-ga9" secondAttribute="top" constant="88" id="cbW-NF-b82"/>
@@ -224,7 +209,6 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="enterButton" destination="q1y-42-dHt" id="YMp-s8-qdw"/>
                         <outlet property="eventResultsTable" destination="dHi-Ss-LfQ" id="4pt-D6-9Hn"/>
                         <outlet property="search" destination="FTH-Sg-lSA" id="dBZ-hb-rxX"/>
                         <outlet property="searchToggle" destination="nyX-ex-cQg" id="aFO-GG-dpE"/>

@@ -18,10 +18,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     let launchedBefore = UserDefaults.standard.bool(forKey: "usersingedin")
     let locationManager = CLLocationManager()
     var window: UIWindow?
+    let loginNotification = Notification.Name(rawValue: "loginNotificationKey")
+    var loggedIn:Bool?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         FirebaseApp.configure()
-        configureInitialViewController()
+        // observer that will make sure someone is logged in
+        NotificationCenter.default.addObserver(self, selector: #selector(self.setInitialViewController), name: self.loginNotification, object: nil)
+        checkIfLoggedIn()
         // request notifications
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert], completionHandler: { (success, error) in
         })
@@ -56,13 +60,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     {
         completionHandler(.banner)
     }
-
     
-    private func configureInitialViewController() {
-        let loggedIn = checkIfLoggedIn()
+    @objc private func setInitialViewController() {
         window = UIWindow()
         let initialViewController: UIViewController
-        if(loggedIn) {
+        if(loggedIn!) {
             let storyboard = UIStoryboard(name: "Home", bundle: nil)
             let mainViewController = storyboard.instantiateViewController(withIdentifier: "MainNavigationController")
             initialViewController = mainViewController
@@ -76,7 +78,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     }
     
     // checks if there is already user info saved in core data
-    private func checkIfLoggedIn() -> Bool {
+    private func checkIfLoggedIn() {
+        let name = Notification.Name(rawValue: "loginNotificationKey")
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let context = appDelegate.persistentContainer.viewContext
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "ProfileEntity")
@@ -86,9 +89,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         } catch {
             let nserror = error as NSError
             NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
-            return false
+            self.loggedIn = false
+            NotificationCenter.default.post(name: name, object: nil)
+            return
         }
-        
         // read in fetched results
         if(!fetchedResults!.isEmpty) {
             let profileEntity = fetchedResults![0]
@@ -96,28 +100,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                   let password = profileEntity.value(forKey:"password") as? String
                 else {
                     print("could not find any user data")
-                    return false
+                    self.loggedIn = false
+                    NotificationCenter.default.post(name: name, object: nil)
+                    return
                 }
             // try logging in
             Auth.auth().signIn(withEmail: uid, password: password) {
               user, error in
                 if let _ = error, user == nil {
                     // couldn't sign in
-                    self.userDefault.set(false, forKey: "usersignedin")
-                    self.userDefault.synchronize()
+                    self.loggedIn = false
                     print("error signing in")
+                    NotificationCenter.default.post(name: name, object: nil)
                 }else {
                     // signed in successfully
-                    self.userDefault.set(true, forKey: "usersignedin")
-                    self.userDefault.synchronize()
+                    self.loggedIn = true
                     print("signed in successfully")
+                    NotificationCenter.default.post(name: name, object: nil)
                 }
             }
         }else {
             print("no log in info")
-            return false
+            self.loggedIn = false
+            NotificationCenter.default.post(name: name, object: nil)
         }
-        return userDefault.bool(forKey: "usersignedin")
     }
 
     // MARK: - Core Data stack

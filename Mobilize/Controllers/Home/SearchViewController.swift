@@ -12,7 +12,6 @@ import Firebase
 
 class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
-    @IBOutlet weak var enterButton: UIButton!
     @IBOutlet weak var eventResultsTable: UITableView!
     @IBOutlet weak var search: UISearchBar!
     @IBOutlet weak var searchToggle: UISegmentedControl!
@@ -29,16 +28,12 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         eventResultsTable.delegate = self
         eventResultsTable.dataSource = self
         search.delegate = self
-        
-        enterButton.layer.cornerRadius = 4
     }
     
     // code to enable tapping on the background to remove software keyboard
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
     }
-    
-    
 
     @IBAction func enter(_ sender: Any) {
         myGroup.enter()
@@ -103,17 +98,6 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        let row = indexPath.row
-//        let pin = annotations[row]
-//
-//        let storyboard: UIStoryboard = UIStoryboard(name: "EventStory", bundle: nil)
-//        let vc = storyboard.instantiateViewController(withIdentifier: "EventView") as! EventDetailsViewController
-//
-//        vc.eventID = pin.eventID
-//
-//        self.show(vc, sender: self)
-        
-        
         let homeVC = delegate as! FocusMap
         let coords = annotations[indexPath.row].coordinate
         homeVC.focusMap(eventCoords: coords)
@@ -162,7 +146,6 @@ extension SearchViewController: UISearchBarDelegate {
             })
             self.eventResultsTable.reloadData()
         }
-        
     }
 }
 
