@@ -98,7 +98,7 @@ class EventAnnotationView: MKAnnotationView {
     }
 }
 
-final class LocationDataMapClusterView: MKAnnotationView {
+class EventMapClusterView: MKAnnotationView {
 
     private let countLabel = UILabel()
 
@@ -122,8 +122,7 @@ final class LocationDataMapClusterView: MKAnnotationView {
         frame = CGRect(x: 0, y: 0, width: 40, height: 50)
         centerOffset = CGPoint(x: 0, y: -frame.size.height / 2)
 
-       
-        setupUI()
+        //setupUI()
     }
 
     @available(*, unavailable)
@@ -131,7 +130,4 @@ final class LocationDataMapClusterView: MKAnnotationView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    private func setupUI() {
-        
-    }
 }

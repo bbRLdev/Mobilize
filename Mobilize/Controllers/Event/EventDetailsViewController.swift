@@ -15,7 +15,7 @@ class EventDetailsViewController: UIViewController {
     let db = Firestore.firestore()
     let auth = Auth.auth()
     let cellTag = "qCell"
-    let imgCollectionSegue = "imageCollectionSegue"
+    //let imgCollectionSegue = "imageCollectionSegue"
     let qSegue = "qSegue"
     //let homeSegue = "homeSegue"
     
@@ -127,13 +127,29 @@ class EventDetailsViewController: UIViewController {
     
     @IBAction func viewMapButtonPressed(_ sender: Any) {
         
-        let nav = self.navigationController
-        let homeVC = nav!.viewControllers[0] as! HomeViewController
+//        if self.presentingViewController != nil {
+//            self.dismiss(animated: false, completion: {
+//                let nav = self.navigationController
+//                let homeVC = nav!.viewControllers[0] as! HomeViewController
+//
+//                let region = (homeVC.mapView.regionThatFits(MKCoordinateRegion(center: self.event.coordinates!, latitudinalMeters: 0, longitudinalMeters: 1500)))
+//
+//                homeVC.mapView.setRegion(region, animated: true)
+//               self.navigationController!.popToRootViewController(animated: true)
+//            })
+//        }
+//        else {
+//            self.navigationController!.popToRootViewController(animated: true)
+//        }
         
+        let nav = self.navigationController
+
+        let homeVC = nav!.viewControllers[0] as! HomeViewController
+
         let region = (homeVC.mapView.regionThatFits(MKCoordinateRegion(center: event.coordinates!, latitudinalMeters: 0, longitudinalMeters: 1500)))
 
         homeVC.mapView.setRegion(region, animated: true)
-            
+
         self.navigationController?.popToRootViewController(animated: true)
     }
     
@@ -316,15 +332,10 @@ class EventDetailsViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == imgCollectionSegue,
-           let nextVC = segue.destination as? EventImageViewController{
-            //nextVC.images = images
-        }
         if segue.identifier == qSegue,
            let nextVC = segue.destination as? AddQ{
             nextVC.eventRef = eventRef
         }
-
     }
     
     private func setOrganizerName(uid: String) {
@@ -593,7 +604,9 @@ class AddQ: UIViewController{
             
         }
         
-
+    }
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
     }
 }
 
@@ -606,11 +619,6 @@ class SelfSizingTableView: UITableView {
   override func reloadData() {
     super.reloadData()
     self.invalidateIntrinsicContentSize()
-    //heightConstraint.constant = contentSize.height
-//    UIView.animate(withDuration: 0.2) {
-//      self.layoutIfNeeded()
-//    }
-    
     self.layoutIfNeeded()
   }
   

@@ -154,7 +154,7 @@ class AddMediaViewController: UIViewController, UIImagePickerControllerDelegate,
                 _ in
                 
 
-                var cell = self.cells[sender.tag] //changed from let to var
+                let cell = self.cells[sender.tag]
                 if let refIndex = cell.refIndex {
                     self.imageRefs.remove(at: refIndex)
                     self.images.remove(at: cell.imageIndex)
@@ -184,10 +184,6 @@ class AddMediaViewController: UIViewController, UIImagePickerControllerDelegate,
         dismiss(animated: true, completion: nil)
     }
     
-
-    
-
-
     @IBAction func onNextButtonPressed(_ sender: Any) {
         performSegue(withIdentifier: segueId, sender: self)
     }
@@ -205,15 +201,7 @@ class AddMediaViewController: UIViewController, UIImagePickerControllerDelegate,
                 imageRefList.append(["\(count)" : ref])
                 count += 1
             }
-//            count = 0
-//            for image in images {
-//                let placeholderImage = UIImage(systemName: "questionmark")
-//                
-//                if image != nil && image!.isEqual(placeholderImage) {
-//                    images.remove(at: count)
-//                }
-//                count += 1
-//            }
+
             nextVC.images = images
             nextVC.imgRefList = imageRefList
             nextVC.event = event

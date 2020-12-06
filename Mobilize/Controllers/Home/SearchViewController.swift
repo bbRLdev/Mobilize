@@ -83,7 +83,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        //let cell = UITableViewCell(style: .subtitle, reuseIdentifier: nil)
+        
         let cell = eventResultsTable.dequeueReusableCell(withIdentifier: cellID, for: indexPath as IndexPath)
         
         let pin = annotations[indexPath.row]
@@ -98,17 +98,28 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
             .withRenderingMode(.alwaysOriginal)
             .withTintColor(color)
         cell.imageView?.image = image
-        //cell.textLabel?.text = eventNamesReturned[indexPath.row]
-        //searchResult
+        
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        let row = indexPath.row
+//        let pin = annotations[row]
+//
+//        let storyboard: UIStoryboard = UIStoryboard(name: "EventStory", bundle: nil)
+//        let vc = storyboard.instantiateViewController(withIdentifier: "EventView") as! EventDetailsViewController
+//
+//        vc.eventID = pin.eventID
+//
+//        self.show(vc, sender: self)
+        
+        
         let homeVC = delegate as! FocusMap
         let coords = annotations[indexPath.row].coordinate
         homeVC.focusMap(eventCoords: coords)
         performSegue(withIdentifier: "unwindToHome", sender: self)
     }
+    
 }
 
 extension SearchViewController: UISearchBarDelegate {
@@ -121,12 +132,8 @@ extension SearchViewController: UISearchBarDelegate {
             for annotation in delegate.mapView.annotations {
                 let model = annotation as? EventAnnotation
                 if model?.title != nil {
-                    //print("|",search.text!,"|",model!.title!)
                     if(model!.title!.contains(search.text!)) {
-                        //print("HERE")
                         annotations.append(model!)
-                        //eventNamesReturned.append(model!.title!)
-                        //eventCoordsReturned.append(model!.coordinate)
                     }
                 }
             }
@@ -138,10 +145,7 @@ extension SearchViewController: UISearchBarDelegate {
                 let model = annotation as? EventAnnotation
                 if model?.address != nil {
                     if(model!.address!.contains(search.text!)) {
-                        //print("HERE")
                         annotations.append(model!)
-                        //eventNamesReturned.append(model!.title!)
-                        //eventCoordsReturned.append(model!.coordinate)
                     }
                 }
             }

@@ -71,15 +71,22 @@ class EventInfoViewController: UIViewController, UITableViewDelegate, UITableVie
         if event != nil {
             populateFields()
         }
+        else{
+            updateDate()
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         searchResultsTableView.isHidden = true
     }
-    @IBAction func onDateSelected(_ sender: Any) {
+    
+    private func updateDate(){
         let date = eventDatePicker.date
         selectedDate = date
         dateComponents = eventDatePicker.calendar.dateComponents([.day, .hour, .minute], from: eventDatePicker.date)
+    }
+    @IBAction func onDateSelected(_ sender: Any) {
+        updateDate()
     }
     
     func startFade(target: UIButton, title: String, color: UIColor, image: UIImage) {
@@ -190,22 +197,6 @@ class EventInfoViewController: UIViewController, UITableViewDelegate, UITableVie
     
     @IBAction func onNextButtonPressed(_ sender: Any) {
         
-        if(eventNameField.text == "" || organizationNameField.text == "" || coordinates == nil){
-            
-            var msg = "please enter event information"
-            if(coordinates == nil){
-                msg = "select an address from the search results"
-            }
-            let controller = UIAlertController(title: "Missing fields",
-                                               message: msg,
-                                               preferredStyle: .alert)
-            controller.addAction(UIAlertAction(title: "OK",
-                                               style: .default,
-                                               handler: nil))
-            present(controller, animated: true, completion: nil)
-            
-            return
-        }
         guard let eventName = eventNameField.text,
                let orgName = organizationNameField.text,
                let eventAddress = eventAddressField.text,
@@ -216,8 +207,32 @@ class EventInfoViewController: UIViewController, UITableViewDelegate, UITableVie
                let eventTypeFilter = selectedEventTypeFilter,
                let eventDate = selectedDate
         else {
+            var msg = "Please enter event information."
+            if(coordinates == nil){
+                msg = "Select an address from the search results."
+            }
+            let controller = UIAlertController(title: "Missing Fields",
+                                               message: msg,
+                                               preferredStyle: .alert)
+            controller.addAction(UIAlertAction(title: "OK",
+                                               style: .default,
+                                               handler: nil))
+            present(controller, animated: true, completion: nil)
             return
         }
+        
+        if(eventDate < Date()){
+            let msg = "Select a valid date in the future."
+            let controller = UIAlertController(title: "Invalid Date",
+                                               message: msg,
+                                               preferredStyle: .alert)
+            controller.addAction(UIAlertAction(title: "OK",
+                                               style: .default,
+                                               handler: nil))
+            present(controller, animated: true, completion: nil)
+            return
+        }
+        
         let timeStampDate = Timestamp(date: eventDate)
         eventSoFar = [
             "name" : eventName,
@@ -238,7 +253,7 @@ class EventInfoViewController: UIViewController, UITableViewDelegate, UITableVie
             eventSoFar["numLikes"] = event.likeNum
             eventSoFar["numRSVPs"] = event.rsvpNum
         }
-        print("ERERL")
+
         performSegue(withIdentifier: segueId, sender: self)
     }
     
@@ -304,7 +319,6 @@ class EventInfoViewController: UIViewController, UITableViewDelegate, UITableVie
         
         let completion = searchResults[indexPath.row]
         
-        
         let formatter = CNPostalAddressFormatter()
         formatter.style = .mailingAddress
         
@@ -349,17 +363,6 @@ class EventInfoViewController: UIViewController, UITableViewDelegate, UITableVie
         return true
     }
     
-//    // Move the text field in a pretty animation!
-//    func moveTextView(_ textField: UITextView, moveDistance: Int, up: Bool) {
-//        let moveDuration = 0.3
-//        let movement: CGFloat = CGFloat(up ? moveDistance : -moveDistance)
-//
-//        UIView.beginAnimations("animateTextField", context: nil)
-//        UIView.setAnimationBeginsFromCurrentState(true)
-//        UIView.setAnimationDuration(moveDuration)
-//        self.view.frame = self.view.frame.offsetBy(dx: 0, dy: movement)
-//        UIView.commitAnimations()
-//    }
     
     func populateFields() {
         if let uid = event.organizerUID {
@@ -392,6 +395,5 @@ class EventInfoViewController: UIViewController, UITableViewDelegate, UITableVie
             }
         }
     }
-
 
 }

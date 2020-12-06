@@ -14,7 +14,7 @@ import UserNotifications
 
 
 class QAandConfirmVC: UIViewController {
-    //var q: Question = (question: "Is america dumb af", answer: "Yes")
+
     let db = Firestore.firestore()
     let cellTag = "tag"
     let segueIdentifier0 = "editSegue"
@@ -37,7 +37,6 @@ class QAandConfirmVC: UIViewController {
     var imgLoadingFlag = false {
             willSet {
                 if newValue == false {
-                    //questions.append(q)
                     collectionLoadingFlag = true
                     uploadCollection()
                 }
@@ -51,10 +50,6 @@ class QAandConfirmVC: UIViewController {
                               eid: eventSoFar["eventID"] as! String)
                 self.navigationController?.popToRootViewController(animated: true)
             }
-            else{
-                //createButton.isUserInteractionEnabled = true
-                //createButton.setTitle("Create Event", for: .normal)
-            }
         }
     }
         
@@ -62,7 +57,6 @@ class QAandConfirmVC: UIViewController {
         super.viewDidLoad()
         createButton.layer.cornerRadius = 4
         addButton.layer.cornerRadius = 4
-        //print("Did load \(images)")
         qaTableView.delegate = self
         qaTableView.dataSource = self
         if event != nil {
@@ -280,7 +274,6 @@ extension QAandConfirmVC: UITableViewDelegate, UITableViewDataSource {
         //cell.textLabel?.numberOfLines = 0
         cell.textLabel?.text = questions[row].question
         cell.detailTextLabel?.text = questions[row].answer
-        //cell.textLabel?.text = questions[row].
         return cell
     }
     
@@ -348,7 +341,6 @@ class addQA: UIViewController, UITextViewDelegate {
         }
 
         otherVC.qaTableView.reloadData()
-        //print(otherVC.questions[0].question)
         self.dismiss(animated: true, completion: nil)
     }
     

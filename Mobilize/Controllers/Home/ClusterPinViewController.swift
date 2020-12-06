@@ -70,11 +70,8 @@ class ClusterPinViewController: UIViewController, UITableViewDelegate, UITableVi
         
         vc.eventID = pin?.eventID
         
-        //vc.modalPresentationStyle = .fullScreen
-        
         self.show(vc, sender: self)
-        //self.present(vc, animated: true, completion: nil)
-        //self.dismiss(animated: true, completion: nil)
+
     }
 
 }

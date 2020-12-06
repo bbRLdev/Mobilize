@@ -53,9 +53,10 @@ class HomeViewController: UIViewController, GetFilters, FocusMap {
     let userNotification = Notification.Name(rawValue: "userModelNotificationKey")
     
     var pending = UIAlertController(title: "Signing in\n\n", message: nil, preferredStyle: .alert)
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         setUpSideMenu()
         checkLocationServices()
         loadPins()
@@ -67,7 +68,7 @@ class HomeViewController: UIViewController, GetFilters, FocusMap {
             // need to try loading in user data
             loadInUserData()
         }
-        mapView.register(LocationDataMapClusterView.self, forAnnotationViewWithReuseIdentifier: "cluster")
+        mapView.register(EventMapClusterView.self, forAnnotationViewWithReuseIdentifier: "cluster")
         mapView.register(EventAnnotationView.self, forAnnotationViewWithReuseIdentifier: "event")
         print(mapView.selectedAnnotations)
         let logo = UIImage(named: "f6238bcf-320b-400d-84d9-2317a9e440ad_200x200") // Or logo.png if you haven't added it to assets
@@ -121,18 +122,7 @@ class HomeViewController: UIViewController, GetFilters, FocusMap {
            let nextVC = segue.destination as? SearchViewController {
             nextVC.delegate = self
         }
-//        if let sideMenuVC = segue.destination as? SideMenuListController {
-//            print("GOT HERE")
-//            sideMenuVC.user = user!
-//        }
-//        else if segue.identifier == "ListEventsSegue"{
-//            let nextVC = segue.destination as? FilterViewController {
-//             nextVC.delegate = self
-//             nextVC.radius = searchRadius
-//             nextVC.initActivismButtons = activismFilters
-//             nextVC.initEventButtons = eventFilters
-//         }
-//        }
+
     }
     
     @IBAction func sideNavButtonPressed(_ sender: Any) {
@@ -228,7 +218,7 @@ class HomeViewController: UIViewController, GetFilters, FocusMap {
     
     // Protocol method
     func focusMap(eventCoords: CLLocationCoordinate2D) {
-        let region = (mapView.regionThatFits(MKCoordinateRegion(center: eventCoords as! CLLocationCoordinate2D, latitudinalMeters: 0, longitudinalMeters: 1500)))
+        let region = (mapView.regionThatFits(MKCoordinateRegion(center: eventCoords , latitudinalMeters: 0, longitudinalMeters: 1500)))
         mapView.setRegion(region, animated: true)
     }
     

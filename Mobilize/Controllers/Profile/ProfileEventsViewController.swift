@@ -230,14 +230,12 @@ extension ProfileEventsViewController: UITableViewDelegate, UITableViewDataSourc
                     
                     cell.textLabel?.text = eventName
                     if(self.RSVPView){
-                        //cell.detailTextLabel?.text = orgName
                         cell.detailTextLabel?.text = dFormatter.string(from: date?.dateValue() ?? Date())
                     }
                     else{
                         cell.detailTextLabel?.text = "Pending Questions: \(pendingQuestions.count)"
                     }
-                    
-                    //date later?
+
                 } else {
                     print("Document does not exist")
                 }

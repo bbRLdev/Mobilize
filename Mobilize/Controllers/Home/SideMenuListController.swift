@@ -28,20 +28,11 @@ class SideMenuListController: UIViewController {
         setUpLabel()
         setupTableView()
         self.tableView.separatorStyle = UITableViewCell.SeparatorStyle.none
-        //loadProfileInfo()
-        //loadUserModelInfo()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         loadProfileInfo()
-        //loadUserModelInfo()
-    }
-    
-    // load in from user state
-    func loadUserModelInfo() {
-        self.name.text = (user?.first)! + " " + (user?.last)!
-        self.imageView.image = user?.profilePicture
     }
     
     // load in from firebase

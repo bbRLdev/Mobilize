@@ -213,54 +213,6 @@ class PendingQuestionsViewController: UIViewController {
                 editEventButton.isUserInteractionEnabled = true
                 editEventButton.isEnabled = true
                 
-                
-//                imageArray.append(UIImage(named: blankImage)!)
-//                //collectionView.reloadData()
-//                
-//                let storageRef = Storage.storage().reference(forURL: "gs://mobilize-77a05.appspot.com")
-//                
-//                let total = event.photoURLCollection.count
-//                if(total == 0){
-//                    collectionView.reloadData()
-//                }
-//                
-//                var count = 0
-//                var empty = true
-//                var loadedImages = [UIImage](repeating: UIImage(), count: total)
-//                
-//                var imgLoadingFlag = false {
-//                        willSet {
-//                            if newValue == true {
-//                                if(!empty){
-//                                    imageArray = loadedImages
-//                                }
-//                                //collectionView.reloadData()
-//                            }
-//
-//                        }
-//                }
-            
-//                for (i, pid) in event.photoURLCollection.enumerated(){
-//                    let imgRef = storageRef.child("events/\(eventID!)").child(pid)
-//                    imgRef.getData(maxSize: 1 * 2048 * 2048, completion: {
-//                        data, error in
-//                        if error != nil {
-//                            print("error getting image")
-//                        } else {
-//                            loadedImages[i] = UIImage(data: data!)!
-//                            empty = false
-//                        }
-//                        count += 1
-//                        if(count >= total){
-//                            if(!imgLoadingFlag){
-//                                imgLoadingFlag = true
-//                            }
-//                        }
-//                    })
-//                }
-//                
-
-                
             }
             
         }
@@ -379,5 +331,8 @@ class AnswerQuestionViewController : UIViewController{
         
     }
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
     
 }

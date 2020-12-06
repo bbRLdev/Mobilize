@@ -41,7 +41,6 @@
 		B9932D5E257C346A00FAF1D8 /* ResourcesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9932D5D257C346A00FAF1D8 /* ResourcesController.swift */; };
 		B9932D61257C351200FAF1D8 /* ResourcesStory.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B9932D60257C351200FAF1D8 /* ResourcesStory.storyboard */; };
 		BF47B03D5A51FD2ADD1E0002 /* Pods_Mobilize.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D16664B2B4F5523DAF4E7C5A /* Pods_Mobilize.framework */; };
-		DB4DAC8725647CD3001C6126 /* EventImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4DAC8625647CD3001C6126 /* EventImageViewController.swift */; };
 		DB4DAC8D2564C11A001C6126 /* MosaicLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4DAC8C2564C11A001C6126 /* MosaicLayout.swift */; };
 		DB4DAC912564C1AE001C6126 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4DAC902564C1AE001C6126 /* Utilities.swift */; };
 		DB4DAC952564C213001C6126 /* MosaicCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4DAC942564C213001C6126 /* MosaicCell.swift */; };
@@ -98,7 +97,6 @@
 		B9932D5D257C346A00FAF1D8 /* ResourcesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourcesController.swift; sourceTree = "<group>"; };
 		B9932D60257C351200FAF1D8 /* ResourcesStory.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ResourcesStory.storyboard; sourceTree = "<group>"; };
 		D16664B2B4F5523DAF4E7C5A /* Pods_Mobilize.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Mobilize.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		DB4DAC8625647CD3001C6126 /* EventImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventImageViewController.swift; sourceTree = "<group>"; };
 		DB4DAC8C2564C11A001C6126 /* MosaicLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MosaicLayout.swift; sourceTree = "<group>"; };
 		DB4DAC902564C1AE001C6126 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		DB4DAC942564C213001C6126 /* MosaicCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MosaicCell.swift; sourceTree = "<group>"; };
@@ -299,7 +297,6 @@
 			isa = PBXGroup;
 			children = (
 				DB51BE1425527B7D007C65F6 /* EventDetailsViewController.swift */,
-				DB4DAC8625647CD3001C6126 /* EventImageViewController.swift */,
 				DB4DACED256A2D12001C6126 /* ReportViewController.swift */,
 				DB4DACF2256A3FB4001C6126 /* ImagePreviewViewController.swift */,
 			);
@@ -462,7 +459,6 @@
 				DB4DAC8D2564C11A001C6126 /* MosaicLayout.swift in Sources */,
 				B960A01C2542093700BC5559 /* SettingsViewController.swift in Sources */,
 				DB4DACF3256A3FB4001C6126 /* ImagePreviewViewController.swift in Sources */,
-				DB4DAC8725647CD3001C6126 /* EventImageViewController.swift in Sources */,
 				9334F52F2566E230004F5B53 /* SideMenuListController.swift in Sources */,
 				1AF47ACC253666DA0092CE1B /* AppDelegate.swift in Sources */,
 				DB51BE322554B862007C65F6 /* Annotations.swift in Sources */,

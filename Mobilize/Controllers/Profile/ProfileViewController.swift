@@ -28,7 +28,6 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     @IBOutlet weak var tableView: UITableView!
     
     
-    
     let db = Firestore.firestore()
     
     override func viewDidLoad() {
@@ -106,12 +105,6 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
                 
                DispatchQueue.main.async { self.tableView.reloadData() }
                self.checkData(userRef: docRef)
-                //self.refreshControl.endRefreshing()
-                
-                //
-                //needs more work
-                //self.profile = UserModel(uid: userID!, first: firstName, last: lastName, organization: org, bio: bio, profilePicture: "", eventsRSVPd: [], eventsCreated: [], eventsLiked: [])
-                
                 
                 self.name.text = firstName + " " + lastName
                 self.organization.text = org
@@ -137,7 +130,6 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         let createdList = createdEvents
         
         for created in createdList{
-            //print(created)
             let eventRef = self.db.collection("events").document(created)
             eventRef.getDocument{ (document, error) in
                 if let document = document, document.exists{}
