@@ -10,7 +10,6 @@
 		1A6036E4254234A900E874D5 /* ControlContainableScrollview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A6036E3254234A900E874D5 /* ControlContainableScrollview.swift */; };
 		1A603726254286D600E874D5 /* ConfirmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A603725254286D600E874D5 /* ConfirmViewController.swift */; };
 		1A60372925428D5100E874D5 /* QAandConfirmVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A60372825428D5100E874D5 /* QAandConfirmVC.swift */; };
-		1A63C4B42570761A00E65868 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1A63C4B32570761A00E65868 /* GoogleService-Info.plist */; };
 		1A91533B254A51A500370962 /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A91533A254A51A500370962 /* FilterViewController.swift */; };
 		1A915341254E068D00370962 /* EventInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A915340254E068D00370962 /* EventInfoViewController.swift */; };
 		1AF47ACC253666DA0092CE1B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF47ACB253666DA0092CE1B /* AppDelegate.swift */; };
@@ -64,7 +63,6 @@
 		1A6036E3254234A900E874D5 /* ControlContainableScrollview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlContainableScrollview.swift; sourceTree = "<group>"; };
 		1A603725254286D600E874D5 /* ConfirmViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmViewController.swift; sourceTree = "<group>"; };
 		1A60372825428D5100E874D5 /* QAandConfirmVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QAandConfirmVC.swift; sourceTree = "<group>"; };
-		1A63C4B32570761A00E65868 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		1A91533A254A51A500370962 /* FilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
 		1A915340254E068D00370962 /* EventInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventInfoViewController.swift; sourceTree = "<group>"; };
 		1AF47AC8253666DA0092CE1B /* Mobilize.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Mobilize.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -172,6 +170,7 @@
 		1AF47ACA253666DA0092CE1B /* Mobilize */ = {
 			isa = PBXGroup;
 			children = (
+				93951CED257D9A5D00053A74 /* Storyboards */,
 				DB4DAC932564C1F6001C6126 /* Cells */,
 				DB4DAC8F2564C17B001C6126 /* Utilities */,
 				DB4DAC8B2564C0D5001C6126 /* Layouts */,
@@ -180,19 +179,7 @@
 				1AF4962A253903DA00CABA30 /* Controllers */,
 				1AF47ACB253666DA0092CE1B /* AppDelegate.swift */,
 				DBB830A3253E7A6B00F2B48E /* Mobilize.entitlements */,
-				DBB17777254A52D900E2AFAA /* EventStory.storyboard */,
-				B9932D60257C351200FAF1D8 /* ResourcesStory.storyboard */,
-				93E47C6D2549185F006D76BF /* CreateEventStory.storyboard */,
-				93E47C6B25491859006D76BF /* SettingsScreen.storyboard */,
-				93E47C6725491704006D76BF /* LaunchScreen.storyboard */,
-				93951CE9257D924900053A74 /* LaunchLoading.storyboard */,
-				93E47C6C2549185D006D76BF /* ProfileStory.storyboard */,
-				93E47C48254912B2006D76BF /* Home.storyboard */,
-				DB4DACDD2568A6FD001C6126 /* ClusterPin.storyboard */,
-				93E47C4E254912DE006D76BF /* FilterStory.storyboard */,
-				93E47C49254912B4006D76BF /* LoginStory.storyboard */,
 				1AF47AD7253666DA0092CE1B /* Assets.xcassets */,
-				1A63C4B32570761A00E65868 /* GoogleService-Info.plist */,
 				1AF47ADC253666DA0092CE1B /* Info.plist */,
 				1AF47AD4253666DA0092CE1B /* Mobilize.xcdatamodeld */,
 				93951BE0256D794D00053A74 /* GoogleService-Info.plist */,
@@ -220,6 +207,24 @@
 				D16664B2B4F5523DAF4E7C5A /* Pods_Mobilize.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		93951CED257D9A5D00053A74 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				DBB17777254A52D900E2AFAA /* EventStory.storyboard */,
+				B9932D60257C351200FAF1D8 /* ResourcesStory.storyboard */,
+				93E47C6D2549185F006D76BF /* CreateEventStory.storyboard */,
+				93E47C6B25491859006D76BF /* SettingsScreen.storyboard */,
+				93E47C6725491704006D76BF /* LaunchScreen.storyboard */,
+				93951CE9257D924900053A74 /* LaunchLoading.storyboard */,
+				93E47C6C2549185D006D76BF /* ProfileStory.storyboard */,
+				93E47C48254912B2006D76BF /* Home.storyboard */,
+				DB4DACDD2568A6FD001C6126 /* ClusterPin.storyboard */,
+				93E47C4E254912DE006D76BF /* FilterStory.storyboard */,
+				93E47C49254912B4006D76BF /* LoginStory.storyboard */,
+			);
+			path = Storyboards;
 			sourceTree = "<group>";
 		};
 		93CC6661254F9BAD0075A9EE /* Models */ = {
@@ -389,7 +394,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				B9932D61257C351200FAF1D8 /* ResourcesStory.storyboard in Resources */,
-				1A63C4B42570761A00E65868 /* GoogleService-Info.plist in Resources */,
 				93E47C4C254912BC006D76BF /* LoginStory.storyboard in Resources */,
 				93E47C6E25491871006D76BF /* SettingsScreen.storyboard in Resources */,
 				93CC665D254B38A60075A9EE /* Settings.bundle in Resources */,
