@@ -65,6 +65,7 @@ class SideMenuListController: UIViewController {
     }
     
     func setUpImageView() {
+        self.view.backgroundColor = .systemBackground
         imageView = UIImageView(image: UIImage(named: "defaultProfile"))
         imageView.frame = CGRect(x: 0, y: 0, width: 75, height: 75)
         imageView.contentMode = .scaleAspectFit
@@ -83,7 +84,8 @@ class SideMenuListController: UIViewController {
     func setUpLabel() {
         name = UILabel(frame: CGRect(x: 0, y: 0, width: 250.0, height: 100.0))
         name.text = ""
-        name.backgroundColor = UIColor.white
+        name.textColor = .label
+        name.backgroundColor = .systemBackground
         view.addSubview(name)
         name.translatesAutoresizingMaskIntoConstraints = false
         name.topAnchor.constraint(equalTo: imageView.bottomAnchor).isActive = true
@@ -144,19 +146,19 @@ extension SideMenuListController: UITableViewDataSource, UITableViewDelegate {
         cell.textLabel?.text = items[indexPath.row]
         
         if(cell.textLabel?.text == "Profile") {
-            cell.imageView?.image = resizeImageWithAspect(image: UIImage(systemName: "person")!, scaledToMaxWidth: 25, maxHeight: 25)
+            cell.imageView?.image = resizeImageWithAspect(image: UIImage(systemName: "person")!, scaledToMaxWidth: 25, maxHeight: 25)?.withTintColor(UIColor.label)
         }
         
         if(cell.textLabel?.text == "Your Events") {
-            cell.imageView?.image = resizeImageWithAspect(image: UIImage(systemName: "list.dash")!, scaledToMaxWidth: 25, maxHeight: 25)
+            cell.imageView?.image = resizeImageWithAspect(image: UIImage(systemName: "list.dash")!, scaledToMaxWidth: 25, maxHeight: 25)?.withTintColor(UIColor.label)
         }
         
         if(cell.textLabel?.text == "Settings") {
-            cell.imageView?.image = resizeImageWithAspect(image: UIImage(systemName: "gearshape")!, scaledToMaxWidth: 25, maxHeight: 25)
+            cell.imageView?.image = resizeImageWithAspect(image: UIImage(systemName: "gearshape")!, scaledToMaxWidth: 25, maxHeight: 25)?.withTintColor(UIColor.label)
         }
         
         if(cell.textLabel?.text == "Resources") {
-            cell.imageView?.image = resizeImageWithAspect(image: UIImage(systemName: "info.circle")!, scaledToMaxWidth: 25, maxHeight: 25)
+            cell.imageView?.image = resizeImageWithAspect(image: UIImage(systemName: "info.circle")!, scaledToMaxWidth: 25, maxHeight: 25)?.withTintColor(UIColor.label)
         }
         
         if(cell.textLabel?.text == "Log Out") {

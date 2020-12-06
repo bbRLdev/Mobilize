@@ -105,7 +105,7 @@ class EventInfoViewController: UIViewController, UITableViewDelegate, UITableVie
                         .withTintColor(color)
                     target.setTitle(title, for: .normal)
                     target.setImage(image, for: .normal)
-                    target.setTitleColor(UIColor.black, for: .normal)
+                    target.setTitleColor(UIColor.label, for: .normal)
                     target.titleEdgeInsets.left = 6
                     target.titleEdgeInsets.right = -6
                     self.endFade(target: target)
@@ -186,7 +186,7 @@ class EventInfoViewController: UIViewController, UITableViewDelegate, UITableVie
                     }
                 })
                 filterAction.setValue(image, forKey: "image")
-                filterAction.setValue(UIColor.black, forKey: "titleTextColor")
+                filterAction.setValue(UIColor.label, forKey: "titleTextColor")
                 filterSheet.addAction(filterAction)
             }
             filterSheet.addAction(UIAlertAction(title:"Cancel", style: .cancel))

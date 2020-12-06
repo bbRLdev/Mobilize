@@ -53,6 +53,7 @@
                                                 <viewLayoutGuide key="frameLayoutGuide" id="bfO-Qe-8Yp"/>
                                             </scrollView>
                                         </subviews>
+                                        <color key="tintColor" systemColor="labelColor"/>
                                         <constraints>
                                             <constraint firstItem="vFt-4p-628" firstAttribute="width" secondItem="ZRh-t5-vPA" secondAttribute="width" id="OMg-jz-3gZ"/>
                                         </constraints>
@@ -68,6 +69,7 @@
                                             </label>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="149-6l-VEj">
                                                 <rect key="frame" x="0.0" y="27.333333333333371" width="374" height="32"/>
+                                                <color key="tintColor" systemColor="labelColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="32" id="In5-VO-IUI"/>
                                                 </constraints>
@@ -132,6 +134,9 @@
         </scene>
     </scenes>
     <resources>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

@@ -46,7 +46,7 @@ class FilterViewController: UIViewController {
         for activism in ActivismFilterTypes.allCases {
             let button = UIButton()
             button.setTitle(activism.rawValue, for: .normal)
-            button.setTitleColor(UIColor.black, for: .normal)
+            button.setTitleColor(UIColor.label, for: .normal)
             button.setImage(UIImage(systemName: "circle"), for: .normal)
             button.setImage(UIImage(systemName: "circle.fill"), for: .selected)
             button.titleEdgeInsets.left = 6
@@ -63,7 +63,7 @@ class FilterViewController: UIViewController {
         for event in EventFilterTypes.allCases {
             let button = UIButton()
             button.setTitle(event.rawValue, for: .normal)
-            button.setTitleColor(UIColor.black, for: .normal)
+            button.setTitleColor(UIColor.label, for: .normal)
             button.setImage(UIImage(systemName: "circle"), for: .normal)
             button.setImage(UIImage(systemName: "circle.fill"), for: .selected)
             button.titleEdgeInsets.left = 6

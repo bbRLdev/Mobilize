@@ -54,23 +54,23 @@
                                     <constraint firstAttribute="height" constant="40" id="3Bx-zW-vMm"/>
                                     <constraint firstAttribute="width" constant="40" id="fAQ-QH-egj"/>
                                 </constraints>
-                                <state key="normal">
-                                    <imageReference key="backgroundImage" image="map" catalog="system" renderingMode="original"/>
-                                </state>
+                                <color key="tintColor" systemColor="labelColor"/>
+                                <state key="normal" backgroundImage="map" catalog="system"/>
                                 <connections>
                                     <action selector="changeMapButtonPressed:" destination="DcC-jA-gKe" eventType="touchUpInside" id="sJm-Zg-cGe"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cs1-Xy-nAb">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cs1-Xy-nAb">
                                 <rect key="frame" x="20" y="129.33333333333334" width="40" height="38.666666666666657"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="40" id="YAM-XD-5fQ"/>
                                     <constraint firstAttribute="height" constant="40" id="kLh-68-LOj"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="1"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <color key="tintColor" systemColor="labelColor"/>
                                 <state key="normal">
                                     <color key="titleColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    <imageReference key="backgroundImage" image="location" catalog="system" renderingMode="original"/>
+                                    <imageReference key="backgroundImage" image="location" catalog="system" symbolScale="default"/>
                                 </state>
                                 <state key="selected" backgroundImage="location.fill" catalog="system">
                                     <color key="titleColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
