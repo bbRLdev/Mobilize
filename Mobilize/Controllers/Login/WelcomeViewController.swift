@@ -22,6 +22,7 @@ class WelcomeViewController: UIViewController {
         super.viewDidLoad()
         continueButton.layer.cornerRadius = 4
         profilePicture.image = user?.profilePicture
+        profilePicture.translatesAutoresizingMaskIntoConstraints = true
         profilePicture.layer.cornerRadius = profilePicture.frame.size.width / 2
         profilePicture.clipsToBounds = true
         profilePicture.layer.borderColor = UIColor.gray.cgColor

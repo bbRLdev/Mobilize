@@ -30,9 +30,12 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        bioField.layer.borderColor = UIColor.lightGray.cgColor
+        bioField.layer.borderWidth = 1
         editButton.layer.cornerRadius = 4
         saveButton.layer.cornerRadius = 4
         imagePicker.delegate = self
+        //profilePicture.translatesAutoresizingMaskIntoConstraints = true
         profilePicture.layer.cornerRadius = profilePicture.frame.size.width / 2
         profilePicture.clipsToBounds = true
         profilePicture.layer.borderColor = UIColor.gray.cgColor
@@ -166,6 +169,11 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
         }
         dismiss(animated: true, completion: nil)
         reloadInputViews()
+    }
+    
+    // Dismiss keyboard
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+            self.view.endEditing(true)
     }
     
 }
