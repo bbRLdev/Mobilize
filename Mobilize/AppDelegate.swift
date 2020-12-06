@@ -15,7 +15,6 @@ import CoreLocation
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
     
     let userDefault = UserDefaults.standard
-    let launchedBefore = UserDefaults.standard.bool(forKey: "usersingedin")
     let locationManager = CLLocationManager()
     var window: UIWindow?
     let loginNotification = Notification.Name(rawValue: "loginNotificationKey")
@@ -31,6 +30,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         })
         UNUserNotificationCenter.current().delegate = self
         locationManager.requestWhenInUseAuthorization()
+        if(loggedIn == nil) {
+            window = UIWindow()
+            let initialViewController: UIViewController
+            let storyboard = UIStoryboard(name: "LaunchLoading", bundle: nil)
+            let launchViewController = storyboard.instantiateViewController(withIdentifier: "LaunchLoading")
+            initialViewController = launchViewController
+            window?.rootViewController = initialViewController
+            self.window?.makeKeyAndVisible()
+        }
         return true
     }
     

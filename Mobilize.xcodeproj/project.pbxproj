@@ -22,6 +22,8 @@
 		938CC6C0255DDFC700244304 /* UploadPictureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 938CC6BF255DDFC700244304 /* UploadPictureViewController.swift */; };
 		938CC6C4255DE10400244304 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 938CC6C3255DE10400244304 /* WelcomeViewController.swift */; };
 		93951BE1256D794D00053A74 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 93951BE0256D794D00053A74 /* GoogleService-Info.plist */; };
+		93951CE7257D915400053A74 /* LaunchLoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93951CE6257D915400053A74 /* LaunchLoadingViewController.swift */; };
+		93951CEA257D924900053A74 /* LaunchLoading.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 93951CE9257D924900053A74 /* LaunchLoading.storyboard */; };
 		93CC665A254B36EE0075A9EE /* NotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93CC6659254B36ED0075A9EE /* NotificationsViewController.swift */; };
 		93CC665D254B38A60075A9EE /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 93CC665C254B38A60075A9EE /* Settings.bundle */; };
 		93CC6663254F9BC70075A9EE /* EventModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93CC6662254F9BC70075A9EE /* EventModel.swift */; };
@@ -78,6 +80,8 @@
 		938CC6BF255DDFC700244304 /* UploadPictureViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadPictureViewController.swift; sourceTree = "<group>"; };
 		938CC6C3255DE10400244304 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		93951BE0256D794D00053A74 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		93951CE6257D915400053A74 /* LaunchLoadingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchLoadingViewController.swift; sourceTree = "<group>"; };
+		93951CE9257D924900053A74 /* LaunchLoading.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchLoading.storyboard; sourceTree = "<group>"; };
 		93CC6659254B36ED0075A9EE /* NotificationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsViewController.swift; sourceTree = "<group>"; };
 		93CC665C254B38A60075A9EE /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		93CC6662254F9BC70075A9EE /* EventModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventModel.swift; sourceTree = "<group>"; };
@@ -181,6 +185,7 @@
 				93E47C6D2549185F006D76BF /* CreateEventStory.storyboard */,
 				93E47C6B25491859006D76BF /* SettingsScreen.storyboard */,
 				93E47C6725491704006D76BF /* LaunchScreen.storyboard */,
+				93951CE9257D924900053A74 /* LaunchLoading.storyboard */,
 				93E47C6C2549185D006D76BF /* ProfileStory.storyboard */,
 				93E47C48254912B2006D76BF /* Home.storyboard */,
 				DB4DACDD2568A6FD001C6126 /* ClusterPin.storyboard */,
@@ -310,6 +315,7 @@
 				DBB830AB253E958400F2B48E /* CreateProfileViewController.swift */,
 				938CC6BF255DDFC700244304 /* UploadPictureViewController.swift */,
 				938CC6C3255DE10400244304 /* WelcomeViewController.swift */,
+				93951CE6257D915400053A74 /* LaunchLoadingViewController.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -393,6 +399,7 @@
 				93E47C4F254912E1006D76BF /* FilterStory.storyboard in Resources */,
 				93951BE1256D794D00053A74 /* GoogleService-Info.plist in Resources */,
 				93E47C7125491879006D76BF /* ProfileStory.storyboard in Resources */,
+				93951CEA257D924900053A74 /* LaunchLoading.storyboard in Resources */,
 				93E47C6825491712006D76BF /* LaunchScreen.storyboard in Resources */,
 				93E47C4A254912B7006D76BF /* Home.storyboard in Resources */,
 				93E47C7025491875006D76BF /* CreateEventStory.storyboard in Resources */,
@@ -474,6 +481,7 @@
 				93CC6667254F9BDF0075A9EE /* UserModel.swift in Sources */,
 				1A60372925428D5100E874D5 /* QAandConfirmVC.swift in Sources */,
 				DB4DACEE256A2D13001C6126 /* ReportViewController.swift in Sources */,
+				93951CE7257D915400053A74 /* LaunchLoadingViewController.swift in Sources */,
 				93E47C7D254A0BE1006D76BF /* SearchViewController.swift in Sources */,
 				B960A0162542079900BC5559 /* ProfileEventsViewController.swift in Sources */,
 				DB51BE1125527B22007C65F6 /* AddMediaViewController.swift in Sources */,
