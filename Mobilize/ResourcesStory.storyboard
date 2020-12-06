@@ -32,74 +32,73 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="JBd-6z-Edu">
-                                <rect key="frame" x="20" y="294" width="374" height="484"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="pxo-im-QE2">
-                                        <rect key="frame" x="0.0" y="28" width="374" height="43.5"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="pxo-im-QE2" id="6A1-A4-p8L">
-                                            <rect key="frame" x="0.0" y="0.0" width="374" height="43.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                </prototypes>
-                            </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1IY-dL-U4V">
-                                <rect key="frame" x="183" y="256" width="48" height="30"/>
-                                <color key="backgroundColor" red="0.0" green="0.56284224989999998" blue="0.31881666180000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="QOi-Hb-mTa">
+                                <rect key="frame" x="20" y="132" width="374" height="669.5"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Organizer Resources" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WeA-i9-hJE">
+                                        <rect key="frame" x="87" y="0.0" width="200" height="20.5"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="200" id="olT-WG-ySk"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="Z1R-7f-vb8">
+                                        <rect key="frame" x="0.0" y="35.5" width="374" height="56"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </searchBar>
+                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="L3Y-w9-dvh">
+                                        <rect key="frame" x="135.5" y="106.5" width="103" height="32"/>
+                                        <segments>
+                                            <segment title="City"/>
+                                            <segment title="State"/>
+                                        </segments>
+                                        <color key="tintColor" red="0.0" green="0.56284224989999998" blue="0.31881666180000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="selectedSegmentTintColor" red="0.0" green="0.56284224989999998" blue="0.31881666180000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </segmentedControl>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1IY-dL-U4V">
+                                        <rect key="frame" x="163" y="152.5" width="48" height="30"/>
+                                        <color key="backgroundColor" red="0.0" green="0.56284224989999998" blue="0.31881666180000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="48" id="eap-YI-ulx"/>
+                                        </constraints>
+                                        <state key="normal" title="Enter">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="enter:" destination="Es8-Uc-8R1" eventType="touchUpInside" id="mCE-3E-oNh"/>
+                                        </connections>
+                                    </button>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="JBd-6z-Edu">
+                                        <rect key="frame" x="0.0" y="197.5" width="374" height="472"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <prototypes>
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="pxo-im-QE2">
+                                                <rect key="frame" x="0.0" y="28" width="374" height="43.5"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="pxo-im-QE2" id="6A1-A4-p8L">
+                                                    <rect key="frame" x="0.0" y="0.0" width="374" height="43.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                </tableViewCellContentView>
+                                            </tableViewCell>
+                                        </prototypes>
+                                    </tableView>
+                                </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="48" id="eap-YI-ulx"/>
+                                    <constraint firstItem="Z1R-7f-vb8" firstAttribute="width" secondItem="QOi-Hb-mTa" secondAttribute="width" id="Lng-Jw-wgW"/>
+                                    <constraint firstItem="JBd-6z-Edu" firstAttribute="width" secondItem="QOi-Hb-mTa" secondAttribute="width" id="WHh-RI-J2w"/>
+                                    <constraint firstItem="Z1R-7f-vb8" firstAttribute="width" secondItem="QOi-Hb-mTa" secondAttribute="width" id="z1d-HD-QFx"/>
                                 </constraints>
-                                <state key="normal" title="Enter">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <connections>
-                                    <action selector="enter:" destination="Es8-Uc-8R1" eventType="touchUpInside" id="mCE-3E-oNh"/>
-                                </connections>
-                            </button>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="L3Y-w9-dvh">
-                                <rect key="frame" x="156" y="216" width="103" height="32"/>
-                                <segments>
-                                    <segment title="City"/>
-                                    <segment title="State"/>
-                                </segments>
-                                <color key="tintColor" red="0.0" green="0.56284224989999998" blue="0.31881666180000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <color key="selectedSegmentTintColor" red="0.0" green="0.56284224989999998" blue="0.31881666180000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </segmentedControl>
-                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="Z1R-7f-vb8">
-                                <rect key="frame" x="0.0" y="138" width="414" height="44"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="gcX-jg-cXN"/>
-                                </constraints>
-                                <textInputTraits key="textInputTraits"/>
-                            </searchBar>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Organizer Resources" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WeA-i9-hJE">
-                                <rect key="frame" x="128" y="105" width="159" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="kLR-xj-9yW"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="WeA-i9-hJE" firstAttribute="leading" secondItem="kLR-xj-9yW" secondAttribute="leading" constant="128" id="1A5-oI-ipj"/>
-                            <constraint firstItem="1IY-dL-U4V" firstAttribute="centerX" secondItem="JBd-6z-Edu" secondAttribute="centerX" id="7Nh-j0-T2b"/>
-                            <constraint firstItem="Z1R-7f-vb8" firstAttribute="top" secondItem="WeA-i9-hJE" secondAttribute="bottom" constant="12" id="8ct-z3-ala"/>
-                            <constraint firstItem="JBd-6z-Edu" firstAttribute="top" secondItem="1IY-dL-U4V" secondAttribute="bottom" constant="8" symbolic="YES" id="HlB-pz-TN6"/>
-                            <constraint firstItem="L3Y-w9-dvh" firstAttribute="top" secondItem="Z1R-7f-vb8" secondAttribute="bottom" constant="34" id="KR4-1P-gue"/>
-                            <constraint firstItem="JBd-6z-Edu" firstAttribute="leading" secondItem="g5B-SU-oGV" secondAttribute="leadingMargin" id="McT-bs-jdc"/>
-                            <constraint firstAttribute="trailing" secondItem="Z1R-7f-vb8" secondAttribute="trailing" id="PTp-1H-zrA"/>
-                            <constraint firstItem="kLR-xj-9yW" firstAttribute="bottom" secondItem="JBd-6z-Edu" secondAttribute="bottom" constant="84" id="TVu-iK-hRx"/>
-                            <constraint firstItem="WeA-i9-hJE" firstAttribute="centerX" secondItem="Z1R-7f-vb8" secondAttribute="centerX" id="WU7-XJ-lO4"/>
-                            <constraint firstItem="Z1R-7f-vb8" firstAttribute="centerX" secondItem="L3Y-w9-dvh" secondAttribute="centerX" id="XIC-wZ-pSy"/>
-                            <constraint firstItem="Z1R-7f-vb8" firstAttribute="leading" secondItem="g5B-SU-oGV" secondAttribute="leading" id="YR0-8w-kgv"/>
-                            <constraint firstItem="WeA-i9-hJE" firstAttribute="top" secondItem="kLR-xj-9yW" secondAttribute="top" constant="17" id="c5N-iY-Zma"/>
-                            <constraint firstItem="L3Y-w9-dvh" firstAttribute="centerX" secondItem="1IY-dL-U4V" secondAttribute="centerX" id="eMp-V3-bEZ"/>
-                            <constraint firstItem="L3Y-w9-dvh" firstAttribute="leading" secondItem="kLR-xj-9yW" secondAttribute="leading" constant="156" id="fdf-eN-Y6L"/>
-                            <constraint firstItem="1IY-dL-U4V" firstAttribute="top" secondItem="L3Y-w9-dvh" secondAttribute="bottom" constant="9" id="ivY-Re-9xn"/>
+                            <constraint firstItem="QOi-Hb-mTa" firstAttribute="leading" secondItem="g5B-SU-oGV" secondAttribute="leadingMargin" id="3Sl-J1-Lik"/>
+                            <constraint firstItem="kLR-xj-9yW" firstAttribute="bottom" secondItem="QOi-Hb-mTa" secondAttribute="bottom" constant="60.5" id="L98-Dj-w5p"/>
+                            <constraint firstItem="QOi-Hb-mTa" firstAttribute="trailing" secondItem="g5B-SU-oGV" secondAttribute="trailingMargin" id="OFc-AG-lvR"/>
+                            <constraint firstItem="QOi-Hb-mTa" firstAttribute="top" secondItem="kLR-xj-9yW" secondAttribute="top" constant="44" id="x72-gw-fgQ"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Wgh-g5-39E"/>

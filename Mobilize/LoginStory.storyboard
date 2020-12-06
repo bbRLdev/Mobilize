@@ -187,16 +187,15 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VOM-NL-cTj">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VOM-NL-cTj">
                                 <rect key="frame" x="167" y="607" width="80" height="55"/>
                                 <color key="backgroundColor" red="0.0" green="0.56284224989999998" blue="0.31881666180000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="80" id="BMQ-yW-YLw"/>
                                     <constraint firstAttribute="height" constant="55" id="lzl-ek-PHM"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="28"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <state key="normal" title="Next"/>
+                                <state key="normal" title="Next" image="info"/>
                                 <connections>
                                     <action selector="nextButtonPressed:" destination="FUS-MW-fz6" eventType="touchUpInside" id="qG2-pL-nxI"/>
                                 </connections>
@@ -429,6 +428,7 @@
         <image name="defaultProfile" width="1024" height="1024"/>
         <image name="eye.slash" catalog="system" width="128" height="86"/>
         <image name="f6238bcf-320b-400d-84d9-2317a9e440ad_200x200" width="200" height="200"/>
+        <image name="info" width="128" height="128"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

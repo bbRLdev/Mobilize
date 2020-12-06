@@ -165,7 +165,7 @@ extension SideMenuListController: UITableViewDataSource, UITableViewDelegate {
         }
         
         if(cell.textLabel?.text == "Resources") {
-            cell.imageView?.image = resizeImageWithAspect(image: UIImage(systemName: "gearshape")!, scaledToMaxWidth: 25, maxHeight: 25)?.withTintColor(UIColor.red)
+            cell.imageView?.image = resizeImageWithAspect(image: UIImage(systemName: "info.circle")!, scaledToMaxWidth: 25, maxHeight: 25)
         }
         
         if(cell.textLabel?.text == "Log Out") {
