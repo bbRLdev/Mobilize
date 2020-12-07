@@ -15,9 +15,7 @@ class EventDetailsViewController: UIViewController {
     let db = Firestore.firestore()
     let auth = Auth.auth()
     let cellTag = "qCell"
-    //let imgCollectionSegue = "imageCollectionSegue"
     let qSegue = "qSegue"
-    //let homeSegue = "homeSegue"
     
     var disableButtons = false
     
@@ -31,13 +29,6 @@ class EventDetailsViewController: UIViewController {
     var blankImage = "PeopleIcon"
     
     var imageArray=[UIImage]()
-    
-//    @IBOutlet weak var organizerLabel: UILabel!
-//
-//    @IBOutlet weak var addressLabel: UILabel!
-//    @IBOutlet weak  var editButton: UIButton!
-//    @IBOutlet weak var stack: UIStackView!
-    
     
     @IBOutlet weak var editButton: UIButton!
     
@@ -118,29 +109,14 @@ class EventDetailsViewController: UIViewController {
         eventRef = self.db.collection("events").document(eventID!)
         userRef = self.db.collection("users").document(userID!)
         loadEventInfo()
-        // Do any additional setup after loading the view.
     }
     
     
     @IBAction func editButtonPressed(_ sender: Any) {
+    
     }
     
     @IBAction func viewMapButtonPressed(_ sender: Any) {
-        
-//        if self.presentingViewController != nil {
-//            self.dismiss(animated: false, completion: {
-//                let nav = self.navigationController
-//                let homeVC = nav!.viewControllers[0] as! HomeViewController
-//
-//                let region = (homeVC.mapView.regionThatFits(MKCoordinateRegion(center: self.event.coordinates!, latitudinalMeters: 0, longitudinalMeters: 1500)))
-//
-//                homeVC.mapView.setRegion(region, animated: true)
-//               self.navigationController!.popToRootViewController(animated: true)
-//            })
-//        }
-//        else {
-//            self.navigationController!.popToRootViewController(animated: true)
-//        }
         
         let nav = self.navigationController
 
@@ -155,7 +131,6 @@ class EventDetailsViewController: UIViewController {
     
     @IBAction func likeButtonPressed(_ sender: Any) {
         likeButton.isUserInteractionEnabled = false
-        //let docRef = self.db.collection("events").document(eventID!)
         
         let operation = likeButton.isSelected ? -1 : 1
 
@@ -167,7 +142,7 @@ class EventDetailsViewController: UIViewController {
                 print("Error updating document: \(err)")
             }
             else{
-                //updateLikeButton()
+                
             }
         })
         
@@ -201,16 +176,11 @@ class EventDetailsViewController: UIViewController {
                 }
             )
         }
-        
-
-
     }
     
     @IBAction func RSVPButtonPressed(_ sender: Any) {
         RSVPButton.isUserInteractionEnabled = false
-        //let docRef = self.db.collection("events").document(eventID!)
-        
-        
+
         let operation = RSVPButton.isSelected ? -1 : 1
 
         eventRef?.updateData([
@@ -221,7 +191,7 @@ class EventDetailsViewController: UIViewController {
                 print("Error updating document: \(err)")
             }
             else{
-                //self.updateRSVPButton()
+
             }
         })
         
@@ -255,9 +225,6 @@ class EventDetailsViewController: UIViewController {
                 }
             )
         }
-
-        
-        
     }
     
     @IBAction func creatorButtonPressed(_ sender: Any) {
@@ -268,18 +235,15 @@ class EventDetailsViewController: UIViewController {
             vc.userID = event.organizerUID
             self.show(vc, sender: self)
         }
-
     }
     
     @IBAction func questionButtonPressed(_ sender: Any) {
-        //segue
     }
     
     @IBAction func reportButtonPressed(_ sender: Any) {
     }
     
     private func updateLikeButton(){
-        //let docRef = self.db.collection("users").document(userID!)
         userRef?.getDocument { (document, error) in
             if let document = document, document.exists {
                 let dataDescription = document.data()
@@ -295,21 +259,16 @@ class EventDetailsViewController: UIViewController {
         }
     }
     private func updateRSVPButton(){
-        //let docRef = self.db.collection("users").document(userID!)
         userRef?.getDocument { (document, error) in
             if let document = document, document.exists {
                 let dataDescription = document.data()
                 let rsvp = dataDescription!["rsvpEvents"] as? [String] ?? []
                 if rsvp.contains(self.eventID!){
-                    //print("RSVP'd")
-                    //self.RSVPButton.setTitle("RSVP'd!", for: .selected)
                     self.RSVPButton.isSelected = true
                     self.scheduleNotification(dataDescription: dataDescription)
                 }
                 else{
-                    //print("did not RSVP")
                     self.RSVPButton.isSelected = false
-                    //self.RSVPButton.setTitle("RSVP", for: .normal)
                 }
                 self.RSVPButton.isUserInteractionEnabled = true
             }
@@ -349,11 +308,12 @@ class EventDetailsViewController: UIViewController {
             }
         }
         
-        
     }
     func loadEventInfo() {
         eventRef?.getDocument { [self] (document, error) in
-            if let document = document, document.exists {
+            if error != nil {
+                print("document error")
+            } else if let document = document, document.exists {
                 let dataDescription = document.data()
                 
                 let activismTypeFilter = dataDescription?["activismTypeFilter"] as! String
@@ -437,9 +397,7 @@ class EventDetailsViewController: UIViewController {
                 event.activismType = aFilter?.rawValue
                 event.eventType = eFilter?.rawValue
                 
-                
                 imageArray.append(UIImage(named: blankImage)!)
-                //collectionView.reloadData()
                 
                 let storageRef = Storage.storage().reference(forURL: "gs://mobilize-77a05.appspot.com")
                 
@@ -462,7 +420,6 @@ class EventDetailsViewController: UIViewController {
                             }
                         }
                 }
-                
                 
                 for (i, pid) in event.photoIdCollection.enumerated(){
                     let imgRef = storageRef.child("events/\(eventID!)").child(pid)
@@ -505,8 +462,9 @@ class EventDetailsViewController: UIViewController {
                         }
                     }
                 
+            }else{
+                print("got here 1 and doc doesn't exist")
             }
-            
         }
 
     }
@@ -517,7 +475,6 @@ class EventDetailsViewController: UIViewController {
                 questionButton.isHidden = false
             }
         }
-
     }
 }
 
@@ -543,14 +500,11 @@ extension EventDetailsViewController: UICollectionViewDelegate, UICollectionView
         vc.imgArray = self.imageArray
         vc.passedContentOffset = indexPath
         self.navigationController?.pushViewController(vc, animated: true)
-        
-        //self.performSegue(withIdentifier: imgCollectionSegue, sender: nil)
     }
-
+    
 }
 
 extension EventDetailsViewController: UITableViewDelegate, UITableViewDataSource{
-    
     
     func loadTable(){
         qaTableView.reloadData()
@@ -610,8 +564,6 @@ class AddQ: UIViewController{
     }
 }
 
-
-
 class SelfSizingTableView: UITableView {
     var maxHeight: CGFloat = UIScreen.main.bounds.size.height
     var padding = CGFloat(80)
@@ -624,8 +576,6 @@ class SelfSizingTableView: UITableView {
   
   override var intrinsicContentSize: CGSize {
     let height = min(contentSize.height + padding , maxHeight)
-    //let height = maxHeight
-    
     return CGSize(width: contentSize.width, height: height)
   }
 }

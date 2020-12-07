@@ -24,7 +24,7 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
     var name = ""
     var organization = ""
     var image:UIImage? = nil
-    var profile:UserModel?
+    //var profile:UserModel?
     var imagePicker = UIImagePickerController()
     let db = Firestore.firestore()
     
@@ -47,13 +47,13 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
         //loadUserModelInfo()
     }
     
-    func loadUserModelInfo() {
-        self.profilePicture.image = profile?.profilePicture
-        self.firstNameField.text = profile?.first
-        self.lastNameField.text = profile?.last
-        self.organizationField.text = profile?.organization
-        self.bioField.text = profile?.bio
-    }
+//    func loadUserModelInfo() {
+//        self.profilePicture.image = profile?.profilePicture
+//        self.firstNameField.text = profile?.first
+//        self.lastNameField.text = profile?.last
+//        self.organizationField.text = profile?.organization
+//        self.bioField.text = profile?.bio
+//    }
     
     @IBAction func editPhoto(_ sender: Any) {
         imagePicker.sourceType = .photoLibrary
@@ -104,11 +104,11 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
             })
         }
         // update user model
-        profile?.profilePicture = self.profilePicture.image
-        profile?.first = self.firstNameField.text!
-        profile?.last =  self.lastNameField.text!
-        profile?.organization = self.organizationField.text!
-        profile?.bio = self.bioField.text!
+//        profile?.profilePicture = self.profilePicture.image
+//        profile?.first = self.firstNameField.text!
+//        profile?.last =  self.lastNameField.text!
+//        profile?.organization = self.organizationField.text!
+//        profile?.bio = self.bioField.text!
         self.navigationController?.popViewController(animated: true)
     }
     

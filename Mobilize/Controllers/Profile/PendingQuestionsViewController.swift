@@ -38,7 +38,6 @@ class PendingQuestionsViewController: UIViewController {
         
         eventRef = self.db.collection("events").document(eventID!)
         loadEventInfo()
-        // Do any additional setup after loading the view.
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -99,17 +98,24 @@ class PendingQuestionsViewController: UIViewController {
                     print("Error removing document: \(err)")
                 } else {
                     print("removing event")
+                    self.removeEventNotification()
                     self.navigationController?.popViewController(animated: true)
                 }
             }
         }))
         controller.addAction(UIAlertAction(title:"Cancel", style: .cancel, handler: nil))
         present(controller, animated: true, completion: nil)
-
-
-        
     }
     
+    private func removeEventNotification() {
+        UNUserNotificationCenter.current().getPendingNotificationRequests { (requests) in
+          for request in requests {
+            if request.identifier == self.eventID! {
+                UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [self.eventID!])
+            }
+          }
+        }
+    }
     
     @IBAction func viewButtonPressed(_ sender: Any) {
         let storyboard: UIStoryboard = UIStoryboard(name: "EventStory", bundle: nil)
@@ -117,7 +123,6 @@ class PendingQuestionsViewController: UIViewController {
         vc.eventID = eventID
         self.show(vc, sender: self)
     }
-    
 
     private func loadQuestions(){
         let eid = eventID

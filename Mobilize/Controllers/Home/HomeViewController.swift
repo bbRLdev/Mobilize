@@ -79,11 +79,20 @@ class HomeViewController: UIViewController, GetFilters, FocusMap {
     }
     
     func loadInUserData() {
-        login = LoginModel(userID: Auth.auth().currentUser!.uid)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.dismissLoading), name: self.userNotification, object: nil)
-        self.displaySignInPendingAlert()
-        login!.getInfoFromFirebase()
-        
+        if((Auth.auth().currentUser) == nil) {
+            // logged out, send to login screen
+            let storyboard: UIStoryboard = UIStoryboard(name: "LoginStory", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "Login") as! LoginViewController
+            self.show(vc, sender: self)
+            let controller = UIAlertController(title: "You have been logged out", message: "Please log in to view events", preferredStyle: .alert)
+            controller.addAction(UIAlertAction(title:"OK", style: .default, handler: nil))
+            present(controller, animated: true, completion: nil)
+        }else {
+            login = LoginModel(userID: Auth.auth().currentUser!.uid)
+            NotificationCenter.default.addObserver(self, selector: #selector(self.dismissLoading), name: self.userNotification, object: nil)
+            self.displaySignInPendingAlert()
+            login!.getInfoFromFirebase()
+        }
     }
     
     // called if we need to load in user data first
@@ -104,9 +113,9 @@ class HomeViewController: UIViewController, GetFilters, FocusMap {
     
     // called after observer is notified that user data is loaded
     @objc func dismissLoading() {
-        user = login!.getUserModel()
-        let menuVC = SideMenuManager.default.leftMenuNavigationController?.viewControllers.first as! SideMenuListController
-        menuVC.user = user
+        //user = login!.getUserModel()
+        //let menuVC = SideMenuManager.default.leftMenuNavigationController?.viewControllers.first as! SideMenuListController
+        //menuVC.user = user
         pending.dismiss(animated: true, completion: nil)
     }
     

@@ -97,18 +97,14 @@ class QAandConfirmVC: UIViewController {
                     eventSoFar["eventID"] = event.eventID
                 }
                 imgLoadingFlag = true
-                //check if event So Far has any photo ids in delete
+                // check if event So Far has any photo ids in delete
                 // field and handle requests if necessary
-                // deleteImages(eventID: eid)
                 uploadNewImages(eventId: eventSoFar["eventID"] as? String ?? "")
                 // set notification timer (if not nil from not changing time)
                 if(dateComponents != nil) {
                     setNotificationTimer()
                 }
             }
-//            else{
-//                imgLoadingFlag = false
-//            }
         }
     }
     
