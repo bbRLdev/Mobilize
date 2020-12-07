@@ -19,8 +19,6 @@ class LoginViewController: UIViewController {
     
     var user:UserModel?
     
-    var hidePassword = true
-
     @IBOutlet weak var hidePasswordButton: UIButton!
     
     @IBOutlet weak var cHidePasswordButton: UIButton!
@@ -71,10 +69,9 @@ class LoginViewController: UIViewController {
     }
     
     private func hidePasswordHelper() {
-        hidePassword = !hidePassword
         passwordTextField.isSecureTextEntry = !passwordTextField.isSecureTextEntry
         cPasswordTextField.isSecureTextEntry = !cPasswordTextField.isSecureTextEntry
-        if(hidePassword == true) {
+        if(passwordTextField.isSecureTextEntry) {
             hidePasswordButton.setImage(UIImage(systemName: "eye.slash"), for: .normal)
             cHidePasswordButton.setImage(UIImage(systemName: "eye.slash"), for: .normal)
         } else {
@@ -102,7 +99,6 @@ class LoginViewController: UIViewController {
             loginButton.setTitle("Sign Up", for: .normal)
         default:
             print("error")
-            
         }
     }
     
