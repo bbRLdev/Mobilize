@@ -13,7 +13,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
 
     let options = ["Edit Profile", "Notifications"]
     let cellTag = "cell"
-    var user: UserModel?
+    //var user: UserModel?
     
     @IBOutlet var Options: UITableView!
     @IBOutlet weak var button: UIButton!
@@ -49,12 +49,12 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         }
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "edit",
-           let editVC = segue.destination as? EditProfileViewController {
-            editVC.profile = user
-        }
-    }
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if segue.identifier == "edit",
+//           let editVC = segue.destination as? EditProfileViewController {
+//            editVC.profile = user
+//        }
+//    }
     
     @IBAction func deletePressed(_ sender: Any) {
         let controller = UIAlertController(title: "Are you sure you want to delete your account?", message: "This action cannot be undone", preferredStyle: .alert)

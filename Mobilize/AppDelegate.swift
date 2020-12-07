@@ -19,6 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     var window: UIWindow?
     let loginNotification = Notification.Name(rawValue: "loginNotificationKey")
     var loggedIn:Bool?
+    var cameFromNotification = false
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         FirebaseApp.configure()
@@ -45,6 +46,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     // This method is called when user clicked on the notification
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void)
     {
+        cameFromNotification = true
         let storyboard = UIStoryboard(name: "Home", bundle: nil)
         let mainViewController = storyboard.instantiateViewController(withIdentifier: "MainNavigationController")
         
@@ -70,19 +72,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     }
     
     @objc private func setInitialViewController() {
-        window = UIWindow()
-        let initialViewController: UIViewController
-        if(loggedIn!) {
-            let storyboard = UIStoryboard(name: "Home", bundle: nil)
-            let mainViewController = storyboard.instantiateViewController(withIdentifier: "MainNavigationController")
-            initialViewController = mainViewController
-        }else {
-            let storyboard = UIStoryboard(name: "LoginStory", bundle: nil)
-            let loginViewController = storyboard.instantiateViewController(withIdentifier: "Login")
-            initialViewController = loginViewController
+        if(!cameFromNotification) {
+            window = UIWindow()
+            let initialViewController: UIViewController
+            if(loggedIn!) {
+                let storyboard = UIStoryboard(name: "Home", bundle: nil)
+                let mainViewController = storyboard.instantiateViewController(withIdentifier: "MainNavigationController")
+                initialViewController = mainViewController
+            }else {
+                let storyboard = UIStoryboard(name: "LoginStory", bundle: nil)
+                let loginViewController = storyboard.instantiateViewController(withIdentifier: "Login")
+                initialViewController = loginViewController
+            }
+            window?.rootViewController = initialViewController
+            self.window?.makeKeyAndVisible()
         }
-        window?.rootViewController = initialViewController
-        self.window?.makeKeyAndVisible()
     }
     
     // checks if there is already user info saved in core data
