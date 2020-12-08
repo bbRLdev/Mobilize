@@ -25,7 +25,6 @@
                             </mapView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zF9-9j-w7N">
                                 <rect key="frame" x="351" y="794" width="43" height="36"/>
-                                <color key="backgroundColor" systemColor="systemFillColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="kqF-qf-zg7"/>
                                     <constraint firstAttribute="width" constant="43" id="x3r-GB-nKx"/>
@@ -38,7 +37,6 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qxk-WA-yGa">
                                 <rect key="frame" x="20" y="794.33333333333337" width="43" height="36.333333333333371"/>
-                                <color key="backgroundColor" systemColor="systemFillColor"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="43" id="M7T-kt-tFD"/>
                                     <constraint firstAttribute="height" constant="38" id="PZ8-cJ-tj1"/>
@@ -52,7 +50,6 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qwk-fU-5ve">
                                 <rect key="frame" x="354" y="129" width="40" height="38.333333333333329"/>
-                                <color key="backgroundColor" systemColor="systemFillColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="3Bx-zW-vMm"/>
                                     <constraint firstAttribute="width" constant="40" id="fAQ-QH-egj"/>
@@ -65,7 +62,6 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cs1-Xy-nAb">
                                 <rect key="frame" x="20" y="129.33333333333334" width="40" height="38.666666666666657"/>
-                                <color key="backgroundColor" systemColor="systemFillColor"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="40" id="YAM-XD-5fQ"/>
                                     <constraint firstAttribute="height" constant="40" id="kLh-68-LOj"/>
@@ -265,9 +261,6 @@
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemFillColor">
-            <color red="0.47058823529411764" green="0.47058823529411764" blue="0.50196078431372548" alpha="0.20000000000000001" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
