@@ -14,8 +14,6 @@ class ImagePreviewViewController: UIViewController, UICollectionViewDelegate, UI
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
         
         self.view.backgroundColor=UIColor.black
         
@@ -39,8 +37,6 @@ class ImagePreviewViewController: UIViewController, UICollectionViewDelegate, UI
         let newOffset = CGPoint(x: CGFloat(passedContentOffset.row) * width, y: offset.y)
         
         myCollectionView.setContentOffset(newOffset, animated: false)
-
-        
         
         self.view.addSubview(myCollectionView)
         
@@ -69,7 +65,6 @@ class ImagePreviewViewController: UIViewController, UICollectionViewDelegate, UI
         cell.imgView.image=imgArray[indexPath.row]
         return cell
     }
-    
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
@@ -102,7 +97,6 @@ class ImagePreviewViewController: UIViewController, UICollectionViewDelegate, UI
 
 }
 
-
 class ImagePreviewFullViewCell: UICollectionViewCell, UIScrollViewDelegate {
     
     var scrollImg: UIScrollView!
@@ -124,7 +118,6 @@ class ImagePreviewFullViewCell: UICollectionViewCell, UIScrollViewDelegate {
         self.addSubview(scrollImg)
         
         imgView = UIImageView()
-        //imgView.image = UIImage(named: "user3")
         scrollImg.addSubview(imgView!)
         imgView.contentMode = .scaleAspectFit
     }
@@ -158,4 +151,3 @@ class ImagePreviewFullViewCell: UICollectionViewCell, UIScrollViewDelegate {
         fatalError("init(coder:) has not been implemented")
     }
 }
-

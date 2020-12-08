@@ -9,7 +9,6 @@ import UIKit
 import MapKit
 import Firebase
 
-
 class ResourcesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var enterButton: UIButton!
@@ -39,8 +38,6 @@ class ResourcesViewController: UIViewController, UITableViewDelegate, UITableVie
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
     }
-    
-    
 
     @IBAction func enter(_ sender: Any) {
         myGroup.enter()
@@ -49,7 +46,7 @@ class ResourcesViewController: UIViewController, UITableViewDelegate, UITableVie
         urlsReturned = []
         let citiesRef = db.collection("resources")
         if(searchToggle.selectedSegmentIndex == 0) {
-            //search for city
+            // search for city
             // Create a query against the collection.\
             let query = citiesRef.whereField("city", isEqualTo: search.text!.lowercased())
                 .getDocuments() { (querySnapshot, err) in
@@ -66,8 +63,7 @@ class ResourcesViewController: UIViewController, UITableViewDelegate, UITableVie
                     self.myGroup.leave()
                 }
                 }
-        }
-        else {
+        }else {
             //search for state
             let query = citiesRef.whereField("state", isEqualTo: search.text!.lowercased())
                 .getDocuments() { (querySnapshot, err) in
@@ -97,13 +93,10 @@ class ResourcesViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        //let cell = UITableViewCell(style: .subtitle, reuseIdentifier: nil)
         let cell = eventResultsTable.dequeueReusableCell(withIdentifier: cellID, for: indexPath as IndexPath)
         let city = citiesReturned[indexPath.row].prefix(1).capitalized + citiesReturned[indexPath.row].suffix(citiesReturned[indexPath.row].count-1)
         let state = statesReturned[indexPath.row].prefix(1).capitalized + statesReturned[indexPath.row].suffix(statesReturned[indexPath.row].count-1)
         cell.textLabel?.text = city + ", " + state
-        //cell.textLabel?.text = eventNamesReturned[indexPath.row]
-        //searchResult
         return cell
     }
     

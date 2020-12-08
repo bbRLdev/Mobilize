@@ -4,6 +4,7 @@
 //
 //  Created by Michael Labarca on 10/15/20.
 //
+
 import UIKit
 import MapKit
 import SideMenu
@@ -47,8 +48,6 @@ class HomeViewController: UIViewController, GetFilters, FocusMap {
     var filteredAnnotations : [EventAnnotation] = []
 
     var trackLocation = false
-    
-    //var coordToPin:[CLLocationCoordinate2D:[AnnotationModel]] = [:]
     
     let userNotification = Notification.Name(rawValue: "userModelNotificationKey")
     
@@ -113,9 +112,6 @@ class HomeViewController: UIViewController, GetFilters, FocusMap {
     
     // called after observer is notified that user data is loaded
     @objc func dismissLoading() {
-        //user = login!.getUserModel()
-        //let menuVC = SideMenuManager.default.leftMenuNavigationController?.viewControllers.first as! SideMenuListController
-        //menuVC.user = user
         pending.dismiss(animated: true, completion: nil)
     }
     
@@ -143,7 +139,6 @@ class HomeViewController: UIViewController, GetFilters, FocusMap {
         trackLocation = !trackLocation
         trackLocationButton.isSelected = trackLocation
     }
-    
     
     @IBAction func changeMapButtonPressed(_ sender: Any) {
         switch mapView.mapType {
@@ -261,7 +256,6 @@ class HomeViewController: UIViewController, GetFilters, FocusMap {
         //let annotation = AnnotationModel(eid: diff.document.documentID)
         let annotation = EventAnnotation(eid: diff.document.documentID, numLikes: likes)
         
-        
         let dFormatter = DateFormatter()
         dFormatter.dateStyle = .medium
         
@@ -272,7 +266,6 @@ class HomeViewController: UIViewController, GetFilters, FocusMap {
         annotation.subtitle = "Date: \(dateString)\nOrganization: \(ownerOrg!)\nActivism Type: \(activismType ?? "None")\nEvent Type: \(eventType ?? "None")"
         annotation.activismType = activismType
         annotation.eventType = eventType
-        //print(ownerOrg!)
         annotation.coordinate = coordinates
         
         self.mapView.addAnnotation(annotation)
@@ -298,16 +291,13 @@ class HomeViewController: UIViewController, GetFilters, FocusMap {
                 }
                 snapshot.documentChanges.forEach { diff in
                     if (diff.type == .added) {
-                        //print("New event: \(diff.document.data())")
                         self.addPin(diff: diff)
                     }
                     else if (diff.type == .modified) {
-                        //print("Modified event: \(diff.document.data())")
                         self.removePin(diff: diff)
                         self.addPin(diff: diff)
                     }
                     else if (diff.type == .removed) {
-                        //print("Removed event: \(diff.document.data())")
                         self.removePin(diff: diff)
                     }
                 }
@@ -363,7 +353,6 @@ class HomeViewController: UIViewController, GetFilters, FocusMap {
     
 }
 
-
 extension HomeViewController: CLLocationManagerDelegate, MKMapViewDelegate {
     
     func setMapDelegate(){
@@ -388,7 +377,6 @@ extension HomeViewController: CLLocationManagerDelegate, MKMapViewDelegate {
     
         case is EventAnnotation:
             let view: EventAnnotationView? = mapView.dequeueReusableAnnotationView(withIdentifier: "event") as? EventAnnotationView
-
 
             let eventAnnotation = annotation as! EventAnnotation
             let activismType = eventAnnotation.activismType!
@@ -455,7 +443,6 @@ extension HomeViewController: CLLocationManagerDelegate, MKMapViewDelegate {
                                                 handler: {
                                                     [self](action) in
                                                     self.mapView.deselectAnnotation(annotation, animated: true)
-//                                                    print(self.mapView.region.span.longitudeDelta.magnitude)
                                                     
                                                     let region = self.mapView.regionThatFits(MKCoordinateRegion(center: annotation.coordinate, latitudinalMeters: 0, longitudinalMeters: self.mapView.region.span.longitudeDelta.magnitude.squareRoot()*regionInMeters)) // may break near the poles
                                                     self.mapView.setRegion(region, animated: true)})
@@ -473,7 +460,6 @@ extension HomeViewController: CLLocationManagerDelegate, MKMapViewDelegate {
                                                     vc.pins = annotation.memberAnnotations
                                                     self.mapView.deselectAnnotation(annotation, animated: true)
                                                     self.show(vc, sender: self)
-                                                    //self.present(vc, animated: true, completion: nil)
                                                     
                                                     })
 
@@ -511,4 +497,3 @@ extension HomeViewController: CLLocationManagerDelegate, MKMapViewDelegate {
     }
     
 }
-

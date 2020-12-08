@@ -10,11 +10,9 @@ import MapKit
 
 class ClusterPinViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
 
-    
     var pins: [MKAnnotation]?
 
     @IBOutlet weak var tableView: UITableView!
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,7 +31,6 @@ class ClusterPinViewController: UIViewController, UITableViewDelegate, UITableVi
         
     }
     
-
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         pins?.count ?? 0
     }

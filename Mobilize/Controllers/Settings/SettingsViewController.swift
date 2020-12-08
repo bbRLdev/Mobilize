@@ -13,7 +13,6 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
 
     let options = ["Edit Profile", "Notifications"]
     let cellTag = "cell"
-    //var user: UserModel?
     
     @IBOutlet var Options: UITableView!
     @IBOutlet weak var button: UIButton!
@@ -48,13 +47,6 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
             performSegue(withIdentifier: "notifications", sender: self)
         }
     }
-    
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if segue.identifier == "edit",
-//           let editVC = segue.destination as? EditProfileViewController {
-//            editVC.profile = user
-//        }
-//    }
     
     @IBAction func deletePressed(_ sender: Any) {
         let controller = UIAlertController(title: "Are you sure you want to delete your account?", message: "This action cannot be undone", preferredStyle: .alert)
@@ -117,11 +109,11 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     
     func displaySignInPendingAlert() {
         
-        //create an activity indicator
+        // create an activity indicator
         let indicator = UIActivityIndicatorView(frame: pending.view.bounds)
         indicator.autoresizingMask = [.flexibleWidth, .flexibleHeight]
 
-        //add the activity indicator as a subview of the alert controller's view
+        // add the activity indicator as a subview of the alert controller's view
         pending.view.addSubview(indicator)
         // required otherwise if there buttons in the UIAlertController you will not be able to press them
         indicator.isUserInteractionEnabled = false

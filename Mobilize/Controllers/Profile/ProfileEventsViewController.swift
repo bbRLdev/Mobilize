@@ -13,7 +13,7 @@ class ProfileEventsViewController: UIViewController {
     
     private let refreshControl = UIRefreshControl()
     
-    //Table with tabs at top to go between events organizing and RSVPs
+    // Table with tabs at top to go between events organizing and RSVPs
     @IBOutlet var eventTable: UITableView!
     
     let cellTag = "cell"
@@ -29,16 +29,12 @@ class ProfileEventsViewController: UIViewController {
     
     @IBOutlet weak var segCtrl: UISegmentedControl!
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         eventTable.delegate = self
         eventTable.dataSource = self
         eventTable.refreshControl = refreshControl
         refreshControl.addTarget(self, action: #selector(refreshTable), for: .valueChanged)
-        // Do any additional setup after loading the view.
-        //load()
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -76,10 +72,7 @@ class ProfileEventsViewController: UIViewController {
             if(RSVPView){
                 listName = "rsvpEvents"
                 list = rsvpEvents
-                
-            }
-            else{
-                
+            }else {
                 listName = "createdEvents"
                 list = createdEvents
             }
@@ -92,17 +85,14 @@ class ProfileEventsViewController: UIViewController {
                     print("Error updating document: \(err)")
                 }
             })
-
             
-        }
-        else{
+        }else {
             navigationItem.rightBarButtonItem?.style = .done
             navigationItem.rightBarButtonItem?.title = "Done"
         }
         eventTable.isEditing = !eventTable.isEditing
         
     }
-    
  
     @IBAction func RSVP(_ sender: Any) {
         RSVPView = true
@@ -139,7 +129,6 @@ class ProfileEventsViewController: UIViewController {
         let likedList = likedEvents
         
         for created in createdList{
-            //print(created)
             let eventRef = self.db.collection("events").document(created)
             eventRef.getDocument{ (document, error) in
                 if let document = document, document.exists{}
@@ -182,7 +171,6 @@ class ProfileEventsViewController: UIViewController {
             }
         }
     }
-    
 
 }
 
@@ -191,8 +179,7 @@ extension ProfileEventsViewController: UITableViewDelegate, UITableViewDataSourc
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if(RSVPView){
             return rsvpEvents.count
-        }
-        else{
+        }else {
             return createdEvents.count
         }
     }
@@ -200,16 +187,12 @@ extension ProfileEventsViewController: UITableViewDelegate, UITableViewDataSourc
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellTag, for: indexPath as IndexPath)
         let row = indexPath.row
-        //cell.textLabel?.numberOfLines = 0
         
         var eid:String?
         if(RSVPView) {
             eid = rsvpEvents[row]
-            //cell.textLabel?.text = rsvpEvents[row]
-            
-        } else {
+        }else {
             eid = createdEvents[row]
-            //cell.textLabel?.text = createdEvents[row]
         }
         
         if(eid != nil){
@@ -222,21 +205,18 @@ extension ProfileEventsViewController: UITableViewDelegate, UITableViewDataSourc
                     let date = dataDescription!["date"] as? Timestamp
                     let pendingQuestions = dataDescription!["pendingQuestions"] as? [String] ?? []
                     
-                    
                     let dFormatter = DateFormatter()
                     dFormatter.dateStyle = .medium
                     dFormatter.timeStyle = .medium
                     
-                    
                     cell.textLabel?.text = eventName
                     if(self.RSVPView){
                         cell.detailTextLabel?.text = dFormatter.string(from: date?.dateValue() ?? Date())
-                    }
-                    else{
+                    }else {
                         cell.detailTextLabel?.text = "Pending Questions: \(pendingQuestions.count)"
                     }
 
-                } else {
+                }else {
                     print("Document does not exist")
                 }
             }
@@ -271,9 +251,6 @@ extension ProfileEventsViewController: UITableViewDelegate, UITableViewDataSourc
         if(RSVPView) {
             eid = rsvpEvents[row]
             rsvpEvents.remove(at: indexPath.row)
-            //self.show(vc, sender: self)
-            
-            //self.eventTable.deleteRows(at: [indexPath], with: .fade)
 
             db.collection("users").document(uid!).updateData(["rsvpEvents": FieldValue.arrayRemove([eid!])])
 
@@ -289,8 +266,6 @@ extension ProfileEventsViewController: UITableViewDelegate, UITableViewDataSourc
         } else {
             eid = createdEvents[row]
             createdEvents.remove(at: indexPath.row)
-            //self.show(vc, sender: self)
-            //self.eventTable.deleteRows(at: [indexPath], with: .fade)
 
             db.collection("users").document(uid!).updateData(["createdEvents": FieldValue.arrayRemove([eid!])])
 
@@ -305,14 +280,14 @@ extension ProfileEventsViewController: UITableViewDelegate, UITableViewDataSourc
         self.eventTable.deleteRows(at: [indexPath], with: .fade)
 
     }
+    
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         
         if editingStyle == .delete {
             var msg = ""
             if(RSVPView){
                 msg = "Remove RSVP?"
-            }
-            else{
+            }else {
                 msg = "Are you sure you want to delete this event? This action cannot be undone."
             }
             
@@ -330,8 +305,7 @@ extension ProfileEventsViewController: UITableViewDelegate, UITableViewDataSourc
             let itemToMove = rsvpEvents[indexPath.row]
             rsvpEvents.remove(at: indexPath.row)
             rsvpEvents.insert(itemToMove, at: to.row)
-        }
-        else{
+        }else {
             let itemToMove = createdEvents[indexPath.row]
             createdEvents.remove(at: indexPath.row)
             createdEvents.insert(itemToMove, at: to.row)
@@ -340,5 +314,3 @@ extension ProfileEventsViewController: UITableViewDelegate, UITableViewDataSourc
     }
     
 }
-
-

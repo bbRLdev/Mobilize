@@ -33,22 +33,12 @@ class AddMediaViewController: UIViewController, UIImagePickerControllerDelegate,
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        if event != nil {
-//            // we must be editing an already created event, so
-//            // load the images
-//            images = retrieveImages()
-//        }
-//
-//        setUpCells()
+
         nextButton.layer.cornerRadius = 4
         imagePicker.delegate = self
         eventPicturesCollection.dataSource = self
         eventPicturesCollection.delegate = self
 
-        //eventPicturesCollection.reloadData()
-        //setUpCells()
-
-        // Do any additional setup after loading the view.
     }
     
     // MARK: EDIT
@@ -137,8 +127,6 @@ class AddMediaViewController: UIViewController, UIImagePickerControllerDelegate,
         imageCell.editButtonMeta = cellButton
         imageCell.editButtonMeta.addTarget(self, action: #selector(onAddPicturePressed(_:)), for: .touchUpInside)
 
-
-        
         return imageCell
     }
     
@@ -152,7 +140,6 @@ class AddMediaViewController: UIViewController, UIImagePickerControllerDelegate,
             let controller = UIAlertController(title: "Delete Photo?", message: "", preferredStyle: .actionSheet)
             controller.addAction(UIAlertAction(title:"Delete", style: .destructive, handler: {
                 _ in
-                
 
                 let cell = self.cells[sender.tag]
                 if let refIndex = cell.refIndex {
@@ -225,7 +212,6 @@ class AddMediaViewController: UIViewController, UIImagePickerControllerDelegate,
 
         return ret
     }
-    
 
 }
 
@@ -236,6 +222,7 @@ extension AddMediaViewController: UICollectionViewDataSource {
         return cells.count
     }
 }
+
 extension AddMediaViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = eventPicturesCollection.dequeueReusableCell(withReuseIdentifier: "MediaCellId", for: indexPath) as! ImageCell
@@ -256,12 +243,11 @@ extension AddMediaViewController: UICollectionViewDelegate {
     }
 }
 
-
 extension AddMediaViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
 
         // Big thanks to stackoverflow for giving me this code
-        //https://stackoverflow.com/questions/35281405/fit-given-number-of-cells-in-uicollectionview-per-row
+        // https://stackoverflow.com/questions/35281405/fit-given-number-of-cells-in-uicollectionview-per-row
         
         
         let noOfCellsInRow = 2

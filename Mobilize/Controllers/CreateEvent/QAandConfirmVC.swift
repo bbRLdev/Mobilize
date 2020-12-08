@@ -12,7 +12,6 @@ import FirebaseFirestore
 import FirebaseStorage
 import UserNotifications
 
-
 class QAandConfirmVC: UIViewController {
 
     let db = Firestore.firestore()
@@ -65,7 +64,6 @@ class QAandConfirmVC: UIViewController {
     }
   
     override func viewWillAppear(_ animated: Bool) {
-        //qaTableView.reloadData()
     }
     
     @IBAction func editButtonPressed(_ sender: Any) {
@@ -80,7 +78,6 @@ class QAandConfirmVC: UIViewController {
         }
         qaTableView.isEditing = !qaTableView.isEditing
     }
-        
         
     @IBAction func createEvent(_ sender: Any) {
         createButton.setTitle("Uploading...", for: .normal)
@@ -267,7 +264,6 @@ extension QAandConfirmVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = qaTableView.dequeueReusableCell(withIdentifier: cellTag, for: indexPath as IndexPath)
         let row = indexPath.row
-        //cell.textLabel?.numberOfLines = 0
         cell.textLabel?.text = questions[row].question
         cell.detailTextLabel?.text = questions[row].answer
         return cell

@@ -17,7 +17,6 @@ class SideMenuListController: UIViewController {
     var tableView = UITableView()
     var imageView: UIImageView!
     var name: UILabel!
-    //var user: UserModel!
     
     var items = [NavLinks.profile.rawValue, NavLinks.events.rawValue, NavLinks.settings.rawValue, NavLinks.resources.rawValue, NavLinks.logout.rawValue]
     
@@ -192,7 +191,6 @@ extension SideMenuListController: UITableViewDataSource, UITableViewDelegate {
         if(indexPath.row == 0) {
             let storyboard: UIStoryboard = UIStoryboard(name: "SettingsScreen", bundle: nil)
             let vc = storyboard.instantiateViewController(withIdentifier: "Profile") as! SettingsProfileViewController
-            //vc.profile = user
             self.show(vc, sender: self)
         } else if (indexPath.row == 1) {
             let storyboard: UIStoryboard = UIStoryboard(name: "SettingsScreen", bundle: nil)
@@ -203,7 +201,6 @@ extension SideMenuListController: UITableViewDataSource, UITableViewDelegate {
         } else if (indexPath.row == 2) {
             let storyboard: UIStoryboard = UIStoryboard(name: "SettingsScreen", bundle: nil)
             let vc = storyboard.instantiateViewController(withIdentifier: "SettingsView") as! SettingsViewController
-            //vc.user = user
             self.show(vc, sender: self)
         }
         else if (indexPath.row == 3) {

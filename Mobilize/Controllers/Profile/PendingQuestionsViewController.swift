@@ -66,8 +66,7 @@ class PendingQuestionsViewController: UIViewController {
                 }
             })
 
-        }
-        else{
+        }else {
             navigationItem.rightBarButtonItem?.style = .done
             navigationItem.rightBarButtonItem?.title = "Done"
         }
@@ -87,7 +86,6 @@ class PendingQuestionsViewController: UIViewController {
         let uid = Auth.auth().currentUser?.uid
         
         let msg = "Are you sure you want to delete this event? This action cannot be undone."
-        
         
         let controller = UIAlertController(title: "Delete Event", message: msg, preferredStyle: .alert)
         controller.addAction(UIAlertAction(title:"Yes", style: .destructive, handler: {_ in
@@ -333,7 +331,6 @@ class AnswerQuestionViewController : UIViewController{
 
         }
 
-        
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

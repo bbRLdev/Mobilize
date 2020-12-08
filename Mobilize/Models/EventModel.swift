@@ -10,7 +10,6 @@ import MapKit
 
 typealias Question = (question: String, answer: String)
 
-
 class EventModel {
     var coordinates: CLLocationCoordinate2D?
     var date: Date?

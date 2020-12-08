@@ -151,11 +151,11 @@ class LoginViewController: UIViewController {
     
     func displaySignInPendingAlert() {
         
-        //create an activity indicator
+        // create an activity indicator
         let indicator = UIActivityIndicatorView(frame: pending.view.bounds)
         indicator.autoresizingMask = [.flexibleWidth, .flexibleHeight]
 
-        //add the activity indicator as a subview of the alert controller's view
+        // add the activity indicator as a subview of the alert controller's view
         pending.view.addSubview(indicator)
         // required otherwise if there buttons in the UIAlertController you will not be able to press them
         indicator.isUserInteractionEnabled = false

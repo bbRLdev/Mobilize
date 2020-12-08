@@ -65,7 +65,6 @@ class EventDetailsViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     
     override func viewWillAppear(_ animated: Bool) {
-        
     }
     
     override func viewDidLoad() {
@@ -81,7 +80,6 @@ class EventDetailsViewController: UIViewController {
         qaTableView.maxHeight = 400
         qaTableView.delegate = self
         qaTableView.dataSource = self
-        
         
         titleLabel.numberOfLines = 0
         addressLabel.numberOfLines = 0
@@ -113,7 +111,6 @@ class EventDetailsViewController: UIViewController {
     
     
     @IBAction func editButtonPressed(_ sender: Any) {
-    
     }
     
     @IBAction func viewMapButtonPressed(_ sender: Any) {
@@ -160,8 +157,7 @@ class EventDetailsViewController: UIViewController {
                     }
                 }
             )
-        }
-        else{
+        }else {
             userRef?.updateData(
                 [
                     "likedEvents": FieldValue.arrayRemove([eventID!])
@@ -209,8 +205,7 @@ class EventDetailsViewController: UIViewController {
                     }
                 }
             )
-        }
-        else{
+        }else {
             userRef?.updateData(
                 [
                     "rsvpEvents": FieldValue.arrayRemove([eventID!])
@@ -258,6 +253,7 @@ class EventDetailsViewController: UIViewController {
             }
         }
     }
+    
     private func updateRSVPButton(){
         userRef?.getDocument { (document, error) in
             if let document = document, document.exists {
@@ -309,6 +305,7 @@ class EventDetailsViewController: UIViewController {
         }
         
     }
+    
     func loadEventInfo() {
         eventRef?.getDocument { [self] (document, error) in
             if error != nil {

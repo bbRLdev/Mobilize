@@ -74,7 +74,6 @@ func deleteEvent(eid: String){
             
             deleteEventRefs(fieldName: "rsvpEvents", eid: eid)
             deleteEventRefs(fieldName: "likedEvents", eid: eid)
-
     
             storageRef.delete(completion: { err in
                 if let err = err {

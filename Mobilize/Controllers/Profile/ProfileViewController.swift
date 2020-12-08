@@ -10,7 +10,6 @@ import FirebaseFirestore
 
 class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
-    //let options = ["Your events", "Settings"]
     var createdEvents:[String] = []
     let cellTag = "cell"
     
@@ -27,7 +26,6 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     @IBOutlet weak var tableView: UITableView!
     
-    
     let db = Firestore.firestore()
     
     override func viewDidLoad() {
@@ -41,9 +39,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         
     }
     
-    
     override func viewWillAppear(_ animated: Bool) {
-        //super.viewWillAppear(false)
         loadProfileInfo()
     }
     
@@ -57,7 +53,6 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellTag, for: indexPath as IndexPath)
         let row = indexPath.row
-        //cell.textLabel?.numberOfLines = 0
         
         let eid = createdEvents[row]
         
@@ -69,8 +64,6 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
                 
                 cell.textLabel?.text = eventName
                 
-                //cell.detailTextLabel?.text = date
-
             } else {
                 print("Document does not exist")
             }
@@ -101,7 +94,6 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
                 let org = dataDescription!["organization"] as! String
                 let bio = dataDescription!["bio"] as! String
                 self.createdEvents = dataDescription!["createdEvents"] as? [String] ?? []
-                
                 
                DispatchQueue.main.async { self.tableView.reloadData() }
                self.checkData(userRef: docRef)
@@ -146,4 +138,3 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
 
 }
-

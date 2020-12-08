@@ -13,13 +13,11 @@ import Firebase
 
 class EventInfoViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, MKLocalSearchCompleterDelegate, UITextViewDelegate {
 
-    
     let auth = FirebaseAuth.Auth.auth()
     let textCellIdentifier = "AddressCell"
     
     var searchCompleter = MKLocalSearchCompleter()
     var searchResults = [MKLocalSearchCompletion]()
-    
     
     @IBOutlet weak var searchResultsTableView: UITableView!
     var coordinates: CLLocationCoordinate2D? = nil
@@ -55,7 +53,6 @@ class EventInfoViewController: UIViewController, UITableViewDelegate, UITableVie
         eventDescriptionField.layer.cornerRadius = 5.0;
         eventDescriptionField.clipsToBounds = true;
         eventDescriptionField.layer.borderColor = UIColor.gray.withAlphaComponent(0.5).cgColor
-        // Do any additional setup after loading the view.
         
         searchCompleter.delegate = self
         searchResultsTableView.delegate = self
@@ -64,7 +61,6 @@ class EventInfoViewController: UIViewController, UITableViewDelegate, UITableVie
         // Users cannot post an event in the same day. That would be
         // bad.
         // commenting for testing notifications
-        //eventDatePicker.minimumDate = Date().addingTimeInterval(86400)
         eventDatePicker.minuteInterval = 1
         // If event != nil, we know we are in this flow while editing. This
         // fact is important in the following Create Event VC's5
@@ -281,7 +277,6 @@ class EventInfoViewController: UIViewController, UITableViewDelegate, UITableVie
         searchCompleter.queryFragment = eventAddressField.text!
     }
     
-    
     func completerDidUpdateResults(_ completer: MKLocalSearchCompleter) {
         searchResults = completer.results.filter { (a) -> Bool in
             if(a.subtitle == ""){
@@ -293,7 +288,6 @@ class EventInfoViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     func completer(_ completer: MKLocalSearchCompleter, didFailWithError error: Error) {
-        // handle error
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -303,13 +297,11 @@ class EventInfoViewController: UIViewController, UITableViewDelegate, UITableVie
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
         let searchResult = searchResults[indexPath.row]
-        //let cell = UITableViewCell(style: .subtitle, reuseIdentifier: nil)
         let cell = searchResultsTableView.dequeueReusableCell(withIdentifier: textCellIdentifier, for: indexPath as IndexPath)
         
         
         cell.textLabel?.text = searchResult.title
         cell.detailTextLabel?.text = searchResult.subtitle
-        //searchResult
         return cell
     }
     
@@ -349,12 +341,10 @@ class EventInfoViewController: UIViewController, UITableViewDelegate, UITableVie
     
     // Start Editing The Text Field
     func textViewDidBeginEditing(_ textView: UITextView) {
-        //moveTextView(textView, moveDistance: -250, up: true)
     }
     
     // Finish Editing The Text Field
     func textViewDidEndEditing(_ textView: UITextView) {
-        //moveTextView(textView, moveDistance: -250, up: false)
     }
     
     // Hide the keyboard when the return key pressed
@@ -362,7 +352,6 @@ class EventInfoViewController: UIViewController, UITableViewDelegate, UITableVie
         textView.resignFirstResponder()
         return true
     }
-    
     
     func populateFields() {
         if let uid = event.organizerUID {

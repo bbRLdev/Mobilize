@@ -8,7 +8,6 @@
 import UIKit
 
 class ReportViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
-
     
     var list = ["Hate Speech", "Violence", "Blocking Traffic"]
     

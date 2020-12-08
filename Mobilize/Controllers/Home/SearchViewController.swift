@@ -9,7 +9,6 @@ import UIKit
 import MapKit
 import Firebase
 
-
 class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var eventResultsTable: UITableView!
@@ -148,4 +147,3 @@ extension SearchViewController: UISearchBarDelegate {
         }
     }
 }
-

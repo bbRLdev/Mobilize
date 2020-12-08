@@ -11,7 +11,6 @@ enum MosaicSegmentStyle {
     case fullWidth
     case fiftyFifty
     case twoThirdsOneThird
-    //case oneThirdTwoThirds
 }
 
 class MosaicLayout: UICollectionViewLayout {
@@ -49,7 +48,6 @@ class MosaicLayout: UICollectionViewLayout {
         
         var currentIndex = 0
         
-        
         var lastFrame: CGRect = .zero
         
         let cvWidth = collectionView.bounds.size.width
@@ -71,11 +69,6 @@ class MosaicLayout: UICollectionViewLayout {
                 let horizontalSlices = segmentFrame.dividedIntegral(fraction: (2.0 / 3.0), from: .minXEdge)
                 let verticalSlices = horizontalSlices.second.dividedIntegral(fraction: 0.5, from: .minYEdge)
                 segmentRects = [horizontalSlices.first, verticalSlices.first, verticalSlices.second]
-                
-//            case .oneThirdTwoThirds:
-//                let horizontalSlices = segmentFrame.dividedIntegral(fraction: (1.0 / 3.0), from: .minXEdge)
-//                let verticalSlices = horizontalSlices.first.dividedIntegral(fraction: 0.5, from: .minYEdge)
-//                segmentRects = [verticalSlices.first, verticalSlices.second, horizontalSlices.second]
 
             }
             
@@ -90,25 +83,6 @@ class MosaicLayout: UICollectionViewLayout {
                 currentIndex += 1
                 lastFrame = rect
             }
-
-            // Determine the next segment style.
-//            switch count - currentIndex {
-//            case 1:
-//                segment = .fullWidth
-//            case 2:
-//                segment = .fiftyFifty
-//            default:
-//                switch segment {
-//                case .fullWidth:
-//                    segment = .fiftyFifty
-//                case .fiftyFifty:
-//                    segment = .twoThirdsOneThird
-//                case .twoThirdsOneThird:
-//                    segment = .oneThirdTwoThirds
-//                case .oneThirdTwoThirds:
-//                    segment = .fiftyFifty
-//                }
-//            }
         }
     }
 

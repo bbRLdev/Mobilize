@@ -26,7 +26,6 @@ class SettingsProfileViewController: UIViewController, UITableViewDelegate, UITa
         super.viewDidLoad()
         Options.delegate = self
         Options.dataSource = self
-        //profilePic.translatesAutoresizingMaskIntoConstraints = true
         profilePic.layer.cornerRadius = profilePic.frame.size.width / 2
         profilePic.clipsToBounds = true
         profilePic.layer.borderColor = UIColor.gray.cgColor
@@ -35,7 +34,6 @@ class SettingsProfileViewController: UIViewController, UITableViewDelegate, UITa
     
     override func viewWillAppear(_ animated: Bool) {
         loadProfileInfo()
-        //loadUserModelInfo()
     }
     
     // load in from user state

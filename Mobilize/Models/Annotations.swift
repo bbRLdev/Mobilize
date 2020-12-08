@@ -8,15 +8,6 @@
 import Foundation
 import MapKit
 
-//class AnnotationModel: MKPointAnnotation{
-//    var eventID: String
-//    var date:Date?
-//    var activismType: String?
-//    init(eid: String){
-//        eventID = eid
-//    }
-//}
-
 class EventAnnotation : NSObject, MKAnnotation {
     var eventID: String
     var likes: Int
@@ -38,12 +29,11 @@ class EventAnnotation : NSObject, MKAnnotation {
         self.address = nil
         self.subtitle = nil
         self.image = nil
-        //self.colour = UIColor.white
     }
 }
 
 class EventAnnotationView: MKAnnotationView {
-    //private var imageView: UIImageView!
+    
     let selectedLabel:UILabel = UILabel.init(frame:CGRect(x: 0, y: 0, width: 240, height: 38))
     
     override var annotation: MKAnnotation? {
@@ -58,15 +48,7 @@ class EventAnnotationView: MKAnnotationView {
 
             selectedLabel.attributedText = NSMutableAttributedString(string: (annotation?.title ?? "")!, attributes: strokeTextAttributes)
             
-            //selectedLabel.text = annotation?.title as? String
-            //selectedLabel.textColor = UIColor.darkGray
-            
             selectedLabel.textAlignment = .center
-            //selectedLabel.font = UIFont.init(name: "HelveticaBold", size: 8)
-            //selectedLabel.backgroundColor = UIColor.white
-            //selectedLabel.layer.borderColor = UIColor.darkGray.cgColor
-            //selectedLabel.layer.borderWidth = 2
-            //selectedLabel.layer.cornerRadius = 5
             selectedLabel.layer.masksToBounds = true
 
             selectedLabel.center.x = 0.5 * self.frame.size.width;
@@ -121,8 +103,6 @@ class EventMapClusterView: MKAnnotationView {
 
         frame = CGRect(x: 0, y: 0, width: 40, height: 50)
         centerOffset = CGPoint(x: 0, y: -frame.size.height / 2)
-
-        //setupUI()
     }
 
     @available(*, unavailable)

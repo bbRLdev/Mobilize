@@ -7,8 +7,6 @@
 
 import UIKit
 
-
-
 class FilterViewController: UIViewController {
     
     @IBOutlet weak var radiusLabel: UILabel!
@@ -38,7 +36,6 @@ class FilterViewController: UIViewController {
 
     var activismButtonSet: [UIButton] = []
     var eventButtonSet: [UIButton] = []
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()

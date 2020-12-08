@@ -12,7 +12,6 @@ import FirebaseStorage
 
 class EditProfileViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
-
     @IBOutlet weak var profilePicture: UIImageView!
     @IBOutlet weak var organizationField: UITextField!
     @IBOutlet weak var firstNameField: UITextField!
@@ -24,7 +23,6 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
     var name = ""
     var organization = ""
     var image:UIImage? = nil
-    //var profile:UserModel?
     var imagePicker = UIImagePickerController()
     let db = Firestore.firestore()
     
@@ -35,7 +33,6 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
         editButton.layer.cornerRadius = 4
         saveButton.layer.cornerRadius = 4
         imagePicker.delegate = self
-        //profilePicture.translatesAutoresizingMaskIntoConstraints = true
         profilePicture.layer.cornerRadius = profilePicture.frame.size.width / 2
         profilePicture.clipsToBounds = true
         profilePicture.layer.borderColor = UIColor.gray.cgColor
@@ -44,23 +41,13 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
     
     override func viewWillAppear(_ animated: Bool) {
         loadProfileInfo()
-        //loadUserModelInfo()
     }
-    
-//    func loadUserModelInfo() {
-//        self.profilePicture.image = profile?.profilePicture
-//        self.firstNameField.text = profile?.first
-//        self.lastNameField.text = profile?.last
-//        self.organizationField.text = profile?.organization
-//        self.bioField.text = profile?.bio
-//    }
     
     @IBAction func editPhoto(_ sender: Any) {
         imagePicker.sourceType = .photoLibrary
         imagePicker.allowsEditing = true
         present(imagePicker, animated: true, completion: nil)
     }
-    
     
     @IBAction func saveChanges(_ sender: Any) {
         guard let imageSelected = self.image else {
@@ -103,12 +90,6 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
                 })
             })
         }
-        // update user model
-//        profile?.profilePicture = self.profilePicture.image
-//        profile?.first = self.firstNameField.text!
-//        profile?.last =  self.lastNameField.text!
-//        profile?.organization = self.organizationField.text!
-//        profile?.bio = self.bioField.text!
         self.navigationController?.popViewController(animated: true)
     }
     
@@ -177,5 +158,3 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
     }
     
 }
-
-
